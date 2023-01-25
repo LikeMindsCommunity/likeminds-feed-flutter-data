@@ -1,0 +1,37 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:feed_sdk/src/repositories/auth_repository.dart';
+import 'package:get_it/get_it.dart';
+
+import 'package:feed_sdk/src/di/di_service.dart';
+import 'package:feed_sdk/src/methods/auth.dart';
+import 'package:feed_sdk/src/methods/feed.dart';
+import 'package:feed_sdk/src/models/models.dart';
+import 'package:feed_sdk/src/repositories/feed_repository.dart';
+
+class SdkApplication {
+  final String apiKey;
+  SdkApplication({
+    required this.apiKey,
+  });
+  // SdkApplication initialize() {
+  //   DIService.instance.init();
+
+  //   return SdkApplication();
+  // }
+
+  AuthApi getAuthApi() {
+    // return authApiImpl
+    print('Getting Auth API');
+    return AuthApi(
+        apiKey: apiKey,
+        authRepository: GetIt.instance.get<AuthRepository>(
+            instanceName: DIService.kInstanceAuthRepository));
+  }
+
+  FeedApi getFeedApi() {
+    // return profileApiImpl
+    return FeedApi(
+        feedRepository: GetIt.instance.get<FeedRepository>(
+            instanceName: DIService.kInstanceFeedRepository));
+  }
+}
