@@ -1,0 +1,15 @@
+import 'package:feed_sdk/src/models/post/add_post_request_model.dart';
+import 'package:feed_sdk/src/models/post/add_post_response_model.dart';
+import 'package:feed_sdk/src/services/post_service.dart';
+
+class PostRepository {
+  final PostService postService;
+
+  PostRepository({required this.postService});
+
+  Future<AddPostResponse> addPost(AddPostRequest addPostRequest) async {
+    AddPostResponseEntity addPostResponseEntity =
+        await postService.addPost(addPostRequest.toEntity());
+    return AddPostResponse.fromEntity(entity: addPostResponseEntity);
+  }
+}

@@ -20,6 +20,15 @@ class Attachment {
         fileTypeString: entity.fileTypeString,
         fileUrl: entity.fileUrl);
   }
+
+  AttachmentEntity toEntity() {
+    return AttachmentEntity(
+      fileSize: fileSize,
+      fileType: fileType,
+      fileTypeString: fileTypeString,
+      fileUrl: fileUrl,
+    );
+  }
 }
 
 @JsonSerializable()
