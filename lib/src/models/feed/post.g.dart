@@ -1,0 +1,86 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'post.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
+      id: json['_id'] as String,
+      text: json['text'] as String,
+      attachments: (json['attachments'] as List<dynamic>?)
+          ?.map((e) => AttachmentEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      communityId: json['community_id'] as int,
+      isPinned: json['is_pinned'] as bool,
+      userId: json['user_id'] as String,
+      likeCount: json['likes_count'] as int,
+      isSaved: json['is_saved'] as bool,
+      menuItems: (json['menu_items'] as List<dynamic>)
+          .map((e) => MenuItemEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      createdAt: json['created_at'] as int,
+      updatedAt: json['updated_at'] as int,
+    );
+
+Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'text': instance.text,
+      'attachments': instance.attachments?.map((e) => e.toJson()).toList(),
+      'community_id': instance.communityId,
+      'is_pinned': instance.isPinned,
+      'user_id': instance.userId,
+      'likes_count': instance.likeCount,
+      'is_saved': instance.isSaved,
+      'menu_items': instance.menuItems.map((e) => e.toJson()).toList(),
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
+    };
+
+AttachmentEntity _$AttachmentEntityFromJson(Map<String, dynamic> json) =>
+    AttachmentEntity(
+      fileSize: json['file_size'] as String?,
+      fileTypeString: json['file_type_S'] as String?,
+      fileType: json['file_type'] as int,
+      fileUrl: json['file_url'] as String?,
+    );
+
+Map<String, dynamic> _$AttachmentEntityToJson(AttachmentEntity instance) =>
+    <String, dynamic>{
+      'file_type': instance.fileType,
+      'file_url': instance.fileUrl,
+      'file_type_S': instance.fileTypeString,
+      'file_size': instance.fileSize,
+    };
+
+MenuItemEntity _$MenuItemEntityFromJson(Map<String, dynamic> json) =>
+    MenuItemEntity(
+      title: json['title'] as String,
+    );
+
+Map<String, dynamic> _$MenuItemEntityToJson(MenuItemEntity instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+    };
+
+PostUserEntity _$PostUserEntityFromJson(Map<String, dynamic> json) =>
+    PostUserEntity(
+      id: json['id'] as int,
+      imageUrl: json['image_url'] as String,
+      name: json['name'] as String,
+      userUniqueId: json['user_unique_id'] as String,
+      isGuest: json['is_guest'] as bool,
+      isDeleted: json['is_deleted'] as bool,
+    );
+
+Map<String, dynamic> _$PostUserEntityToJson(PostUserEntity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'image_url': instance.imageUrl,
+      'name': instance.name,
+      'user_unique_id': instance.userUniqueId,
+      'is_guest': instance.isGuest,
+      'is_deleted': instance.isDeleted,
+    };
