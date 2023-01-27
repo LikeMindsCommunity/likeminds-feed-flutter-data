@@ -52,6 +52,22 @@ class Post {
         createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
         updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt));
   }
+
+  PostEntity toEntity() {
+    return PostEntity(
+      id: id,
+      text: text,
+      attachments: attachments?.map((e) => e.toEntity()).toList(),
+      communityId: communityId,
+      isPinned: isPinned,
+      userId: userId,
+      likeCount: likeCount,
+      isSaved: isSaved,
+      menuItems: menuItems.map((e) => e.toEntity()).toList(),
+      createdAt: createdAt.millisecondsSinceEpoch.toInt(),
+      updatedAt: updatedAt.millisecondsSinceEpoch.toInt(),
+    );
+  }
 }
 
 @JsonSerializable(explicitToJson: true)

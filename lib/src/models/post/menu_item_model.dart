@@ -11,6 +11,10 @@ class MenuItem {
   factory MenuItem.fromEntity({required MenuItemEntity entity}) {
     return MenuItem(title: entity.title);
   }
+
+  MenuItemEntity toEntity() {
+    return MenuItemEntity(title: title);
+  }
 }
 
 @JsonSerializable()

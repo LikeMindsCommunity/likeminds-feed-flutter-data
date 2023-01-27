@@ -2,11 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:feed_sdk/src/endpoints.dart';
 import 'package:feed_sdk/src/models/post/add_post_request_model.dart';
 import 'package:feed_sdk/src/models/post/add_post_response_model.dart';
+import 'package:feed_sdk/src/models/post/get_post_request_model.dart';
+import 'package:feed_sdk/src/models/post/get_post_response_model.dart';
 import 'package:feed_sdk/src/services/api/api_client.dart';
 
 abstract class IPostService {
   Future<AddPostResponseEntity> addPost(AddPostRequestEntity addPostRequest);
-  // Future<GetPostResponse> getPost(GetPostRequest getPostRequest);
+  Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest);
   // Future<GetPostLikesResponse> getPostLikes(
   //     GetPostLikesRequest getPostLikesRequest);
   // Future<DeletePostResponse> deletePost(DeletePostRequest deletePostRequest);
@@ -43,6 +45,33 @@ class PostService extends IPostService {
       AddPostResponseEntity addPostResponseEntity =
           AddPostResponseEntity.fromJson(e.response?.data);
       return addPostResponseEntity;
+    }
+  }
+
+  @override
+  Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest) async {
+    try {
+      final response = await apiClient.client().get(
+            "$ADD_POST_ENDPOINT/${getPostRequest.postId}",
+            queryParameters: {
+              'page': getPostRequest.page,
+              'page_size': getPostRequest.pageSize,
+            },
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      print("Response from get post: ${response.data}");
+      GetPostResponseEntity getPostResponseEntity =
+          GetPostResponseEntity.fromJson(response.data);
+      return getPostResponseEntity;
+    } on DioError catch (e) {
+      print("Error from get post: $e");
+      GetPostResponseEntity getPostResponseEntity =
+          GetPostResponseEntity.fromJson(e.response?.data);
+      return getPostResponseEntity;
     }
   }
 }

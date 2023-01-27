@@ -27,6 +27,16 @@ class PostUser {
         isGuest: entity.isGuest,
         isDeleted: entity.isDeleted);
   }
+
+  PostUserEntity toEntity() {
+    return PostUserEntity(
+        id: id,
+        imageUrl: imageUrl,
+        name: name,
+        userUniqueId: userUniqueId,
+        isGuest: isGuest,
+        isDeleted: isDeleted);
+  }
 }
 
 @JsonSerializable()
