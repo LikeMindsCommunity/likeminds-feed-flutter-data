@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:feed_sdk/src/endpoints.dart';
 import 'package:feed_sdk/src/models/post/add_post_request_model.dart';
 import 'package:feed_sdk/src/models/post/add_post_response_model.dart';
+import 'package:feed_sdk/src/models/post/delete_post_request_model.dart';
+import 'package:feed_sdk/src/models/post/delete_post_response_model.dart';
 import 'package:feed_sdk/src/models/post/get_post_request_model.dart';
 import 'package:feed_sdk/src/models/post/get_post_response_model.dart';
 import 'package:feed_sdk/src/services/api/api_client.dart';
@@ -11,7 +13,8 @@ abstract class IPostService {
   Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest);
   // Future<GetPostLikesResponse> getPostLikes(
   //     GetPostLikesRequest getPostLikesRequest);
-  // Future<DeletePostResponse> deletePost(DeletePostRequest deletePostRequest);
+  Future<DeletePostResponseEntity> deletePost(
+      DeletePostRequest deletePostRequest);
   // Future<LikePostResponse> likePost(LikePostResponse likePostResponse);
 }
 
@@ -72,6 +75,31 @@ class PostService extends IPostService {
       GetPostResponseEntity getPostResponseEntity =
           GetPostResponseEntity.fromJson(e.response?.data);
       return getPostResponseEntity;
+    }
+  }
+
+  @override
+  Future<DeletePostResponseEntity> deletePost(
+      DeletePostRequest deletePostRequest) async {
+    try {
+      final response = await apiClient.client().delete(
+            "$ADD_POST_ENDPOINT/${deletePostRequest.postId}",
+            data: {"delete_reason": deletePostRequest.deleteReason},
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      print("Response from delete post: ${response.data}");
+      DeletePostResponseEntity deletePostResponseEntity =
+          DeletePostResponseEntity.fromJson(response.data);
+      return deletePostResponseEntity;
+    } on DioError catch (e) {
+      print("Error from delete post: ${e.response?.data}");
+      DeletePostResponseEntity deletePostResponseEntity =
+          DeletePostResponseEntity.fromJson(e.response?.data);
+      return deletePostResponseEntity;
     }
   }
 }
