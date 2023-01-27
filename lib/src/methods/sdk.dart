@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:feed_sdk/src/methods/post.dart';
 import 'package:feed_sdk/src/repositories/auth_repository.dart';
+import 'package:feed_sdk/src/repositories/post_repository.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:feed_sdk/src/di/di_service.dart';
@@ -33,5 +35,12 @@ class SdkApplication {
     return FeedApi(
         feedRepository: GetIt.instance.get<FeedRepository>(
             instanceName: DIService.kInstanceFeedRepository));
+  }
+
+  PostApi getPostApi() {
+    return PostApi(
+        postRepository: GetIt.instance.get<PostRepository>(
+      instanceName: DIService.kInstancePostRepository,
+    ));
   }
 }

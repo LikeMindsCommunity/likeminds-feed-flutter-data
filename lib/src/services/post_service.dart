@@ -31,11 +31,11 @@ class PostService extends IPostService {
             data: addPostRequest.toJson(),
             options: Options(
               headers: {
-                'Authorization': apiKey,
+                'Authorization': '${apiClient.accessToken}',
               },
             ),
           );
-
+      print("Response from add post: ${response.data}");
       AddPostResponseEntity addPostResponseEntity =
           AddPostResponseEntity.fromJson(response.data);
       return addPostResponseEntity;

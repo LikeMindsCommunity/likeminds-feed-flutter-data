@@ -19,7 +19,8 @@ class ApiClient {
   Dio client() {
     Map<String, dynamic>? headers;
     if (accessToken != null) {
-      headers = {'Authorization': 'Bearer Token $accessToken'};
+      print("Add post token - $accessToken");
+      headers = {'Authorization': '$accessToken'};
     }
 
     BaseOptions options = new BaseOptions(headers: headers);

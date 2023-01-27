@@ -4,3 +4,8 @@ export 'package:feed_sdk/src/models/auth/user_model.dart';
 export 'package:feed_sdk/src/models/feed/universal_feed_request.dart';
 export 'package:feed_sdk/src/models/feed/universal_feed_response.dart';
 export 'package:feed_sdk/src/models/post/post_model.dart';
+export 'package:feed_sdk/src/models/post/attachment_model.dart';
+export 'package:feed_sdk/src/models/post/add_post_request_model.dart';
+export 'package:feed_sdk/src/models/post/add_post_response_model.dart';
+export 'package:feed_sdk/src/models/post/menu_item_model.dart';
+export 'package:feed_sdk/src/models/post/post_user_model.dart';
