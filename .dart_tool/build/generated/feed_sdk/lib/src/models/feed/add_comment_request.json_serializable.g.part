@@ -1,0 +1,13 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+AddCommentRequest _$AddCommentRequestFromJson(Map<String, dynamic> json) =>
+    AddCommentRequest(
+      text: json['text'] as String,
+    );
+
+Map<String, dynamic> _$AddCommentRequestToJson(AddCommentRequest instance) =>
+    <String, dynamic>{
+      'text': instance.text,
+    };

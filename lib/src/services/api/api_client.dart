@@ -29,4 +29,8 @@ class ApiClient {
   String getUniversalFeedEndPoint(int page) {
     return "$feedUrl/universal?page=$page";
   }
+
+  String getPostEndPoint(String postId, int page) {
+    return "$feedUrl/post/?page=$page";
+  }
 }
