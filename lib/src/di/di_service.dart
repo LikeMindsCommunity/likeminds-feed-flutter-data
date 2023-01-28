@@ -22,8 +22,7 @@ class DIService {
     FeedService _feedService = FeedService(apiClient: _apiClient);
     FeedRepository _feedRepository = FeedRepository(feedService: _feedService);
 
-    PostService _postService =
-        PostService(apiKey: apiKey, apiClient: _apiClient);
+    PostService _postService = PostService(apiClient: _apiClient);
     PostRepository _postRepository = PostRepository(postService: _postService);
 
     getIt.registerFactory<ApiClient>(() => _apiClient,

@@ -15,9 +15,8 @@ class AddPostRequest {
   factory AddPostRequest.fromEntity({required AddPostRequestEntity entity}) {
     return AddPostRequest(
       text: entity.text,
-      attachments: entity.attachments
-          .map((e) => Attachment.fromEntity(entity: e))
-          .toList(),
+      attachments:
+          entity.attachments.map((e) => Attachment.fromEntity(e)).toList(),
     );
   }
 

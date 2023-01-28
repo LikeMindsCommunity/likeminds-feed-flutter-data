@@ -39,7 +39,7 @@ class Post {
         id: postEntity.id,
         text: postEntity.text,
         attachments: postEntity.attachments
-            ?.map((e) => Attachment.fromEntity(entity: e))
+            ?.map((e) => Attachment.fromEntity(e))
             .toList(),
         communityId: postEntity.communityId,
         isPinned: postEntity.isPinned,

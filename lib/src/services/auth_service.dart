@@ -15,7 +15,7 @@ class AuthService {
       InitiateUserRequest initiateUserRequest) async {
     try {
       final response = await apiClient.client().post(
-            AUTH_HOST,
+            AUTH_ENDPOINT,
             data: initiateUserRequest.toJson(),
             options: Options(
               headers: {

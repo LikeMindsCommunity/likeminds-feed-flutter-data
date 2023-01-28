@@ -2,8 +2,12 @@ import 'package:feed_sdk/src/models/post/add_post_request_model.dart';
 import 'package:feed_sdk/src/models/post/add_post_response_model.dart';
 import 'package:feed_sdk/src/models/post/delete_post_request_model.dart';
 import 'package:feed_sdk/src/models/post/delete_post_response_model.dart';
+import 'package:feed_sdk/src/models/post/get_likes_request_model.dart';
+import 'package:feed_sdk/src/models/post/get_likes_response_model.dart';
 import 'package:feed_sdk/src/models/post/get_post_request_model.dart';
 import 'package:feed_sdk/src/models/post/get_post_response_model.dart';
+import 'package:feed_sdk/src/models/post/like_post_request_model.dart';
+import 'package:feed_sdk/src/models/post/like_post_response_model.dart';
 import 'package:feed_sdk/src/repositories/post_repository.dart';
 
 class PostApi {
@@ -22,5 +26,14 @@ class PostApi {
   Future<DeletePostResponse> deletePost(
       DeletePostRequest deletePostRequest) async {
     return await postRepository.deletePost(deletePostRequest);
+  }
+
+  Future<LikePostResponse> likePost(LikePostRequest likePostRequest) async {
+    return await postRepository.likePost(likePostRequest);
+  }
+
+  Future<GetPostLikesResponse> getPostLikes(
+      GetPostLikesRequest getPostLikesRequest) async {
+    return await postRepository.getPostLikes(getPostLikesRequest);
   }
 }
