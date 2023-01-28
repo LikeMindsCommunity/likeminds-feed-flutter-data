@@ -7,11 +7,14 @@ import 'package:feed_sdk/src/services/api/log_interceptor.dart';
 
 class ApiClient {
   final String feedUrl = 'https://betaauth.likeminds.community/feed';
+  final String apiKey;
   String? accessToken;
   String? refreshToken;
 
   String? userId;
-  String? communityId;
+  int? communityId;
+
+  ApiClient({required this.apiKey});
 
   void initTokens(String accessToken, String refreshToken) {
     print('Tokens Initiated $accessToken');
@@ -20,12 +23,13 @@ class ApiClient {
   }
 
   set setUserId(String? userId) => this.userId = userId;
-  set setCommunityId(String? communityId) => this.communityId = communityId;
+  set setCommunityId(int? communityId) => this.communityId = communityId;
 
   get getUserId => userId;
   get getCommunityId => communityId;
   get getAccessToken => accessToken;
   get getRefreshToken => refreshToken;
+  get getApiKey => apiKey;
 
   final int pageLimit = 10;
   Dio client() {

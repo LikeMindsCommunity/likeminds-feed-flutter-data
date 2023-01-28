@@ -26,8 +26,12 @@ class AuthService {
 
       InitiateUserResponse initiateUserResponse =
           InitiateUserResponse.fromJson(response.data);
+
       apiClient.initTokens(initiateUserResponse.data?['access_token'],
           initiateUserResponse.data?['refresh_token']);
+      apiClient.setUserId =
+          initiateUserResponse.data?["user"]['user_unique_id'];
+      apiClient.setCommunityId = initiateUserResponse.data?["community"]['id'];
       return initiateUserResponse;
     } on DioError catch (e) {
       InitiateUserResponse initiateUserResponse =

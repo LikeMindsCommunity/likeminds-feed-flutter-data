@@ -10,7 +10,7 @@ AddPostResponseEntity _$AddPostResponseEntityFromJson(
         Map<String, dynamic> json) =>
     AddPostResponseEntity(
       success: json['success'] as bool,
-      errorMessage: json['error_message'] as String,
+      errorMessage: json['error_message'] as String?,
     );
 
 Map<String, dynamic> _$AddPostResponseEntityToJson(

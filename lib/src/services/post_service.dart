@@ -33,7 +33,7 @@ class PostService extends IPostService {
   Future<AddPostResponseEntity> addPost(
       AddPostRequestEntity addPostRequest) async {
     try {
-      if (await apiClient.getAccessType("add_post")) {
+      if (await apiClient.getAccessType("create_post")) {
         print("Access granted");
         final response = await apiClient.client().post(
               ADD_POST_ENDPOINT,
@@ -169,7 +169,7 @@ class PostService extends IPostService {
       GetPostLikesRequest getPostLikesRequest) async {
     try {
       if (await apiClient.getAccessType("view_post")) {
-        final response = await apiClient.client().put(
+        final response = await apiClient.client().get(
               "$ADD_POST_ENDPOINT/${getPostLikesRequest.postId}/like",
               options: Options(
                 headers: {

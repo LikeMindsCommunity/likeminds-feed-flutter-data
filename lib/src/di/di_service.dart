@@ -13,7 +13,7 @@ class DIService {
 
   DIService._() {}
   init(String apiKey) {
-    ApiClient _apiClient = ApiClient();
+    ApiClient _apiClient = ApiClient(apiKey: apiKey);
 
     AuthService _authService =
         AuthService(apiKey: apiKey, apiClient: _apiClient);

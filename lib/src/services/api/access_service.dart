@@ -16,7 +16,8 @@ class AccessService {
             },
             options: Options(
               headers: {
-                'x-member-id': '${apiClient.getUserId()}',
+                'x-member-id': '${apiClient.getUserId}',
+                'x-api-key': '${apiClient.getApiKey}',
               },
             ),
           );

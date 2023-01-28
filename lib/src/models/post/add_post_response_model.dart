@@ -22,7 +22,7 @@ class AddPostResponseEntity {
   final bool success;
 
   @JsonKey(name: 'error_message')
-  final String errorMessage;
+  final String? errorMessage;
 
   AddPostResponseEntity({
     required this.success,
