@@ -9,9 +9,11 @@ part of 'add_comment_request.dart';
 AddCommentRequest _$AddCommentRequestFromJson(Map<String, dynamic> json) =>
     AddCommentRequest(
       text: json['text'] as String,
+      postId: json['postId'] as String,
     );
 
 Map<String, dynamic> _$AddCommentRequestToJson(AddCommentRequest instance) =>
     <String, dynamic>{
       'text': instance.text,
+      'postId': instance.postId,
     };

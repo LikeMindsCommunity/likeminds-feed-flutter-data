@@ -7,9 +7,8 @@ part 'add_comment_request.g.dart';
 @JsonSerializable()
 class AddCommentRequest {
   final String text;
-  AddCommentRequest({
-    required this.text,
-  });
+  final String postId;
+  AddCommentRequest({required this.text, required this.postId});
   factory AddCommentRequest.fromJson(Map<String, dynamic> json) =>
       _$AddCommentRequestFromJson(json);
 

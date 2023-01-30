@@ -4,3 +4,11 @@ export 'package:feed_sdk/src/models/auth/user_model.dart';
 export 'package:feed_sdk/src/models/feed/universal_feed_request.dart';
 export 'package:feed_sdk/src/models/feed/universal_feed_response.dart';
 export 'package:feed_sdk/src/models/feed/post.dart';
+export 'package:feed_sdk/src/models/feed/post_detail_response.dart';
+export 'package:feed_sdk/src/models/feed/post_detail_request.dart';
+export 'package:feed_sdk/src/models/feed/post_replies.dart';
+export 'package:feed_sdk/src/models/feed/add_comment_request.dart';
+export 'package:feed_sdk/src/models/feed/add_comment_response.dart';
+
+export 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
+export 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';

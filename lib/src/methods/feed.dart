@@ -1,10 +1,7 @@
-import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
-import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
-import 'package:feed_sdk/src/models/feed/post_detail_request.dart';
-import 'package:feed_sdk/src/models/feed/post_detail_response.dart';
-import 'package:feed_sdk/src/models/feed/universal_feed_request.dart';
-import 'package:feed_sdk/src/models/feed/universal_feed_response.dart';
-import 'package:feed_sdk/src/repositories/auth_repository.dart';
+import 'package:feed_sdk/feed_sdk.dart';
+
+import 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
+import 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';
 import 'package:feed_sdk/src/repositories/feed_repository.dart';
 
 class FeedApi {
@@ -24,5 +21,19 @@ class FeedApi {
     final PostDetailResponse? postDetailResponse =
         await feedRepository.getPost(postDetailRequest);
     return postDetailResponse;
+  }
+
+  Future<AddCommentResponse?> addComment(
+      AddCommentRequest addCommentRequest) async {
+    final AddCommentResponse? addCommentResponse =
+        await feedRepository.addComment(addCommentRequest);
+    return addCommentResponse;
+  }
+
+  Future<ToggleLikeCommentResponse?> toggleLikeComment(
+      ToggleLikeCommentRequest request) async {
+    final ToggleLikeCommentResponse? response =
+        await feedRepository.toggleLikeComment(request);
+    return response;
   }
 }

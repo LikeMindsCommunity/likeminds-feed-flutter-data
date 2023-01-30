@@ -14,7 +14,8 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
       likeCount: json['likes_count'] as int,
       isSaved: json['is_saved'] as bool,
       menuItems: (json['menu_items'] as List<dynamic>)
-          .map((e) => MenuItemEntity.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              PopupMenuItemModelEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: json['created_at'] as int,
       updatedAt: json['updated_at'] as int,
@@ -39,7 +40,7 @@ AttachmentEntity _$AttachmentEntityFromJson(Map<String, dynamic> json) =>
     AttachmentEntity(
       fileSize: json['file_size'] as String?,
       fileTypeString: json['file_type_S'] as String?,
-      fileType: json['file_type'] as int,
+      fileType: json['file_type'] as int?,
       fileUrl: json['file_url'] as String?,
     );
 
@@ -51,12 +52,14 @@ Map<String, dynamic> _$AttachmentEntityToJson(AttachmentEntity instance) =>
       'file_size': instance.fileSize,
     };
 
-MenuItemEntity _$MenuItemEntityFromJson(Map<String, dynamic> json) =>
-    MenuItemEntity(
+PopupMenuItemModelEntity _$PopupMenuItemModelEntityFromJson(
+        Map<String, dynamic> json) =>
+    PopupMenuItemModelEntity(
       title: json['title'] as String,
     );
 
-Map<String, dynamic> _$MenuItemEntityToJson(MenuItemEntity instance) =>
+Map<String, dynamic> _$PopupMenuItemModelEntityToJson(
+        PopupMenuItemModelEntity instance) =>
     <String, dynamic>{
       'title': instance.title,
     };
