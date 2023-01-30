@@ -44,7 +44,20 @@ class ApiClient {
   }
 
   String getUniversalFeedEndPoint(int page) {
-    return "$feedUrl/universal?page=$page";
+    return "$feedUrl/universal?page=$page&page_size=$pageLimit";
+  }
+
+  String getPostEndPoint(String postId, int page) {
+    return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";
+  }
+
+  String getAddCommentEndPoint(String postId) {
+    return "$feedUrl/post/$postId/comment";
+  }
+
+  String toggleLikeCommentEndPoint(String commentId, String postId) {
+    // feed/post/<post_id>/comment/<comment_id>/like
+    return "$feedUrl/post/$postId/comment/$commentId/like";
   }
 
   Future<bool> getAccessType(String accessType) async =>

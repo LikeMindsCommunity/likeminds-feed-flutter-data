@@ -18,3 +18,12 @@ export 'package:feed_sdk/src/models/post/like_post_response_model.dart';
 export 'package:feed_sdk/src/models/post/menu_item_model.dart';
 export 'package:feed_sdk/src/models/post/post_user_model.dart';
 export 'package:feed_sdk/src/models/comment/comment_model.dart';
+export 'package:feed_sdk/src/models/feed/post.dart';
+export 'package:feed_sdk/src/models/feed/post_detail_response.dart';
+export 'package:feed_sdk/src/models/feed/post_detail_request.dart';
+export 'package:feed_sdk/src/models/feed/post_replies.dart';
+export 'package:feed_sdk/src/models/feed/add_comment_request.dart';
+export 'package:feed_sdk/src/models/feed/add_comment_response.dart';
+
+export 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
+export 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';

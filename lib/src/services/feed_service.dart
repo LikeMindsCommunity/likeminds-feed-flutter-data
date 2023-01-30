@@ -13,7 +13,7 @@ class FeedService {
   final Dio _dio = Dio();
   // final String authHost = "https://betaauth.likeminds.community/feed/";
 
-  Future<UniversalFeedResponseEntity> getUniversalFeed(
+  Future<UniversalFeedResponseEntity?> getUniversalFeed(
       UniversalFeedRequest universalFeedRequest) async {
     print(apiClient.getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
@@ -31,6 +31,6 @@ class FeedService {
     } catch (e) {
       print(e);
     }
-    return UniversalFeedResponseEntity(posts: [], users: {});
+    // return UniversalFeedResponseEntity(posts: [], users: {});
   }
 }

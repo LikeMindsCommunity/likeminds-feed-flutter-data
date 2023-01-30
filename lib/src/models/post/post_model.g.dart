@@ -1,5 +1,3 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
 part of 'post_model.dart';
 
 // **************************************************************************
@@ -18,7 +16,8 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
       likeCount: json['likes_count'] as int,
       isSaved: json['is_saved'] as bool,
       menuItems: (json['menu_items'] as List<dynamic>)
-          .map((e) => MenuItemEntity.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              PopupMenuItemModelEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: json['created_at'] as int,
       updatedAt: json['updated_at'] as int,
