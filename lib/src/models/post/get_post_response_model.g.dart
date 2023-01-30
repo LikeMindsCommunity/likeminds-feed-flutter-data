@@ -11,10 +11,10 @@ GetPostResponseEntity _$GetPostResponseEntityFromJson(
     GetPostResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      post: json['post'] == null
+      post: json['data']['post'] == null
           ? null
-          : PostEntity.fromJson(json['post'] as Map<String, dynamic>),
-      users: (json['users'] as Map<String, dynamic>?)?.map(
+          : PostEntity.fromJson(json['data']['post'] as Map<String, dynamic>),
+      users: (json['data']['users'] as Map<String, dynamic>?)?.map(
         (k, e) =>
             MapEntry(k, PostUserEntity.fromJson(e as Map<String, dynamic>)),
       ),

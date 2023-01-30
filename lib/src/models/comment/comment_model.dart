@@ -1,4 +1,4 @@
-import 'package:feed_sdk/src/models/post/menu_item_model.dart';
+import 'package:feed_sdk/src/models/post/popup_menu_item_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'comment_model.g.dart';
@@ -9,7 +9,7 @@ class Comment {
   final int level;
   final int likesCount;
   final int repliesCount;
-  final List<MenuItem> menuItems;
+  final List<PopupMenuItemModel> menuItems;
 
   Comment({
     required this.userId,
@@ -28,7 +28,7 @@ class Comment {
       likesCount: commentEntity.likesCount,
       repliesCount: commentEntity.repliesCount,
       menuItems: commentEntity.menuItems
-          .map((e) => MenuItem.fromEntity(entity: e))
+          .map((e) => PopupMenuItemModel.fromEntity(entity: e))
           .toList(),
     );
   }
@@ -56,7 +56,7 @@ class CommentEntity {
   @JsonKey(name: 'replies_count')
   final int repliesCount;
   @JsonKey(name: 'menu_items')
-  final List<MenuItemEntity> menuItems;
+  final List<PopupMenuItemModelEntity> menuItems;
 
   CommentEntity({
     required this.userId,

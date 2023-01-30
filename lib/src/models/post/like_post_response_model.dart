@@ -5,13 +5,19 @@ part 'like_post_response_model.g.dart';
 class LikePostResponse {
   final bool success;
   final String? errorMessage;
+  final int? likes;
 
-  LikePostResponse({required this.success, required this.errorMessage});
+  LikePostResponse({
+    required this.success,
+    required this.errorMessage,
+    required this.likes,
+  });
 
   factory LikePostResponse.fromEntity(LikePostResponseEntity entity) {
     return LikePostResponse(
       success: entity.success,
       errorMessage: entity.errorMessage,
+      likes: entity.likes,
     );
   }
 
@@ -19,6 +25,7 @@ class LikePostResponse {
     return LikePostResponseEntity(
       success: success,
       errorMessage: errorMessage,
+      likes: likes,
     );
   }
 }
@@ -28,8 +35,17 @@ class LikePostResponseEntity {
   final bool success;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
+  int? likes;
 
-  LikePostResponseEntity({required this.success, required this.errorMessage});
+  LikePostResponseEntity({
+    required this.success,
+    required this.errorMessage,
+    this.likes,
+  });
+
+  set setLikes(int? likes) {
+    this.likes = likes;
+  }
 
   factory LikePostResponseEntity.fromJson(Map<String, dynamic> json) =>
       _$LikePostResponseEntityFromJson(json);

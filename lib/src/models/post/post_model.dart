@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+// import 'package:feed_sdk/src/models/feed/post.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:feed_sdk/src/models/auth/user_model.dart';
 import 'package:feed_sdk/src/models/post/attachment_model.dart';
-import 'package:feed_sdk/src/models/post/menu_item_model.dart';
-import 'package:feed_sdk/src/models/post/post_user_model.dart';
+import 'package:feed_sdk/src/models/post/popup_menu_item_model.dart';
 
 part 'post_model.g.dart';
 
@@ -17,7 +16,7 @@ class Post {
   final String userId;
   final int likeCount;
   final bool isSaved;
-  final List<MenuItem> menuItems;
+  final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;
   final DateTime updatedAt;
   Post({
@@ -47,7 +46,7 @@ class Post {
         likeCount: postEntity.likeCount,
         isSaved: postEntity.isSaved,
         menuItems: postEntity.menuItems
-            .map((e) => MenuItem.fromEntity(entity: e))
+            .map((e) => PopupMenuItemModel.fromEntity(entity: e))
             .toList(),
         createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
         updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt));
@@ -87,7 +86,7 @@ class PostEntity {
   @JsonKey(name: 'is_saved')
   final bool isSaved;
   @JsonKey(name: 'menu_items')
-  final List<MenuItemEntity> menuItems;
+  final List<PopupMenuItemModelEntity> menuItems;
   @JsonKey(name: 'created_at')
   final int createdAt;
   @JsonKey(name: 'updated_at')

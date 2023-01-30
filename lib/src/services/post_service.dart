@@ -146,8 +146,14 @@ class PostService extends IPostService {
               ),
             );
         print("Response from like post: ${response.data}");
+        final postResponse = await getPost(GetPostRequest(
+          postId: likePostRequest.postId,
+          page: 1,
+          pageSize: 10,
+        ));
         LikePostResponseEntity likePostResponseEntity =
             LikePostResponseEntity.fromJson(response.data);
+        likePostResponseEntity.setLikes = postResponse.post!.likeCount;
         return likePostResponseEntity;
       } else {
         print("Access denied");

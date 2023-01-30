@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:feed_sdk/src/methods/media.dart';
 import 'package:feed_sdk/src/methods/post.dart';
 import 'package:feed_sdk/src/repositories/auth_repository.dart';
+import 'package:feed_sdk/src/repositories/media_repository.dart';
 import 'package:feed_sdk/src/repositories/post_repository.dart';
 import 'package:get_it/get_it.dart';
 
@@ -15,11 +17,6 @@ class SdkApplication {
   SdkApplication({
     required this.apiKey,
   });
-  // SdkApplication initialize() {
-  //   DIService.instance.init();
-
-  //   return SdkApplication();
-  // }
 
   AuthApi getAuthApi() {
     // return authApiImpl
@@ -31,7 +28,6 @@ class SdkApplication {
   }
 
   FeedApi getFeedApi() {
-    // return profileApiImpl
     return FeedApi(
         feedRepository: GetIt.instance.get<FeedRepository>(
             instanceName: DIService.kInstanceFeedRepository));
@@ -41,6 +37,13 @@ class SdkApplication {
     return PostApi(
         postRepository: GetIt.instance.get<PostRepository>(
       instanceName: DIService.kInstancePostRepository,
+    ));
+  }
+
+  MediaApi getMediaApi() {
+    return MediaApi(
+        mediaRepository: GetIt.instance.get<MediaRepository>(
+      instanceName: DIService.kInstanceMediaRepository,
     ));
   }
 }

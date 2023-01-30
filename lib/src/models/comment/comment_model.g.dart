@@ -14,7 +14,8 @@ CommentEntity _$CommentEntityFromJson(Map<String, dynamic> json) =>
       likesCount: json['likes_count'] as int,
       repliesCount: json['replies_count'] as int,
       menuItems: (json['menu_items'] as List<dynamic>)
-          .map((e) => MenuItemEntity.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              PopupMenuItemModelEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

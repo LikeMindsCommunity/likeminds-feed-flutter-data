@@ -2,23 +2,27 @@
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      email: json['email'] as String?,
-      phone: json['phone'] as String?,
-      avatar: json['avatar'] as String?,
-      token: json['token'] as String?,
-      refreshToken: json['refreshToken'] as String?,
+User _$UserFromJson(Map<String, dynamic> json) => User(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      imageUrl: json['image_url'] as String,
+      isGuest: json['is_guest'] as bool,
+      organisationName: json['organisation_name'] as String?,
+      sdkClientInfo: json['sdk_client_info'] == null
+          ? null
+          : SDKClientInfo.fromJson(
+              json['sdk_client_info'] as Map<String, dynamic>),
+      updatedAt: (json['updated_at'] as num).toDouble(),
+      userUniqueId: json['user_unique_id'] as String,
     );
 
-Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'email': instance.email,
-      'phone': instance.phone,
-      'avatar': instance.avatar,
-      'token': instance.token,
-      'refreshToken': instance.refreshToken,
+      'image_url': instance.imageUrl,
+      'is_guest': instance.isGuest,
+      'organisation_name': instance.organisationName,
+      'sdk_client_info': instance.sdkClientInfo,
+      'updated_at': instance.updatedAt,
+      'user_unique_id': instance.userUniqueId,
     };
