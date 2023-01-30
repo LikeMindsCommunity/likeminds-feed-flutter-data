@@ -14,7 +14,7 @@ class Post {
   final String userId;
   final int likeCount;
   final bool isSaved;
-  final List<MenuItem> menuItems;
+  final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;
   final DateTime updatedAt;
   Post({
@@ -44,7 +44,7 @@ class Post {
         likeCount: postEntity.likeCount,
         isSaved: postEntity.isSaved,
         menuItems: postEntity.menuItems
-            .map((e) => MenuItem.fromEntity(entity: e))
+            .map((e) => PopupMenuItemModel.fromEntity(entity: e))
             .toList(),
         createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
         updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt));
@@ -86,7 +86,7 @@ class PostEntity {
   @JsonKey(name: 'is_saved')
   final bool isSaved;
   @JsonKey(name: 'menu_items')
-  final List<MenuItemEntity> menuItems;
+  final List<PopupMenuItemModelEntity> menuItems;
   @JsonKey(name: 'created_at')
   final int createdAt;
   @JsonKey(name: 'updated_at')
@@ -111,7 +111,7 @@ class PostEntity {
 }
 
 class Attachment {
-  final int fileType;
+  final int? fileType;
   final String? fileUrl;
   final String? fileTypeString;
   final String? fileSize;
@@ -133,7 +133,7 @@ class Attachment {
 @JsonSerializable()
 class AttachmentEntity {
   @JsonKey(name: 'file_type')
-  final int fileType;
+  final int? fileType;
   @JsonKey(name: 'file_url')
   final String? fileUrl;
   @JsonKey(name: 'file_type_S')
@@ -153,28 +153,29 @@ class AttachmentEntity {
   Map<String, dynamic> toJson() => _$AttachmentEntityToJson(this);
 }
 
-class MenuItem {
+class PopupMenuItemModel {
   final String title;
-  MenuItem({
+  PopupMenuItemModel({
     required this.title,
   });
 
-  factory MenuItem.fromEntity({required MenuItemEntity entity}) {
-    return MenuItem(title: entity.title);
+  factory PopupMenuItemModel.fromEntity(
+      {required PopupMenuItemModelEntity entity}) {
+    return PopupMenuItemModel(title: entity.title);
   }
 }
 
 @JsonSerializable()
-class MenuItemEntity {
+class PopupMenuItemModelEntity {
   final String title;
-  MenuItemEntity({
+  PopupMenuItemModelEntity({
     required this.title,
   });
 
-  factory MenuItemEntity.fromJson(Map<String, dynamic> data) =>
-      _$MenuItemEntityFromJson(data);
+  factory PopupMenuItemModelEntity.fromJson(Map<String, dynamic> data) =>
+      _$PopupMenuItemModelEntityFromJson(data);
 
-  Map<String, dynamic> toJson() => _$MenuItemEntityToJson(this);
+  Map<String, dynamic> toJson() => _$PopupMenuItemModelEntityToJson(this);
 }
 
 class PostUser {
