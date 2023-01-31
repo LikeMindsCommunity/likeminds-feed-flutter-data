@@ -3,7 +3,6 @@ import 'package:feed_sdk/feed_sdk.dart';
 import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
 import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
 import 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';
-import 'package:feed_sdk/src/models/feed/post.dart';
 import 'package:feed_sdk/src/models/feed/post_detail_request.dart';
 import 'package:feed_sdk/src/models/feed/post_detail_response.dart';
 import 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';

@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:feed_sdk/src/models/post/attachment_model.dart';
+import 'package:feed_sdk/src/models/post/popup_menu_item_model.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'package:feed_sdk/feed_sdk.dart';
 
 part 'post_replies.g.dart';
 
@@ -49,9 +49,7 @@ class PostReplies {
         updatedAt: DateTime.fromMillisecondsSinceEpoch(entity.updatedAt),
         replies: entity.replies.map((e) => Reply.fromEntity(e)).toList(),
         attachments: entity.attachments != null
-            ? entity.attachments
-                ?.map((e) => Attachment.fromEntity(entity: e))
-                .toList()
+            ? entity.attachments?.map((e) => Attachment.fromEntity(e)).toList()
             : null);
   }
 }

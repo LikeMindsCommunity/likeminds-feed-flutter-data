@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:feed_sdk/feed_sdk.dart';
 import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
 import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
-import 'package:feed_sdk/src/models/feed/post.dart';
+import 'package:feed_sdk/src/models/post/post_model.dart';
 import 'package:feed_sdk/src/models/feed/universal_feed_request.dart';
 import 'package:feed_sdk/src/models/feed/universal_feed_response.dart';
 import 'package:feed_sdk/src/services/api/api_client.dart';
