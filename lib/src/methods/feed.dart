@@ -65,5 +65,17 @@ class FeedApi {
           await feedRepository.getFeedOfFeedRoom(getFeedFeedRoomRequest);
       return response;
     }
+  Future<GetFeedRoomResponse> getFeedRoom(
+      GetFeedRoomRequest getFeedRoomRequest) async {
+    final GetFeedRoomResponse response =
+        await feedRepository.getFeedRoom(getFeedRoomRequest);
+    return response;
+  }
+
+  Future<GetFeedOfFeedRoomResponse> getFeedOfFeedRoom(
+      GetFeedOfFeedRoomRequest getFeedFeedRoomRequest) async {
+    final GetFeedOfFeedRoomResponse response =
+        await feedRepository.getFeedOfFeedRoom(getFeedFeedRoomRequest);
+    return response;
   }
 }

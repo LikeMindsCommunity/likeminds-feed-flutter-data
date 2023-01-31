@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
 import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
 import 'package:feed_sdk/src/models/comment/add_comment_reply_request.dart';
@@ -10,6 +11,8 @@ import 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
 import 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';
 import 'package:feed_sdk/src/models/feed/universal_feed_request.dart';
 import 'package:feed_sdk/src/models/feed/universal_feed_response.dart';
+=======
+>>>>>>> 6736be9 (Adding Feedrooms and member state)
 import 'package:feed_sdk/src/models/models.dart';
 import 'package:feed_sdk/src/services/auth_service.dart';
 import 'package:feed_sdk/src/services/comment_service.dart';
