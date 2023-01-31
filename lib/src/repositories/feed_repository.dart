@@ -1,11 +1,3 @@
-import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
-import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
-import 'package:feed_sdk/src/models/feed/post_detail_request.dart';
-import 'package:feed_sdk/src/models/feed/post_detail_response.dart';
-import 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
-import 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';
-import 'package:feed_sdk/src/models/feed/universal_feed_request.dart';
-import 'package:feed_sdk/src/models/feed/universal_feed_response.dart';
 import 'package:feed_sdk/src/models/models.dart';
 import 'package:feed_sdk/src/services/auth_service.dart';
 import 'package:feed_sdk/src/services/comment_service.dart';
@@ -52,5 +44,19 @@ class FeedRepository {
     return responseEntity != null
         ? ToggleLikeCommentResponse.fromEntity(responseEntity)
         : null;
+  }
+
+  Future<GetFeedRoomResponse> getFeedRoom(
+      GetFeedRoomRequest getFeedRoomRequest) async {
+    final GetFeedRoomResponseEntity responseEntity =
+        await feedService.getFeedRoom(getFeedRoomRequest);
+    return GetFeedRoomResponse.fromEntity(responseEntity);
+  }
+
+  Future<GetFeedOfFeedRoomResponse> getFeedOfFeedRoom(
+      GetFeedOfFeedRoomRequest getFeedFeedRoomRequest) async {
+    final GetFeedOfFeedRoomResponseEntity responseEntity =
+        await feedService.getFeedOfFeedRoom(getFeedFeedRoomRequest);
+    return GetFeedOfFeedRoomResponse.fromEntity(entity: responseEntity);
   }
 }

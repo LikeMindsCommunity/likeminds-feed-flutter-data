@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:feed_sdk/src/methods/access.dart';
 import 'package:feed_sdk/src/methods/media.dart';
 import 'package:feed_sdk/src/methods/post.dart';
+import 'package:feed_sdk/src/repositories/access_repository.dart';
 import 'package:feed_sdk/src/repositories/auth_repository.dart';
 import 'package:feed_sdk/src/repositories/media_repository.dart';
 import 'package:feed_sdk/src/repositories/post_repository.dart';
@@ -25,6 +27,12 @@ class SdkApplication {
         apiKey: apiKey,
         authRepository: GetIt.instance.get<AuthRepository>(
             instanceName: DIService.kInstanceAuthRepository));
+  }
+
+  AccessApi getAccessApi() {
+    return AccessApi(
+        accessRepository: GetIt.instance.get<AccessRepository>(
+            instanceName: DIService.kInstanceAccessRepository));
   }
 
   FeedApi getFeedApi() {

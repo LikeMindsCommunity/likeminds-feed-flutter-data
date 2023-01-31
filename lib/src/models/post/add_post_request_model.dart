@@ -5,25 +5,27 @@ part 'add_post_request_model.g.dart';
 
 class AddPostRequest {
   final String text;
-  final List<Attachment> attachments;
+  final String? feedroomId;
+  final List<Attachment>? attachments;
 
   AddPostRequest({
     required this.text,
     required this.attachments,
+    this.feedroomId,
   });
 
   factory AddPostRequest.fromEntity({required AddPostRequestEntity entity}) {
     return AddPostRequest(
       text: entity.text,
       attachments:
-          entity.attachments.map((e) => Attachment.fromEntity(e)).toList(),
+          entity.attachments?.map((e) => Attachment.fromEntity(e)).toList(),
     );
   }
 
   AddPostRequestEntity toEntity() {
     return AddPostRequestEntity(
       text: text,
-      attachments: attachments.map((e) => e.toEntity()).toList(),
+      attachments: attachments?.map((e) => e.toEntity()).toList(),
     );
   }
 }
@@ -31,11 +33,14 @@ class AddPostRequest {
 @JsonSerializable()
 class AddPostRequestEntity {
   final String text;
-  final List<AttachmentEntity> attachments;
+  final List<AttachmentEntity>? attachments;
+  @JsonKey(name: 'feedroom_id')
+  final String? feedroomId;
 
   AddPostRequestEntity({
     required this.text,
     required this.attachments,
+    this.feedroomId,
   });
 
   factory AddPostRequestEntity.fromJson(Map<String, dynamic> data) =>

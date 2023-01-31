@@ -23,6 +23,11 @@ export 'package:feed_sdk/src/models/feed/post_detail_request.dart';
 export 'package:feed_sdk/src/models/feed/post_replies.dart';
 export 'package:feed_sdk/src/models/feed/add_comment_request.dart';
 export 'package:feed_sdk/src/models/feed/add_comment_response.dart';
-
 export 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
 export 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';
+export 'package:feed_sdk/src/models/feedroom/feedroom_model.dart';
+export 'package:feed_sdk/src/models/feedroom/get_feedroom_request_model.dart';
+export 'package:feed_sdk/src/models/feedroom/get_feedroom_response_model.dart';
+export 'package:feed_sdk/src/models/feedroom/get_feed_feedroom_request_model.dart';
+export 'package:feed_sdk/src/models/feedroom/get_feed_feedroom_response_model.dart';
+export 'package:feed_sdk/src/models/feedroom/feedroom_user_model.dart';
