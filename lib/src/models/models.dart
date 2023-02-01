@@ -25,11 +25,13 @@ export 'package:feed_sdk/src/models/feed/add_comment_request.dart';
 export 'package:feed_sdk/src/models/feed/add_comment_response.dart';
 export 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
 export 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';
+
 export 'package:feed_sdk/src/models/feed/comment_detail_request.dart';
 export 'package:feed_sdk/src/models/feed/comment_detail_response.dart';
 export 'package:feed_sdk/src/models/feed/comment_replies.dart';
 export 'package:feed_sdk/src/models/comment/add_comment_reply_request.dart';
 export 'package:feed_sdk/src/models/comment/add_comment_reply_response.dart';
+
 export 'package:feed_sdk/src/models/feedroom/feedroom_model.dart';
 export 'package:feed_sdk/src/models/feedroom/get_feedroom_request_model.dart';
 export 'package:feed_sdk/src/models/feedroom/get_feedroom_response_model.dart';
