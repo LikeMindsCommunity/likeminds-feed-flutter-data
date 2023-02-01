@@ -60,6 +60,14 @@ class ApiClient {
     return "$feedUrl/post/$postId/comment/$commentId/like";
   }
 
+  String getCommentEndPoint(String commentId, String postId, int page) {
+    return "$feedUrl/post/$postId/comment/$commentId?page=$page&page_size=$pageLimit";
+  }
+
+  String addCommentReplyEndPoint(String commentId, String postId) {
+    return "$feedUrl/post/$postId/comment/$commentId/comment";
+  }
+
   Future<bool> getAccessType(String accessType) async =>
       await AccessService(apiClient: this).getAccess(accessType);
 

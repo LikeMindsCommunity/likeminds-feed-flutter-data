@@ -147,7 +147,7 @@ class ReplyEntity {
   final int level;
   @JsonKey(name: 'likes_count')
   final int likesCount;
-  @JsonKey(name: 'replies_count')
+  @JsonKey(name: 'comments_count')
   final int? repliesCount;
   @JsonKey(name: 'menu_items')
   final List<PopupMenuItemModelEntity> menuItems;

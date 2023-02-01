@@ -2,6 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:feed_sdk/feed_sdk.dart';
 import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
 import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
+import 'package:feed_sdk/src/models/comment/add_comment_reply_request.dart';
+import 'package:feed_sdk/src/models/comment/add_comment_reply_response.dart';
+import 'package:feed_sdk/src/models/feed/comment_detail_request.dart';
+import 'package:feed_sdk/src/models/feed/comment_detail_response.dart';
 import 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';
 import 'package:feed_sdk/src/models/feed/post_detail_request.dart';
 import 'package:feed_sdk/src/models/feed/post_detail_response.dart';
@@ -87,6 +91,44 @@ class CommentService {
       );
       print(response.data);
       return ToggleLikeCommentResponseEntity.fromJson(response.data);
+    } on DioError catch (e) {
+      print(e.toString());
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<CommentDetailResponseEntity?> getComment(
+      CommentDetailRequest request) async {
+    try {
+      final response = await _dio.get(
+        apiClient.getCommentEndPoint(
+            request.commentId, request.postId, request.page),
+        options: Options(
+          headers: {'Authorization': '${apiClient.accessToken}'},
+        ),
+      );
+      print(response.data);
+      return CommentDetailResponseEntity.fromJson(response.data['data']);
+    } on DioError catch (e) {
+      print(e.toString());
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<AddCommentReplyResponseEntity?> addCommentReply(
+      AddCommentReplyRequest? request) async {
+    try {
+      final response = await _dio.post(
+        apiClient.addCommentReplyEndPoint(request!.commentId, request.postId),
+        data: request.toJson(),
+        options: Options(
+          headers: {'Authorization': '${apiClient.accessToken}'},
+        ),
+      );
+      print(response.data);
+      return AddCommentReplyResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       print(e.toString());
     } catch (e) {
