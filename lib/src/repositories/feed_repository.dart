@@ -1,5 +1,9 @@
 import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
 import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
+import 'package:feed_sdk/src/models/comment/add_comment_reply_request.dart';
+import 'package:feed_sdk/src/models/comment/add_comment_reply_response.dart';
+import 'package:feed_sdk/src/models/feed/comment_detail_request.dart';
+import 'package:feed_sdk/src/models/feed/comment_detail_response.dart';
 import 'package:feed_sdk/src/models/feed/post_detail_request.dart';
 import 'package:feed_sdk/src/models/feed/post_detail_response.dart';
 import 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
@@ -51,6 +55,24 @@ class FeedRepository {
         await commentService.toggleLikeComment(request);
     return responseEntity != null
         ? ToggleLikeCommentResponse.fromEntity(responseEntity)
+        : null;
+  }
+
+  Future<CommentDetailResponse?> getComment(
+      CommentDetailRequest request) async {
+    final CommentDetailResponseEntity? responseEntity =
+        await commentService.getComment(request);
+    return responseEntity != null
+        ? CommentDetailResponse.fromEntity(responseEntity)
+        : null;
+  }
+
+  Future<AddCommentReplyResponse?> addCommentReply(
+      AddCommentReplyRequest request) async {
+    final AddCommentReplyResponseEntity? responseEntity =
+        await commentService.addCommentReply(request);
+    return responseEntity != null
+        ? AddCommentReplyResponse.fromEntity(responseEntity)
         : null;
   }
 }

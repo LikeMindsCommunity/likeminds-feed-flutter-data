@@ -3,103 +3,110 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:feed_sdk/feed_sdk.dart';
 
-part 'post_replies.g.dart';
+part 'comment_replies.g.dart';
 
-class PostReplies {
+class CommentReplies {
   final String id;
   final String text;
-  final List<Attachment>? attachments;
-  final int communityId;
-  final bool isPinned;
+  final String? postId;
+  final int commentsCount;
+  final int level;
+  final Map? parentComment;
+
   final String userId;
-  final int likeCount;
-  final bool isSaved;
+  final int likesCount;
+
   final List<PopupMenuItemModel> menuItems;
+  final bool? isLiked;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final List<Reply> replies;
-  PostReplies({
+  final List<CommentReply> replies;
+  CommentReplies({
+    required this.isLiked,
     required this.id,
     required this.text,
-    this.attachments,
-    required this.communityId,
-    required this.isPinned,
     required this.userId,
-    required this.likeCount,
-    required this.isSaved,
+    required this.likesCount,
     required this.menuItems,
     required this.createdAt,
     required this.updatedAt,
     required this.replies,
+    required this.postId,
+    required this.commentsCount,
+    required this.level,
+    required this.parentComment,
   });
 
-  factory PostReplies.fromEntity(PostRepliesEntity entity) {
-    return PostReplies(
-        id: entity.id,
-        text: entity.text,
-        communityId: entity.communityId,
-        isPinned: entity.isPinned,
-        userId: entity.userId,
-        likeCount: entity.likeCount,
-        isSaved: entity.isSaved,
-        menuItems: entity.menuItems
-            .map((e) => PopupMenuItemModel.fromEntity(entity: e))
-            .toList(),
-        createdAt: DateTime.fromMillisecondsSinceEpoch(entity.createdAt),
-        updatedAt: DateTime.fromMillisecondsSinceEpoch(entity.updatedAt),
-        replies: entity.replies.map((e) => Reply.fromEntity(e)).toList(),
-        attachments: entity.attachments != null
-            ? entity.attachments
-                ?.map((e) => Attachment.fromEntity(entity: e))
-                .toList()
-            : null);
+  factory CommentReplies.fromEntity(CommentRepliesEntity entity) {
+    return CommentReplies(
+      id: entity.id,
+      text: entity.text,
+      userId: entity.userId,
+      likesCount: entity.likesCount,
+      menuItems: entity.menuItems
+          .map((e) => PopupMenuItemModel.fromEntity(entity: e))
+          .toList(),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(entity.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(entity.updatedAt),
+      replies: entity.replies.map((e) => CommentReply.fromEntity(e)).toList(),
+      commentsCount: entity.commentsCount,
+      level: entity.level,
+      parentComment: entity.parentComment,
+      postId: entity.postId,
+      isLiked: entity.isLiked,
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
-class PostRepliesEntity {
+class CommentRepliesEntity {
   @JsonKey(name: '_id')
   final String id;
   final String text;
-  final List<AttachmentEntity>? attachments;
-  @JsonKey(name: 'community_id')
-  final int communityId;
-  @JsonKey(name: 'is_pinned')
-  final bool isPinned;
+  @JsonKey(name: 'post_id')
+  final String? postId;
+  @JsonKey(name: 'comments_count')
+  final int commentsCount;
+  @JsonKey(name: 'level')
+  final int level;
+  @JsonKey(name: 'parent_comment')
+  final Map? parentComment;
+
   @JsonKey(name: 'user_id')
   final String userId;
   @JsonKey(name: 'likes_count')
-  final int likeCount;
-  @JsonKey(name: 'is_saved')
-  final bool isSaved;
+  final int likesCount;
+
+  @JsonKey(name: 'is_liked')
+  final bool? isLiked;
   @JsonKey(name: 'menu_items')
   final List<PopupMenuItemModelEntity> menuItems;
   @JsonKey(name: 'created_at')
   final int createdAt;
   @JsonKey(name: 'updated_at')
   final int updatedAt;
-  final List<ReplyEntity> replies;
-  PostRepliesEntity({
-    required this.id,
-    required this.text,
-    this.attachments,
-    required this.communityId,
-    required this.isPinned,
-    required this.userId,
-    required this.likeCount,
-    required this.isSaved,
-    required this.menuItems,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.replies,
-  });
-  factory PostRepliesEntity.fromJson(Map<String, dynamic> data) =>
-      _$PostRepliesEntityFromJson(data);
+  final List<CommentReplyEntity> replies;
+  CommentRepliesEntity(
+      {required this.id,
+      required this.text,
+      required this.userId,
+      required this.likesCount,
+      required this.menuItems,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.replies,
+      required this.commentsCount,
+      required this.level,
+      required this.parentComment,
+      required this.postId,
+      required this.isLiked});
+  factory CommentRepliesEntity.fromJson(Map<String, dynamic> data) =>
+      _$CommentRepliesEntityFromJson(data);
 
-  Map<String, dynamic> toJson() => _$PostRepliesEntityToJson(this);
+  Map<String, dynamic> toJson() => _$CommentRepliesEntityToJson(this);
 }
 
-class Reply {
+class CommentReply {
   final String id;
   final String userId;
   final String text;
@@ -110,7 +117,7 @@ class Reply {
   final DateTime createdAt;
   final DateTime updatedAt;
   final bool isLiked;
-  Reply(
+  CommentReply(
       {required this.userId,
       required this.text,
       required this.level,
@@ -122,13 +129,13 @@ class Reply {
       required this.isLiked,
       required this.id});
 
-  factory Reply.fromEntity(ReplyEntity replyEntity) {
-    return Reply(
+  factory CommentReply.fromEntity(CommentReplyEntity replyEntity) {
+    return CommentReply(
         userId: replyEntity.userId,
         text: replyEntity.text,
         level: replyEntity.level,
         likesCount: replyEntity.likesCount,
-        repliesCount: replyEntity.repliesCount ?? 0,
+        repliesCount: replyEntity.commentsCount ?? 0,
         menuItems: replyEntity.menuItems
             .map((e) => PopupMenuItemModel.fromEntity(entity: e))
             .toList(),
@@ -140,7 +147,7 @@ class Reply {
 }
 
 @JsonSerializable(explicitToJson: true)
-class ReplyEntity {
+class CommentReplyEntity {
   @JsonKey(name: '_id')
   final String id;
   @JsonKey(name: 'user_id')
@@ -150,7 +157,7 @@ class ReplyEntity {
   @JsonKey(name: 'likes_count')
   final int likesCount;
   @JsonKey(name: 'comments_count')
-  final int? repliesCount;
+  final int? commentsCount;
   @JsonKey(name: 'menu_items')
   final List<PopupMenuItemModelEntity> menuItems;
   @JsonKey(name: 'created_at')
@@ -160,19 +167,19 @@ class ReplyEntity {
 
   @JsonKey(name: 'is_liked')
   final bool isLiked;
-  ReplyEntity(
+  CommentReplyEntity(
       {required this.id,
       required this.userId,
       required this.text,
       required this.level,
       required this.likesCount,
-      required this.repliesCount,
+      required this.commentsCount,
       required this.menuItems,
       required this.createdAt,
       required this.updatedAt,
       required this.isLiked});
-  factory ReplyEntity.fromJson(Map<String, dynamic> data) =>
-      _$ReplyEntityFromJson(data);
+  factory CommentReplyEntity.fromJson(Map<String, dynamic> data) =>
+      _$CommentReplyEntityFromJson(data);
 
-  Map<String, dynamic> toJson() => _$ReplyEntityToJson(this);
+  Map<String, dynamic> toJson() => _$CommentReplyEntityToJson(this);
 }
