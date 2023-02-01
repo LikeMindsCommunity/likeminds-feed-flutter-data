@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:feed_sdk/src/models/feed/post.dart';
 import 'package:feed_sdk/src/models/feed/post_replies.dart';
+import 'package:feed_sdk/src/models/post/post_user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'post_detail_response.g.dart';
 
