@@ -11,6 +11,8 @@ class PostReplies {
   final List<Attachment>? attachments;
   final int communityId;
   final bool isPinned;
+  final bool isLiked;
+  final int commentsCount;
   final String userId;
   final int likeCount;
   final bool isSaved;
@@ -31,6 +33,8 @@ class PostReplies {
     required this.createdAt,
     required this.updatedAt,
     required this.replies,
+    required this.isLiked,
+    required this.commentsCount,
   });
 
   factory PostReplies.fromEntity(PostRepliesEntity entity) {
@@ -41,7 +45,9 @@ class PostReplies {
         isPinned: entity.isPinned,
         userId: entity.userId,
         likeCount: entity.likeCount,
+        commentsCount: entity.commentsCount,
         isSaved: entity.isSaved,
+        isLiked: entity.isLiked,
         menuItems: entity.menuItems
             .map((e) => PopupMenuItemModel.fromEntity(entity: e))
             .toList(),
@@ -68,8 +74,12 @@ class PostRepliesEntity {
   final String userId;
   @JsonKey(name: 'likes_count')
   final int likeCount;
+  @JsonKey(name: 'comments_count')
+  final int commentsCount;
   @JsonKey(name: 'is_saved')
   final bool isSaved;
+  @JsonKey(name: 'is_liked')
+  final bool isLiked;
   @JsonKey(name: 'menu_items')
   final List<PopupMenuItemModelEntity> menuItems;
   @JsonKey(name: 'created_at')
@@ -90,6 +100,8 @@ class PostRepliesEntity {
     required this.createdAt,
     required this.updatedAt,
     required this.replies,
+    required this.isLiked,
+    required this.commentsCount,
   });
   factory PostRepliesEntity.fromJson(Map<String, dynamic> data) =>
       _$PostRepliesEntityFromJson(data);

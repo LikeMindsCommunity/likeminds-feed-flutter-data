@@ -6,6 +6,7 @@ const String KETTLE_HOST = "https://betaauth.likeminds.community";
 
 //Auth endpoints
 const String AUTH_ENDPOINT = "$KETTLE_HOST/sdk/initiate";
+const String AUTH_REFRESH_ENDPOINT = "$KETTLE_HOST/user/refresh";
 
 //Feedroom endpoints
 const String FEEDROOM_ENDPOINT = "$KETTLE_HOST/feedroom";

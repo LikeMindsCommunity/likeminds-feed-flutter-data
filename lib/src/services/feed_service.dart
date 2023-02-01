@@ -28,13 +28,9 @@ class FeedService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
       return UniversalFeedResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
-      print(e.toString() + "dsa");
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   Future<GetFeedRoomResponseEntity> getFeedRoom(
@@ -50,10 +46,8 @@ class FeedService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response);
       return GetFeedRoomResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.toString() + "dsa");
       final GetFeedRoomResponseEntity responseEntity =
           GetFeedRoomResponseEntity(
         success: false,
@@ -79,10 +73,8 @@ class FeedService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response);
       return GetFeedOfFeedRoomResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.toString());
       final GetFeedOfFeedRoomResponseEntity responseEntity =
           GetFeedOfFeedRoomResponseEntity(
               success: false, errorMessage: e.toString(), posts: [], users: {});

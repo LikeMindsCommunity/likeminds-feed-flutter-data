@@ -15,7 +15,9 @@ class Post {
   final bool isPinned;
   final String userId;
   final int likeCount;
+  final int commentCount;
   final bool isSaved;
+  final bool isLiked;
   final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -31,6 +33,8 @@ class Post {
     required this.menuItems,
     required this.createdAt,
     required this.updatedAt,
+    required this.isLiked,
+    required this.commentCount,
   });
 
   factory Post.fromEntity({required PostEntity postEntity}) {
@@ -44,7 +48,9 @@ class Post {
         isPinned: postEntity.isPinned,
         userId: postEntity.userId,
         likeCount: postEntity.likeCount,
+        commentCount: postEntity.commentCount,
         isSaved: postEntity.isSaved,
+        isLiked: postEntity.isLiked,
         menuItems: postEntity.menuItems
             .map((e) => PopupMenuItemModel.fromEntity(entity: e))
             .toList(),
@@ -62,6 +68,8 @@ class Post {
       userId: userId,
       likeCount: likeCount,
       isSaved: isSaved,
+      isLiked: isLiked,
+      commentCount: commentCount,
       menuItems: menuItems.map((e) => e.toEntity()).toList(),
       createdAt: createdAt.millisecondsSinceEpoch.toInt(),
       updatedAt: updatedAt.millisecondsSinceEpoch.toInt(),
@@ -79,6 +87,10 @@ class PostEntity {
   final int communityId;
   @JsonKey(name: 'is_pinned')
   final bool isPinned;
+  @JsonKey(name: 'is_liked')
+  final bool isLiked;
+  @JsonKey(name: 'comments_count')
+  final int commentCount;
   @JsonKey(name: 'user_id')
   final String userId;
   @JsonKey(name: 'likes_count')
@@ -103,6 +115,8 @@ class PostEntity {
     required this.menuItems,
     required this.createdAt,
     required this.updatedAt,
+    required this.isLiked,
+    required this.commentCount,
   });
   factory PostEntity.fromJson(Map<String, dynamic> data) =>
       _$PostEntityFromJson(data);

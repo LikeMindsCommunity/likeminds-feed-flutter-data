@@ -20,8 +20,7 @@ class DIService {
   init(String apiKey) {
     ApiClient _apiClient = ApiClient(apiKey: apiKey);
 
-    AuthService _authService =
-        AuthService(apiKey: apiKey, apiClient: _apiClient);
+    AuthService _authService = AuthService(apiClient: _apiClient);
     AuthRepository _authRepository = AuthRepository(authService: _authService);
 
     AccessService _accessService = AccessService(apiClient: _apiClient);
