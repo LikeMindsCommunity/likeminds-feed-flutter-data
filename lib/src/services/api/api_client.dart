@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
-import 'package:feed_sdk/src/services/api/access_service.dart';
+import 'package:feed_sdk/src/services/access_service.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:feed_sdk/src/services/api/log_interceptor.dart';
@@ -62,4 +62,7 @@ class ApiClient {
 
   Future<bool> getAccessType(String accessType) async =>
       await AccessService(apiClient: this).getAccess(accessType);
+
+  Future<bool> getMemberState() async =>
+      await AccessService(apiClient: this).getMemberState();
 }
