@@ -11,6 +11,7 @@ LikePostResponseEntity _$LikePostResponseEntityFromJson(
     LikePostResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
+      likes: json['likes'] as int?,
     );
 
 Map<String, dynamic> _$LikePostResponseEntityToJson(
@@ -18,4 +19,5 @@ Map<String, dynamic> _$LikePostResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
+      'likes': instance.likes,
     };

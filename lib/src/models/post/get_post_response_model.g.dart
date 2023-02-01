@@ -14,7 +14,7 @@ GetPostResponseEntity _$GetPostResponseEntityFromJson(
       post: json['data']['post'] == null
           ? null
           : PostEntity.fromJson(json['data']['post'] as Map<String, dynamic>),
-      users: (json['data']['users'] as Map<String, dynamic>?)?.map(
+      users: (json['users'] as Map<String, dynamic>?)?.map(
         (k, e) =>
             MapEntry(k, PostUserEntity.fromJson(e as Map<String, dynamic>)),
       ),

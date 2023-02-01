@@ -75,4 +75,18 @@ class FeedRepository {
         ? AddCommentReplyResponse.fromEntity(responseEntity)
         : null;
   }
+
+  Future<GetFeedRoomResponse> getFeedRoom(
+      GetFeedRoomRequest getFeedRoomRequest) async {
+    final GetFeedRoomResponseEntity responseEntity =
+        await feedService.getFeedRoom(getFeedRoomRequest);
+    return GetFeedRoomResponse.fromEntity(responseEntity);
+  }
+
+  Future<GetFeedOfFeedRoomResponse> getFeedOfFeedRoom(
+      GetFeedOfFeedRoomRequest getFeedFeedRoomRequest) async {
+    final GetFeedOfFeedRoomResponseEntity responseEntity =
+        await feedService.getFeedOfFeedRoom(getFeedFeedRoomRequest);
+    return GetFeedOfFeedRoomResponse.fromEntity(entity: responseEntity);
+  }
 }
