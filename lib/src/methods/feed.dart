@@ -41,7 +41,6 @@ class FeedApi {
     return response;
   }
 
-
   Future<CommentDetailResponse?> getComment(
       CommentDetailRequest request) async {
     final CommentDetailResponse? response =
@@ -66,12 +65,5 @@ class FeedApi {
           await feedRepository.getFeedOfFeedRoom(getFeedFeedRoomRequest);
       return response;
     }
-
-  Future<GetFeedRoomResponse> getFeedRoom(
-      GetFeedRoomRequest getFeedRoomRequest) async {
-    final GetFeedRoomResponse response =
-        await feedRepository.getFeedRoom(getFeedRoomRequest);
-    return response;
   }
-
 }
