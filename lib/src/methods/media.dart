@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:feed_sdk/src/repositories/media_repository.dart';
+import 'package:likeminds_feed/src/repositories/media_repository.dart';
 
 class MediaApi {
   final MediaRepository mediaRepository;

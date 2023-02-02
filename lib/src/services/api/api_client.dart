@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
-import 'package:feed_sdk/src/services/access_service.dart';
-import 'package:feed_sdk/src/services/api/token_interceptor.dart';
+import 'package:likeminds_feed/src/services/access_service.dart';
+import 'package:likeminds_feed/src/services/api/token_interceptor.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:feed_sdk/src/services/api/log_interceptor.dart';
+import 'package:likeminds_feed/src/services/api/log_interceptor.dart';
 
 class ApiClient {
   final String feedUrl = 'https://betaauth.likeminds.community/feed';

@@ -1,4 +1,4 @@
-import 'package:feed_sdk/feed_sdk.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'get_feed_feedroom_response_model.g.dart';

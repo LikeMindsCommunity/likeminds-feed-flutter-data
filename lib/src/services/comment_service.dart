@@ -1,18 +1,18 @@
 import 'package:dio/dio.dart';
-import 'package:feed_sdk/feed_sdk.dart';
-import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
-import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
-import 'package:feed_sdk/src/models/comment/add_comment_reply_request.dart';
-import 'package:feed_sdk/src/models/comment/add_comment_reply_response.dart';
-import 'package:feed_sdk/src/models/feed/comment_detail_request.dart';
-import 'package:feed_sdk/src/models/feed/comment_detail_response.dart';
-import 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';
-import 'package:feed_sdk/src/models/feed/post_detail_request.dart';
-import 'package:feed_sdk/src/models/feed/post_detail_response.dart';
-import 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
-import 'package:feed_sdk/src/models/feed/universal_feed_request.dart';
-import 'package:feed_sdk/src/models/feed/universal_feed_response.dart';
-import 'package:feed_sdk/src/services/api/api_client.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
+import 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
+import 'package:likeminds_feed/src/models/comment/add_comment_reply_request.dart';
+import 'package:likeminds_feed/src/models/comment/add_comment_reply_response.dart';
+import 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
+import 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';
+import 'package:likeminds_feed/src/models/feed/toggle_like_comment_response.dart';
+import 'package:likeminds_feed/src/models/feed/post_detail_request.dart';
+import 'package:likeminds_feed/src/models/feed/post_detail_response.dart';
+import 'package:likeminds_feed/src/models/feed/toggle_like_comment_request.dart';
+import 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
+import 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
+import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class CommentService {
   final ApiClient apiClient;

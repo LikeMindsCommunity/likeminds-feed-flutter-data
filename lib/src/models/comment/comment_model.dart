@@ -1,4 +1,4 @@
-import 'package:feed_sdk/src/models/post/popup_menu_item_model.dart';
+import 'package:likeminds_feed/src/models/post/popup_menu_item_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'comment_model.g.dart';

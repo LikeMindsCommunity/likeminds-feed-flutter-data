@@ -1,13 +1,13 @@
-library feed_sdk;
+library likeminds_feed;
 
 export 'src/methods/sdk.dart';
 export 'src/methods/methods.dart';
 export 'src/models/models.dart';
 
 // export 'src/me';
-import 'package:feed_sdk/src/di/di_service.dart';
-import 'package:feed_sdk/src/methods/sdk.dart';
-import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
+import 'package:likeminds_feed/src/di/di_service.dart';
+import 'package:likeminds_feed/src/methods/sdk.dart';
+import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
 
 class LMClient {
   static SdkApplication initiateLikeMinds(String apiKey) {

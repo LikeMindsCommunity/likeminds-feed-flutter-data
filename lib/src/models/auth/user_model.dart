@@ -1,4 +1,4 @@
-import 'package:feed_sdk/src/models/sdk/sdk_client_info_model.dart';
+import 'package:likeminds_feed/src/models/sdk/sdk_client_info_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';

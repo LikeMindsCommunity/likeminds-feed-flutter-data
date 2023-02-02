@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
-import 'package:feed_sdk/src/endpoints.dart';
+import 'package:likeminds_feed/src/endpoints.dart';
 
-import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
-import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
-import 'package:feed_sdk/src/models/auth/refresh_request_model.dart';
-import 'package:feed_sdk/src/models/auth/refresh_response_model.dart';
-import 'package:feed_sdk/src/services/api/api_client.dart';
+import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
+import 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
+import 'package:likeminds_feed/src/models/auth/refresh_request_model.dart';
+import 'package:likeminds_feed/src/models/auth/refresh_response_model.dart';
+import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class AuthService {
   final ApiClient apiClient;

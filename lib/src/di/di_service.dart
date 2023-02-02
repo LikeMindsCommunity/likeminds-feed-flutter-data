@@ -1,15 +1,15 @@
-import 'package:feed_sdk/src/repositories/access_repository.dart';
-import 'package:feed_sdk/src/repositories/auth_repository.dart';
-import 'package:feed_sdk/src/repositories/feed_repository.dart';
-import 'package:feed_sdk/src/repositories/media_repository.dart';
-import 'package:feed_sdk/src/repositories/post_repository.dart';
-import 'package:feed_sdk/src/services/access_service.dart';
-import 'package:feed_sdk/src/services/api/api_client.dart';
-import 'package:feed_sdk/src/services/auth_service.dart';
-import 'package:feed_sdk/src/services/comment_service.dart';
-import 'package:feed_sdk/src/services/feed_service.dart';
-import 'package:feed_sdk/src/services/media_service.dart';
-import 'package:feed_sdk/src/services/post_service.dart';
+import 'package:likeminds_feed/src/repositories/access_repository.dart';
+import 'package:likeminds_feed/src/repositories/auth_repository.dart';
+import 'package:likeminds_feed/src/repositories/feed_repository.dart';
+import 'package:likeminds_feed/src/repositories/media_repository.dart';
+import 'package:likeminds_feed/src/repositories/post_repository.dart';
+import 'package:likeminds_feed/src/services/access_service.dart';
+import 'package:likeminds_feed/src/services/api/api_client.dart';
+import 'package:likeminds_feed/src/services/auth_service.dart';
+import 'package:likeminds_feed/src/services/comment_service.dart';
+import 'package:likeminds_feed/src/services/feed_service.dart';
+import 'package:likeminds_feed/src/services/media_service.dart';
+import 'package:likeminds_feed/src/services/post_service.dart';
 import 'package:get_it/get_it.dart';
 
 class DIService {

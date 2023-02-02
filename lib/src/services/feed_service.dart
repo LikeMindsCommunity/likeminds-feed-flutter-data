@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:feed_sdk/feed_sdk.dart';
-import 'package:feed_sdk/src/endpoints.dart';
-import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
-import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
-import 'package:feed_sdk/src/models/feedroom/get_feed_feedroom_request_model.dart';
-import 'package:feed_sdk/src/models/feedroom/get_feed_feedroom_response_model.dart';
-import 'package:feed_sdk/src/models/feedroom/get_feedroom_request_model.dart';
-import 'package:feed_sdk/src/models/feedroom/get_feedroom_response_model.dart';
-import 'package:feed_sdk/src/models/post/post_model.dart';
-import 'package:feed_sdk/src/models/feed/universal_feed_request.dart';
-import 'package:feed_sdk/src/models/feed/universal_feed_response.dart';
-import 'package:feed_sdk/src/services/api/api_client.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/endpoints.dart';
+import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
+import 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
+import 'package:likeminds_feed/src/models/feedroom/get_feed_feedroom_request_model.dart';
+import 'package:likeminds_feed/src/models/feedroom/get_feed_feedroom_response_model.dart';
+import 'package:likeminds_feed/src/models/feedroom/get_feedroom_request_model.dart';
+import 'package:likeminds_feed/src/models/feedroom/get_feedroom_response_model.dart';
+import 'package:likeminds_feed/src/models/post/post_model.dart';
+import 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
+import 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
+import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class FeedService {
   final ApiClient apiClient;

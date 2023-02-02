@@ -1,4 +1,4 @@
-import 'package:feed_sdk/src/models/post/attachment_model.dart';
+import 'package:likeminds_feed/src/models/post/attachment_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'add_post_request_model.g.dart';

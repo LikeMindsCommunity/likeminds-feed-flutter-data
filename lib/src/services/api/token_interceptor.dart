@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:feed_sdk/src/models/models.dart';
-import 'package:feed_sdk/src/services/api/api_client.dart';
-import 'package:feed_sdk/src/services/auth_service.dart';
+import 'package:likeminds_feed/src/models/models.dart';
+import 'package:likeminds_feed/src/services/api/api_client.dart';
+import 'package:likeminds_feed/src/services/auth_service.dart';
 
 class TokenInterceptor extends Interceptor {
   final ApiClient apiClient;

@@ -1,12 +1,12 @@
-import 'package:feed_sdk/feed_sdk.dart';
-import 'package:feed_sdk/src/models/comment/add_comment_reply_request.dart';
-import 'package:feed_sdk/src/models/comment/add_comment_reply_response.dart';
-import 'package:feed_sdk/src/models/feed/comment_detail_request.dart';
-import 'package:feed_sdk/src/models/feed/comment_detail_response.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/models/comment/add_comment_reply_request.dart';
+import 'package:likeminds_feed/src/models/comment/add_comment_reply_response.dart';
+import 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
+import 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';
 
-import 'package:feed_sdk/src/models/feed/toggle_like_comment_request.dart';
-import 'package:feed_sdk/src/models/feed/toggle_like_comment_response.dart';
-import 'package:feed_sdk/src/repositories/feed_repository.dart';
+import 'package:likeminds_feed/src/models/feed/toggle_like_comment_request.dart';
+import 'package:likeminds_feed/src/models/feed/toggle_like_comment_response.dart';
+import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 
 class FeedApi {
   FeedApi({required this.feedRepository});

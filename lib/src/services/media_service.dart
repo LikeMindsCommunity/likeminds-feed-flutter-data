@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:feed_sdk/src/services/api/api_client.dart';
+import 'package:likeminds_feed/src/services/api/api_client.dart';
 import 'package:simple_s3/simple_s3.dart';
 
 ///Internal media service to talk to our s3 buckets

@@ -1,5 +1,5 @@
-import 'package:feed_sdk/src/models/post/like_model.dart';
-import 'package:feed_sdk/src/models/post/post_user_model.dart';
+import 'package:likeminds_feed/src/models/post/like_model.dart';
+import 'package:likeminds_feed/src/models/post/post_user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'get_likes_response_model.g.dart';

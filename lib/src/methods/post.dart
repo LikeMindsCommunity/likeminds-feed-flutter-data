@@ -1,14 +1,14 @@
-import 'package:feed_sdk/src/models/post/add_post_request_model.dart';
-import 'package:feed_sdk/src/models/post/add_post_response_model.dart';
-import 'package:feed_sdk/src/models/post/delete_post_request_model.dart';
-import 'package:feed_sdk/src/models/post/delete_post_response_model.dart';
-import 'package:feed_sdk/src/models/post/get_likes_request_model.dart';
-import 'package:feed_sdk/src/models/post/get_likes_response_model.dart';
-import 'package:feed_sdk/src/models/post/get_post_request_model.dart';
-import 'package:feed_sdk/src/models/post/get_post_response_model.dart';
-import 'package:feed_sdk/src/models/post/like_post_request_model.dart';
-import 'package:feed_sdk/src/models/post/like_post_response_model.dart';
-import 'package:feed_sdk/src/repositories/post_repository.dart';
+import 'package:likeminds_feed/src/models/post/add_post_request_model.dart';
+import 'package:likeminds_feed/src/models/post/add_post_response_model.dart';
+import 'package:likeminds_feed/src/models/post/delete_post_request_model.dart';
+import 'package:likeminds_feed/src/models/post/delete_post_response_model.dart';
+import 'package:likeminds_feed/src/models/post/get_likes_request_model.dart';
+import 'package:likeminds_feed/src/models/post/get_likes_response_model.dart';
+import 'package:likeminds_feed/src/models/post/get_post_request_model.dart';
+import 'package:likeminds_feed/src/models/post/get_post_response_model.dart';
+import 'package:likeminds_feed/src/models/post/like_post_request_model.dart';
+import 'package:likeminds_feed/src/models/post/like_post_response_model.dart';
+import 'package:likeminds_feed/src/repositories/post_repository.dart';
 
 class PostApi {
   final PostRepository postRepository;
