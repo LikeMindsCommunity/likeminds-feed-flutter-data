@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:feed_sdk/feed_sdk.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 
 part 'comment_replies.g.dart';
 

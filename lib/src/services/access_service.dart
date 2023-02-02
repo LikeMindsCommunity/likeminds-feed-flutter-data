@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:feed_sdk/src/endpoints.dart';
-import 'package:feed_sdk/src/services/api/api_client.dart';
+import 'package:likeminds_feed/src/endpoints.dart';
+import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class AccessService {
   final ApiClient apiClient;

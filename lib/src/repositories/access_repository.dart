@@ -1,4 +1,4 @@
-import 'package:feed_sdk/src/services/access_service.dart';
+import 'package:likeminds_feed/src/services/access_service.dart';
 
 class AccessRepository {
   final AccessService accessService;

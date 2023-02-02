@@ -17,7 +17,9 @@ PostRepliesEntity _$PostRepliesEntityFromJson(Map<String, dynamic> json) =>
       isPinned: json['is_pinned'] as bool,
       userId: json['user_id'] as String,
       likeCount: json['likes_count'] as int,
+      commentsCount: json['comments_count'] as int,
       isSaved: json['is_saved'] as bool,
+      isLiked: json['is_liked'] as bool,
       menuItems: (json['menu_items'] as List<dynamic>)
           .map((e) =>
               PopupMenuItemModelEntity.fromJson(e as Map<String, dynamic>))
@@ -37,8 +39,10 @@ Map<String, dynamic> _$PostRepliesEntityToJson(PostRepliesEntity instance) =>
       'community_id': instance.communityId,
       'is_pinned': instance.isPinned,
       'user_id': instance.userId,
+      'comments_count': instance.commentsCount,
       'likes_count': instance.likeCount,
       'is_saved': instance.isSaved,
+      'is_liked': instance.isLiked,
       'menu_items': instance.menuItems.map((e) => e.toJson()).toList(),
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,

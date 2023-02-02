@@ -4,8 +4,8 @@ part 'sdk_client_info_model.g.dart';
 
 @JsonSerializable()
 class SDKClientInfo {
-  final String community;
-  final String user;
+  final int community;
+  final int user;
 
   @JsonKey(name: 'user_unique_id')
   final String userUniqueId;

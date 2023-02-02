@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:feed_sdk/src/services/media_service.dart';
+import 'package:likeminds_feed/src/services/media_service.dart';
 
 class MediaRepository {
   final MediaService mediaService;

@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
-import 'package:feed_sdk/src/services/access_service.dart';
+import 'package:likeminds_feed/src/services/access_service.dart';
+import 'package:likeminds_feed/src/services/api/token_interceptor.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:feed_sdk/src/services/api/log_interceptor.dart';
+import 'package:likeminds_feed/src/services/api/log_interceptor.dart';
 
 class ApiClient {
   final String feedUrl = 'https://betaauth.likeminds.community/feed';
@@ -17,7 +18,6 @@ class ApiClient {
   ApiClient({required this.apiKey});
 
   void initTokens(String accessToken, String refreshToken) {
-    print('Tokens Initiated $accessToken');
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
   }
@@ -32,15 +32,18 @@ class ApiClient {
   get getApiKey => apiKey;
 
   final int pageLimit = 10;
-  Dio client() {
+  Dio client({bool? isRefresh}) {
+    Dio dio = Dio();
     Map<String, dynamic>? headers;
-    if (accessToken != null) {
-      print("Add post token - $accessToken");
+    if (accessToken != null && isRefresh != null ? !isRefresh : true) {
       headers = {'Authorization': '$accessToken'};
     }
 
-    BaseOptions options = new BaseOptions(headers: headers);
-    return Dio(options)..interceptors.add(Logging());
+    BaseOptions options = BaseOptions(headers: headers);
+    dio.options = options;
+    dio.interceptors.add(Logging());
+    dio.interceptors.add(TokenInterceptor(apiClient: this));
+    return dio;
   }
 
   String getUniversalFeedEndPoint(int page) {

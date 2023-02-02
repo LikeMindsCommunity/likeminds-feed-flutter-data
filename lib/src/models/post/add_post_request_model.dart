@@ -1,11 +1,11 @@
-import 'package:feed_sdk/src/models/post/attachment_model.dart';
+import 'package:likeminds_feed/src/models/post/attachment_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'add_post_request_model.g.dart';
 
 class AddPostRequest {
   final String text;
-  final String? feedroomId;
+  final int? feedroomId;
   final List<Attachment>? attachments;
 
   AddPostRequest({
@@ -19,6 +19,7 @@ class AddPostRequest {
       text: entity.text,
       attachments:
           entity.attachments?.map((e) => Attachment.fromEntity(e)).toList(),
+      feedroomId: entity.feedroomId,
     );
   }
 
@@ -26,6 +27,7 @@ class AddPostRequest {
     return AddPostRequestEntity(
       text: text,
       attachments: attachments?.map((e) => e.toEntity()).toList(),
+      feedroomId: feedroomId,
     );
   }
 }
@@ -35,7 +37,7 @@ class AddPostRequestEntity {
   final String text;
   final List<AttachmentEntity>? attachments;
   @JsonKey(name: 'feedroom_id')
-  final String? feedroomId;
+  final int? feedroomId;
 
   AddPostRequestEntity({
     required this.text,

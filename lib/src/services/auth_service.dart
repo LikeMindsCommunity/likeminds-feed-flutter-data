@@ -1,15 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
-import 'package:feed_sdk/src/endpoints.dart';
+import 'package:likeminds_feed/src/endpoints.dart';
 
-import 'package:feed_sdk/src/models/auth/initiate_user_request_model.dart';
-import 'package:feed_sdk/src/models/auth/initiate_user_response_model.dart';
-import 'package:feed_sdk/src/services/api/api_client.dart';
+import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
+import 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
+import 'package:likeminds_feed/src/models/auth/refresh_request_model.dart';
+import 'package:likeminds_feed/src/models/auth/refresh_response_model.dart';
+import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class AuthService {
-  final String apiKey;
   final ApiClient apiClient;
-  AuthService({required this.apiKey, required this.apiClient});
+  AuthService({required this.apiClient});
 
   Future<InitiateUserResponse> initiateUser(
       InitiateUserRequest initiateUserRequest) async {
@@ -19,7 +20,7 @@ class AuthService {
             data: initiateUserRequest.toJson(),
             options: Options(
               headers: {
-                'x-api-key': apiKey,
+                'x-api-key': apiClient.getApiKey,
               },
             ),
           );
@@ -37,6 +38,28 @@ class AuthService {
       InitiateUserResponse initiateUserResponse =
           InitiateUserResponse.fromJson(e.response?.data);
       return initiateUserResponse;
+    }
+  }
+
+  Future<RefreshResponseEntity> refresh(RefreshRequest request) async {
+    Dio dio = Dio();
+    try {
+      final response = await dio.post(
+        AUTH_REFRESH_ENDPOINT,
+        options: Options(
+          headers: {
+            'Authorization': request.refreshToken,
+          },
+        ),
+      );
+      RefreshResponseEntity refreshResponse =
+          RefreshResponseEntity.fromJson(response.data);
+
+      return refreshResponse;
+    } on DioError catch (e) {
+      RefreshResponseEntity refreshResponse =
+          RefreshResponseEntity.fromJson(e.response?.data);
+      return refreshResponse;
     }
   }
 }

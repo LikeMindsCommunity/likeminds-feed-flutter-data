@@ -11,29 +11,37 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+LikeMinds Feed is a plug and play package for creating feed in your flutter app using your LikeMinds account. Provides all functionality for the data layer that can be used with any UI.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Get a feed setup in your app in minutes
+
+- Feed functionality
+- Posting functionality
+- Comment functionality
+- Feedroom functionality
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+The starting point is the LikeMinds website. Create your account and get and API key, then initialize the package and get your feed ready in less than 15 minutes.
+
+Then add the package as dependency in pubspec.yaml
+
+```
+likeminds_feed: 0.5.0
+```
+
+or you can run this command in the terminal
+
+```bash
+flutter pub add likeminds_feed
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+After adding the import, get an object of the SdkApplication that exposes public methods
 
 ```dart
-const like = 'sample';
+SdkApplication _sdkApplication = LMClient.initiateLikeMinds(apiKey);
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.

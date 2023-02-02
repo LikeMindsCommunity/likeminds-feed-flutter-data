@@ -1,4 +1,4 @@
-import 'package:feed_sdk/src/repositories/access_repository.dart';
+import 'package:likeminds_feed/src/repositories/access_repository.dart';
 
 class AccessApi {
   final AccessRepository accessRepository;
