@@ -1,0 +1,26 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'universal_feed_response.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+UniversalFeedResponseEntity _$UniversalFeedResponseEntityFromJson(
+        Map<String, dynamic> json) =>
+    UniversalFeedResponseEntity(
+      posts: (json['posts'] as List<dynamic>)
+          .map((e) => PostEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      users: (json['users'] as Map<String, dynamic>).map(
+        (k, e) =>
+            MapEntry(k, PostUserEntity.fromJson(e as Map<String, dynamic>)),
+      ),
+    );
+
+Map<String, dynamic> _$UniversalFeedResponseEntityToJson(
+        UniversalFeedResponseEntity instance) =>
+    <String, dynamic>{
+      'posts': instance.posts.map((e) => e.toJson()).toList(),
+      'users': instance.users.map((k, e) => MapEntry(k, e.toJson())),
+    };

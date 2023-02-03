@@ -1,0 +1,32 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'user_model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+User _$UserFromJson(Map<String, dynamic> json) => User(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      imageUrl: json['image_url'] as String,
+      isGuest: json['is_guest'] as bool,
+      organisationName: json['organisation_name'] as String?,
+      sdkClientInfo: json['sdk_client_info'] == null
+          ? null
+          : SDKClientInfo.fromJson(
+              json['sdk_client_info'] as Map<String, dynamic>),
+      updatedAt: (json['updated_at'] as num).toDouble(),
+      userUniqueId: json['user_unique_id'] as String,
+    );
+
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'image_url': instance.imageUrl,
+      'is_guest': instance.isGuest,
+      'organisation_name': instance.organisationName,
+      'sdk_client_info': instance.sdkClientInfo,
+      'updated_at': instance.updatedAt,
+      'user_unique_id': instance.userUniqueId,
+    };
