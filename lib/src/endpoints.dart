@@ -58,24 +58,3 @@ class EndPoints {
     return "$feedUrl/post/$postId/comment/$commentId/comment";
   }
 }
-
-//Host endpoints
-// const String CARAVAN_HOST = "https://beta.likeminds.community/api";
-// const String KETTLE_HOST = "https://betaauth.likeminds.community";
-
-// //Auth endpoints
-// const String AUTH_ENDPOINT = "$KETTLE_HOST/sdk/initiate";
-// const String AUTH_REFRESH_ENDPOINT = "$KETTLE_HOST/user/refresh";
-// const String AUTH_LOGOUT_ENDPOINT = "$KETTLE_HOST/user/logout";
-
-// //Notification endpoints
-// const String REGISTER_DEVICE_ENDPOINT = "$CARAVAN_HOST/push";
-
-// //Feedroom endpoints
-// const String FEEDROOM_ENDPOINT = "$KETTLE_HOST/feedroom";
-
-// //Post endpoints
-// const String ADD_POST_ENDPOINT = "$KETTLE_HOST/feed/post";
-
-// const String ACCESS_ENDPOINT = "$CARAVAN_HOST/community_member/fetch_access";
-// const String MEMBER_STATE_ENDPOINT = "$KETTLE_HOST/community/member/state";
