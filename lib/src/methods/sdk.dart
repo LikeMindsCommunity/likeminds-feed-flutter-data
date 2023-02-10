@@ -11,18 +11,16 @@ import 'package:get_it/get_it.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/auth.dart';
 import 'package:likeminds_feed/src/methods/feed.dart';
-import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 
 class SdkApplication {
   final String apiKey;
+
   SdkApplication({
     required this.apiKey,
   });
 
   AuthApi getAuthApi() {
-    // return authApiImpl
-    print('Getting Auth API');
     return AuthApi(
         apiKey: apiKey,
         authRepository: GetIt.instance.get<AuthRepository>(

@@ -5,10 +5,11 @@ part 'universal_feed_request.g.dart';
 @JsonSerializable()
 class UniversalFeedRequest {
   final int page;
-  // final int pageSize;
+  final int pageSize;
 
   UniversalFeedRequest({
     required this.page,
+    required this.pageSize,
   });
 
   factory UniversalFeedRequest.fromJson(Map<String, dynamic> json) =>

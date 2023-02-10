@@ -1,15 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/endpoints.dart';
-import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
-import 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
-import 'package:likeminds_feed/src/models/feedroom/get_feed_feedroom_request_model.dart';
-import 'package:likeminds_feed/src/models/feedroom/get_feed_feedroom_response_model.dart';
-import 'package:likeminds_feed/src/models/feedroom/get_feedroom_request_model.dart';
-import 'package:likeminds_feed/src/models/feedroom/get_feedroom_response_model.dart';
-import 'package:likeminds_feed/src/models/post/post_model.dart';
-import 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
-import 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class FeedService {
@@ -19,11 +10,16 @@ class FeedService {
 
   Future<UniversalFeedResponseEntity?> getUniversalFeed(
       UniversalFeedRequest universalFeedRequest) async {
-    print(apiClient.getUniversalFeedEndPoint(universalFeedRequest.page));
+    print(apiClient.getEndpoints
+        .getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
       final response = await apiClient.client().get(
-            apiClient.getUniversalFeedEndPoint(universalFeedRequest.page),
-            // data: universalFeedRequest.toJson(),
+            apiClient.getEndpoints
+                .getUniversalFeedEndPoint(universalFeedRequest.page),
+            queryParameters: {
+              'page': universalFeedRequest.page,
+              'page_size': universalFeedRequest.pageSize,
+            },
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
@@ -37,7 +33,7 @@ class FeedService {
       GetFeedRoomRequest getFeedRoomRequest) async {
     try {
       final response = await apiClient.client().get(
-            FEEDROOM_ENDPOINT,
+            apiClient.getEndpoints.feedroomEndpoint,
             queryParameters: {
               'page': getFeedRoomRequest.page,
               'feedroom_id': getFeedRoomRequest.feedroomId,
@@ -63,7 +59,7 @@ class FeedService {
       GetFeedOfFeedRoomRequest feedRoomRequest) async {
     try {
       final response = await apiClient.client().get(
-            "${KETTLE_HOST}/feed/group",
+            apiClient.getEndpoints.feedOfFeedroomEndpoint,
             queryParameters: {
               'page': feedRoomRequest.page,
               'feedroom_id': feedRoomRequest.feedroomId,
@@ -77,7 +73,11 @@ class FeedService {
     } on DioError catch (e) {
       final GetFeedOfFeedRoomResponseEntity responseEntity =
           GetFeedOfFeedRoomResponseEntity(
-              success: false, errorMessage: e.toString(), posts: [], users: {});
+        success: false,
+        errorMessage: e.toString(),
+        posts: [],
+        users: {},
+      );
       return responseEntity;
     }
   }

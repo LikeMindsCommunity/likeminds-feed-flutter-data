@@ -1,11 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/endpoints.dart';
-
-import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
-import 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
-import 'package:likeminds_feed/src/models/auth/refresh_request_model.dart';
-import 'package:likeminds_feed/src/models/auth/refresh_response_model.dart';
+import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class AuthService {
@@ -16,7 +11,7 @@ class AuthService {
       InitiateUserRequest initiateUserRequest) async {
     try {
       final response = await apiClient.client().post(
-            AUTH_ENDPOINT,
+            apiClient.getEndpoints.authEndpoint,
             data: initiateUserRequest.toJson(),
             options: Options(
               headers: {
@@ -45,7 +40,7 @@ class AuthService {
     Dio dio = Dio();
     try {
       final response = await dio.post(
-        AUTH_REFRESH_ENDPOINT,
+        apiClient.getEndpoints.authRefreshEndpoint,
         options: Options(
           headers: {
             'Authorization': request.refreshToken,
@@ -60,6 +55,25 @@ class AuthService {
       RefreshResponseEntity refreshResponse =
           RefreshResponseEntity.fromJson(e.response?.data);
       return refreshResponse;
+    }
+  }
+
+  Future<LogoutResponseEntity> logout(LogoutRequest request) async {
+    try {
+      final response = await apiClient.client().post(
+        apiClient.getEndpoints.authLogoutEndpoint,
+        data: {
+          "refresh_token": request.refreshToken ?? apiClient.getRefreshToken
+        },
+      );
+      LogoutResponseEntity logoutResponse =
+          LogoutResponseEntity.fromJson(response.data);
+
+      return logoutResponse;
+    } on DioError catch (e) {
+      LogoutResponseEntity logoutResponse =
+          LogoutResponseEntity.fromJson(e.response?.data);
+      return logoutResponse;
     }
   }
 }

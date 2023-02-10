@@ -14,6 +14,9 @@ class User {
   @JsonKey(name: 'is_guest')
   final bool isGuest;
 
+  @JsonKey(name: 'user_unique_id')
+  final String userUniqueId;
+
   @JsonKey(name: 'organisation_name')
   final String? organisationName;
 
@@ -21,20 +24,45 @@ class User {
   final SDKClientInfo? sdkClientInfo;
 
   @JsonKey(name: 'updated_at')
-  final double updatedAt;
+  final int? updatedAt;
 
-  @JsonKey(name: 'user_unique_id')
-  final String userUniqueId;
+  @JsonKey(name: 'is_owner')
+  final bool? isOwner;
+
+  @JsonKey(name: 'custom_title')
+  final String? customTitle;
+
+  @JsonKey(name: 'member_since')
+  final String? memberSince;
+
+  @JsonKey(name: 'route')
+  final String? route;
+
+  @JsonKey(name: 'state')
+  final int? state;
+
+  @JsonKey(name: 'community_id')
+  final int? communityId;
+
+  @JsonKey(name: 'created_at')
+  final int? createdAt;
 
   User({
     required this.id,
     required this.name,
     required this.imageUrl,
     required this.isGuest,
+    required this.userUniqueId,
     this.organisationName,
     this.sdkClientInfo,
-    required this.updatedAt,
-    required this.userUniqueId,
+    this.updatedAt,
+    this.isOwner,
+    this.customTitle,
+    this.memberSince,
+    this.route,
+    this.state,
+    this.communityId,
+    this.createdAt,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

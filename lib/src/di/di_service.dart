@@ -9,6 +9,7 @@ import 'package:likeminds_feed/src/services/auth_service.dart';
 import 'package:likeminds_feed/src/services/comment_service.dart';
 import 'package:likeminds_feed/src/services/feed_service.dart';
 import 'package:likeminds_feed/src/services/media_service.dart';
+import 'package:likeminds_feed/src/services/notification_service.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
 import 'package:get_it/get_it.dart';
 
@@ -17,8 +18,9 @@ class DIService {
   static DIService get instance => _instance ??= DIService._();
 
   DIService._() {}
-  init(String apiKey) {
-    ApiClient _apiClient = ApiClient(apiKey: apiKey);
+  init(String apiKey, bool isProduction) {
+    ApiClient _apiClient =
+        ApiClient(apiKey: apiKey, isProduction: isProduction);
 
     AuthService _authService = AuthService(apiClient: _apiClient);
     AuthRepository _authRepository = AuthRepository(authService: _authService);
@@ -54,6 +56,9 @@ class DIService {
         instanceName: kInstancePostRepository);
     getIt.registerFactory<MediaRepository>(() => _mediaRepository,
         instanceName: kInstanceMediaRepository);
+
+    getIt.registerLazySingleton(
+        () => NotificationService(apiClient: _apiClient));
   }
   // DIService();
 

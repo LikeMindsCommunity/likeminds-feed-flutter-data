@@ -1,21 +1,26 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
+import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/token_interceptor.dart';
-import 'package:flutter/foundation.dart';
-
 import 'package:likeminds_feed/src/services/api/log_interceptor.dart';
 
 class ApiClient {
-  final String feedUrl = 'https://betaauth.likeminds.community/feed';
   final String apiKey;
+  final bool isProduction;
+  late final EndPoints endPoints;
   String? accessToken;
   String? refreshToken;
 
   String? userId;
   int? communityId;
 
-  ApiClient({required this.apiKey});
+  ApiClient({
+    required this.apiKey,
+    required this.isProduction,
+  }) {
+    endPoints = EndPoints.instance(isProduction);
+  }
 
   void initTokens(String accessToken, String refreshToken) {
     this.accessToken = accessToken;
@@ -30,13 +35,18 @@ class ApiClient {
   get getAccessToken => accessToken;
   get getRefreshToken => refreshToken;
   get getApiKey => apiKey;
+  EndPoints get getEndpoints => endPoints;
 
-  final int pageLimit = 10;
   Dio client({bool? isRefresh}) {
     Dio dio = Dio();
-    Map<String, dynamic>? headers;
+
+    Map<String, dynamic>? headers = {
+      // 'x-platform-code': 'an',
+      // 'x-version-code': '210'
+    };
+
     if (accessToken != null && isRefresh != null ? !isRefresh : true) {
-      headers = {'Authorization': '$accessToken'};
+      headers.addAll({'Authorization': '$accessToken'});
     }
 
     BaseOptions options = BaseOptions(headers: headers);
@@ -44,31 +54,6 @@ class ApiClient {
     dio.interceptors.add(Logging());
     dio.interceptors.add(TokenInterceptor(apiClient: this));
     return dio;
-  }
-
-  String getUniversalFeedEndPoint(int page) {
-    return "$feedUrl/universal?page=$page&page_size=$pageLimit";
-  }
-
-  String getPostEndPoint(String postId, int page) {
-    return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";
-  }
-
-  String getAddCommentEndPoint(String postId) {
-    return "$feedUrl/post/$postId/comment";
-  }
-
-  String toggleLikeCommentEndPoint(String commentId, String postId) {
-    // feed/post/<post_id>/comment/<comment_id>/like
-    return "$feedUrl/post/$postId/comment/$commentId/like";
-  }
-
-  String getCommentEndPoint(String commentId, String postId, int page) {
-    return "$feedUrl/post/$postId/comment/$commentId?page=$page&page_size=$pageLimit";
-  }
-
-  String addCommentReplyEndPoint(String commentId, String postId) {
-    return "$feedUrl/post/$postId/comment/$commentId/comment";
   }
 
   Future<bool> getAccessType(String accessType) async =>
