@@ -1,18 +1,60 @@
 /// This file contains all the endpoints used in the package
 
-//Host endpoints
-const String CARAVAN_HOST = "https://beta.likeminds.community/api";
-const String KETTLE_HOST = "https://betaauth.likeminds.community";
+// ignore_for_file: constant_identifier_names
 
-//Auth endpoints
-const String AUTH_ENDPOINT = "$KETTLE_HOST/sdk/initiate";
-const String AUTH_REFRESH_ENDPOINT = "$KETTLE_HOST/user/refresh";
+class EndPoints {
+  static EndPoints? _instance;
+  static EndPoints instance(bool? isProd) =>
+      _instance ??= EndPoints._(isProduction: isProd ?? false);
 
-//Feedroom endpoints
-const String FEEDROOM_ENDPOINT = "$KETTLE_HOST/feedroom";
+  final bool isProduction;
+  final int pageLimit = 10;
 
-//Post endpoints
-const String ADD_POST_ENDPOINT = "$KETTLE_HOST/feed/post";
+  EndPoints._({required this.isProduction});
 
-const String ACCESS_ENDPOINT = "$CARAVAN_HOST/community_member/fetch_access";
-const String MEMBER_STATE_ENDPOINT = "$KETTLE_HOST/community/member/state";
+  String get CARAVAN_HOST => isProduction
+      ? "https://likeminds.community/api"
+      : "https://beta.likeminds.community/api";
+  String get KETTLE_HOST => isProduction
+      ? "https://auth.likeminds.community"
+      : "https://betaauth.likeminds.community";
+
+  String get authEndpoint => "$KETTLE_HOST/sdk/initiate";
+  String get authRefreshEndpoint => "$KETTLE_HOST/user/refresh";
+  String get authLogoutEndpoint => "$KETTLE_HOST/user/logout";
+
+  String get registerDeviceEndpoint => "$CARAVAN_HOST/push";
+
+  String get feedUrl => "$KETTLE_HOST/feed";
+  String get feedroomEndpoint => "$KETTLE_HOST/feedroom";
+  String get feedOfFeedroomEndpoint => "$KETTLE_HOST/feed/group";
+
+  String get addPostEndpoint => "$KETTLE_HOST/feed/post";
+
+  String get accessEndpoint => "$CARAVAN_HOST/community_member/fetch_access";
+  String get memberStateEndpoint => "$KETTLE_HOST/community/member/state";
+
+  String getUniversalFeedEndPoint(int page) {
+    return "$feedUrl/universal?page=$page&page_size=$pageLimit";
+  }
+
+  String getPostEndPoint(String postId, int page) {
+    return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";
+  }
+
+  String getAddCommentEndPoint(String postId) {
+    return "$feedUrl/post/$postId/comment";
+  }
+
+  String toggleLikeCommentEndPoint(String commentId, String postId) {
+    return "$feedUrl/post/$postId/comment/$commentId/like";
+  }
+
+  String getCommentEndPoint(String commentId, String postId, int page) {
+    return "$feedUrl/post/$postId/comment/$commentId?page=$page&page_size=$pageLimit";
+  }
+
+  String addCommentReplyEndPoint(String commentId, String postId) {
+    return "$feedUrl/post/$postId/comment/$commentId/comment";
+  }
+}

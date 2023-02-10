@@ -36,7 +36,7 @@ class PostService extends IPostService {
       if (await apiClient.getAccessType("create_post")) {
         print("Access granted");
         final response = await apiClient.client().post(
-              ADD_POST_ENDPOINT,
+              apiClient.getEndpoints.addPostEndpoint,
               data: addPostRequest.toJson(),
               options: Options(
                 headers: {
@@ -68,7 +68,7 @@ class PostService extends IPostService {
       if (await apiClient.getAccessType("view_post")) {
         print("Access granted");
         final response = await apiClient.client().get(
-              "$ADD_POST_ENDPOINT/${getPostRequest.postId}",
+              "${apiClient.getEndpoints.addPostEndpoint}/${getPostRequest.postId}",
               queryParameters: {
                 'page': getPostRequest.page,
                 'page_size': getPostRequest.pageSize,
@@ -105,7 +105,7 @@ class PostService extends IPostService {
       if (await apiClient.getAccessType("delete_post")) {
         print("Access granted");
         final response = await apiClient.client().delete(
-              "$ADD_POST_ENDPOINT/${deletePostRequest.postId}",
+              "${apiClient.getEndpoints.addPostEndpoint}/${deletePostRequest.postId}",
               data: {"delete_reason": deletePostRequest.deleteReason},
               options: Options(
                 headers: {
@@ -138,7 +138,7 @@ class PostService extends IPostService {
     try {
       if (await apiClient.getAccessType("like_post")) {
         final response = await apiClient.client().put(
-              "$ADD_POST_ENDPOINT/${likePostRequest.postId}/like",
+              "${apiClient.getEndpoints.addPostEndpoint}/${likePostRequest.postId}/like",
               options: Options(
                 headers: {
                   'Authorization': '${apiClient.accessToken}',
@@ -176,7 +176,7 @@ class PostService extends IPostService {
     try {
       if (await apiClient.getAccessType("view_post")) {
         final response = await apiClient.client().get(
-              "$ADD_POST_ENDPOINT/${getPostLikesRequest.postId}/like",
+              "${apiClient.getEndpoints.addPostEndpoint}/${getPostLikesRequest.postId}/like",
               options: Options(
                 headers: {
                   'Authorization': '${apiClient.accessToken}',

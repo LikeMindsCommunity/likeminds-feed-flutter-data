@@ -10,7 +10,10 @@ GetFeedRoomResponseEntity _$GetFeedRoomResponseEntityFromJson(
         Map<String, dynamic> json) =>
     GetFeedRoomResponseEntity(
       success: json['success'] as bool,
-      chatroom: json['data']['chatroom'] as Map<String, dynamic>?,
+      chatroom: json['data']['chatroom'] == null
+          ? null
+          : FeedRoomEntity.fromJson(
+              json['data']['chatroom'] as Map<String, dynamic>),
       participantCount: json['data']['participant_count'] as int?,
       errorMessage: json['error_message'] as String?,
     );

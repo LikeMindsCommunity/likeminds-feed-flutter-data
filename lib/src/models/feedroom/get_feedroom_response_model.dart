@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 
 part 'get_feedroom_response_model.g.dart';
 
 class GetFeedRoomResponse {
   final bool success;
-  final Map<String, dynamic>? chatroom;
+  final FeedRoom? chatroom;
   final int? participantCount;
   final String? errorMessage;
 
@@ -18,7 +19,7 @@ class GetFeedRoomResponse {
   factory GetFeedRoomResponse.fromEntity(GetFeedRoomResponseEntity entity) {
     return GetFeedRoomResponse(
       success: entity.success,
-      chatroom: entity.chatroom,
+      chatroom: FeedRoom.fromEntity(entity.chatroom!),
       participantCount: entity.participantCount,
       errorMessage: entity.errorMessage,
     );
@@ -27,7 +28,7 @@ class GetFeedRoomResponse {
   GetFeedRoomResponseEntity toEntity() {
     return GetFeedRoomResponseEntity(
       success: success,
-      chatroom: chatroom,
+      chatroom: chatroom!.toEntity(),
       participantCount: participantCount,
       errorMessage: errorMessage,
     );
@@ -37,7 +38,7 @@ class GetFeedRoomResponse {
 @JsonSerializable()
 class GetFeedRoomResponseEntity {
   final bool success;
-  final Map<String, dynamic>? chatroom;
+  final FeedRoomEntity? chatroom;
   @JsonKey(name: 'participant_count')
   final int? participantCount;
   @JsonKey(name: 'error_message')
