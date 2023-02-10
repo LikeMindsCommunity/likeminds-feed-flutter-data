@@ -41,7 +41,7 @@ class ApiClient {
     Dio dio = Dio();
 
     Map<String, dynamic>? headers = {
-      // 'x-platform-code': 'an',
+      'x-platform-code': 'an',
       // 'x-version-code': '210'
     };
 
