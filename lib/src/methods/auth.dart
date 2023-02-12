@@ -3,11 +3,9 @@ import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
 
 class AuthApi {
-  final String apiKey;
-
   final AuthRepository authRepository;
+
   AuthApi({
-    required this.apiKey,
     required this.authRepository,
   });
 

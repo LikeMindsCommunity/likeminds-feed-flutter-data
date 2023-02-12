@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
@@ -9,9 +10,9 @@ class ApiClient {
   final String apiKey;
   final bool isProduction;
   late final EndPoints endPoints;
+
   String? accessToken;
   String? refreshToken;
-
   String? userId;
   int? communityId;
 
@@ -41,8 +42,16 @@ class ApiClient {
     Dio dio = Dio();
 
     Map<String, dynamic>? headers = {
-      'x-platform-code': 'an',
-      // 'x-version-code': '210'
+      'x-platform-code': Platform.isAndroid
+          ? 'an'
+          : Platform.isIOS
+              ? 'ios'
+              : 'web',
+      'x-version-code': Platform.isAndroid
+          ? 210
+          : Platform.isIOS
+              ? 372
+              : 16
     };
 
     if (accessToken != null && isRefresh != null ? !isRefresh : true) {
