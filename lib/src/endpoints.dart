@@ -34,6 +34,10 @@ class EndPoints {
   String get accessEndpoint => "$CARAVAN_HOST/community_member/fetch_access";
   String get memberStateEndpoint => "$KETTLE_HOST/community/member/state";
 
+  String getBrandingEndPoint(String communityId) {
+    return "$CARAVAN_HOST/community/$communityId/branding";
+  }
+
   String getUniversalFeedEndPoint(int page) {
     return "$feedUrl/universal?page=$page&page_size=$pageLimit";
   }
