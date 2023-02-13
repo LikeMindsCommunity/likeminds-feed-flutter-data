@@ -1,3 +1,5 @@
+import 'package:likeminds_feed/src/environment/env.dart';
+
 /// This file contains all the endpoints used in the package
 
 // ignore_for_file: constant_identifier_names
@@ -12,12 +14,10 @@ class EndPoints {
 
   EndPoints._({required this.isProduction});
 
-  String get CARAVAN_HOST => isProduction
-      ? "https://likeminds.community/api"
-      : "https://beta.likeminds.community/api";
-  String get KETTLE_HOST => isProduction
-      ? "https://auth.likeminds.community"
-      : "https://betaauth.likeminds.community";
+  String get CARAVAN_HOST =>
+      isProduction ? EnvProd.caravanHost : EnvDev.caravanHost;
+  String get KETTLE_HOST =>
+      isProduction ? EnvProd.kettleHost : EnvDev.kettleHost;
 
   String get authEndpoint => "$KETTLE_HOST/sdk/initiate";
   String get authRefreshEndpoint => "$KETTLE_HOST/user/refresh";

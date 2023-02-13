@@ -6,13 +6,14 @@ import 'package:likeminds_feed/src/services/auth_service.dart';
 
 class AuthRepository {
   final AuthService authService;
-  AuthRepository({
-    required this.authService,
-  });
+
+  AuthRepository({required this.authService});
 
   Future<InitiateUserResponse> initiateUser(
       InitiateUserRequest initiateUserRequest) async {
-    return await authService.initiateUser(initiateUserRequest);
+    return InitiateUserResponse.fromEntity(
+      await authService.initiateUser(initiateUserRequest),
+    );
   }
 
   Future<RefreshResponse> refreshUser(RefreshRequest refreshRequest) async {

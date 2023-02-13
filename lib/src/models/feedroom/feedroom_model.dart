@@ -130,7 +130,7 @@ class FeedRoom {
       participantsCount: entity.participantsCount,
       memberId: entity.memberId,
       access: entity.access,
-      member: entity.member,
+      member: User.fromEntity(entity.member),
       cohorts: entity.cohorts,
       coHosts: entity.coHosts,
     );
@@ -176,7 +176,7 @@ class FeedRoom {
       participantsCount: participantsCount,
       memberId: memberId,
       access: access,
-      member: member,
+      member: member.toEntity(),
       cohorts: cohorts,
       coHosts: coHosts,
     );
@@ -254,7 +254,7 @@ class FeedRoomEntity {
   @JsonKey(name: 'member_id')
   final int? memberId;
   final String? access;
-  final User member;
+  final UserEntity member;
   final List<dynamic>? cohorts;
   @JsonKey(name: 'co_hosts')
   final List<dynamic>? coHosts;
