@@ -3,6 +3,7 @@ library likeminds_feed;
 export 'src/methods/sdk.dart';
 export 'src/methods/methods.dart';
 export 'src/models/models.dart';
+export 'src/environment/env.dart';
 
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/callback.dart';

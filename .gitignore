@@ -3,3 +3,7 @@
 .flutter-plugins
 .flutter-plugins-dependencies
 .DS_Store
+
+.env.dev
+.env.prod
+lib/src/environment/env.g.dart

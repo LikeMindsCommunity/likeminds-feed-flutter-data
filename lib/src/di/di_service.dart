@@ -24,11 +24,17 @@ class DIService {
   static DIService? _instance;
   static DIService get instance => _instance ??= DIService._();
 
+  late final bool production;
+  set _setProduction(bool isProduction) => production = isProduction;
+  get isProduction => instance.production;
+
   DIService._();
 
   /// Init function to register all the dependencies
   /// This function should be called before using any of the methods
   void init(String apiKey, bool isProduction, LMSdkCallback sdkCallback) {
+    _setProduction = isProduction;
+
     ApiClient apiClient = ApiClient(
       apiKey: apiKey,
       isProduction: isProduction,

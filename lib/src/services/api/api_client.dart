@@ -6,6 +6,9 @@ import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/token_interceptor.dart';
 import 'package:likeminds_feed/src/services/api/log_interceptor.dart';
 
+/// Api client to talk to our backend.
+/// Also acts as the token manager class
+/// to manage access and refresh tokens
 class ApiClient {
   final String apiKey;
   final bool isProduction;
@@ -13,7 +16,7 @@ class ApiClient {
 
   String? accessToken;
   String? refreshToken;
-  String? userId;
+  int? userId;
   int? communityId;
 
   ApiClient({
@@ -23,12 +26,7 @@ class ApiClient {
     endPoints = EndPoints.instance(isProduction);
   }
 
-  void initTokens(String accessToken, String refreshToken) {
-    this.accessToken = accessToken;
-    this.refreshToken = refreshToken;
-  }
-
-  set setUserId(String? userId) => this.userId = userId;
+  set setUserId(int? userId) => this.userId = userId;
   set setCommunityId(int? communityId) => this.communityId = communityId;
 
   get getUserId => userId;
@@ -36,7 +34,20 @@ class ApiClient {
   get getAccessToken => accessToken;
   get getRefreshToken => refreshToken;
   get getApiKey => apiKey;
+  get getIsProduction => isProduction;
   EndPoints get getEndpoints => endPoints;
+
+  void initTokens(String accessToken, String refreshToken) {
+    this.accessToken = accessToken;
+    this.refreshToken = refreshToken;
+  }
+
+  void clearTokens() {
+    accessToken = null;
+    refreshToken = null;
+    setUserId = null;
+    setCommunityId = null;
+  }
 
   Dio client({bool? isRefresh}) {
     Dio dio = Dio();
