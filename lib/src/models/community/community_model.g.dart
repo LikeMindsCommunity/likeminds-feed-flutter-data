@@ -8,7 +8,7 @@ part of 'community_model.dart';
 
 CommunityEntity _$CommunityEntityFromJson(Map<String, dynamic> json) =>
     CommunityEntity(
-      id: json['id'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
       imageUrl: json['image_url'] as String?,
       purpose: json['purpose'] as String?,

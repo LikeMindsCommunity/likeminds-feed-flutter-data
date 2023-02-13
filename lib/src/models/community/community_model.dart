@@ -4,7 +4,7 @@ import 'package:likeminds_feed/src/models/models.dart';
 part 'community_model.g.dart';
 
 class Community {
-  final String id;
+  final int id;
   final String name;
   final String? imageUrl;
   final String? purpose;
@@ -192,7 +192,7 @@ class Community {
 
 @JsonSerializable()
 class CommunityEntity {
-  final String id;
+  final int id;
   final String name;
   final int? state;
   final String? date;
