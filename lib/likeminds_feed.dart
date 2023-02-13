@@ -4,21 +4,20 @@ export 'src/methods/sdk.dart';
 export 'src/methods/methods.dart';
 export 'src/models/models.dart';
 
-// export 'src/me';
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
+import 'package:likeminds_feed/src/methods/callback.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
-import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
 
 class LMClient {
-  static SdkApplication initiateLikeMinds(String apiKey) {
-    DIService.instance.init(apiKey);
-    SdkApplication sdkApplication = SdkApplication(apiKey: apiKey);
+  static SdkApplication initiateLikeMinds({
+    required String apiKey,
+    required bool isProduction,
+    required LMSdkCallback sdkCallback,
+  }) {
+    debugPrint("SDK Initiation point reached");
+    DIService.instance.init(apiKey, isProduction, sdkCallback);
+    SdkApplication sdkApplication = SdkApplication();
     return sdkApplication;
   }
-
-  void logout() {}
-
-  void initiateGroupChat() {}
-
-  void parseDeepLink() {}
 }

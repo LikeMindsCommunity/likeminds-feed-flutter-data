@@ -13,7 +13,7 @@ class AccessService {
   Future<bool> getAccess(String accessType) async {
     try {
       final response = await apiClient.client().get(
-            ACCESS_ENDPOINT,
+            apiClient.getEndpoints.accessEndpoint,
             queryParameters: {
               'access_type': accessType,
             },
@@ -41,7 +41,7 @@ class AccessService {
   Future<bool> getMemberState() async {
     try {
       final response = await apiClient.client().get(
-            MEMBER_STATE_ENDPOINT,
+            apiClient.getEndpoints.memberStateEndpoint,
             options: Options(
               headers: {
                 // 'Authorization': '${apiClient.getUserId}',

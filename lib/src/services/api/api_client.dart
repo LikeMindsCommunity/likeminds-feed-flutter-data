@@ -1,28 +1,32 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/token_interceptor.dart';
-import 'package:flutter/foundation.dart';
-
 import 'package:likeminds_feed/src/services/api/log_interceptor.dart';
 
+/// Api client to talk to our backend.
+/// Also acts as the token manager class
+/// to manage access and refresh tokens
 class ApiClient {
-  final String feedUrl = 'https://betaauth.likeminds.community/feed';
   final String apiKey;
+  final bool isProduction;
+  late final EndPoints endPoints;
+
   String? accessToken;
   String? refreshToken;
-
-  String? userId;
+  int? userId;
   int? communityId;
 
-  ApiClient({required this.apiKey});
-
-  void initTokens(String accessToken, String refreshToken) {
-    this.accessToken = accessToken;
-    this.refreshToken = refreshToken;
+  ApiClient({
+    required this.apiKey,
+    required this.isProduction,
+  }) {
+    endPoints = EndPoints.instance(isProduction);
   }
 
-  set setUserId(String? userId) => this.userId = userId;
+  set setUserId(int? userId) => this.userId = userId;
   set setCommunityId(int? communityId) => this.communityId = communityId;
 
   get getUserId => userId;
@@ -30,13 +34,39 @@ class ApiClient {
   get getAccessToken => accessToken;
   get getRefreshToken => refreshToken;
   get getApiKey => apiKey;
+  get getIsProduction => isProduction;
+  EndPoints get getEndpoints => endPoints;
 
-  final int pageLimit = 10;
+  void initTokens(String accessToken, String refreshToken) {
+    this.accessToken = accessToken;
+    this.refreshToken = refreshToken;
+  }
+
+  void clearTokens() {
+    accessToken = null;
+    refreshToken = null;
+    setUserId = null;
+    setCommunityId = null;
+  }
+
   Dio client({bool? isRefresh}) {
     Dio dio = Dio();
-    Map<String, dynamic>? headers;
+
+    Map<String, dynamic>? headers = {
+      'x-platform-code': Platform.isAndroid
+          ? 'an'
+          : Platform.isIOS
+              ? 'ios'
+              : 'web',
+      'x-version-code': Platform.isAndroid
+          ? 210
+          : Platform.isIOS
+              ? 372
+              : 16
+    };
+
     if (accessToken != null && isRefresh != null ? !isRefresh : true) {
-      headers = {'Authorization': '$accessToken'};
+      headers.addAll({'Authorization': '$accessToken'});
     }
 
     BaseOptions options = BaseOptions(headers: headers);
@@ -44,31 +74,6 @@ class ApiClient {
     dio.interceptors.add(Logging());
     dio.interceptors.add(TokenInterceptor(apiClient: this));
     return dio;
-  }
-
-  String getUniversalFeedEndPoint(int page) {
-    return "$feedUrl/universal?page=$page&page_size=$pageLimit";
-  }
-
-  String getPostEndPoint(String postId, int page) {
-    return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";
-  }
-
-  String getAddCommentEndPoint(String postId) {
-    return "$feedUrl/post/$postId/comment";
-  }
-
-  String toggleLikeCommentEndPoint(String commentId, String postId) {
-    // feed/post/<post_id>/comment/<comment_id>/like
-    return "$feedUrl/post/$postId/comment/$commentId/like";
-  }
-
-  String getCommentEndPoint(String commentId, String postId, int page) {
-    return "$feedUrl/post/$postId/comment/$commentId?page=$page&page_size=$pageLimit";
-  }
-
-  String addCommentReplyEndPoint(String commentId, String postId) {
-    return "$feedUrl/post/$postId/comment/$commentId/comment";
   }
 
   Future<bool> getAccessType(String accessType) async =>

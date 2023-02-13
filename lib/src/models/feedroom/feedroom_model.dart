@@ -1,85 +1,310 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:likeminds_feed/src/models/models.dart';
+
+part 'feedroom_model.g.dart';
+
 class FeedRoom {
-  // "about_recording": null,
-  //           "access": null,
-  //           "access_without_subscription": false,
-  //           "answer_text": "",
-  //           "answers_count": 0,
-  //           "attachment_count": 0,
-  //           "attachments_uploaded": false,
-  //           "attended": false,
-  //           "attending_count": 0,
-  //           "attending_status": false,
-  //           "audio_count": 0,
-  //           "auto_follow_done": false,
-  //           "card_creation_time": "01:04 PM",
-  //           "chat_request_created_at": null,
-  //           "chat_request_state": null,
-  //           "chat_requested_by": null,
-  //           "chatroom_image_url": "https://i.pravatar.cc/400",
-  //           "co_hosts": [],
-  //           "cohorts": [],
-  //           "community_id": 50447,
-  //           "community_name": "Flutter GC Example",
-  //           "created_at": "13:04",
-  //           "date": "31 Jan 2023",
-  //           "date_epoch": 1675150463,
-  //           "date_time": 0,
-  //           "duration": 0,
-  //           "external_seen": true,
-  //           "follow_status": true,
-  //           "has_been_named": true,
-  //           "header": "Test feedroom ABC",
-  //           "id": 72200,
-  //           "image_count": 0,
-  //           "include_members_later": false,
-  //           "is_edited": false,
-  //           "is_guest": false,
-  //           "is_paid": false,
-  //           "is_pending": false,
-  //           "is_pinned": false,
-  //           "is_private": false,
-  //           "is_private_member": false,
-  //           "is_secret": false,
-  //           "is_tagged": false,
-  //           "member": {
-  //               "community_id": 50447,
-  //               "created_at": 1673613302,
-  //               "custom_title": "Owner",
-  //               "id": 87103,
-  //               "image_url": "",
-  //               "is_guest": false,
-  //               "is_owner": true,
-  //               "member_since": "Member since Jan 13 2023",
-  //               "name": "Flutter GC Example bot",
-  //               "route": "route://member_community_profile?community_id=50447&member_id=87103",
-  //               "state": 1,
-  //               "user_unique_id": "22b6a64f-66bf-4bca-800e-b40ca66f924d"
-  //           },
-  //           "member_can_message": true,
-  //           "member_id": 87103,
-  //           "mute_status": false,
-  //           "online_link_enable_before": 900000,
-  //           "online_link_type": null,
-  //           "participants_count": 2,
-  //           "pdf_count": 0,
-  //           "polls_count": 0,
-  //           "reactions": [],
-  //           "recording_url_og_tags": null,
-  //           "recordings_attachments": [],
-  //           "recordings_attachments_view": 0,
-  //           "recordings_url": [],
-  //           "share_link": "",
-  //           "show_follow_auto_tag": false,
-  //           "show_follow_telescope": false,
-  //           "state": 0,
-  //           "third_party_unique_id": "",
-  //           "title": "Test feedroom ABC",
-  //           "total_response_count": 0,
-  //           "type": 11,
-  //           "video_count": 0
+  final int id;
+  final String title;
+  final String header;
+  final String date;
+  final int? dateEpoch;
+  final int? dateTime;
+  final int? duration;
+  final String? cardCreationTime;
+  final String? shareLink;
+  final String? thirdPartyUniqueId;
+  final int state;
+  final bool? isPrivate;
+  final bool? isSecret;
+  final bool? isPending;
+  final bool? isPrivateMember;
+  final bool? isTagged;
+  final bool? isGuest;
+  final bool? isPaid;
+  final bool? isPinned;
+  final bool? isEdited;
+  final bool? hasBeenNamed;
+  final bool? autoFollowDone;
+  final bool? includeMembersLater;
+  final bool? accessWithoutSubscription;
+  final bool? externalSeen;
+  final bool? showFollowTelescope;
+  final bool? showFollowAutoTag;
+  final bool? memberCanMessage;
+  final bool? muteStatus;
+  final bool? followStatus;
+  final int communityId;
+  final String? communityName;
+  final String chatroomImageUrl;
+  final int? onlineLinkEnableBefore;
+  final String? onlineLinkType;
+  final int participantsCount;
+  final int? memberId;
+  final String? access;
+  final User member;
+  final List<dynamic>? cohorts;
+  final List<dynamic>? coHosts;
 
-  // final String? audioRecording;
-  // final String? access;
-  // final bool accessWithoutSubscription;
+  FeedRoom({
+    required this.id,
+    required this.title,
+    required this.header,
+    required this.date,
+    this.dateEpoch,
+    this.dateTime,
+    this.duration,
+    this.cardCreationTime,
+    this.shareLink,
+    this.thirdPartyUniqueId,
+    required this.state,
+    this.isPrivate,
+    this.isSecret,
+    this.isPending,
+    this.isPrivateMember,
+    this.isTagged,
+    this.isGuest,
+    this.isPaid,
+    this.isPinned,
+    this.isEdited,
+    this.hasBeenNamed,
+    this.autoFollowDone,
+    this.includeMembersLater,
+    this.accessWithoutSubscription,
+    this.externalSeen,
+    this.showFollowTelescope,
+    this.showFollowAutoTag,
+    this.memberCanMessage,
+    this.muteStatus,
+    this.followStatus,
+    required this.communityId,
+    this.communityName,
+    required this.chatroomImageUrl,
+    this.onlineLinkEnableBefore,
+    this.onlineLinkType,
+    required this.participantsCount,
+    this.memberId,
+    this.access,
+    required this.member,
+    this.cohorts,
+    this.coHosts,
+  });
 
+  factory FeedRoom.fromEntity(FeedRoomEntity entity) {
+    return FeedRoom(
+      id: entity.id,
+      title: entity.title,
+      header: entity.header,
+      date: entity.date,
+      dateEpoch: entity.dateEpoch,
+      dateTime: entity.dateTime,
+      duration: entity.duration,
+      cardCreationTime: entity.cardCreationTime,
+      shareLink: entity.shareLink,
+      thirdPartyUniqueId: entity.thirdPartyUniqueId,
+      state: entity.state,
+      isPrivate: entity.isPrivate,
+      isSecret: entity.isSecret,
+      isPending: entity.isPending,
+      isPrivateMember: entity.isPrivateMember,
+      isTagged: entity.isTagged,
+      isGuest: entity.isGuest,
+      isPaid: entity.isPaid,
+      isPinned: entity.isPinned,
+      isEdited: entity.isEdited,
+      hasBeenNamed: entity.hasBeenNamed,
+      autoFollowDone: entity.autoFollowDone,
+      includeMembersLater: entity.includeMembersLater,
+      accessWithoutSubscription: entity.accessWithoutSubscription,
+      externalSeen: entity.externalSeen,
+      showFollowTelescope: entity.showFollowTelescope,
+      showFollowAutoTag: entity.showFollowAutoTag,
+      memberCanMessage: entity.memberCanMessage,
+      muteStatus: entity.muteStatus,
+      followStatus: entity.followStatus,
+      communityId: entity.communityId,
+      communityName: entity.communityName,
+      chatroomImageUrl: entity.chatroomImageUrl,
+      onlineLinkEnableBefore: entity.onlineLinkEnableBefore,
+      onlineLinkType: entity.onlineLinkType,
+      participantsCount: entity.participantsCount,
+      memberId: entity.memberId,
+      access: entity.access,
+      member: User.fromEntity(entity.member),
+      cohorts: entity.cohorts,
+      coHosts: entity.coHosts,
+    );
+  }
+
+  FeedRoomEntity toEntity() {
+    return FeedRoomEntity(
+      id: id,
+      title: title,
+      header: header,
+      date: date,
+      dateEpoch: dateEpoch,
+      dateTime: dateTime,
+      duration: duration,
+      cardCreationTime: cardCreationTime,
+      shareLink: shareLink,
+      thirdPartyUniqueId: thirdPartyUniqueId,
+      state: state,
+      isPrivate: isPrivate,
+      isSecret: isSecret,
+      isPending: isPending,
+      isPrivateMember: isPrivateMember,
+      isTagged: isTagged,
+      isGuest: isGuest,
+      isPaid: isPaid,
+      isPinned: isPinned,
+      isEdited: isEdited,
+      hasBeenNamed: hasBeenNamed,
+      autoFollowDone: autoFollowDone,
+      includeMembersLater: includeMembersLater,
+      accessWithoutSubscription: accessWithoutSubscription,
+      externalSeen: externalSeen,
+      showFollowTelescope: showFollowTelescope,
+      showFollowAutoTag: showFollowAutoTag,
+      memberCanMessage: memberCanMessage,
+      muteStatus: muteStatus,
+      followStatus: followStatus,
+      communityId: communityId,
+      communityName: communityName,
+      chatroomImageUrl: chatroomImageUrl,
+      onlineLinkEnableBefore: onlineLinkEnableBefore,
+      onlineLinkType: onlineLinkType,
+      participantsCount: participantsCount,
+      memberId: memberId,
+      access: access,
+      member: member.toEntity(),
+      cohorts: cohorts,
+      coHosts: coHosts,
+    );
+  }
+}
+
+@JsonSerializable()
+class FeedRoomEntity {
+  final int id;
+  final String title;
+  final String header;
+  final String date;
+  @JsonKey(name: 'date_epoch')
+  final int? dateEpoch;
+  @JsonKey(name: 'date_time')
+  final int? dateTime;
+  final int? duration;
+  @JsonKey(name: 'card_creation_time')
+  final String? cardCreationTime;
+  @JsonKey(name: 'share_link')
+  final String? shareLink;
+  @JsonKey(name: 'third_party_unique_id')
+  final String? thirdPartyUniqueId;
+  final int state;
+  @JsonKey(name: 'is_private')
+  final bool? isPrivate;
+  @JsonKey(name: 'is_secret')
+  final bool? isSecret;
+  @JsonKey(name: 'is_pending')
+  final bool? isPending;
+  @JsonKey(name: 'is_private_member')
+  final bool? isPrivateMember;
+  @JsonKey(name: 'is_tagged')
+  final bool? isTagged;
+  @JsonKey(name: 'is_guest')
+  final bool? isGuest;
+  @JsonKey(name: 'is_paid')
+  final bool? isPaid;
+  @JsonKey(name: 'is_pinned')
+  final bool? isPinned;
+  @JsonKey(name: 'is_edited')
+  final bool? isEdited;
+  @JsonKey(name: 'has_been_named')
+  final bool? hasBeenNamed;
+  @JsonKey(name: 'auto_follow_done')
+  final bool? autoFollowDone;
+  @JsonKey(name: 'include_members_later')
+  final bool? includeMembersLater;
+  @JsonKey(name: 'access_without_subscription')
+  final bool? accessWithoutSubscription;
+  @JsonKey(name: 'external_seen')
+  final bool? externalSeen;
+  @JsonKey(name: 'show_follow_telescope')
+  final bool? showFollowTelescope;
+  @JsonKey(name: 'show_follow_auto_tag')
+  final bool? showFollowAutoTag;
+  @JsonKey(name: 'member_can_message')
+  final bool? memberCanMessage;
+  @JsonKey(name: 'mute_status')
+  final bool? muteStatus;
+  @JsonKey(name: 'follow_status')
+  final bool? followStatus;
+  @JsonKey(name: 'community_id')
+  final int communityId;
+  @JsonKey(name: 'community_name')
+  final String? communityName;
+  @JsonKey(name: 'chatroom_image_url')
+  final String chatroomImageUrl;
+  @JsonKey(name: 'online_link_enable_before')
+  final int? onlineLinkEnableBefore;
+  @JsonKey(name: 'online_link_type')
+  final String? onlineLinkType;
+  @JsonKey(name: 'participants_count')
+  final int participantsCount;
+  @JsonKey(name: 'member_id')
+  final int? memberId;
+  final String? access;
+  final UserEntity member;
+  final List<dynamic>? cohorts;
+  @JsonKey(name: 'co_hosts')
+  final List<dynamic>? coHosts;
+
+  FeedRoomEntity({
+    required this.id,
+    required this.title,
+    required this.header,
+    required this.date,
+    this.dateEpoch,
+    this.dateTime,
+    this.duration,
+    this.cardCreationTime,
+    this.shareLink,
+    this.thirdPartyUniqueId,
+    required this.state,
+    this.isPrivate,
+    this.isSecret,
+    this.isPending,
+    this.isPrivateMember,
+    this.isTagged,
+    this.isGuest,
+    this.isPaid,
+    this.isPinned,
+    this.isEdited,
+    this.hasBeenNamed,
+    this.autoFollowDone,
+    this.includeMembersLater,
+    this.accessWithoutSubscription,
+    this.externalSeen,
+    this.showFollowTelescope,
+    this.showFollowAutoTag,
+    this.memberCanMessage,
+    this.muteStatus,
+    this.followStatus,
+    required this.communityId,
+    this.communityName,
+    required this.chatroomImageUrl,
+    this.onlineLinkEnableBefore,
+    this.onlineLinkType,
+    required this.participantsCount,
+    this.memberId,
+    this.access,
+    required this.member,
+    this.cohorts,
+    this.coHosts,
+  });
+
+  factory FeedRoomEntity.fromJson(Map<String, dynamic> json) =>
+      _$FeedRoomEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FeedRoomEntityToJson(this);
 }

@@ -16,17 +16,14 @@ import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class CommentService {
   final ApiClient apiClient;
-  CommentService({required this.apiClient}) {}
-  // final Dio _dio = apiClient.client();
-  // final String authHost = "https://betaauth.likeminds.community/feed/";
+  CommentService({required this.apiClient});
+
   Future<PostDetailResponseEntity?> getPost(
       PostDetailRequest postDetailRequest) async {
-    // print(apiClient.getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
       final response = await apiClient.client().get(
-            apiClient.getPostEndPoint(
+            apiClient.getEndpoints.getPostEndPoint(
                 postDetailRequest.postId, postDetailRequest.page),
-            // data: universalFeedRequest.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
@@ -42,10 +39,10 @@ class CommentService {
 
   Future<UniversalFeedResponseEntity?> getUniversalFeed(
       UniversalFeedRequest universalFeedRequest) async {
-    print(apiClient.getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
       final response = await apiClient.client().get(
-            apiClient.getUniversalFeedEndPoint(universalFeedRequest.page),
+            apiClient.getEndpoints
+                .getUniversalFeedEndPoint(universalFeedRequest.page),
             // data: universalFeedRequest.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
@@ -64,7 +61,8 @@ class CommentService {
       AddCommentRequest addCommentRequest) async {
     try {
       final response = await apiClient.client().post(
-            apiClient.getAddCommentEndPoint(addCommentRequest.postId),
+            apiClient.getEndpoints
+                .getAddCommentEndPoint(addCommentRequest.postId),
             data: addCommentRequest.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
@@ -83,7 +81,7 @@ class CommentService {
       ToggleLikeCommentRequest toggleLikeCommentRequest) async {
     try {
       final response = await apiClient.client().put(
-            apiClient.toggleLikeCommentEndPoint(
+            apiClient.getEndpoints.toggleLikeCommentEndPoint(
                 toggleLikeCommentRequest.commentId,
                 toggleLikeCommentRequest.postId),
             options: Options(
@@ -103,7 +101,7 @@ class CommentService {
       CommentDetailRequest request) async {
     try {
       final response = await apiClient.client().get(
-            apiClient.getCommentEndPoint(
+            apiClient.getEndpoints.getCommentEndPoint(
                 request.commentId, request.postId, request.page),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
@@ -122,8 +120,8 @@ class CommentService {
       AddCommentReplyRequest? request) async {
     try {
       final response = await apiClient.client().post(
-            apiClient.addCommentReplyEndPoint(
-                request!.commentId, request.postId),
+            apiClient.getEndpoints
+                .addCommentReplyEndPoint(request!.commentId, request.postId),
             data: request.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
