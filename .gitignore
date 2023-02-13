@@ -6,4 +6,4 @@
 
 .env.dev
 .env.prod
-lib/src/environment/env.g.dart
+# lib/src/environment/env.g.dart

@@ -1,3 +1,6 @@
 pubspec.lock
 .flutter-plugins-dependencies
 .flutter-plugins
+
+.env.dev
+.env.prod
