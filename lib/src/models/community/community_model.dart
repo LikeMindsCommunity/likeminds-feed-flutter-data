@@ -11,13 +11,13 @@ class Community {
   final String? about;
   final Branding? branding;
   final int? membersCount;
-  final bool isMember;
-  final int pendingMembersCount;
-  final int pendingChatRoomCount;
-  final int openReportsCount;
-  final int chatroomUnseen;
-  final String? updatedAt;
-  final bool isAdmin;
+  final bool? isMember;
+  final int? pendingMembersCount;
+  final int? pendingChatRoomCount;
+  final int? openReportsCount;
+  final int? chatroomUnseen;
+  final int? updatedAt;
+  final bool? isAdmin;
   final int? state;
   final int? memberState;
   final String? createdBy;
@@ -52,13 +52,13 @@ class Community {
     this.about,
     this.branding,
     this.membersCount,
-    required this.isMember,
-    required this.pendingMembersCount,
-    required this.pendingChatRoomCount,
-    required this.openReportsCount,
-    required this.chatroomUnseen,
+    this.isMember,
+    this.pendingMembersCount,
+    this.pendingChatRoomCount,
+    this.openReportsCount,
+    this.chatroomUnseen,
     this.updatedAt,
-    required this.isAdmin,
+    this.isAdmin,
     this.state,
     this.memberState,
     this.createdBy,
@@ -210,25 +210,25 @@ class CommunityEntity {
   final int? membersCount;
 
   @JsonKey(name: 'is_member')
-  final bool isMember;
+  final bool? isMember;
 
   @JsonKey(name: 'pending_members_count')
-  final int pendingMembersCount;
+  final int? pendingMembersCount;
 
   @JsonKey(name: 'pending_chatroom_count')
-  final int pendingChatRoomCount;
+  final int? pendingChatRoomCount;
 
   @JsonKey(name: 'open_reports_count')
-  final int openReportsCount;
+  final int? openReportsCount;
 
   @JsonKey(name: 'chatroom_unseen')
-  final int chatroomUnseen;
+  final int? chatroomUnseen;
 
   @JsonKey(name: 'updated_at')
-  final String? updatedAt;
+  final int? updatedAt;
 
   @JsonKey(name: 'is_admin')
-  final bool isAdmin;
+  final bool? isAdmin;
 
   @JsonKey(name: 'member_state')
   final int? memberState;
@@ -298,13 +298,13 @@ class CommunityEntity {
     this.about,
     this.branding,
     this.membersCount,
-    required this.isMember,
-    required this.pendingMembersCount,
-    required this.pendingChatRoomCount,
-    required this.openReportsCount,
-    required this.chatroomUnseen,
+    this.isMember,
+    this.pendingMembersCount,
+    this.pendingChatRoomCount,
+    this.openReportsCount,
+    this.chatroomUnseen,
     this.updatedAt,
-    required this.isAdmin,
+    this.isAdmin,
     this.state,
     this.memberState,
     this.createdBy,
