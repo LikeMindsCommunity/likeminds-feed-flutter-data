@@ -3,8 +3,84 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';
 
-@JsonSerializable()
 class User {
+  final int id;
+  final String name;
+  final String imageUrl;
+  final bool isGuest;
+  final String userUniqueId;
+  final String? organisationName;
+  final SDKClientInfo? sdkClientInfo;
+  final int? updatedAt;
+  final bool? isOwner;
+  final String? customTitle;
+  final String? memberSince;
+  final String? route;
+  final int? state;
+  final int? communityId;
+  final int? createdAt;
+
+  User({
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+    required this.isGuest,
+    required this.userUniqueId,
+    this.organisationName,
+    this.sdkClientInfo,
+    this.updatedAt,
+    this.isOwner,
+    this.customTitle,
+    this.memberSince,
+    this.route,
+    this.state,
+    this.communityId,
+    this.createdAt,
+  });
+
+  factory User.fromEntity(UserEntity entity) {
+    return User(
+      id: entity.id,
+      name: entity.name,
+      imageUrl: entity.imageUrl,
+      isGuest: entity.isGuest,
+      userUniqueId: entity.userUniqueId,
+      organisationName: entity.organisationName,
+      sdkClientInfo: entity.sdkClientInfo,
+      updatedAt: entity.updatedAt,
+      isOwner: entity.isOwner,
+      customTitle: entity.customTitle,
+      memberSince: entity.memberSince,
+      route: entity.route,
+      state: entity.state,
+      communityId: entity.communityId,
+      createdAt: entity.createdAt,
+    );
+  }
+
+  toEntity() {
+    return UserEntity(
+      id: id,
+      name: name,
+      imageUrl: imageUrl,
+      isGuest: isGuest,
+      userUniqueId: userUniqueId,
+      organisationName: organisationName,
+      sdkClientInfo: sdkClientInfo,
+      updatedAt: updatedAt,
+      isOwner: isOwner,
+      customTitle: customTitle,
+      memberSince: memberSince,
+      route: route,
+      state: state,
+      communityId: communityId,
+      createdAt: createdAt,
+    );
+  }
+}
+
+@JsonSerializable()
+class UserEntity {
   final int id;
   final String name;
 
@@ -47,7 +123,7 @@ class User {
   @JsonKey(name: 'created_at')
   final int? createdAt;
 
-  User({
+  UserEntity({
     required this.id,
     required this.name,
     required this.imageUrl,
@@ -65,7 +141,8 @@ class User {
     this.createdAt,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory UserEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserEntityFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  Map<String, dynamic> toJson() => _$UserEntityToJson(this);
 }

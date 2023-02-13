@@ -1,10 +1,14 @@
 export 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
 export 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
+export 'package:likeminds_feed/src/models/auth/initiate_user_model.dart';
 export 'package:likeminds_feed/src/models/auth/refresh_request_model.dart';
 export 'package:likeminds_feed/src/models/auth/refresh_response_model.dart';
 export 'package:likeminds_feed/src/models/auth/user_model.dart';
 export 'package:likeminds_feed/src/models/auth/logout_response_model.dart';
 export 'package:likeminds_feed/src/models/auth/logout_request_model.dart';
+
+export 'package:likeminds_feed/src/models/community/community_model.dart';
+export 'package:likeminds_feed/src/models/community/community_settings_rights_model.dart';
 
 export 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
 export 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';

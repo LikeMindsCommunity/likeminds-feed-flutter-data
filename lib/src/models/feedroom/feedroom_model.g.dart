@@ -46,7 +46,7 @@ FeedRoomEntity _$FeedRoomEntityFromJson(Map<String, dynamic> json) =>
       participantsCount: json['participants_count'] as int,
       memberId: json['member_id'] as int?,
       access: json['access'] as String?,
-      member: User.fromJson(json['member'] as Map<String, dynamic>),
+      member: UserEntity.fromJson(json['member'] as Map<String, dynamic>),
       cohorts: json['cohorts'] as List<dynamic>?,
       coHosts: json['co_hosts'] as List<dynamic>?,
     );
