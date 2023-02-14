@@ -116,6 +116,32 @@ class CommentService {
     }
   }
 
+  Future<DeleteCommentResponseEntity> deleteComment(
+      DeleteCommentRequest request) async {
+    try {
+      final response = await apiClient.client().delete(
+            apiClient.getEndpoints.deleteCommentEndPoint(
+              request.commentId,
+              request.postId,
+            ),
+            data: {'delete_reason': request.reason},
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      print(response.data);
+      return DeleteCommentResponseEntity.fromJson(response.data);
+    } on DioError catch (e) {
+      print(e.toString());
+      return DeleteCommentResponseEntity(
+          success: false, errorMessage: e.message);
+    } catch (e) {
+      print(e);
+      return DeleteCommentResponseEntity(
+          success: false, errorMessage: e.toString());
+    }
+  }
+
   Future<AddCommentReplyResponseEntity?> addCommentReply(
       AddCommentReplyRequest? request) async {
     try {
