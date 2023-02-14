@@ -48,6 +48,13 @@ class FeedApi {
     return response;
   }
 
+  Future<DeleteCommentResponse> deleteComment(
+      DeleteCommentRequest request) async {
+    final DeleteCommentResponse response =
+        await feedRepository.deleteComment(request);
+    return response;
+  }
+
   Future<AddCommentReplyResponse?> addCommentReply(
       AddCommentReplyRequest request) async {
     final AddCommentReplyResponse? response =

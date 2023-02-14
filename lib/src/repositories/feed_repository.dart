@@ -68,6 +68,13 @@ class FeedRepository {
         : null;
   }
 
+  Future<DeleteCommentResponse> deleteComment(
+      DeleteCommentRequest request) async {
+    final DeleteCommentResponseEntity responseEntity =
+        await commentService.deleteComment(request);
+    return DeleteCommentResponse.fromEntity(responseEntity);
+  }
+
   Future<AddCommentReplyResponse?> addCommentReply(
       AddCommentReplyRequest request) async {
     final AddCommentReplyResponseEntity? responseEntity =
