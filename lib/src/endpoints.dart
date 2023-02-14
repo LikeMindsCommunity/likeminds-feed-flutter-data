@@ -58,6 +58,10 @@ class EndPoints {
     return "$feedUrl/post/$postId/comment/$commentId?page=$page&page_size=$pageLimit";
   }
 
+  String deleteCommentEndPoint(String commentId, String postId) {
+    return "$feedUrl/post/$postId/comment/$commentId";
+  }
+
   String addCommentReplyEndPoint(String commentId, String postId) {
     return "$feedUrl/post/$postId/comment/$commentId/comment";
   }
