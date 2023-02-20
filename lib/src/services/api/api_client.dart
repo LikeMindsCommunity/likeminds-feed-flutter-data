@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/environment/env.dart';
@@ -53,20 +52,7 @@ class ApiClient {
   Dio client({bool? isRefresh}) {
     Dio dio = Dio();
 
-    // Map<String, dynamic>? headers = {
-    //   'x-platform-code': Platform.isAndroid
-    //       ? 'an'
-    //       : Platform.isIOS
-    //           ? 'ios'
-    //           : 'web',
-    //   'x-version-code': Platform.isAndroid
-    //       ? 210
-    //       : Platform.isIOS
-    //           ? 372
-    //           : 16
-    // };
-
-    Map<String, dynamic>? headers = {
+    Map<String, dynamic> headers = {
       "x-platform-code": EnvDev.platformCode,
       "x-version-code": EnvDev.versionCode,
     };
