@@ -10,4 +10,8 @@ class HelperRepository {
     final response = await helperService.getTags(feedroomId: feedroomId);
     return TagResponseModel.fromEntity(response);
   }
+
+  void routeProfilePage(String userId) {
+    helperService.routeProfilePage(userId);
+  }
 }

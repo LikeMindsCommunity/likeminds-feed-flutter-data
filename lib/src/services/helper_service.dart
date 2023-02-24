@@ -1,11 +1,17 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/models/models.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class HelperService {
+  late final LMSdkCallback callback;
   final ApiClient apiClient;
 
-  HelperService({required this.apiClient});
+  HelperService({required this.apiClient}) {
+    callback = DIService.getIt.get<LMSdkCallback>(
+      instanceName: "LMCallback",
+    );
+  }
 
   Future<TagResponseModelEntity> getTags({int? feedroomId}) async {
     try {
@@ -36,5 +42,9 @@ class HelperService {
         errorMessage: e.message,
       );
     }
+  }
+
+  void routeProfilePage(String userId) {
+    callback.profileRouteCallback(lmUserId: userId);
   }
 }

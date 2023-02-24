@@ -9,4 +9,8 @@ class HelperApi {
   Future<TagResponseModel> getTags({int? feedroomId}) async {
     return await helperRepository.getTags(feedroomId: feedroomId);
   }
+
+  void routeProfilePage(String userId) {
+    helperRepository.routeProfilePage(userId);
+  }
 }

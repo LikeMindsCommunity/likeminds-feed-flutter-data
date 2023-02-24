@@ -42,6 +42,15 @@ class DIService {
       isProduction: isProduction,
     );
 
+    // Register all the services in the getIt instance
+    getIt.registerLazySingleton(
+      () => NotificationService(apiClient: apiClient),
+    );
+    getIt.registerLazySingleton(
+      () => sdkCallback,
+      instanceName: "LMCallback",
+    );
+
     AuthService authService = AuthService(apiClient: apiClient);
     AuthRepository authRepository = AuthRepository(authService: authService);
 
@@ -101,15 +110,6 @@ class DIService {
     getIt.registerFactory<MediaRepository>(
       () => mediaRepository,
       instanceName: kInstanceMediaRepository,
-    );
-
-    // Register all the services in the getIt instance
-    getIt.registerLazySingleton(
-      () => NotificationService(apiClient: apiClient),
-    );
-    getIt.registerLazySingleton(
-      () => sdkCallback,
-      instanceName: "LMCallback",
     );
   }
 

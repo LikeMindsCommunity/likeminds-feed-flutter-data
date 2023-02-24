@@ -9,19 +9,19 @@ part of 'user_tag_model.dart';
 UserTagEntity _$UserTagEntityFromJson(Map<String, dynamic> json) =>
     UserTagEntity(
       name: json['name'] as String?,
-      imageUrl: json['imageUrl'] as String?,
-      customTitle: json['customTitle'] as String?,
+      imageUrl: json['image_url'] as String?,
+      customTitle: json['custom_title'] as String?,
       id: json['id'] as int?,
-      isGuest: json['isGuest'] as bool?,
-      userUniqueId: json['userUniqueId'] as String?,
+      isGuest: json['is_guest'] as bool?,
+      userUniqueId: json['user_unique_id'] as String?,
     );
 
 Map<String, dynamic> _$UserTagEntityToJson(UserTagEntity instance) =>
     <String, dynamic>{
-      'name': instance.name,
-      'imageUrl': instance.imageUrl,
-      'customTitle': instance.customTitle,
       'id': instance.id,
-      'isGuest': instance.isGuest,
-      'userUniqueId': instance.userUniqueId,
+      'name': instance.name,
+      'image_url': instance.imageUrl,
+      'custom_title': instance.customTitle,
+      'is_guest': instance.isGuest,
+      'user_unique_id': instance.userUniqueId,
     };

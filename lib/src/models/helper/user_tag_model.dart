@@ -10,13 +10,14 @@ class UserTag {
   final bool? isGuest;
   final String? userUniqueId;
 
-  UserTag(
-      {this.name,
-      this.imageUrl,
-      this.customTitle,
-      this.id,
-      this.isGuest,
-      this.userUniqueId});
+  UserTag({
+    this.name,
+    this.imageUrl,
+    this.customTitle,
+    this.id,
+    this.isGuest,
+    this.userUniqueId,
+  });
 
   factory UserTag.fromEntity(UserTagEntity entity) {
     return UserTag(
@@ -39,24 +40,35 @@ class UserTag {
       userUniqueId: userUniqueId,
     );
   }
+
+  @override
+  String toString() => '$name';
 }
 
 @JsonSerializable()
 class UserTagEntity {
-  final String? name;
-  final String? imageUrl;
-  final String? customTitle;
   final int? id;
+  final String? name;
+
+  @JsonKey(name: 'image_url')
+  final String? imageUrl;
+
+  @JsonKey(name: 'custom_title')
+  final String? customTitle;
+  @JsonKey(name: 'is_guest')
   final bool? isGuest;
+
+  @JsonKey(name: 'user_unique_id')
   final String? userUniqueId;
 
-  UserTagEntity(
-      {this.name,
-      this.imageUrl,
-      this.customTitle,
-      this.id,
-      this.isGuest,
-      this.userUniqueId});
+  UserTagEntity({
+    this.name,
+    this.imageUrl,
+    this.customTitle,
+    this.id,
+    this.isGuest,
+    this.userUniqueId,
+  });
 
   factory UserTagEntity.fromJson(Map<String, dynamic> json) =>
       _$UserTagEntityFromJson(json);
