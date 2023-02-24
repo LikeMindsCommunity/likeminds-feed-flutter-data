@@ -88,7 +88,9 @@ class FeedRepository {
       GetFeedRoomRequest getFeedRoomRequest) async {
     final GetFeedRoomResponseEntity responseEntity =
         await feedService.getFeedRoom(getFeedRoomRequest);
-    return GetFeedRoomResponse.fromEntity(responseEntity);
+    final GetFeedRoomResponse response =
+        GetFeedRoomResponse.fromEntity(responseEntity);
+    return response;
   }
 
   Future<GetFeedOfFeedRoomResponse> getFeedOfFeedRoom(

@@ -31,23 +31,29 @@ class FeedService {
 
   Future<GetFeedRoomResponseEntity> getFeedRoom(
       GetFeedRoomRequest getFeedRoomRequest) async {
+    final Map<String, dynamic> queryParameters = {
+      'page': getFeedRoomRequest.page,
+    };
+    if (getFeedRoomRequest.feedroomId != null) {
+      queryParameters['feedroom_id'] = getFeedRoomRequest.feedroomId;
+    }
     try {
       final response = await apiClient.client().get(
             apiClient.getEndpoints.feedroomEndpoint,
-            queryParameters: {
-              'page': getFeedRoomRequest.page,
-              'feedroom_id': getFeedRoomRequest.feedroomId,
-            },
+            queryParameters: queryParameters,
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      return GetFeedRoomResponseEntity.fromJson(response.data);
+      final GetFeedRoomResponseEntity responseEntity =
+          GetFeedRoomResponseEntity.fromJson(response.data);
+      return responseEntity;
     } on DioError catch (e) {
       final GetFeedRoomResponseEntity responseEntity =
           GetFeedRoomResponseEntity(
         success: false,
         chatroom: null,
+        chatrooms: null,
         participantCount: null,
         errorMessage: e.toString(),
       );
