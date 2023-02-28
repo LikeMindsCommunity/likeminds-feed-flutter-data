@@ -6,8 +6,18 @@ class HelperRepository {
 
   HelperRepository({required this.helperService});
 
-  Future<TagResponseModel> getTags({int? feedroomId}) async {
-    final response = await helperService.getTags(feedroomId: feedroomId);
+  Future<TagResponseModel> getTags({
+    int? feedroomId,
+    int? page,
+    int? pageSize,
+    String? searchQuery,
+  }) async {
+    final response = await helperService.getTags(
+      feedroomId: feedroomId,
+      page: page,
+      pageSize: pageSize,
+      searchQuery: searchQuery,
+    );
     return TagResponseModel.fromEntity(response);
   }
 

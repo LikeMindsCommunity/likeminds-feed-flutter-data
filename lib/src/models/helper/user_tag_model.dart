@@ -55,6 +55,7 @@ class UserTagEntity {
 
   @JsonKey(name: 'custom_title')
   final String? customTitle;
+
   @JsonKey(name: 'is_guest')
   final bool? isGuest;
 

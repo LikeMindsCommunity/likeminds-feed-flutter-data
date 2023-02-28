@@ -13,7 +13,12 @@ class HelperService {
     );
   }
 
-  Future<TagResponseModelEntity> getTags({int? feedroomId}) async {
+  Future<TagResponseModelEntity> getTags({
+    int? feedroomId,
+    int? page,
+    int? pageSize,
+    String? searchQuery,
+  }) async {
     try {
       final response = await apiClient.client().get(
         apiClient.getEndpoints.tagsEndpoint,
@@ -24,6 +29,9 @@ class HelperService {
         ),
         queryParameters: {
           'feedroom_id': feedroomId,
+          'page': page,
+          'page_size': pageSize,
+          'search_query': searchQuery,
         },
       );
       print("Response from get tags: ${response.data}");

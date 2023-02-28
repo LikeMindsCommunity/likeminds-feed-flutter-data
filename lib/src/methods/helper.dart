@@ -6,8 +6,18 @@ class HelperApi {
 
   HelperApi({required this.helperRepository});
 
-  Future<TagResponseModel> getTags({int? feedroomId}) async {
-    return await helperRepository.getTags(feedroomId: feedroomId);
+  Future<TagResponseModel> getTags({
+    int? feedroomId,
+    int? page,
+    int? pageSize,
+    String? searchQuery,
+  }) async {
+    return await helperRepository.getTags(
+      feedroomId: feedroomId,
+      page: page,
+      pageSize: pageSize,
+      searchQuery: searchQuery,
+    );
   }
 
   void routeProfilePage(String userId) {

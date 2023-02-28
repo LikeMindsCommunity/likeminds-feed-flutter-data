@@ -45,6 +45,8 @@ class TagResponseModelEntity {
 
   @JsonKey(name: 'group_tags')
   final List<GroupTagEntity>? groupTags;
+
+  @JsonKey(name: 'community_members')
   final List<UserTagEntity>? members;
 
   TagResponseModelEntity({
