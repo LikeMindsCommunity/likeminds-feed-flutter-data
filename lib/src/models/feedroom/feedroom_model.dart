@@ -36,7 +36,7 @@ class FeedRoom {
   final bool? followStatus;
   final int communityId;
   final String? communityName;
-  final String chatroomImageUrl;
+  final String? chatroomImageUrl;
   final int? onlineLinkEnableBefore;
   final String? onlineLinkType;
   final int participantsCount;
@@ -79,7 +79,7 @@ class FeedRoom {
     this.followStatus,
     required this.communityId,
     this.communityName,
-    required this.chatroomImageUrl,
+    this.chatroomImageUrl,
     this.onlineLinkEnableBefore,
     this.onlineLinkType,
     required this.participantsCount,
@@ -244,7 +244,7 @@ class FeedRoomEntity {
   @JsonKey(name: 'community_name')
   final String? communityName;
   @JsonKey(name: 'chatroom_image_url')
-  final String chatroomImageUrl;
+  final String? chatroomImageUrl;
   @JsonKey(name: 'online_link_enable_before')
   final int? onlineLinkEnableBefore;
   @JsonKey(name: 'online_link_type')
@@ -292,7 +292,7 @@ class FeedRoomEntity {
     this.followStatus,
     required this.communityId,
     this.communityName,
-    required this.chatroomImageUrl,
+    this.chatroomImageUrl,
     this.onlineLinkEnableBefore,
     this.onlineLinkType,
     required this.participantsCount,

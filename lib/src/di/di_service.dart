@@ -3,6 +3,7 @@ import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
 import 'package:likeminds_feed/src/repositories/branding_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
+import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/media_repository.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
@@ -11,6 +12,7 @@ import 'package:likeminds_feed/src/services/auth_service.dart';
 import 'package:likeminds_feed/src/services/branding_service.dart';
 import 'package:likeminds_feed/src/services/comment_service.dart';
 import 'package:likeminds_feed/src/services/feed_service.dart';
+import 'package:likeminds_feed/src/services/helper_service.dart';
 import 'package:likeminds_feed/src/services/media_service.dart';
 import 'package:likeminds_feed/src/services/notification_service.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
@@ -40,8 +42,21 @@ class DIService {
       isProduction: isProduction,
     );
 
+    // Register all the services in the getIt instance
+    getIt.registerLazySingleton(
+      () => NotificationService(apiClient: apiClient),
+    );
+    getIt.registerLazySingleton(
+      () => sdkCallback,
+      instanceName: "LMCallback",
+    );
+
     AuthService authService = AuthService(apiClient: apiClient);
     AuthRepository authRepository = AuthRepository(authService: authService);
+
+    HelperService helperService = HelperService(apiClient: apiClient);
+    HelperRepository helperRepository =
+        HelperRepository(helperService: helperService);
 
     AccessService accessService = AccessService(apiClient: apiClient);
     AccessRepository accessRepository =
@@ -72,6 +87,10 @@ class DIService {
       () => accessRepository,
       instanceName: kInstanceAccessRepository,
     );
+    getIt.registerFactory<HelperRepository>(
+      () => helperRepository,
+      instanceName: kInstanceHelperRepository,
+    );
     getIt.registerFactory<BrandingRepository>(
       () => brandingRepository,
       instanceName: kInstanceBrandingRepository,
@@ -92,15 +111,6 @@ class DIService {
       () => mediaRepository,
       instanceName: kInstanceMediaRepository,
     );
-
-    // Register all the services in the getIt instance
-    getIt.registerLazySingleton(
-      () => NotificationService(apiClient: apiClient),
-    );
-    getIt.registerLazySingleton(
-      () => sdkCallback,
-      instanceName: "LMCallback",
-    );
   }
 
   // Get the static instance of GetIt to get the dependencies
@@ -114,4 +124,5 @@ class DIService {
   static const String kInstancePostRepository = 'post_repository';
   static const String kInstanceMediaRepository = 'media_repository';
   static const String kInstanceBrandingRepository = 'branding_repository';
+  static const String kInstanceHelperRepository = 'helper_repository';
 }

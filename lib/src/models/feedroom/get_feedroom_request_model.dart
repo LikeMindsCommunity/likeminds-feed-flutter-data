@@ -6,7 +6,7 @@ class GetFeedRoomRequest {
   final int page;
   final int? feedroomId;
 
-  GetFeedRoomRequest({required this.page, required this.feedroomId});
+  GetFeedRoomRequest({required this.page, this.feedroomId});
 
   factory GetFeedRoomRequest.fromEntity(GetFeedRoomRequestEntity entity) {
     return GetFeedRoomRequest(

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class AccessService {
@@ -44,7 +43,6 @@ class AccessService {
             apiClient.getEndpoints.memberStateEndpoint,
             options: Options(
               headers: {
-                // 'Authorization': '${apiClient.getUserId}',
                 'x-api-key': '${apiClient.getApiKey}',
               },
             ),

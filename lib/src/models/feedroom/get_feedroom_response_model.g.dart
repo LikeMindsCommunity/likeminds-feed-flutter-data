@@ -16,6 +16,9 @@ GetFeedRoomResponseEntity _$GetFeedRoomResponseEntityFromJson(
               json['data']['chatroom'] as Map<String, dynamic>),
       participantCount: json['data']['participant_count'] as int?,
       errorMessage: json['error_message'] as String?,
+      chatrooms: (json['data']['chatrooms'] as List<dynamic>?)
+          ?.map((e) => FeedRoomEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$GetFeedRoomResponseEntityToJson(
@@ -25,4 +28,5 @@ Map<String, dynamic> _$GetFeedRoomResponseEntityToJson(
       'chatroom': instance.chatroom,
       'participant_count': instance.participantCount,
       'error_message': instance.errorMessage,
+      'chatrooms': instance.chatrooms,
     };

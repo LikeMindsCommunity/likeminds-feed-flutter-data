@@ -1,7 +1,9 @@
+import 'package:likeminds_feed/src/methods/helper.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
 import 'package:likeminds_feed/src/repositories/branding_repository.dart';
+import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/media_repository.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
@@ -56,6 +58,14 @@ class SdkApplication {
     return BrandingApi(
       brandingRepository: GetIt.instance.get<BrandingRepository>(
         instanceName: DIService.kInstanceBrandingRepository,
+      ),
+    );
+  }
+
+  HelperApi getHelperApi() {
+    return HelperApi(
+      helperRepository: GetIt.instance.get<HelperRepository>(
+        instanceName: DIService.kInstanceHelperRepository,
       ),
     );
   }
