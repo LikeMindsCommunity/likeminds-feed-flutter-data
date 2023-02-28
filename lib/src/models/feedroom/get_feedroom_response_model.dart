@@ -6,6 +6,7 @@ part 'get_feedroom_response_model.g.dart';
 class GetFeedRoomResponse {
   final bool success;
   final FeedRoom? chatroom;
+  final List<FeedRoom>? chatrooms;
   final int? participantCount;
   final String? errorMessage;
 
@@ -14,14 +15,20 @@ class GetFeedRoomResponse {
     required this.chatroom,
     required this.participantCount,
     required this.errorMessage,
+    this.chatrooms,
   });
 
   factory GetFeedRoomResponse.fromEntity(GetFeedRoomResponseEntity entity) {
     return GetFeedRoomResponse(
       success: entity.success,
-      chatroom: FeedRoom.fromEntity(entity.chatroom!),
+      chatroom: entity.chatroom != null
+          ? FeedRoom.fromEntity(entity.chatroom!)
+          : null,
       participantCount: entity.participantCount,
       errorMessage: entity.errorMessage,
+      chatrooms: entity.chatrooms != null
+          ? entity.chatrooms!.map((e) => FeedRoom.fromEntity(e)).toList()
+          : null,
     );
   }
 
@@ -31,6 +38,7 @@ class GetFeedRoomResponse {
       chatroom: chatroom!.toEntity(),
       participantCount: participantCount,
       errorMessage: errorMessage,
+      chatrooms: chatrooms!.map((e) => e.toEntity()).toList(),
     );
   }
 }
@@ -43,12 +51,15 @@ class GetFeedRoomResponseEntity {
   final int? participantCount;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
+  @JsonKey(name: 'chatrooms')
+  final List<FeedRoomEntity>? chatrooms;
 
   GetFeedRoomResponseEntity({
     required this.success,
     required this.chatroom,
     required this.participantCount,
     required this.errorMessage,
+    this.chatrooms,
   });
 
   factory GetFeedRoomResponseEntity.fromJson(Map<String, dynamic> json) =>

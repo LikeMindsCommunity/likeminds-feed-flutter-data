@@ -40,7 +40,7 @@ FeedRoomEntity _$FeedRoomEntityFromJson(Map<String, dynamic> json) =>
       followStatus: json['follow_status'] as bool?,
       communityId: json['community_id'] as int,
       communityName: json['community_name'] as String?,
-      chatroomImageUrl: json['chatroom_image_url'] as String,
+      chatroomImageUrl: json['chatroom_image_url'] as String?,
       onlineLinkEnableBefore: json['online_link_enable_before'] as int?,
       onlineLinkType: json['online_link_type'] as String?,
       participantsCount: json['participants_count'] as int,

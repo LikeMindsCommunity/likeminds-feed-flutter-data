@@ -31,6 +31,8 @@ class EndPoints {
 
   String get addPostEndpoint => "$KETTLE_HOST/feed/post";
 
+  String get tagsEndpoint => "$KETTLE_HOST/community/tag";
+
   String get accessEndpoint => "$CARAVAN_HOST/community_member/fetch_access";
   String get memberStateEndpoint => "$KETTLE_HOST/community/member/state";
 
