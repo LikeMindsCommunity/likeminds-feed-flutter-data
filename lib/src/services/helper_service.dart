@@ -31,7 +31,7 @@ class HelperService {
           'feedroom_id': feedroomId,
           'page': page,
           'page_size': pageSize,
-          'search_query': searchQuery,
+          'search_name': searchQuery,
         },
       );
       print("Response from get tags: ${response.data}");
