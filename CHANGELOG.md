@@ -10,3 +10,11 @@ Adding environment and endpoint management.
 
 Adding Analytics, Callbacks, and Notifications.
 Refactoring and fixing minor bugs.
+
+## 0.6.0
+
+Adding user tagging
+
+## 0.6.1
+
+Fixing tagging bugs
