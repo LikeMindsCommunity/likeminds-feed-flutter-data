@@ -161,4 +161,33 @@ class CommentService {
       print(e);
     }
   }
+
+  Future<GetCommentLikesResponseEntity> getCommentLikes(
+      GetCommentLikesRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.toggleLikeCommentEndPoint(
+              request.commentId,
+              request.postId,
+            ),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      print(response.data);
+      return GetCommentLikesResponseEntity.fromJson(response.data);
+    } on DioError catch (e) {
+      print(e.toString());
+      return GetCommentLikesResponseEntity(
+        success: false,
+        errorMessage: e.message,
+      );
+    } catch (e) {
+      print(e);
+      return GetCommentLikesResponseEntity(
+        success: false,
+        errorMessage: e.toString(),
+      );
+    }
+  }
 }

@@ -76,6 +76,23 @@ class LMFeedClient {
         .deleteComment(deleteCommentRequest);
   }
 
+  Future<AddCommentResponse?> addComment(
+      AddCommentRequest addCommentRequest) async {
+    return await _sdkApplication.getFeedApi().addComment(addCommentRequest);
+  }
+
+  Future<GetCommentLikesResponse> getCommentLikes(
+      GetCommentLikesRequest request) async {
+    return await _sdkApplication.getFeedApi().getCommentLikes(request);
+  }
+
+  Future<ToggleLikeCommentResponse?> likeComment(
+      ToggleLikeCommentRequest likeCommentRequest) async {
+    return await _sdkApplication
+        .getFeedApi()
+        .toggleLikeComment(likeCommentRequest);
+  }
+
   Future<GetFeedOfFeedRoomResponse> getFeedOfFeedRoom(
       GetFeedOfFeedRoomRequest request) async {
     return await _sdkApplication.getFeedApi().getFeedOfFeedRoom(request);
