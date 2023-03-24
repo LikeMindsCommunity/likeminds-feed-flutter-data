@@ -13,6 +13,7 @@ export 'package:likeminds_feed/src/models/community/community_settings_rights_mo
 export 'package:likeminds_feed/src/models/helper/tag_response_model.dart';
 export 'package:likeminds_feed/src/models/helper/group_tag_model.dart';
 export 'package:likeminds_feed/src/models/helper/user_tag_model.dart';
+export 'package:likeminds_feed/src/models/helper/tag_request_model.dart';
 
 export 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
 export 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';

@@ -6,4 +6,3 @@ export 'package:likeminds_feed/src/methods/access.dart';
 export 'package:likeminds_feed/src/methods/notification.dart';
 export 'package:likeminds_feed/src/methods/callback.dart';
 export 'package:likeminds_feed/src/methods/analytics.dart';
-export 'package:likeminds_feed/src/methods/branding.dart';
