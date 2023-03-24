@@ -11,7 +11,7 @@ import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
 import 'src/models/models.dart';
 
-const _prod = false;
+const _prod = true;
 
 class LMFeedClient {
   late final SdkApplication _sdkApplication;
@@ -26,7 +26,6 @@ class LMFeedClient {
 
   static LMFeedClient initiateLikeMinds({
     required String apiKey,
-    required bool isProduction,
     required LMSdkCallback sdkCallback,
   }) {
     debugPrint("SDK Initiation point reached");
