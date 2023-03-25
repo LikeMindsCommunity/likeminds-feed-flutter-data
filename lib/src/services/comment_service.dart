@@ -170,6 +170,10 @@ class CommentService {
               request.commentId,
               request.postId,
             ),
+            queryParameters: {
+              'page': request.page,
+              'page_size': request.pageSize,
+            },
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
