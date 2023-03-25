@@ -47,8 +47,9 @@ class GetCommentLikesResponseEntity {
   final bool success;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
-  @JsonKey(name: 'comment_likes')
+  @JsonKey(name: 'likes')
   final List<CommentLikeEntity>? commentLikes;
+  @JsonKey(name: 'users')
   final Map<String, PostUserEntity>? users;
   @JsonKey(name: 'total_count')
   final int? totalCount;

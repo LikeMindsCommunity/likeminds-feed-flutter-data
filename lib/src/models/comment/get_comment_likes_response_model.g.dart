@@ -11,14 +11,14 @@ GetCommentLikesResponseEntity _$GetCommentLikesResponseEntityFromJson(
     GetCommentLikesResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      commentLikes: (json['comment_likes'] as List<dynamic>?)
+      commentLikes: (json['data']['likes'] as List<dynamic>?)
           ?.map((e) => CommentLikeEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      users: (json['users'] as Map<String, dynamic>?)?.map(
+      users: (json['data']['users'] as Map<String, dynamic>?)?.map(
         (k, e) =>
             MapEntry(k, PostUserEntity.fromJson(e as Map<String, dynamic>)),
       ),
-      totalCount: json['total_count'] as int?,
+      totalCount: json['data']['total_count'] as int?,
     );
 
 Map<String, dynamic> _$GetCommentLikesResponseEntityToJson(
@@ -26,7 +26,7 @@ Map<String, dynamic> _$GetCommentLikesResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'comment_likes': instance.commentLikes,
+      'likes': instance.commentLikes,
       'users': instance.users,
       'total_count': instance.totalCount,
     };

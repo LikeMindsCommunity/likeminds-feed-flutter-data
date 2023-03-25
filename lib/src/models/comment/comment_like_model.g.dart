@@ -8,7 +8,7 @@ part of 'comment_like_model.dart';
 
 CommentLikeEntity _$CommentLikeEntityFromJson(Map<String, dynamic> json) =>
     CommentLikeEntity(
-      id: json['id'] as String,
+      id: json['_id'] as String,
       createdAt: json['created_at'] as int,
       updatedAt: json['updated_at'] as int,
       userId: json['user_id'] as String,
@@ -16,7 +16,7 @@ CommentLikeEntity _$CommentLikeEntityFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$CommentLikeEntityToJson(CommentLikeEntity instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'user_id': instance.userId,

@@ -36,6 +36,7 @@ class CommentLike {
 
 @JsonSerializable()
 class CommentLikeEntity {
+  @JsonKey(name: '_id')
   final String id;
   @JsonKey(name: 'created_at')
   final int createdAt;
