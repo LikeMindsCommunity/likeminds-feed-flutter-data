@@ -8,8 +8,8 @@ abstract class EnvDev {
   static const platformCode = _EnvDev.platformCode;
   @EnviedField(varName: 'VERSION_CODE')
   static const int versionCode = _EnvDev.versionCode;
-  @EnviedField(varName: 'CARAVAN_HOST')
-  static const caravanHost = _EnvDev.caravanHost;
+  // @EnviedField(varName: 'CARAVAN_HOST')
+  // static const caravanHost = _EnvDev.caravanHost;
   @EnviedField(varName: 'KETTLE_HOST')
   static const kettleHost = _EnvDev.kettleHost;
   @EnviedField(varName: 'BUCKET_NAME', obfuscate: true)
@@ -24,8 +24,8 @@ abstract class EnvProd {
   static const platformCode = _EnvProd.platformCode;
   @EnviedField(varName: 'VERSION_CODE')
   static const int versionCode = _EnvProd.versionCode;
-  @EnviedField(varName: 'CARAVAN_HOST')
-  static const caravanHost = _EnvProd.caravanHost;
+  // @EnviedField(varName: 'CARAVAN_HOST')
+  // static const caravanHost = _EnvProd.caravanHost;
   @EnviedField(varName: 'KETTLE_HOST')
   static const kettleHost = _EnvProd.kettleHost;
   @EnviedField(varName: 'BUCKET_NAME', obfuscate: true)

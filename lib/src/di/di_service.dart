@@ -1,7 +1,6 @@
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
-import 'package:likeminds_feed/src/repositories/branding_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/media_repository.dart';
@@ -9,7 +8,6 @@ import 'package:likeminds_feed/src/repositories/post_repository.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 import 'package:likeminds_feed/src/services/auth_service.dart';
-import 'package:likeminds_feed/src/services/branding_service.dart';
 import 'package:likeminds_feed/src/services/comment_service.dart';
 import 'package:likeminds_feed/src/services/feed_service.dart';
 import 'package:likeminds_feed/src/services/helper_service.dart';
@@ -62,10 +60,6 @@ class DIService {
     AccessRepository accessRepository =
         AccessRepository(accessService: accessService);
 
-    BrandingService brandingService = BrandingService(apiClient: apiClient);
-    BrandingRepository brandingRepository =
-        BrandingRepository(brandingService: brandingService);
-
     CommentService commentService = CommentService(apiClient: apiClient);
     FeedService feedService = FeedService(apiClient: apiClient);
     FeedRepository feedRepository = FeedRepository(
@@ -90,10 +84,6 @@ class DIService {
     getIt.registerFactory<HelperRepository>(
       () => helperRepository,
       instanceName: kInstanceHelperRepository,
-    );
-    getIt.registerFactory<BrandingRepository>(
-      () => brandingRepository,
-      instanceName: kInstanceBrandingRepository,
     );
     getIt.registerFactory<FeedRepository>(
       () => feedRepository,
@@ -123,6 +113,5 @@ class DIService {
   static const String kInstanceAuthRepository = 'auth_repository';
   static const String kInstancePostRepository = 'post_repository';
   static const String kInstanceMediaRepository = 'media_repository';
-  static const String kInstanceBrandingRepository = 'branding_repository';
   static const String kInstanceHelperRepository = 'helper_repository';
 }

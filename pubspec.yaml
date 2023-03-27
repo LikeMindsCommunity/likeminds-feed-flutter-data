@@ -1,6 +1,6 @@
 name: likeminds_feed
 description: Flutter SDK package for LikeMinds feed.
-version: 0.6.1
+version: 0.7.0
 homepage: "https://likeminds.community"
 
 environment:

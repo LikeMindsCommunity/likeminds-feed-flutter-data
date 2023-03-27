@@ -5,9 +5,9 @@ class AccessApi {
 
   AccessApi({required this.accessRepository});
 
-  Future<bool> getAccess(String accesType) async {
-    return await accessRepository.getAccess(accesType);
-  }
+  // Future<bool> getAccess(String accesType) async {
+  //   return await accessRepository.getAccess(accesType);
+  // }
 
   Future<bool> getMemberState() async {
     return await accessRepository.getMemberState();
