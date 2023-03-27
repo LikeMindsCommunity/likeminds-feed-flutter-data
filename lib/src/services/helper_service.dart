@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
-import 'package:likeminds_feed/src/models/helper/tag_request_model.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class HelperService {
@@ -42,6 +41,37 @@ class HelperService {
     } on DioError catch (e) {
       print("Error from get tags: $e");
       return TagResponseModelEntity(
+        success: false,
+        errorMessage: e.message,
+      );
+    }
+  }
+
+  Future<DecodeUrlResponseEntity> decodeUrl(
+      {required DecodeUrlRequest request}) async {
+    try {
+      final response = await apiClient.client().get(
+        apiClient.getEndpoints.decodeUrlEndpoint,
+        options: Options(
+          headers: {
+            'Authorization': '${apiClient.accessToken}',
+          },
+        ),
+        queryParameters: {
+          'url': request.url,
+        },
+      );
+      if (response.data['success'] == true) {
+        return DecodeUrlResponseEntity.fromJson(response.data);
+      } else {
+        return DecodeUrlResponseEntity(
+          success: false,
+          errorMessage: response.data['message'],
+        );
+      }
+    } on DioError catch (e) {
+      print("Error from get tags: $e");
+      return DecodeUrlResponseEntity(
         success: false,
         errorMessage: e.message,
       );

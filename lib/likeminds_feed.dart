@@ -129,4 +129,8 @@ class LMFeedClient {
   Future<String?> uploadFile(File file) async {
     return await _sdkApplication.getMediaApi().uploadFile(file);
   }
+
+  Future<DecodeUrlResponse> decodeUrl(DecodeUrlRequest request) async {
+    return await _sdkApplication.getHelperApi().decodeUrl(request: request);
+  }
 }
