@@ -11,7 +11,7 @@ import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
 import 'src/models/models.dart';
 
-const _prod = true;
+const _prod = false;
 
 class LMFeedClient {
   late final SdkApplication _sdkApplication;
@@ -67,6 +67,14 @@ class LMFeedClient {
   Future<LikePostResponse> likePost(LikePostRequest likePostRequest) async {
     return await _sdkApplication.getPostApi().likePost(likePostRequest);
   }
+
+  Future<PinPostResponse> pinPost(PinPostRequest pinPostRequest) async {
+    return await _sdkApplication.getPostApi().pinPost(pinPostRequest);
+  }
+
+  // Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
+  //   return await _sdkApplication.getPostApi().editPost(editPostRequest);
+  // }
 
   Future<DeleteCommentResponse> deleteComment(
       DeleteCommentRequest deleteCommentRequest) async {
