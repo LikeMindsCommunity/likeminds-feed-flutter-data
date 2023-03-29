@@ -41,6 +41,13 @@ class FeedApi {
     return response;
   }
 
+  Future<GetCommentLikesResponse> getCommentLikes(
+      GetCommentLikesRequest request) async {
+    final GetCommentLikesResponse response =
+        await feedRepository.getCommentLikes(request);
+    return response;
+  }
+
   Future<CommentDetailResponse?> getComment(
       CommentDetailRequest request) async {
     final CommentDetailResponse? response =

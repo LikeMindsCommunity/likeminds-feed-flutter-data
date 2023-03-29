@@ -1,18 +1,4 @@
-import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
-import 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
-import 'package:likeminds_feed/src/models/comment/add_comment_reply_request.dart';
-import 'package:likeminds_feed/src/models/comment/add_comment_reply_response.dart';
-import 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
-import 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';
-import 'package:likeminds_feed/src/models/feed/post_detail_request.dart';
-import 'package:likeminds_feed/src/models/feed/post_detail_response.dart';
-import 'package:likeminds_feed/src/models/feed/toggle_like_comment_request.dart';
-import 'package:likeminds_feed/src/models/feed/toggle_like_comment_response.dart';
-import 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
-import 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
-
 import 'package:likeminds_feed/src/models/models.dart';
-import 'package:likeminds_feed/src/services/auth_service.dart';
 import 'package:likeminds_feed/src/services/comment_service.dart';
 import 'package:likeminds_feed/src/services/feed_service.dart';
 
@@ -57,6 +43,13 @@ class FeedRepository {
     return responseEntity != null
         ? ToggleLikeCommentResponse.fromEntity(responseEntity)
         : null;
+  }
+
+  Future<GetCommentLikesResponse> getCommentLikes(
+      GetCommentLikesRequest request) async {
+    final GetCommentLikesResponseEntity responseEntity =
+        await commentService.getCommentLikes(request);
+    return GetCommentLikesResponse.fromEntity(responseEntity);
   }
 
   Future<CommentDetailResponse?> getComment(

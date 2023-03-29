@@ -18,3 +18,10 @@ Adding user tagging
 ## 0.6.1
 
 Fixing tagging bugs
+
+## 0.7.0
+
+Removing branding
+Refactoriing client class
+Support for fetching comment likes
+PDF, Video support for Feed media

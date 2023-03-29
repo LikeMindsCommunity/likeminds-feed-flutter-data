@@ -5,9 +5,9 @@ class AccessRepository {
 
   AccessRepository({required this.accessService});
 
-  Future<bool> getAccess(String accesType) async {
-    return await accessService.getAccess(accesType);
-  }
+  // Future<bool> getAccess(String accesType) async {
+  //   return await accessService.getAccess(accesType);
+  // }
 
   Future<bool> getMemberState() async {
     return await accessService.getMemberState();

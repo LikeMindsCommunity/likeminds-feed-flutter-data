@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/models/notifications/register_device_request_model.dart';
 import 'package:likeminds_feed/src/models/notifications/register_device_response_model.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
@@ -19,16 +18,14 @@ class NotificationService implements INotificationService {
     try {
       final response = await apiClient.client().post(
             apiClient.getEndpoints.registerDeviceEndpoint,
-            // data: request.toEntity().toJson(),
-            queryParameters: {
-              'member_id': request.memberId.toString(),
-              'device_id': request.deviceId,
+            data: {
               'token': request.token,
             },
             options: Options(
               headers: {
                 'x-member-id': '${request.memberId}',
                 'x-api-key': '${apiClient.getApiKey}',
+                'x-device-id': request.deviceId,
               },
             ),
           );

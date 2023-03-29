@@ -13,6 +13,7 @@ export 'package:likeminds_feed/src/models/community/community_settings_rights_mo
 export 'package:likeminds_feed/src/models/helper/tag_response_model.dart';
 export 'package:likeminds_feed/src/models/helper/group_tag_model.dart';
 export 'package:likeminds_feed/src/models/helper/user_tag_model.dart';
+export 'package:likeminds_feed/src/models/helper/tag_request_model.dart';
 
 export 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
 export 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
@@ -46,6 +47,9 @@ export 'package:likeminds_feed/src/models/comment/add_comment_reply_request.dart
 export 'package:likeminds_feed/src/models/comment/add_comment_reply_response.dart';
 export 'package:likeminds_feed/src/models/comment/delete_comment_request.dart';
 export 'package:likeminds_feed/src/models/comment/delete_comment_response.dart';
+export 'package:likeminds_feed/src/models/comment/comment_like_model.dart';
+export 'package:likeminds_feed/src/models/comment/get_comment_likes_request_model.dart';
+export 'package:likeminds_feed/src/models/comment/get_comment_likes_response_model.dart';
 
 export 'package:likeminds_feed/src/models/feedroom/feedroom_model.dart';
 export 'package:likeminds_feed/src/models/feedroom/get_feedroom_request_model.dart';
