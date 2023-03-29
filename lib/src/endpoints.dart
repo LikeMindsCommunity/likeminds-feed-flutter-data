@@ -1,8 +1,6 @@
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+
 import 'package:likeminds_feed/src/environment/env.dart';
-
-/// This file contains all the endpoints used in the package
-
-// ignore_for_file: constant_identifier_names
 
 class EndPoints {
   static EndPoints? _instance;
@@ -14,8 +12,6 @@ class EndPoints {
 
   EndPoints._({required this.isProduction});
 
-  String get CARAVAN_HOST =>
-      isProduction ? EnvProd.caravanHost : EnvDev.caravanHost;
   String get KETTLE_HOST =>
       isProduction ? EnvProd.kettleHost : EnvDev.kettleHost;
 
@@ -23,7 +19,7 @@ class EndPoints {
   String get authRefreshEndpoint => "$KETTLE_HOST/user/refresh";
   String get authLogoutEndpoint => "$KETTLE_HOST/user/logout";
 
-  String get registerDeviceEndpoint => "$CARAVAN_HOST/push";
+  String get registerDeviceEndpoint => "$KETTLE_HOST/user/device/push";
 
   String get feedUrl => "$KETTLE_HOST/feed";
   String get feedroomEndpoint => "$KETTLE_HOST/feedroom";
@@ -33,12 +29,7 @@ class EndPoints {
 
   String get tagsEndpoint => "$KETTLE_HOST/community/tag";
 
-  String get accessEndpoint => "$CARAVAN_HOST/community_member/fetch_access";
   String get memberStateEndpoint => "$KETTLE_HOST/community/member/state";
-
-  String getBrandingEndPoint(String communityId) {
-    return "$CARAVAN_HOST/community/$communityId/branding";
-  }
 
   String getUniversalFeedEndPoint(int page) {
     return "$feedUrl/universal?page=$page&page_size=$pageLimit";

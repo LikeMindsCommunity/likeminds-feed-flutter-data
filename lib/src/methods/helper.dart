@@ -1,3 +1,4 @@
+import 'package:likeminds_feed/src/models/helper/tag_request_model.dart';
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 
@@ -7,17 +8,9 @@ class HelperApi {
   HelperApi({required this.helperRepository});
 
   Future<TagResponseModel> getTags({
-    int? feedroomId,
-    int? page,
-    int? pageSize,
-    String? searchQuery,
+    required TagRequestModel request,
   }) async {
-    return await helperRepository.getTags(
-      feedroomId: feedroomId,
-      page: page,
-      pageSize: pageSize,
-      searchQuery: searchQuery,
-    );
+    return await helperRepository.getTags(request: request);
   }
 
   void routeProfilePage(String userId) {

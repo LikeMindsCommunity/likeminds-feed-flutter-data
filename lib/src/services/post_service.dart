@@ -33,28 +33,20 @@ class PostService extends IPostService {
   Future<AddPostResponseEntity> addPost(
       AddPostRequestEntity addPostRequest) async {
     try {
-      if (await apiClient.getAccessType("create_post")) {
-        print("Access granted");
-        final response = await apiClient.client().post(
-              apiClient.getEndpoints.addPostEndpoint,
-              data: addPostRequest.toJson(),
-              options: Options(
-                headers: {
-                  'Authorization': '${apiClient.accessToken}',
-                },
-              ),
-            );
-        print("Response from add post: ${response.data}");
-        AddPostResponseEntity addPostResponseEntity =
-            AddPostResponseEntity.fromJson(response.data);
-        return addPostResponseEntity;
-      } else {
-        print("Access denied");
-        return AddPostResponseEntity(
-          success: false,
-          errorMessage: "You are not authorized to perform this operation",
-        );
-      }
+      print("Access granted");
+      final response = await apiClient.client().post(
+            apiClient.getEndpoints.addPostEndpoint,
+            data: addPostRequest.toJson(),
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      print("Response from add post: ${response.data}");
+      AddPostResponseEntity addPostResponseEntity =
+          AddPostResponseEntity.fromJson(response.data);
+      return addPostResponseEntity;
     } on DioError catch (e) {
       AddPostResponseEntity addPostResponseEntity =
           AddPostResponseEntity.fromJson(e.response?.data);
@@ -65,31 +57,22 @@ class PostService extends IPostService {
   @override
   Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest) async {
     try {
-      if (await apiClient.getAccessType("view_post")) {
-        print("Access granted");
-        final response = await apiClient.client().get(
-              "${apiClient.getEndpoints.addPostEndpoint}/${getPostRequest.postId}",
-              queryParameters: {
-                'page': getPostRequest.page,
-                'page_size': getPostRequest.pageSize,
+      final response = await apiClient.client().get(
+            "${apiClient.getEndpoints.addPostEndpoint}/${getPostRequest.postId}",
+            queryParameters: {
+              'page': getPostRequest.page,
+              'page_size': getPostRequest.pageSize,
+            },
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
               },
-              options: Options(
-                headers: {
-                  'Authorization': '${apiClient.accessToken}',
-                },
-              ),
-            );
-        print("Response from get post: ${response.data}");
-        GetPostResponseEntity getPostResponseEntity =
-            GetPostResponseEntity.fromJson(response.data);
-        return getPostResponseEntity;
-      } else {
-        print("Access denied");
-        return GetPostResponseEntity(
-          success: false,
-          errorMessage: "You are not authorized to perform this operation",
-        );
-      }
+            ),
+          );
+      print("Response from get post: ${response.data}");
+      GetPostResponseEntity getPostResponseEntity =
+          GetPostResponseEntity.fromJson(response.data);
+      return getPostResponseEntity;
     } on DioError catch (e) {
       print("Error from get post: $e");
       GetPostResponseEntity getPostResponseEntity =
@@ -102,28 +85,19 @@ class PostService extends IPostService {
   Future<DeletePostResponseEntity> deletePost(
       DeletePostRequest deletePostRequest) async {
     try {
-      if (await apiClient.getAccessType("delete_post")) {
-        print("Access granted");
-        final response = await apiClient.client().delete(
-              "${apiClient.getEndpoints.addPostEndpoint}/${deletePostRequest.postId}",
-              data: {"delete_reason": deletePostRequest.deleteReason},
-              options: Options(
-                headers: {
-                  'Authorization': '${apiClient.accessToken}',
-                },
-              ),
-            );
-        print("Response from delete post: ${response.data}");
-        DeletePostResponseEntity deletePostResponseEntity =
-            DeletePostResponseEntity.fromJson(response.data);
-        return deletePostResponseEntity;
-      } else {
-        print("Access denied");
-        return DeletePostResponseEntity(
-          success: false,
-          errorMessage: "You are not authorized to perform this operation",
-        );
-      }
+      final response = await apiClient.client().delete(
+            "${apiClient.getEndpoints.addPostEndpoint}/${deletePostRequest.postId}",
+            data: {"delete_reason": deletePostRequest.deleteReason},
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      print("Response from delete post: ${response.data}");
+      DeletePostResponseEntity deletePostResponseEntity =
+          DeletePostResponseEntity.fromJson(response.data);
+      return deletePostResponseEntity;
     } on DioError catch (e) {
       print("Error from delete post: ${e.response?.data}");
       DeletePostResponseEntity deletePostResponseEntity =
@@ -136,32 +110,24 @@ class PostService extends IPostService {
   Future<LikePostResponseEntity> likePost(
       LikePostRequest likePostRequest) async {
     try {
-      if (await apiClient.getAccessType("like_post")) {
-        final response = await apiClient.client().put(
-              "${apiClient.getEndpoints.addPostEndpoint}/${likePostRequest.postId}/like",
-              options: Options(
-                headers: {
-                  'Authorization': '${apiClient.accessToken}',
-                },
-              ),
-            );
-        print("Response from like post: ${response.data}");
-        final postResponse = await getPost(GetPostRequest(
-          postId: likePostRequest.postId,
-          page: 1,
-          pageSize: 10,
-        ));
-        LikePostResponseEntity likePostResponseEntity =
-            LikePostResponseEntity.fromJson(response.data);
-        likePostResponseEntity.setLikes = postResponse.post!.likeCount;
-        return likePostResponseEntity;
-      } else {
-        print("Access denied");
-        return LikePostResponseEntity(
-          success: false,
-          errorMessage: "You are not authorized to perform this operation",
-        );
-      }
+      final response = await apiClient.client().put(
+            "${apiClient.getEndpoints.addPostEndpoint}/${likePostRequest.postId}/like",
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      print("Response from like post: ${response.data}");
+      final postResponse = await getPost(GetPostRequest(
+        postId: likePostRequest.postId,
+        page: 1,
+        pageSize: 10,
+      ));
+      LikePostResponseEntity likePostResponseEntity =
+          LikePostResponseEntity.fromJson(response.data);
+      likePostResponseEntity.setLikes = postResponse.post!.likeCount;
+      return likePostResponseEntity;
     } on DioError catch (e) {
       print("Error from like post: ${e.response?.data}");
       LikePostResponseEntity likePostResponseEntity =
@@ -174,26 +140,18 @@ class PostService extends IPostService {
   Future<GetPostLikesResponseEntity> getPostLikes(
       GetPostLikesRequest getPostLikesRequest) async {
     try {
-      if (await apiClient.getAccessType("view_post")) {
-        final response = await apiClient.client().get(
-              "${apiClient.getEndpoints.addPostEndpoint}/${getPostLikesRequest.postId}/like",
-              options: Options(
-                headers: {
-                  'Authorization': '${apiClient.accessToken}',
-                },
-              ),
-            );
-        print("Response from get likes on post: ${response.data}");
-        GetPostLikesResponseEntity getPostLikesResponseEntity =
-            GetPostLikesResponseEntity.fromJson(response.data);
-        return getPostLikesResponseEntity;
-      } else {
-        print("Access denied");
-        return GetPostLikesResponseEntity(
-          success: false,
-          errorMessage: "You are not authorized to perform this operation",
-        );
-      }
+      final response = await apiClient.client().get(
+            "${apiClient.getEndpoints.addPostEndpoint}/${getPostLikesRequest.postId}/like",
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      print("Response from get likes on post: ${response.data}");
+      GetPostLikesResponseEntity getPostLikesResponseEntity =
+          GetPostLikesResponseEntity.fromJson(response.data);
+      return getPostLikesResponseEntity;
     } on DioError catch (e) {
       print("Error from like post: ${e.response?.data}");
       return GetPostLikesResponseEntity(

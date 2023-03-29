@@ -1,3 +1,4 @@
+import 'package:likeminds_feed/src/models/helper/tag_request_model.dart';
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/helper_service.dart';
 
@@ -7,17 +8,9 @@ class HelperRepository {
   HelperRepository({required this.helperService});
 
   Future<TagResponseModel> getTags({
-    int? feedroomId,
-    int? page,
-    int? pageSize,
-    String? searchQuery,
+    required TagRequestModel request,
   }) async {
-    final response = await helperService.getTags(
-      feedroomId: feedroomId,
-      page: page,
-      pageSize: pageSize,
-      searchQuery: searchQuery,
-    );
+    final response = await helperService.getTags(request: request);
     return TagResponseModel.fromEntity(response);
   }
 
