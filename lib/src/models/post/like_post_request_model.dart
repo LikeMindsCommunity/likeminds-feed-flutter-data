@@ -1,40 +1,27 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'like_post_request_model.g.dart';
-
 class LikePostRequest {
   final String postId;
 
-  LikePostRequest({
+  LikePostRequest._({
     required this.postId,
   });
 
-  factory LikePostRequest.fromEntity(LikePostRequestEntity entity) {
-    return LikePostRequest(
-      postId: entity.postId,
-    );
-  }
-
-  LikePostRequestEntity toEntity() {
-    return LikePostRequestEntity(
-      postId: postId,
-    );
-  }
+  Map<String, dynamic> toJson() => {
+        'post_id': postId,
+      };
 
   get getPostId => postId;
 }
 
-@JsonSerializable()
-class LikePostRequestEntity {
-  @JsonKey(name: 'post_id')
-  final String postId;
+class LikePostRequestBuilder {
+  String? _postId;
 
-  LikePostRequestEntity({
-    required this.postId,
-  });
+  void postId(String postId) {
+    _postId = postId;
+  }
 
-  factory LikePostRequestEntity.fromJson(Map<String, dynamic> json) =>
-      _$LikePostRequestEntityFromJson(json);
-
-  Map<String, dynamic> toJson() => _$LikePostRequestEntityToJson(this);
+  LikePostRequest build() {
+    return LikePostRequest._(
+      postId: _postId!,
+    );
+  }
 }

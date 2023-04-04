@@ -1,52 +1,49 @@
 import 'package:likeminds_feed/src/models/post/attachment_model.dart';
-import 'package:json_annotation/json_annotation.dart';
-
-part 'add_post_request_model.g.dart';
 
 class AddPostRequest {
   final String text;
   final int? feedroomId;
   final List<Attachment>? attachments;
 
-  AddPostRequest({
+  AddPostRequest._({
     required this.text,
     required this.attachments,
     this.feedroomId,
   });
 
-  factory AddPostRequest.fromEntity({required AddPostRequestEntity entity}) {
-    return AddPostRequest(
-      text: entity.text,
-      attachments:
-          entity.attachments?.map((e) => Attachment.fromEntity(e)).toList(),
-      feedroomId: entity.feedroomId,
-    );
-  }
-
-  AddPostRequestEntity toEntity() {
-    return AddPostRequestEntity(
-      text: text,
-      attachments: attachments?.map((e) => e.toEntity()).toList(),
-      feedroomId: feedroomId,
-    );
+  Map<String, dynamic> toJson() {
+    return {
+      'text': text,
+      'attachments': attachments,
+      'feedroom_id': feedroomId,
+    };
   }
 }
 
-@JsonSerializable()
-class AddPostRequestEntity {
-  final String text;
-  final List<AttachmentEntity>? attachments;
-  @JsonKey(name: 'feedroom_id')
-  final int? feedroomId;
+class AddPostRequestBuilder {
+  String? _text;
+  int? _feedroomId;
+  List<Attachment>? _attachments;
 
-  AddPostRequestEntity({
-    required this.text,
-    required this.attachments,
-    this.feedroomId,
-  });
+  AddPostRequestBuilder();
 
-  factory AddPostRequestEntity.fromJson(Map<String, dynamic> data) =>
-      _$AddPostRequestEntityFromJson(data);
+  void text(String text) {
+    _text = text;
+  }
 
-  Map<String, dynamic> toJson() => _$AddPostRequestEntityToJson(this);
+  void feedroomId(int feedroomId) {
+    _feedroomId = feedroomId;
+  }
+
+  void attachments(List<Attachment> attachments) {
+    _attachments = attachments;
+  }
+
+  AddPostRequest build() {
+    return AddPostRequest._(
+      attachments: _attachments,
+      text: _text!,
+      feedroomId: _feedroomId,
+    );
+  }
 }

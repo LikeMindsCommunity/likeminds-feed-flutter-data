@@ -1,52 +1,43 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'get_feed_feedroom_request_model.g.dart';
-
 class GetFeedOfFeedRoomRequest {
   final int page;
   final int pageSize;
   final int feedroomId;
 
-  GetFeedOfFeedRoomRequest({
+  GetFeedOfFeedRoomRequest._({
     required this.page,
     required this.pageSize,
     required this.feedroomId,
   });
 
-  factory GetFeedOfFeedRoomRequest.fromEntity(
-      GetFeedOfFeedRoomRequestEntity entity) {
-    return GetFeedOfFeedRoomRequest(
-      page: entity.page,
-      pageSize: entity.pageSize,
-      feedroomId: entity.feedroomId,
-    );
-  }
-
-  GetFeedOfFeedRoomRequestEntity toEntity() {
-    return GetFeedOfFeedRoomRequestEntity(
-      page: page,
-      pageSize: pageSize,
-      feedroomId: feedroomId,
-    );
-  }
+  Map<String, dynamic> toJson() => {
+        'page': page,
+        'pageSize': pageSize,
+        'feedroomId': feedroomId,
+      };
 }
 
-@JsonSerializable()
-class GetFeedOfFeedRoomRequestEntity {
-  final int page;
-  @JsonKey(name: 'page_size')
-  final int pageSize;
-  @JsonKey(name: 'feedroom_id')
-  final int feedroomId;
+class GetFeedOfFeedRoomRequestBuilder {
+  int? _page;
+  int? _pageSize;
+  int? _feedroomId;
 
-  GetFeedOfFeedRoomRequestEntity({
-    required this.page,
-    required this.pageSize,
-    required this.feedroomId,
-  });
+  void page(int page) {
+    _page = page;
+  }
 
-  factory GetFeedOfFeedRoomRequestEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetFeedOfFeedRoomRequestEntityFromJson(json);
+  void feedroomId(int feedroomId) {
+    _feedroomId = feedroomId;
+  }
 
-  Map<String, dynamic> toJson() => _$GetFeedOfFeedRoomRequestEntityToJson(this);
+  void pageSize(int pageSize) {
+    _pageSize = pageSize;
+  }
+
+  GetFeedOfFeedRoomRequest build() {
+    return GetFeedOfFeedRoomRequest._(
+      page: _page!,
+      pageSize: _pageSize!,
+      feedroomId: _feedroomId!,
+    );
+  }
 }

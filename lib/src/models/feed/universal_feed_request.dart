@@ -1,19 +1,36 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'universal_feed_request.g.dart';
-
-@JsonSerializable()
 class UniversalFeedRequest {
   final int page;
   final int pageSize;
 
-  UniversalFeedRequest({
+  UniversalFeedRequest._({
     required this.page,
     required this.pageSize,
   });
 
-  factory UniversalFeedRequest.fromJson(Map<String, dynamic> json) =>
-      _$UniversalFeedRequestFromJson(json);
+  Map<String, dynamic> toJson() => {
+        'page': page,
+        'page_size': pageSize,
+      };
+}
 
-  Map<String, dynamic> toJson() => _$UniversalFeedRequestToJson(this);
+class UniversalFeedRequestBuilder {
+  int? _page;
+  int? _pageSize;
+
+  UniversalFeedRequestBuilder();
+
+  void page(int page) {
+    _page = page;
+  }
+
+  void pageSize(int pageSize) {
+    _pageSize = pageSize;
+  }
+
+  UniversalFeedRequest build() {
+    return UniversalFeedRequest._(
+      page: _page!,
+      pageSize: _pageSize!,
+    );
+  }
 }

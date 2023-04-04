@@ -1,45 +1,36 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'delete_post_request_model.g.dart';
-
 class DeletePostRequest {
   final String postId;
   final String deleteReason;
 
-  DeletePostRequest({
+  DeletePostRequest._({
     required this.postId,
     required this.deleteReason,
   });
 
-  factory DeletePostRequest.fromEntity(DeletePostRequestEntity entity) {
-    return DeletePostRequest(
-      postId: entity.postId,
-      deleteReason: entity.deleteReason,
-    );
-  }
-
-  DeletePostRequestEntity toEntity() {
-    return DeletePostRequestEntity(
-      postId: postId,
-      deleteReason: deleteReason,
-    );
+  Map<String, dynamic> toJson() {
+    return {
+      'post_id': postId,
+      'delete_reason': deleteReason,
+    };
   }
 }
 
-@JsonSerializable()
-class DeletePostRequestEntity {
-  @JsonKey(name: 'post_id')
-  final String postId;
-  @JsonKey(name: 'delete_reason')
-  final String deleteReason;
+class DeletePostRequestBuilder {
+  String? _postId;
+  String? _deleteReason;
 
-  DeletePostRequestEntity({
-    required this.postId,
-    required this.deleteReason,
-  });
+  void postId(String postId) {
+    _postId = postId;
+  }
 
-  factory DeletePostRequestEntity.fromJson(Map<String, dynamic> json) =>
-      _$DeletePostRequestEntityFromJson(json);
+  void deleteReason(String deleteReason) {
+    _deleteReason = deleteReason;
+  }
 
-  Map<String, dynamic> toJson() => _$DeletePostRequestEntityToJson(this);
+  DeletePostRequest build() {
+    return DeletePostRequest._(
+      postId: _postId!,
+      deleteReason: _deleteReason!,
+    );
+  }
 }
