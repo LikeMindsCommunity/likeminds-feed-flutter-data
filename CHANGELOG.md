@@ -24,3 +24,4 @@ Fixing tagging bugs
 Removing branding
 Refactoriing client class
 Support for fetching comment likes
+PDF, Video support for Feed media

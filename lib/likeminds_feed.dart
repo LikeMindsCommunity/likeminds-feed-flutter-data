@@ -72,9 +72,9 @@ class LMFeedClient {
     return await _sdkApplication.getPostApi().pinPost(pinPostRequest);
   }
 
-  // Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
-  //   return await _sdkApplication.getPostApi().editPost(editPostRequest);
-  // }
+  Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
+    return await _sdkApplication.getPostApi().editPost(editPostRequest);
+  }
 
   Future<DeleteCommentResponse> deleteComment(
       DeleteCommentRequest deleteCommentRequest) async {
