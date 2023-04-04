@@ -11,9 +11,10 @@ DecodeUrlResponseEntity _$DecodeUrlResponseEntityFromJson(
     DecodeUrlResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      ogTags: json['og_tags'] == null
+      ogTags: json['data']['og_tags'] == null
           ? null
-          : OgTagsEntity.fromJson(json['og_tags'] as Map<String, dynamic>),
+          : OgTagsEntity.fromJson(
+              json['data']['og_tags'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DecodeUrlResponseEntityToJson(
