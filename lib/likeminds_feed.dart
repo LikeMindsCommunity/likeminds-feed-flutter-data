@@ -68,6 +68,14 @@ class LMFeedClient {
     return await _sdkApplication.getPostApi().likePost(likePostRequest);
   }
 
+  Future<PinPostResponse> pinPost(PinPostRequest pinPostRequest) async {
+    return await _sdkApplication.getPostApi().pinPost(pinPostRequest);
+  }
+
+  Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
+    return await _sdkApplication.getPostApi().editPost(editPostRequest);
+  }
+
   Future<DeleteCommentResponse> deleteComment(
       DeleteCommentRequest deleteCommentRequest) async {
     return await _sdkApplication
@@ -120,5 +128,9 @@ class LMFeedClient {
 
   Future<String?> uploadFile(File file) async {
     return await _sdkApplication.getMediaApi().uploadFile(file);
+  }
+
+  Future<DecodeUrlResponse> decodeUrl(DecodeUrlRequest request) async {
+    return await _sdkApplication.getHelperApi().decodeUrl(request: request);
   }
 }

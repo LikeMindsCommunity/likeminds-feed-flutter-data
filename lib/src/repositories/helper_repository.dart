@@ -14,6 +14,13 @@ class HelperRepository {
     return TagResponseModel.fromEntity(response);
   }
 
+  Future<DecodeUrlResponse> decodeUrl({
+    required DecodeUrlRequest request,
+  }) async {
+    final response = await helperService.decodeUrl(request: request);
+    return DecodeUrlResponse.fromEntity(response);
+  }
+
   void routeProfilePage(String userId) {
     helperService.routeProfilePage(userId);
   }
