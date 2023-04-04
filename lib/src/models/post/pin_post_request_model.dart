@@ -1,7 +1,7 @@
 class PinPostRequest {
   final String postId;
 
-  PinPostRequest({
+  PinPostRequest._({
     required this.postId,
   });
 
