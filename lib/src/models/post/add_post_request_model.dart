@@ -14,7 +14,7 @@ class AddPostRequest {
   Map<String, dynamic> toJson() {
     return {
       'text': text,
-      'attachments': attachments,
+      'attachments': attachments?.map((e) => e.toEntity().toJson()).toList(),
       'feedroom_id': feedroomId,
     };
   }

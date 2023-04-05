@@ -11,8 +11,6 @@ class AddCommentReplyRequest {
 
   Map<String, dynamic> toJson() => {
         'text': text,
-        'post_id': postId,
-        'comment_id': commentId,
       };
 }
 

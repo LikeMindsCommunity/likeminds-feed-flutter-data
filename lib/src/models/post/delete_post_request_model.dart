@@ -9,7 +9,6 @@ class DeletePostRequest {
 
   Map<String, dynamic> toJson() {
     return {
-      'post_id': postId,
       'delete_reason': deleteReason,
     };
   }

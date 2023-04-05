@@ -15,7 +15,7 @@ class InitiateUserRequest {
 
   Map<String, dynamic> toJson() => {
         'user_name': userName,
-        'user_id': userId,
+        'user_unique_id': userId,
         'is_guest': isGuest,
         'image_url': imageUrl,
         'api_key': apiKey,

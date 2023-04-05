@@ -12,7 +12,7 @@ class GetFeedOfFeedRoomRequest {
   Map<String, dynamic> toJson() => {
         'page': page,
         'pageSize': pageSize,
-        'feedroomId': feedroomId,
+        'feedroom_id': feedroomId,
       };
 }
 

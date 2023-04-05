@@ -78,7 +78,7 @@ class PostService extends IPostService {
     try {
       final response = await apiClient.client().delete(
             "${apiClient.getEndpoints.addPostEndpoint}/${deletePostRequest.postId}",
-            data: {"delete_reason": deletePostRequest.deleteReason},
+            data: deletePostRequest.toJson(),
             options: Options(
               headers: {
                 'Authorization': '${apiClient.accessToken}',

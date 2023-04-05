@@ -10,9 +10,7 @@ class DeleteCommentRequest {
   });
 
   Map<String, dynamic> toJson() => {
-        'comment_id': commentId,
-        'post_id': postId,
-        'reason': reason,
+        'delete_reason': reason,
       };
 }
 

@@ -9,7 +9,7 @@ class GetFeedRoomRequest {
 
   Map<String, dynamic> toJson() => {
         'page': page,
-        'feedroomId': feedroomId,
+        'feedroom_id': feedroomId,
       };
 }
 
@@ -30,7 +30,7 @@ class GetFeedRoomRequestBuilder {
   GetFeedRoomRequest build() {
     return GetFeedRoomRequest._(
       page: _page!,
-      feedroomId: _feedroomId!,
+      feedroomId: _feedroomId,
     );
   }
 }
