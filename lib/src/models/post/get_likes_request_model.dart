@@ -1,51 +1,37 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'get_likes_request_model.g.dart';
-
 class GetPostLikesRequest {
   final String postId;
   final int? page;
   final int? pageSize;
 
-  GetPostLikesRequest({
+  GetPostLikesRequest._({
     required this.postId,
     this.page,
     this.pageSize,
   });
-
-  factory GetPostLikesRequest.fromEntity(GetPostLikesRequestEntity entity) {
-    return GetPostLikesRequest(
-      postId: entity.postId,
-      page: entity.page,
-      pageSize: entity.pageSize,
-    );
-  }
-
-  GetPostLikesRequestEntity toEntity() {
-    return GetPostLikesRequestEntity(
-      postId: postId,
-      page: page,
-      pageSize: pageSize,
-    );
-  }
 }
 
-@JsonSerializable()
-class GetPostLikesRequestEntity {
-  @JsonKey(name: 'post_id')
-  final String postId;
-  final int? page;
-  @JsonKey(name: 'page_size')
-  final int? pageSize;
+class GetPostLikesRequestBuilder {
+  String? _postId;
+  int? _page;
+  int? _pageSize;
 
-  GetPostLikesRequestEntity({
-    required this.postId,
-    this.page,
-    this.pageSize,
-  });
+  void postId(String postId) {
+    _postId = postId;
+  }
 
-  factory GetPostLikesRequestEntity.fromJson(Map<String, dynamic> json) =>
-      _$GetPostLikesRequestEntityFromJson(json);
+  void page(int page) {
+    _page = page;
+  }
 
-  Map<String, dynamic> toJson() => _$GetPostLikesRequestEntityToJson(this);
+  void pageSize(int pageSize) {
+    _pageSize = pageSize;
+  }
+
+  GetPostLikesRequest build() {
+    return GetPostLikesRequest._(
+      postId: _postId!,
+      page: _page,
+      pageSize: _pageSize,
+    );
+  }
 }

@@ -1,46 +1,36 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'branding_request_model.g.dart';
-
 class BrandingRequest {
   final String communityId;
   final String? userId;
 
-  BrandingRequest({
+  BrandingRequest._({
     required this.communityId,
     this.userId,
   });
 
-  factory BrandingRequest.fromEntity(BrandingRequestEntity entity) {
-    return BrandingRequest(
-      communityId: entity.communityId,
-      userId: entity.userId,
-    );
-  }
-
-  BrandingRequestEntity toEntity() {
-    return BrandingRequestEntity(
-      communityId: communityId,
-      userId: userId,
-    );
-  }
+  Map<String, dynamic> toJson() => {
+        'community_id': communityId,
+        'user_id': userId,
+      };
 }
 
-@JsonSerializable(explicitToJson: true)
-class BrandingRequestEntity {
-  @JsonKey(name: 'community_id')
-  final String communityId;
+class BrandingRequestBuilder {
+  String? _communityId;
+  String? _userId;
 
-  @JsonKey(name: 'user_id')
-  final String? userId;
+  BrandingRequestBuilder();
 
-  BrandingRequestEntity({
-    required this.communityId,
-    this.userId,
-  });
+  void communityId(String communityId) {
+    _communityId = communityId;
+  }
 
-  Map<String, dynamic> toJson() => _$BrandingRequestEntityToJson(this);
+  void userId(String userId) {
+    _userId = userId;
+  }
 
-  factory BrandingRequestEntity.fromJson(Map<String, dynamic> data) =>
-      _$BrandingRequestEntityFromJson(data);
+  BrandingRequest build() {
+    return BrandingRequest._(
+      communityId: _communityId!,
+      userId: _userId!,
+    );
+  }
 }

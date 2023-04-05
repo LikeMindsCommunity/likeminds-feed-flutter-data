@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class IPostService {
-  Future<AddPostResponseEntity> addPost(AddPostRequestEntity addPostRequest);
+  Future<AddPostResponseEntity> addPost(AddPostRequest addPostRequest);
   Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest);
   Future<GetPostLikesResponseEntity> getPostLikes(
       GetPostLikesRequest getPostLikesRequest);
@@ -23,8 +22,7 @@ class PostService extends IPostService {
   });
 
   @override
-  Future<AddPostResponseEntity> addPost(
-      AddPostRequestEntity addPostRequest) async {
+  Future<AddPostResponseEntity> addPost(AddPostRequest addPostRequest) async {
     try {
       print("Access granted");
       final response = await apiClient.client().post(
@@ -80,7 +78,7 @@ class PostService extends IPostService {
     try {
       final response = await apiClient.client().delete(
             "${apiClient.getEndpoints.addPostEndpoint}/${deletePostRequest.postId}",
-            data: {"delete_reason": deletePostRequest.deleteReason},
+            data: deletePostRequest.toJson(),
             options: Options(
               headers: {
                 'Authorization': '${apiClient.accessToken}',
@@ -112,11 +110,13 @@ class PostService extends IPostService {
             ),
           );
       print("Response from like post: ${response.data}");
-      final postResponse = await getPost(GetPostRequest(
-        postId: likePostRequest.postId,
-        page: 1,
-        pageSize: 10,
-      ));
+      final postResponse = await getPost(
+        (GetPostRequestBuilder()
+              ..postId(likePostRequest.postId)
+              ..page(1)
+              ..pageSize(10))
+            .build(),
+      );
       LikePostResponseEntity likePostResponseEntity =
           LikePostResponseEntity.fromJson(response.data);
       likePostResponseEntity.setLikes = postResponse.post!.likeCount;

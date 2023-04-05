@@ -1,20 +1,37 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'post_detail_request.g.dart';
-
-@JsonSerializable()
 class PostDetailRequest {
   final String postId;
   final int page;
   // final int pageSize;
 
-  PostDetailRequest({
+  PostDetailRequest._({
     required this.postId,
     required this.page,
   });
 
-  factory PostDetailRequest.fromJson(Map<String, dynamic> json) =>
-      _$PostDetailRequestFromJson(json);
+  Map<String, dynamic> toJson() => {
+        'post_id': postId,
+        'page': page,
+      };
+}
 
-  Map<String, dynamic> toJson() => _$PostDetailRequestToJson(this);
+class PostDetailRequestBuilder {
+  String? _postId;
+  int? _page;
+
+  PostDetailRequestBuilder();
+
+  void postId(String postId) {
+    _postId = postId;
+  }
+
+  void page(int page) {
+    _page = page;
+  }
+
+  PostDetailRequest build() {
+    return PostDetailRequest._(
+      postId: _postId!,
+      page: _page!,
+    );
+  }
 }
