@@ -45,14 +45,6 @@ class SdkApplication {
     );
   }
 
-  MediaApi getMediaApi() {
-    return MediaApi(
-      mediaRepository: GetIt.instance.get<MediaRepository>(
-        instanceName: DIService.kInstanceMediaRepository,
-      ),
-    );
-  }
-
   HelperApi getHelperApi() {
     return HelperApi(
       helperRepository: GetIt.instance.get<HelperRepository>(
