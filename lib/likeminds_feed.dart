@@ -4,7 +4,6 @@ export 'src/methods/sdk.dart';
 export 'src/methods/methods.dart';
 export 'src/models/models.dart';
 
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
@@ -124,10 +123,6 @@ class LMFeedClient {
 
   void routeToProfile(String userId) {
     _sdkApplication.getHelperApi().routeProfilePage(userId);
-  }
-
-  Future<String?> uploadFile(File file) async {
-    return await _sdkApplication.getMediaApi().uploadFile(file);
   }
 
   Future<DecodeUrlResponse> decodeUrl(DecodeUrlRequest request) async {
