@@ -7,7 +7,7 @@ class GetPostResponse {
   final bool success;
   final String? errorMessage;
   final Post? post;
-  final Map<String, PostUser>? users;
+  final Map<String, User>? users;
 
   GetPostResponse({
     required this.success,
@@ -24,7 +24,7 @@ class GetPostResponse {
           ? Post.fromEntity(postEntity: entity.post!)
           : null,
       users: entity.users?.map((key, value) {
-        return MapEntry(key, PostUser.fromEntity(entity: value));
+        return MapEntry(key, User.fromEntity(value));
       }),
     );
   }
@@ -47,7 +47,7 @@ class GetPostResponseEntity {
   @JsonKey(name: 'error_message')
   final String? errorMessage;
   final PostEntity? post;
-  final Map<String, PostUserEntity>? users;
+  final Map<String, UserEntity>? users;
 
   GetPostResponseEntity({
     required this.success,

@@ -18,8 +18,8 @@ AddPostResponseEntity _$AddPostResponseEntityFromJson(
       users: (json['data']['users'] as Map<String, dynamic>).map(
         (key, value) => MapEntry(
           key,
-          PostUser.fromEntity(
-            entity: PostUserEntity.fromJson(value),
+          User.fromEntity(
+            UserEntity.fromJson(value),
           ),
         ),
       ),

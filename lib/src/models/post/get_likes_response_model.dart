@@ -1,5 +1,4 @@
-import 'package:likeminds_feed/src/models/post/like_model.dart';
-import 'package:likeminds_feed/src/models/post/post_user_model.dart';
+import 'package:likeminds_feed/src/models/models.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'get_likes_response_model.g.dart';
@@ -9,7 +8,7 @@ class GetPostLikesResponse {
   final String? errorMessage;
   final List<Like>? likes;
   final int? totalCount;
-  final Map<String, PostUser>? users;
+  final Map<String, User>? users;
 
   GetPostLikesResponse({
     required this.success,
@@ -28,7 +27,7 @@ class GetPostLikesResponse {
           : null,
       totalCount: entity.totalCount,
       users: entity.users?.map((key, value) {
-        return MapEntry(key, PostUser.fromEntity(entity: value));
+        return MapEntry(key, User.fromEntity(value));
       }),
     );
   }
@@ -54,7 +53,7 @@ class GetPostLikesResponseEntity {
   final List<LikeEntity>? likes;
   @JsonKey(name: 'total_count')
   final int? totalCount;
-  final Map<String, PostUserEntity>? users;
+  final Map<String, UserEntity>? users;
 
   GetPostLikesResponseEntity({
     required this.success,
