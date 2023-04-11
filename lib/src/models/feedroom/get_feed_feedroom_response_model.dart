@@ -7,7 +7,7 @@ class GetFeedOfFeedRoomResponse {
   final bool success;
   final String? errorMessage;
   final List<Post>? posts;
-  final Map<String, PostUser> users;
+  final Map<String, User> users;
 
   GetFeedOfFeedRoomResponse({
     required this.success,
@@ -23,8 +23,8 @@ class GetFeedOfFeedRoomResponse {
         errorMessage: entity.errorMessage,
         posts:
             entity.posts?.map((e) => Post.fromEntity(postEntity: e)).toList(),
-        users: entity.users.map(
-            (key, value) => MapEntry(key, PostUser.fromEntity(entity: value))),
+        users: entity.users
+            .map((key, value) => MapEntry(key, User.fromEntity(value))),
       );
 
   GetFeedOfFeedRoomResponseEntity toEntity() => GetFeedOfFeedRoomResponseEntity(
@@ -41,7 +41,7 @@ class GetFeedOfFeedRoomResponseEntity {
   @JsonKey(name: 'error_message')
   final String? errorMessage;
   final List<PostEntity>? posts;
-  final Map<String, PostUserEntity> users;
+  final Map<String, UserEntity> users;
 
   GetFeedOfFeedRoomResponseEntity({
     required this.success,

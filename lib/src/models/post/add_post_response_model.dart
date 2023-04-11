@@ -7,7 +7,7 @@ class AddPostResponse {
   final bool success;
   final String? errorMessage;
   final Post? post;
-  final Map<String, PostUser>? user;
+  final Map<String, User>? user;
 
   AddPostResponse({
     required this.success,
@@ -30,7 +30,7 @@ class AddPostResponse {
 class AddPostResponseEntity {
   final bool success;
   final Post? post;
-  final Map<String, PostUser>? users;
+  final Map<String, User>? users;
 
   @JsonKey(name: 'error_message')
   final String? errorMessage;

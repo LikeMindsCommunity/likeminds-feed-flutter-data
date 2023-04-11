@@ -12,8 +12,7 @@ CommentDetailResponseEntity _$CommentDetailResponseEntityFromJson(
       postReplies: CommentRepliesEntity.fromJson(
           json['comment'] as Map<String, dynamic>),
       users: (json['users'] as Map<String, dynamic>).map(
-        (k, e) =>
-            MapEntry(k, PostUserEntity.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
     );
 
