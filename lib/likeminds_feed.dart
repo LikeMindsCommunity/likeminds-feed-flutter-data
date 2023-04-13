@@ -128,4 +128,9 @@ class LMFeedClient {
   Future<DecodeUrlResponse> decodeUrl(DecodeUrlRequest request) async {
     return await _sdkApplication.getHelperApi().decodeUrl(request: request);
   }
+
+  Future<GetDeleteReasonResponse> getReportTags(
+      GetDeleteReasonRequest request) async {
+    return await _sdkApplication.getModerationApi().getDeleteReasons(request);
+  }
 }
