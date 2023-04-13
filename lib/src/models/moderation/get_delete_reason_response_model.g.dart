@@ -11,7 +11,7 @@ GetDeleteReasonResponseEntity _$GetDeleteReasonResponseEntityFromJson(
     GetDeleteReasonResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      reportTags: (json['report_tags'] as List<dynamic>?)
+      reportTags: (json['data']['report_tags'] as List<dynamic>?)
           ?.map((e) => DeleteReasonEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
