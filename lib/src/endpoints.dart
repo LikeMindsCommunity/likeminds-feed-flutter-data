@@ -30,6 +30,7 @@ class EndPoints {
   String get tagsEndpoint => "$KETTLE_HOST/community/tag";
 
   String get decodeUrlEndpoint => "$KETTLE_HOST/helper/url";
+  String get reportEndpoint => "$KETTLE_HOST/community/report/tag";
 
   String get memberStateEndpoint => "$KETTLE_HOST/community/member/state";
 

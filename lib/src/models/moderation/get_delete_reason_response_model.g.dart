@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'branding_response_model.dart';
+part of 'get_delete_reason_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BrandingResponseEntity _$BrandingResponseEntityFromJson(
+GetDeleteReasonResponseEntity _$GetDeleteReasonResponseEntityFromJson(
         Map<String, dynamic> json) =>
-    BrandingResponseEntity(
+    GetDeleteReasonResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      branding: json['branding'] == null
-          ? null
-          : BrandingEntity.fromJson(json['branding'] as Map<String, dynamic>),
+      reportTags: (json['data']['report_tags'] as List<dynamic>?)
+          ?.map((e) => DeleteReasonEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$BrandingResponseEntityToJson(
-        BrandingResponseEntity instance) =>
+Map<String, dynamic> _$GetDeleteReasonResponseEntityToJson(
+        GetDeleteReasonResponseEntity instance) =>
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'branding': instance.branding?.toJson(),
+      'report_tags': instance.reportTags,
     };

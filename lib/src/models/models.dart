@@ -46,6 +46,7 @@ export 'package:likeminds_feed/src/models/feed/add_comment_request.dart';
 export 'package:likeminds_feed/src/models/feed/add_comment_response.dart';
 export 'package:likeminds_feed/src/models/feed/toggle_like_comment_request.dart';
 export 'package:likeminds_feed/src/models/feed/toggle_like_comment_response.dart';
+export 'package:likeminds_feed/src/models/moderation/delete_reason_model.dart';
 
 export 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
 export 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';
@@ -68,8 +69,5 @@ export 'package:likeminds_feed/src/models/feedroom/feedroom_user_model.dart';
 export 'package:likeminds_feed/src/models/notifications/register_device_request_model.dart';
 export 'package:likeminds_feed/src/models/notifications/register_device_response_model.dart';
 
-export 'package:likeminds_feed/src/models/branding/branding_model.dart';
-export 'package:likeminds_feed/src/models/branding/branding_basic_model.dart';
-export 'package:likeminds_feed/src/models/branding/branding_advanced_model.dart';
-export 'package:likeminds_feed/src/models/branding/branding_request_model.dart';
-export 'package:likeminds_feed/src/models/branding/branding_response_model.dart';
+export 'package:likeminds_feed/src/models/moderation/get_delete_reason_response_model.dart';
+export 'package:likeminds_feed/src/models/moderation/get_delete_reason_request_model.dart';
