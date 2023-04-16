@@ -180,8 +180,8 @@ class PostService extends IPostService {
   Future<EditPostResponseEntity> editPost(
       EditPostRequest editPostRequest) async {
     try {
-      final response = await apiClient.client().post(
-            "${apiClient.getEndpoints.addPostEndpoint}/${editPostRequest.postId}/edit",
+      final response = await apiClient.client().put(
+            "${apiClient.getEndpoints.addPostEndpoint}/${editPostRequest.postId}",
             options: Options(
               headers: {
                 'Authorization': '${apiClient.accessToken}',
