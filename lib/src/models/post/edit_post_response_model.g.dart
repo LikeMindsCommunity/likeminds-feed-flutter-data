@@ -11,6 +11,18 @@ EditPostResponseEntity _$EditPostResponseEntityFromJson(
     EditPostResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
+      post: Post.fromEntity(
+        postEntity:
+            PostEntity.fromJson(json['data']['post'] as Map<String, dynamic>),
+      ),
+      users: (json['data']['users'] as Map<String, dynamic>).map(
+        (key, value) => MapEntry(
+          key,
+          User.fromEntity(
+            UserEntity.fromJson(value),
+          ),
+        ),
+      ),
     );
 
 Map<String, dynamic> _$EditPostResponseEntityToJson(
@@ -18,4 +30,6 @@ Map<String, dynamic> _$EditPostResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
+      'post': instance.post?.toEntity().toJson(),
+      'users': instance.users,
     };

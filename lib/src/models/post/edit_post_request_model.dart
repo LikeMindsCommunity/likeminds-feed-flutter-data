@@ -1,16 +1,20 @@
+import 'package:likeminds_feed/likeminds_feed.dart';
+
 class EditPostRequest {
   final String postId;
   final String postText;
+  final List<Attachment>? attachments;
 
   EditPostRequest._({
     required this.postId,
     required this.postText,
+    required this.attachments,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'post_id': postId,
-      'post_text': postText,
+      'text': postText,
+      'attachments': attachments?.map((e) => e.toEntity().toJson()).toList(),
     };
   }
 }
@@ -18,6 +22,7 @@ class EditPostRequest {
 class EditPostRequestBuilder {
   String? _postId;
   String? _postText;
+  List<Attachment>? _attachments;
 
   EditPostRequestBuilder();
 
@@ -29,10 +34,15 @@ class EditPostRequestBuilder {
     _postText = postText;
   }
 
+  void attachments(List<Attachment> attachments) {
+    _attachments = attachments;
+  }
+
   EditPostRequest build() {
     return EditPostRequest._(
       postId: _postId!,
       postText: _postText!,
+      attachments: _attachments!,
     );
   }
 }
