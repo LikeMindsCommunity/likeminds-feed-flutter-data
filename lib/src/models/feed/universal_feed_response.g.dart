@@ -13,8 +13,7 @@ UniversalFeedResponseEntity _$UniversalFeedResponseEntityFromJson(
           .map((e) => PostEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       users: (json['users'] as Map<String, dynamic>).map(
-        (k, e) =>
-            MapEntry(k, PostUserEntity.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
     );
 

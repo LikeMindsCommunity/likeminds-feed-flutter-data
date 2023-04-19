@@ -7,7 +7,7 @@ part 'comment_detail_response.g.dart';
 
 class CommentDetailResponse {
   final CommentReplies postReplies;
-  final Map<String, PostUser> users;
+  final Map<String, User> users;
   CommentDetailResponse({
     required this.postReplies,
     required this.users,
@@ -15,8 +15,8 @@ class CommentDetailResponse {
   factory CommentDetailResponse.fromEntity(CommentDetailResponseEntity entity) {
     return CommentDetailResponse(
         postReplies: CommentReplies.fromEntity(entity.postReplies),
-        users: entity.users.map(
-            (key, value) => MapEntry(key, PostUser.fromEntity(entity: value))));
+        users: entity.users
+            .map((key, value) => MapEntry(key, User.fromEntity(value))));
   }
 }
 
@@ -24,7 +24,7 @@ class CommentDetailResponse {
 class CommentDetailResponseEntity {
   @JsonKey(name: 'comment')
   final CommentRepliesEntity postReplies;
-  final Map<String, PostUserEntity> users;
+  final Map<String, UserEntity> users;
   CommentDetailResponseEntity({
     required this.postReplies,
     required this.users,

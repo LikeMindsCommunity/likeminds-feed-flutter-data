@@ -9,7 +9,6 @@ class Community {
   final String? imageUrl;
   final String? purpose;
   final String? about;
-  final Branding? branding;
   final int? membersCount;
   final bool? isMember;
   final int? pendingMembersCount;
@@ -50,7 +49,6 @@ class Community {
     this.imageUrl,
     this.purpose,
     this.about,
-    this.branding,
     this.membersCount,
     this.isMember,
     this.pendingMembersCount,
@@ -93,9 +91,6 @@ class Community {
       imageUrl: entity.imageUrl,
       purpose: entity.purpose,
       about: entity.about,
-      branding: entity.branding != null
-          ? Branding.fromEntity(entity.branding!)
-          : null,
       membersCount: entity.membersCount,
       isMember: entity.isMember,
       pendingMembersCount: entity.pendingMembersCount,
@@ -143,7 +138,6 @@ class Community {
       imageUrl: imageUrl,
       purpose: purpose,
       about: about,
-      branding: branding?.toEntity(),
       membersCount: membersCount,
       isMember: isMember,
       pendingMembersCount: pendingMembersCount,
@@ -201,7 +195,6 @@ class CommunityEntity {
   final List<String>? menu;
   final String? purpose;
   final String? about;
-  final BrandingEntity? branding;
 
   @JsonKey(name: 'image_url')
   final String? imageUrl;
@@ -296,7 +289,6 @@ class CommunityEntity {
     this.imageUrl,
     this.purpose,
     this.about,
-    this.branding,
     this.membersCount,
     this.isMember,
     this.pendingMembersCount,

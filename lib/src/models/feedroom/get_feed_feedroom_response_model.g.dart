@@ -15,8 +15,7 @@ GetFeedOfFeedRoomResponseEntity _$GetFeedOfFeedRoomResponseEntityFromJson(
           ?.map((e) => PostEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       users: (json['data']['users'] as Map<String, dynamic>).map(
-        (k, e) =>
-            MapEntry(k, PostUserEntity.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
     );
 

@@ -13,6 +13,12 @@ class HelperApi {
     return await helperRepository.getTags(request: request);
   }
 
+  Future<DecodeUrlResponse> decodeUrl({
+    required DecodeUrlRequest request,
+  }) async {
+    return await helperRepository.decodeUrl(request: request);
+  }
+
   void routeProfilePage(String userId) {
     helperRepository.routeProfilePage(userId);
   }

@@ -1,25 +1,17 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/endpoints.dart';
-import 'package:likeminds_feed/src/models/post/add_post_request_model.dart';
-import 'package:likeminds_feed/src/models/post/add_post_response_model.dart';
-import 'package:likeminds_feed/src/models/post/delete_post_request_model.dart';
-import 'package:likeminds_feed/src/models/post/delete_post_response_model.dart';
-import 'package:likeminds_feed/src/models/post/get_likes_request_model.dart';
-import 'package:likeminds_feed/src/models/post/get_likes_response_model.dart';
-import 'package:likeminds_feed/src/models/post/get_post_request_model.dart';
-import 'package:likeminds_feed/src/models/post/get_post_response_model.dart';
-import 'package:likeminds_feed/src/models/post/like_post_request_model.dart';
-import 'package:likeminds_feed/src/models/post/like_post_response_model.dart';
+import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class IPostService {
-  Future<AddPostResponseEntity> addPost(AddPostRequestEntity addPostRequest);
+  Future<AddPostResponseEntity> addPost(AddPostRequest addPostRequest);
   Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest);
   Future<GetPostLikesResponseEntity> getPostLikes(
       GetPostLikesRequest getPostLikesRequest);
   Future<DeletePostResponseEntity> deletePost(
       DeletePostRequest deletePostRequest);
   Future<LikePostResponseEntity> likePost(LikePostRequest likePostRequest);
+  Future<PinPostResponseEntity> pinPost(PinPostRequest pinPostRequest);
+  Future<EditPostResponseEntity> editPost(EditPostRequest editPostRequest);
 }
 
 class PostService extends IPostService {
@@ -30,8 +22,7 @@ class PostService extends IPostService {
   });
 
   @override
-  Future<AddPostResponseEntity> addPost(
-      AddPostRequestEntity addPostRequest) async {
+  Future<AddPostResponseEntity> addPost(AddPostRequest addPostRequest) async {
     try {
       print("Access granted");
       final response = await apiClient.client().post(
@@ -87,7 +78,7 @@ class PostService extends IPostService {
     try {
       final response = await apiClient.client().delete(
             "${apiClient.getEndpoints.addPostEndpoint}/${deletePostRequest.postId}",
-            data: {"delete_reason": deletePostRequest.deleteReason},
+            data: deletePostRequest.toJson(),
             options: Options(
               headers: {
                 'Authorization': '${apiClient.accessToken}',
@@ -119,11 +110,13 @@ class PostService extends IPostService {
             ),
           );
       print("Response from like post: ${response.data}");
-      final postResponse = await getPost(GetPostRequest(
-        postId: likePostRequest.postId,
-        page: 1,
-        pageSize: 10,
-      ));
+      final postResponse = await getPost(
+        (GetPostRequestBuilder()
+              ..postId(likePostRequest.postId)
+              ..page(1)
+              ..pageSize(10))
+            .build(),
+      );
       LikePostResponseEntity likePostResponseEntity =
           LikePostResponseEntity.fromJson(response.data);
       likePostResponseEntity.setLikes = postResponse.post!.likeCount;
@@ -158,6 +151,52 @@ class PostService extends IPostService {
         success: false,
         errorMessage: "${e.response?.data}",
       );
+    }
+  }
+
+  @override
+  Future<PinPostResponseEntity> pinPost(PinPostRequest pinPostRequest) async {
+    try {
+      final response = await apiClient.client().put(
+            "${apiClient.getEndpoints.addPostEndpoint}/${pinPostRequest.postId}/pin",
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      PinPostResponseEntity pinPostResponseEntity =
+          PinPostResponseEntity.fromJson(response.data);
+      return pinPostResponseEntity;
+    } on DioError catch (e) {
+      print("Error from pin post: ${e.response?.data}");
+      PinPostResponseEntity pinPostResponseEntity =
+          PinPostResponseEntity(success: false, errorMessage: e.message);
+      return pinPostResponseEntity;
+    }
+  }
+
+  @override
+  Future<EditPostResponseEntity> editPost(
+      EditPostRequest editPostRequest) async {
+    try {
+      final response = await apiClient.client().put(
+            "${apiClient.getEndpoints.addPostEndpoint}/${editPostRequest.postId}",
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+            data: editPostRequest.toJson(),
+          );
+      EditPostResponseEntity editPostResponseEntity =
+          EditPostResponseEntity.fromJson(response.data);
+      return editPostResponseEntity;
+    } on DioError catch (e) {
+      print("Error from edit post: ${e.response?.data}");
+      EditPostResponseEntity editPostResponseEntity =
+          EditPostResponseEntity(success: false, errorMessage: e.message);
+      return editPostResponseEntity;
     }
   }
 }
