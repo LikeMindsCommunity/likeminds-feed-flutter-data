@@ -1,13 +1,4 @@
-import 'package:likeminds_feed/src/models/post/add_post_request_model.dart';
-import 'package:likeminds_feed/src/models/post/add_post_response_model.dart';
-import 'package:likeminds_feed/src/models/post/delete_post_request_model.dart';
-import 'package:likeminds_feed/src/models/post/delete_post_response_model.dart';
-import 'package:likeminds_feed/src/models/post/get_likes_request_model.dart';
-import 'package:likeminds_feed/src/models/post/get_likes_response_model.dart';
-import 'package:likeminds_feed/src/models/post/get_post_request_model.dart';
-import 'package:likeminds_feed/src/models/post/get_post_response_model.dart';
-import 'package:likeminds_feed/src/models/post/like_post_request_model.dart';
-import 'package:likeminds_feed/src/models/post/like_post_response_model.dart';
+import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
 
 class PostRepository {
@@ -17,7 +8,7 @@ class PostRepository {
 
   Future<AddPostResponse> addPost(AddPostRequest addPostRequest) async {
     AddPostResponseEntity addPostResponseEntity =
-        await postService.addPost(addPostRequest.toEntity());
+        await postService.addPost(addPostRequest);
     return AddPostResponse.fromEntity(entity: addPostResponseEntity);
   }
 
@@ -45,5 +36,17 @@ class PostRepository {
     GetPostLikesResponseEntity getPostLikesResponseEntity =
         await postService.getPostLikes(getPostLikesRequest);
     return GetPostLikesResponse.fromEntity(getPostLikesResponseEntity);
+  }
+
+  Future<PinPostResponse> pinPost(PinPostRequest pinPostRequest) async {
+    PinPostResponseEntity pinPostResponseEntity =
+        await postService.pinPost(pinPostRequest);
+    return PinPostResponse.fromEntity(pinPostResponseEntity);
+  }
+
+  Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
+    EditPostResponseEntity editPostResponseEntity =
+        await postService.editPost(editPostRequest);
+    return EditPostResponse.fromEntity(editPostResponseEntity);
   }
 }

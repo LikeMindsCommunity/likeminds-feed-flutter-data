@@ -25,6 +25,7 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       state: json['state'] as int?,
       communityId: json['community_id'] as int?,
       createdAt: json['created_at'] as int?,
+      isDeleted: json['is_deleted'] as bool?,
     );
 
 Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>
@@ -44,4 +45,5 @@ Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>
       'state': instance.state,
       'community_id': instance.communityId,
       'created_at': instance.createdAt,
+      'is_deleted': instance.isDeleted,
     };

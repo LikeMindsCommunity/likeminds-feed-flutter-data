@@ -7,7 +7,7 @@ class GetCommentLikesResponse {
   final bool success;
   final String? errorMessage;
   final List<CommentLike>? commentLikes;
-  final Map<String, PostUser>? users;
+  final Map<String, User>? users;
   final int? totalCount;
 
   GetCommentLikesResponse({
@@ -25,8 +25,8 @@ class GetCommentLikesResponse {
       errorMessage: entity.errorMessage,
       commentLikes:
           entity.commentLikes?.map((e) => CommentLike.fromEntity(e)).toList(),
-      users: entity.users?.map(
-          (key, value) => MapEntry(key, PostUser.fromEntity(entity: value))),
+      users: entity.users
+          ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
       totalCount: entity.totalCount,
     );
   }
@@ -50,7 +50,7 @@ class GetCommentLikesResponseEntity {
   @JsonKey(name: 'likes')
   final List<CommentLikeEntity>? commentLikes;
   @JsonKey(name: 'users')
-  final Map<String, PostUserEntity>? users;
+  final Map<String, UserEntity>? users;
   @JsonKey(name: 'total_count')
   final int? totalCount;
 

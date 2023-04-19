@@ -8,6 +8,7 @@ class User {
   final String name;
   final String imageUrl;
   final bool isGuest;
+  final bool? isDeleted;
   final String userUniqueId;
   final String? organisationName;
   final SDKClientInfo? sdkClientInfo;
@@ -36,6 +37,7 @@ class User {
     this.state,
     this.communityId,
     this.createdAt,
+    this.isDeleted,
   });
 
   factory User.fromEntity(UserEntity entity) {
@@ -55,6 +57,7 @@ class User {
       state: entity.state,
       communityId: entity.communityId,
       createdAt: entity.createdAt,
+      isDeleted: entity.isDeleted,
     );
   }
 
@@ -75,6 +78,7 @@ class User {
       state: state,
       communityId: communityId,
       createdAt: createdAt,
+      isDeleted: isDeleted,
     );
   }
 }
@@ -123,6 +127,9 @@ class UserEntity {
   @JsonKey(name: 'created_at')
   final int? createdAt;
 
+  @JsonKey(name: 'is_deleted')
+  final bool? isDeleted;
+
   UserEntity({
     required this.id,
     required this.name,
@@ -139,6 +146,7 @@ class UserEntity {
     this.state,
     this.communityId,
     this.createdAt,
+    this.isDeleted,
   });
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>

@@ -12,8 +12,7 @@ PostDetailResponseEntity _$PostDetailResponseEntityFromJson(
       postReplies:
           PostRepliesEntity.fromJson(json['post'] as Map<String, dynamic>),
       users: (json['users'] as Map<String, dynamic>).map(
-        (k, e) =>
-            MapEntry(k, PostUserEntity.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
     );
 

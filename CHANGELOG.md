@@ -25,3 +25,10 @@ Removing branding
 Refactoriing client class
 Support for fetching comment likes
 PDF, Video support for Feed media
+
+## 1.0.0
+
+Add post pinning, editing
+Removing media upload, analytics
+Switching to builder pattern
+Moderation support

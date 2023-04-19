@@ -1,19 +1,37 @@
-import 'package:json_annotation/json_annotation.dart';
-part 'toggle_like_comment_request.g.dart';
-
-@JsonSerializable()
 class ToggleLikeCommentRequest {
   final String postId;
   final String commentId;
   // final int pageSize;
 
-  ToggleLikeCommentRequest({
+  ToggleLikeCommentRequest._({
     required this.postId,
     required this.commentId,
   });
 
-  factory ToggleLikeCommentRequest.fromJson(Map<String, dynamic> json) =>
-      _$ToggleLikeCommentRequestFromJson(json);
+  Map<String, dynamic> toJson() => {
+        'post_id': postId,
+        'comment_id': commentId,
+      };
+}
 
-  Map<String, dynamic> toJson() => _$ToggleLikeCommentRequestToJson(this);
+class ToggleLikeCommentRequestBuilder {
+  String? _postId;
+  String? _commentId;
+
+  ToggleLikeCommentRequestBuilder();
+
+  void postId(String postId) {
+    _postId = postId;
+  }
+
+  void commentId(String commentId) {
+    _commentId = commentId;
+  }
+
+  ToggleLikeCommentRequest build() {
+    return ToggleLikeCommentRequest._(
+      postId: _postId!,
+      commentId: _commentId!,
+    );
+  }
 }

@@ -1,51 +1,37 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'get_post_request_model.g.dart';
-
 class GetPostRequest {
   final String postId;
   final int page;
   final int pageSize;
 
-  GetPostRequest({
+  GetPostRequest._({
     required this.postId,
     required this.page,
     required this.pageSize,
   });
-
-  factory GetPostRequest.fromEntity({required GetPostRequestEntity entity}) {
-    return GetPostRequest(
-      postId: entity.postId,
-      page: entity.page,
-      pageSize: entity.pageSize,
-    );
-  }
-
-  GetPostRequestEntity toEntity() {
-    return GetPostRequestEntity(
-      postId: postId,
-      page: page,
-      pageSize: pageSize,
-    );
-  }
 }
 
-@JsonSerializable()
-class GetPostRequestEntity {
-  @JsonKey(name: 'post_id')
-  final String postId;
-  final int page;
-  @JsonKey(name: 'page_size')
-  final int pageSize;
+class GetPostRequestBuilder {
+  String? _postId;
+  int? _page;
+  int? _pageSize;
 
-  GetPostRequestEntity({
-    required this.postId,
-    required this.page,
-    required this.pageSize,
-  });
+  void postId(String postId) {
+    _postId = postId;
+  }
 
-  factory GetPostRequestEntity.fromJson(Map<String, dynamic> data) =>
-      _$GetPostRequestEntityFromJson(data);
+  void page(int page) {
+    _page = page;
+  }
 
-  Map<String, dynamic> toJson() => _$GetPostRequestEntityToJson(this);
+  void pageSize(int pageSize) {
+    _pageSize = pageSize;
+  }
+
+  GetPostRequest build() {
+    return GetPostRequest._(
+      postId: _postId!,
+      page: _page!,
+      pageSize: _pageSize!,
+    );
+  }
 }

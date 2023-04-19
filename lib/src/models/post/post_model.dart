@@ -21,6 +21,7 @@ class Post {
   final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final bool isEdited;
   Post({
     required this.id,
     required this.text,
@@ -35,11 +36,13 @@ class Post {
     required this.updatedAt,
     required this.isLiked,
     required this.commentCount,
+    required this.isEdited,
   });
 
   factory Post.fromEntity({required PostEntity postEntity}) {
     return Post(
         id: postEntity.id,
+        isEdited: postEntity.isEdited,
         text: postEntity.text,
         attachments: postEntity.attachments
             ?.map((e) => Attachment.fromEntity(e))
@@ -62,6 +65,7 @@ class Post {
     return PostEntity(
       id: id,
       text: text,
+      isEdited: isEdited,
       attachments: attachments?.map((e) => e.toEntity()).toList(),
       communityId: communityId,
       isPinned: isPinned,
@@ -89,6 +93,8 @@ class PostEntity {
   final bool isPinned;
   @JsonKey(name: 'is_liked')
   final bool isLiked;
+  @JsonKey(name: 'is_edited')
+  final bool isEdited;
   @JsonKey(name: 'comments_count')
   final int commentCount;
   @JsonKey(name: 'user_id')
@@ -117,6 +123,7 @@ class PostEntity {
     required this.updatedAt,
     required this.isLiked,
     required this.commentCount,
+    required this.isEdited,
   });
   factory PostEntity.fromJson(Map<String, dynamic> data) =>
       _$PostEntityFromJson(data);

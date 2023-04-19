@@ -1,51 +1,45 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'register_device_request_model.g.dart';
-
 class RegisterDeviceRequest {
   final String token;
   final String deviceId;
   final int memberId;
 
-  RegisterDeviceRequest({
+  RegisterDeviceRequest._({
     required this.token,
     required this.deviceId,
     required this.memberId,
   });
 
-  factory RegisterDeviceRequest.fromEntity(RegisterDeviceRequestEntity entity) {
-    return RegisterDeviceRequest(
-      token: entity.token,
-      deviceId: entity.deviceId,
-      memberId: entity.memberId,
-    );
-  }
-
-  RegisterDeviceRequestEntity toEntity() {
-    return RegisterDeviceRequestEntity(
-      token: token,
-      deviceId: deviceId,
-      memberId: memberId,
-    );
-  }
+  Map<String, dynamic> toJson() => {
+        'token': token,
+        'deviceId': deviceId,
+        'memberId': memberId,
+      };
 }
 
-@JsonSerializable()
-class RegisterDeviceRequestEntity {
-  final String token;
-  @JsonKey(name: 'device_id')
-  final String deviceId;
-  @JsonKey(name: 'x-member_id')
-  final int memberId;
+class RegisterDeviceRequestBuilder {
+  String? _token;
+  String? _deviceId;
+  int? _memberId;
 
-  RegisterDeviceRequestEntity({
-    required this.token,
-    required this.deviceId,
-    required this.memberId,
-  });
+  RegisterDeviceRequestBuilder();
 
-  factory RegisterDeviceRequestEntity.fromJson(Map<String, dynamic> json) =>
-      _$RegisterDeviceRequestEntityFromJson(json);
+  void token(String token) {
+    _token = token;
+  }
 
-  Map<String, dynamic> toJson() => _$RegisterDeviceRequestEntityToJson(this);
+  void deviceId(String deviceId) {
+    _deviceId = deviceId;
+  }
+
+  void memberId(int memberId) {
+    _memberId = memberId;
+  }
+
+  RegisterDeviceRequest build() {
+    return RegisterDeviceRequest._(
+      token: _token!,
+      deviceId: _deviceId!,
+      memberId: _memberId!,
+    );
+  }
 }

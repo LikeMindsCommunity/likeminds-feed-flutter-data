@@ -4,6 +4,7 @@ import 'package:likeminds_feed/src/repositories/auth_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/media_repository.dart';
+import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
@@ -12,6 +13,7 @@ import 'package:likeminds_feed/src/services/comment_service.dart';
 import 'package:likeminds_feed/src/services/feed_service.dart';
 import 'package:likeminds_feed/src/services/helper_service.dart';
 import 'package:likeminds_feed/src/services/media_service.dart';
+import 'package:likeminds_feed/src/services/moderation_service.dart';
 import 'package:likeminds_feed/src/services/notification_service.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
 import 'package:get_it/get_it.dart';
@@ -24,17 +26,11 @@ class DIService {
   static DIService? _instance;
   static DIService get instance => _instance ??= DIService._();
 
-  late final bool production;
-  set _setProduction(bool isProduction) => production = isProduction;
-  get isProduction => instance.production;
-
   DIService._();
 
   /// Init function to register all the dependencies
   /// This function should be called before using any of the methods
   void init(String apiKey, bool isProduction, LMSdkCallback sdkCallback) {
-    _setProduction = isProduction;
-
     ApiClient apiClient = ApiClient(
       apiKey: apiKey,
       isProduction: isProduction,
@@ -72,6 +68,11 @@ class DIService {
     MediaRepository mediaRepository =
         MediaRepository(mediaService: mediaService);
 
+    ModerationService moderationService =
+        ModerationService(apiClient: apiClient);
+    ModerationRepository moderationRepository =
+        ModerationRepository(moderationService: moderationService);
+
     // Register all the dependencies in the getIt instance
     getIt.registerFactory<ApiClient>(
       () => apiClient,
@@ -101,6 +102,10 @@ class DIService {
       () => mediaRepository,
       instanceName: kInstanceMediaRepository,
     );
+    getIt.registerFactory<ModerationRepository>(
+      () => moderationRepository,
+      instanceName: kInstanceModerationRepository,
+    );
   }
 
   // Get the static instance of GetIt to get the dependencies
@@ -114,4 +119,5 @@ class DIService {
   static const String kInstancePostRepository = 'post_repository';
   static const String kInstanceMediaRepository = 'media_repository';
   static const String kInstanceHelperRepository = 'helper_repository';
+  static const String kInstanceModerationRepository = 'moderation_repository';
 }

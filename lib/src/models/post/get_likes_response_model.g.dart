@@ -16,8 +16,7 @@ GetPostLikesResponseEntity _$GetPostLikesResponseEntityFromJson(
           .toList(),
       totalCount: json['data']['total_count'] as int?,
       users: (json['data']['users'] as Map<String, dynamic>?)?.map(
-        (k, e) =>
-            MapEntry(k, PostUserEntity.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
     );
 

@@ -13,9 +13,6 @@ CommunityEntity _$CommunityEntityFromJson(Map<String, dynamic> json) =>
       imageUrl: json['image_url'] as String?,
       purpose: json['purpose'] as String?,
       about: json['about'] as String?,
-      branding: json['branding'] == null
-          ? null
-          : BrandingEntity.fromJson(json['branding'] as Map<String, dynamic>),
       membersCount: json['members_count'] as int?,
       isMember: json['is_member'] as bool?,
       pendingMembersCount: json['pending_members_count'] as int?,
@@ -72,7 +69,6 @@ Map<String, dynamic> _$CommunityEntityToJson(CommunityEntity instance) =>
       'menu': instance.menu,
       'purpose': instance.purpose,
       'about': instance.about,
-      'branding': instance.branding,
       'image_url': instance.imageUrl,
       'members_count': instance.membersCount,
       'is_member': instance.isMember,
