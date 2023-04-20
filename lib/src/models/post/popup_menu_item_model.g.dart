@@ -10,10 +10,12 @@ PopupMenuItemModelEntity _$PopupMenuItemModelEntityFromJson(
         Map<String, dynamic> json) =>
     PopupMenuItemModelEntity(
       title: json['title'] as String,
+      id: json['id'] as int,
     );
 
 Map<String, dynamic> _$PopupMenuItemModelEntityToJson(
         PopupMenuItemModelEntity instance) =>
     <String, dynamic>{
       'title': instance.title,
+      'id': instance.id,
     };
