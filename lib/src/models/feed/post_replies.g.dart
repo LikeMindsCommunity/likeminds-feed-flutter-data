@@ -63,6 +63,13 @@ ReplyEntity _$ReplyEntityFromJson(Map<String, dynamic> json) => ReplyEntity(
       createdAt: json['created_at'] as int,
       updatedAt: json['updated_at'] as int,
       isLiked: json['is_liked'] as bool,
+      parentComment: json['parent_comment'] != null
+          ? Reply.fromEntity(
+              ReplyEntity.fromJson(
+                json['parent_comment'],
+              ),
+            )
+          : null,
     );
 
 Map<String, dynamic> _$ReplyEntityToJson(ReplyEntity instance) =>
@@ -77,4 +84,5 @@ Map<String, dynamic> _$ReplyEntityToJson(ReplyEntity instance) =>
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'is_liked': instance.isLiked,
+      'parent_comment': instance.parentComment,
     };

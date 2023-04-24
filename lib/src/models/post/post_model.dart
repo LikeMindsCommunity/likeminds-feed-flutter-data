@@ -14,8 +14,8 @@ class Post {
   final int communityId;
   final bool isPinned;
   final String userId;
-  final int likeCount;
-  final int commentCount;
+  int likeCount;
+  int commentCount;
   final bool isSaved;
   final bool isLiked;
   final List<PopupMenuItemModel> menuItems;
