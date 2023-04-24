@@ -11,6 +11,11 @@ AddCommentReplyResponseEntity _$AddCommentReplyResponseEntityFromJson(
     AddCommentReplyResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
+      reply: Reply.fromEntity(
+         ReplyEntity.fromJson(
+          json['data']['comment'] ?? {},
+        ),
+      ),
     );
 
 Map<String, dynamic> _$AddCommentReplyResponseEntityToJson(
@@ -18,4 +23,5 @@ Map<String, dynamic> _$AddCommentReplyResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
+      'comment': instance.reply,
     };
