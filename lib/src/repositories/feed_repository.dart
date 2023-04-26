@@ -36,6 +36,16 @@ class FeedRepository {
         : null;
   }
 
+  Future<EditCommentResponse?> editComment(
+      EditCommentRequest editCommentRequest) async {
+    final EditCommentResponseEntity? responseEntity =
+        await commentService.editComment(editCommentRequest);
+
+    return responseEntity != null
+        ? EditCommentResponse.fromEntity(responseEntity)
+        : null;
+  }
+
   Future<ToggleLikeCommentResponse?> toggleLikeComment(
       ToggleLikeCommentRequest request) async {
     final ToggleLikeCommentResponseEntity? responseEntity =
