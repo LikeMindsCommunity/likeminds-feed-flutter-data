@@ -69,6 +69,13 @@ class FeedApi {
     return response;
   }
 
+  Future<EditCommentReplyResponse?> editCommentReply(
+      EditCommentReplyRequest request) async {
+    final EditCommentReplyResponse? response =
+        await feedRepository.editCommentReply(request);
+    return response;
+  }
+
   Future<GetFeedRoomResponse> getFeedRoom(
       GetFeedRoomRequest getFeedRoomRequest) async {
     final GetFeedRoomResponse response =

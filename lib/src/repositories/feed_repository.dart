@@ -87,6 +87,15 @@ class FeedRepository {
         : null;
   }
 
+  Future<EditCommentReplyResponse?> editCommentReply(
+      EditCommentReplyRequest request) async {
+    final EditCommentReplyResponseEntity? responseEntity =
+        await commentService.editCommentReply(request);
+    return responseEntity != null
+        ? EditCommentReplyResponse.fromEntity(responseEntity)
+        : null;
+  }
+
   Future<GetFeedRoomResponse> getFeedRoom(
       GetFeedRoomRequest getFeedRoomRequest) async {
     final GetFeedRoomResponseEntity responseEntity =

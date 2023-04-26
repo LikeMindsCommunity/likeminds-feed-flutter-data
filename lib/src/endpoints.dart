@@ -65,4 +65,9 @@ class EndPoints {
   String addCommentReplyEndPoint(String commentId, String postId) {
     return "$feedUrl/post/$postId/comment/$commentId/comment";
   }
+
+  String editCommentReplyEndPoint(
+      String commentId, String postId, String replyId) {
+    return "$feedUrl/post/$postId/comment/$replyId";
+  }
 }

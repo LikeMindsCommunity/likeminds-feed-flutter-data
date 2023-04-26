@@ -1,19 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
-import 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
-import 'package:likeminds_feed/src/models/comment/add_comment_reply_request.dart';
-import 'package:likeminds_feed/src/models/comment/add_comment_reply_response.dart';
-import 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
-import 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';
-import 'package:likeminds_feed/src/models/feed/edit_comment_request.dart';
-import 'package:likeminds_feed/src/models/feed/edit_comment_response.dart';
-import 'package:likeminds_feed/src/models/feed/toggle_like_comment_response.dart';
-import 'package:likeminds_feed/src/models/feed/post_detail_request.dart';
-import 'package:likeminds_feed/src/models/feed/post_detail_response.dart';
-import 'package:likeminds_feed/src/models/feed/toggle_like_comment_request.dart';
-import 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
-import 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class CommentService {
@@ -177,6 +163,26 @@ class CommentService {
           );
       print(response.data);
       return AddCommentReplyResponseEntity.fromJson(response.data);
+    } on DioError catch (e) {
+      print(e.toString());
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<EditCommentReplyResponseEntity?> editCommentReply(
+      EditCommentReplyRequest? request) async {
+    try {
+      final response = await apiClient.client().put(
+            apiClient.getEndpoints.editCommentReplyEndPoint(
+                request!.commentId, request.postId, request.replyId),
+            data: request.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      print(response.data);
+      return EditCommentReplyResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       print(e.toString());
     } catch (e) {
