@@ -1,11 +1,4 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/models/comment/add_comment_reply_request.dart';
-import 'package:likeminds_feed/src/models/comment/add_comment_reply_response.dart';
-import 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
-import 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';
-
-import 'package:likeminds_feed/src/models/feed/toggle_like_comment_request.dart';
-import 'package:likeminds_feed/src/models/feed/toggle_like_comment_response.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 
 class FeedApi {
@@ -32,6 +25,13 @@ class FeedApi {
     final AddCommentResponse? addCommentResponse =
         await feedRepository.addComment(addCommentRequest);
     return addCommentResponse;
+  }
+
+  Future<EditCommentResponse?> editComment(
+      EditCommentRequest editCommentRequest) async {
+    final EditCommentResponse? editCommentResponse =
+        await feedRepository.editComment(editCommentRequest);
+    return editCommentResponse;
   }
 
   Future<ToggleLikeCommentResponse?> toggleLikeComment(

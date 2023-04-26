@@ -6,6 +6,8 @@ import 'package:likeminds_feed/src/models/comment/add_comment_reply_request.dart
 import 'package:likeminds_feed/src/models/comment/add_comment_reply_response.dart';
 import 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
 import 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';
+import 'package:likeminds_feed/src/models/feed/edit_comment_request.dart';
+import 'package:likeminds_feed/src/models/feed/edit_comment_response.dart';
 import 'package:likeminds_feed/src/models/feed/toggle_like_comment_response.dart';
 import 'package:likeminds_feed/src/models/feed/post_detail_request.dart';
 import 'package:likeminds_feed/src/models/feed/post_detail_response.dart';
@@ -70,6 +72,26 @@ class CommentService {
           );
       print(response.data);
       return AddCommentResponseEntity.fromJson(response.data);
+    } on DioError catch (e) {
+      print(e.toString());
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<EditCommentResponseEntity?> editComment(
+      EditCommentRequest editCommentRequest) async {
+    try {
+      final response = await apiClient.client().put(
+            apiClient.getEndpoints.getEditCommentEndPoint(
+                editCommentRequest.commentId, editCommentRequest.postId),
+            data: editCommentRequest.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      print(response.data);
+      return EditCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       print(e.toString());
     } catch (e) {

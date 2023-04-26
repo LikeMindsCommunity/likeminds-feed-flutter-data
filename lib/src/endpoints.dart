@@ -46,6 +46,10 @@ class EndPoints {
     return "$feedUrl/post/$postId/comment";
   }
 
+  String getEditCommentEndPoint(String commentId, String postId) {
+    return "$feedUrl/post/$postId/comment/$commentId";
+  }
+
   String toggleLikeCommentEndPoint(String commentId, String postId) {
     return "$feedUrl/post/$postId/comment/$commentId/like";
   }

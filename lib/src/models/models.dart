@@ -21,6 +21,7 @@ export 'package:likeminds_feed/src/models/helper/og_tags_model.dart';
 export 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
 export 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
 export 'package:likeminds_feed/src/models/post/post_model.dart';
+
 export 'package:likeminds_feed/src/models/post/attachment_model.dart';
 export 'package:likeminds_feed/src/models/post/add_post_request_model.dart';
 export 'package:likeminds_feed/src/models/post/add_post_response_model.dart';
@@ -44,6 +45,8 @@ export 'package:likeminds_feed/src/models/feed/post_detail_request.dart';
 export 'package:likeminds_feed/src/models/feed/post_replies.dart';
 export 'package:likeminds_feed/src/models/feed/add_comment_request.dart';
 export 'package:likeminds_feed/src/models/feed/add_comment_response.dart';
+export 'package:likeminds_feed/src/models/feed/edit_comment_request.dart';
+export 'package:likeminds_feed/src/models/feed/edit_comment_response.dart';
 export 'package:likeminds_feed/src/models/feed/toggle_like_comment_request.dart';
 export 'package:likeminds_feed/src/models/feed/toggle_like_comment_response.dart';
 export 'package:likeminds_feed/src/models/moderation/delete_reason_model.dart';
