@@ -19,6 +19,7 @@ class PostReplies {
   final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final bool? isEdited;
   final List<Reply> replies;
 
   PostReplies({
@@ -36,6 +37,7 @@ class PostReplies {
     required this.updatedAt,
     required this.replies,
     required this.isLiked,
+    this.isEdited,
   });
 
   factory PostReplies.fromEntity(PostRepliesEntity entity) {
@@ -49,6 +51,7 @@ class PostReplies {
       commentsCount: entity.commentsCount,
       isSaved: entity.isSaved,
       isLiked: entity.isLiked,
+      isEdited: entity.isEdited,
       menuItems: entity.menuItems
           .map((e) => PopupMenuItemModel.fromEntity(entity: e))
           .toList(),
@@ -88,6 +91,8 @@ class PostRepliesEntity {
   @JsonKey(name: 'updated_at')
   final int updatedAt;
   final List<ReplyEntity> replies;
+  @JsonKey(name: 'is_edited')
+  final bool? isEdited;
 
   PostRepliesEntity({
     required this.id,
@@ -104,6 +109,7 @@ class PostRepliesEntity {
     required this.replies,
     required this.isLiked,
     required this.commentsCount,
+    this.isEdited,
   });
 
   factory PostRepliesEntity.fromJson(Map<String, dynamic> data) =>
@@ -118,6 +124,7 @@ class Reply {
   final String text;
   final int level;
   final int likesCount;
+  final bool? isEdited;
   int repliesCount;
   final Reply? parentComment;
   final List<PopupMenuItemModel> menuItems;
@@ -136,6 +143,7 @@ class Reply {
     required this.updatedAt,
     required this.isLiked,
     required this.id,
+    this.isEdited,
     this.parentComment,
   });
 
@@ -154,6 +162,7 @@ class Reply {
       isLiked: replyEntity.isLiked,
       id: replyEntity.id,
       parentComment: replyEntity.parentComment,
+      isEdited: replyEntity.isEdited,
     );
   }
 }
@@ -178,6 +187,8 @@ class ReplyEntity {
   final int updatedAt;
   @JsonKey(name: 'parent_comment')
   final Reply? parentComment;
+  @JsonKey(name: 'is_edited')
+  final bool? isEdited;
 
   @JsonKey(name: 'is_liked')
   final bool isLiked;
@@ -194,6 +205,7 @@ class ReplyEntity {
     required this.updatedAt,
     required this.isLiked,
     this.parentComment,
+    this.isEdited,
   });
 
   factory ReplyEntity.fromJson(Map<String, dynamic> data) =>
