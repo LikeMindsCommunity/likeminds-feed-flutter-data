@@ -20,6 +20,7 @@ PostRepliesEntity _$PostRepliesEntityFromJson(Map<String, dynamic> json) =>
       commentsCount: json['comments_count'] as int,
       isSaved: json['is_saved'] as bool,
       isLiked: json['is_liked'] as bool,
+      isEdited: json["is_edited"] as bool?,
       menuItems: (json['menu_items'] as List<dynamic>)
           .map((e) =>
               PopupMenuItemModelEntity.fromJson(e as Map<String, dynamic>))
@@ -47,6 +48,7 @@ Map<String, dynamic> _$PostRepliesEntityToJson(PostRepliesEntity instance) =>
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'replies': instance.replies.map((e) => e.toJson()).toList(),
+      'is_edited': instance.isEdited,
     };
 
 ReplyEntity _$ReplyEntityFromJson(Map<String, dynamic> json) => ReplyEntity(
@@ -63,6 +65,7 @@ ReplyEntity _$ReplyEntityFromJson(Map<String, dynamic> json) => ReplyEntity(
       createdAt: json['created_at'] as int,
       updatedAt: json['updated_at'] as int,
       isLiked: json['is_liked'] as bool,
+      isEdited: json['is_edited'] as bool?,
       parentComment: json['parent_comment'] != null
           ? Reply.fromEntity(
               ReplyEntity.fromJson(
@@ -85,4 +88,5 @@ Map<String, dynamic> _$ReplyEntityToJson(ReplyEntity instance) =>
       'updated_at': instance.updatedAt,
       'is_liked': instance.isLiked,
       'parent_comment': instance.parentComment,
+      'is_edited': instance.isEdited,
     };

@@ -62,6 +62,7 @@ CommentReplyEntity _$CommentReplyEntityFromJson(Map<String, dynamic> json) =>
       createdAt: json['created_at'] as int,
       updatedAt: json['updated_at'] as int,
       isLiked: json['is_liked'] as bool,
+      isEdited: json['is_edited'] as bool?,
     );
 
 Map<String, dynamic> _$CommentReplyEntityToJson(CommentReplyEntity instance) =>
@@ -76,4 +77,5 @@ Map<String, dynamic> _$CommentReplyEntityToJson(CommentReplyEntity instance) =>
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'is_liked': instance.isLiked,
+      'is_edited': instance.isEdited,
     };
