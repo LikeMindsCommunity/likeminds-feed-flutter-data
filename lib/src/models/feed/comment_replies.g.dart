@@ -63,6 +63,13 @@ CommentReplyEntity _$CommentReplyEntityFromJson(Map<String, dynamic> json) =>
       updatedAt: json['updated_at'] as int,
       isLiked: json['is_liked'] as bool,
       isEdited: json['is_edited'] as bool?,
+      parentComment: json['parent_comment'] != null
+          ? CommentReply.fromEntity(
+              CommentReplyEntity.fromJson(
+                json['parent_comment'],
+              ),
+            )
+          : null,
     );
 
 Map<String, dynamic> _$CommentReplyEntityToJson(CommentReplyEntity instance) =>

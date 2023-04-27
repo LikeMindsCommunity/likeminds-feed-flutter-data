@@ -118,6 +118,8 @@ class CommentReply {
   final DateTime updatedAt;
   final bool isLiked;
   final bool? isEdited;
+  final CommentReply? parentComment;
+
   CommentReply({
     required this.userId,
     required this.text,
@@ -130,6 +132,7 @@ class CommentReply {
     required this.isLiked,
     required this.id,
     this.isEdited,
+    this.parentComment,
   });
 
   factory CommentReply.fromEntity(CommentReplyEntity replyEntity) {
@@ -147,6 +150,7 @@ class CommentReply {
       isLiked: replyEntity.isLiked,
       id: replyEntity.id,
       isEdited: replyEntity.isEdited,
+      parentComment: replyEntity.parentComment,
     );
   }
 }
@@ -171,6 +175,8 @@ class CommentReplyEntity {
   final int updatedAt;
   @JsonKey(name: 'is_edited')
   final bool? isEdited;
+  @JsonKey(name: 'parent_comment')
+  final CommentReply? parentComment;
 
   @JsonKey(name: 'is_liked')
   final bool isLiked;
@@ -185,6 +191,7 @@ class CommentReplyEntity {
     required this.createdAt,
     required this.updatedAt,
     required this.isLiked,
+    this.parentComment,
     this.isEdited,
   });
   factory CommentReplyEntity.fromJson(Map<String, dynamic> data) =>
