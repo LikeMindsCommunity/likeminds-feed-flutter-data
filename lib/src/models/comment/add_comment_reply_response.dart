@@ -3,11 +3,10 @@ import 'package:likeminds_feed/likeminds_feed.dart';
 
 part 'add_comment_reply_response.g.dart';
 
-
 class AddCommentReplyResponse {
   final bool success;
   final String? errorMessage;
-  final Reply? reply;
+  final CommentReply? reply;
 
   AddCommentReplyResponse({
     required this.success,
@@ -30,7 +29,7 @@ class AddCommentReplyResponseEntity {
   final bool success;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
-  final Reply? reply;
+  final CommentReply? reply;
 
   AddCommentReplyResponseEntity({
     required this.success,
