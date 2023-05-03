@@ -32,3 +32,7 @@ Add post pinning, editing
 Removing media upload, analytics
 Switching to builder pattern
 Moderation support
+
+## 1.1.0
+
+Edit Comment & Reply
