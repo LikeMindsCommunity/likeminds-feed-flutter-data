@@ -9,7 +9,7 @@ part of 'env.dart';
 class _EnvDev {
   static const platformCode = 'fl';
   static const int versionCode = 6;
-  static const xSDKSource = 'FEED';
+  static const xSDKSource = 'feed';
   static const kettleHost = 'https://betaauth.likeminds.community';
   static const List<int> _enviedkeybucketName = [
     4033913027,
@@ -168,7 +168,7 @@ class _EnvDev {
 class _EnvProd {
   static const platformCode = 'fl';
   static const int versionCode = 6;
-  static const xSDKSource = 'FEED';
+  static const xSDKSource = 'feed';
   static const kettleHost = 'https://auth.likeminds.community';
   static const List<int> _enviedkeybucketName = [
     237849845,
