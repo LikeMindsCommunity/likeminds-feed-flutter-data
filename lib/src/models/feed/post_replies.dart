@@ -123,14 +123,14 @@ class Reply {
   final String userId;
   final String text;
   final int level;
-  final int likesCount;
+  int likesCount;
   final bool? isEdited;
   int repliesCount;
   final Reply? parentComment;
   final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final bool isLiked;
+  bool isLiked;
 
   Reply({
     required this.userId,

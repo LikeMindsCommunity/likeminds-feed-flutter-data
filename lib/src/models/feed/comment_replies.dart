@@ -111,12 +111,12 @@ class CommentReply {
   final String userId;
   final String text;
   final int level;
-  final int likesCount;
+  int likesCount;
   final int repliesCount;
   final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final bool isLiked;
+  bool isLiked;
   final bool? isEdited;
   final CommentReply? parentComment;
 
