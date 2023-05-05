@@ -87,6 +87,11 @@ class LMFeedClient {
     return await _sdkApplication.getFeedApi().addComment(addCommentRequest);
   }
 
+  Future<EditCommentResponse?> editComment(
+      EditCommentRequest editCommentRequest) async {
+    return await _sdkApplication.getFeedApi().editComment(editCommentRequest);
+  }
+
   Future<GetCommentLikesResponse> getCommentLikes(
       GetCommentLikesRequest request) async {
     return await _sdkApplication.getFeedApi().getCommentLikes(request);

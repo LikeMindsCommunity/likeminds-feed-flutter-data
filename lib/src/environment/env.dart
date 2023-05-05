@@ -16,6 +16,8 @@ abstract class EnvDev {
   static final bucketName = _EnvDev.bucketName;
   @EnviedField(varName: 'POOL_ID', obfuscate: true)
   static final poolId = _EnvDev.poolId;
+  @EnviedField(varName: "X_SDK_SOURCE")
+  static const xSDKSource = _EnvDev.xSDKSource;
 }
 
 @Envied(path: '.env.prod')
@@ -32,4 +34,6 @@ abstract class EnvProd {
   static final bucketName = _EnvProd.bucketName;
   @EnviedField(varName: 'POOL_ID', obfuscate: true)
   static final poolId = _EnvProd.poolId;
+  @EnviedField(varName: "X_SDK_SOURCE")
+  static const xSDKSource = _EnvProd.xSDKSource;
 }
