@@ -111,38 +111,47 @@ class CommentReply {
   final String userId;
   final String text;
   final int level;
-  final int likesCount;
+  int likesCount;
   final int repliesCount;
   final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final bool isLiked;
-  CommentReply(
-      {required this.userId,
-      required this.text,
-      required this.level,
-      required this.likesCount,
-      required this.repliesCount,
-      required this.menuItems,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.isLiked,
-      required this.id});
+  bool isLiked;
+  final bool? isEdited;
+  final CommentReply? parentComment;
+
+  CommentReply({
+    required this.userId,
+    required this.text,
+    required this.level,
+    required this.likesCount,
+    required this.repliesCount,
+    required this.menuItems,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.isLiked,
+    required this.id,
+    this.isEdited,
+    this.parentComment,
+  });
 
   factory CommentReply.fromEntity(CommentReplyEntity replyEntity) {
     return CommentReply(
-        userId: replyEntity.userId,
-        text: replyEntity.text,
-        level: replyEntity.level,
-        likesCount: replyEntity.likesCount,
-        repliesCount: replyEntity.commentsCount ?? 0,
-        menuItems: replyEntity.menuItems
-            .map((e) => PopupMenuItemModel.fromEntity(entity: e))
-            .toList(),
-        createdAt: DateTime.fromMillisecondsSinceEpoch(replyEntity.createdAt),
-        updatedAt: DateTime.fromMillisecondsSinceEpoch(replyEntity.updatedAt),
-        isLiked: replyEntity.isLiked,
-        id: replyEntity.id);
+      userId: replyEntity.userId,
+      text: replyEntity.text,
+      level: replyEntity.level,
+      likesCount: replyEntity.likesCount,
+      repliesCount: replyEntity.commentsCount ?? 0,
+      menuItems: replyEntity.menuItems
+          .map((e) => PopupMenuItemModel.fromEntity(entity: e))
+          .toList(),
+      createdAt: DateTime.fromMillisecondsSinceEpoch(replyEntity.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(replyEntity.updatedAt),
+      isLiked: replyEntity.isLiked,
+      id: replyEntity.id,
+      isEdited: replyEntity.isEdited,
+      parentComment: replyEntity.parentComment,
+    );
   }
 }
 
@@ -164,20 +173,27 @@ class CommentReplyEntity {
   final int createdAt;
   @JsonKey(name: 'updated_at')
   final int updatedAt;
+  @JsonKey(name: 'is_edited')
+  final bool? isEdited;
+  @JsonKey(name: 'parent_comment')
+  final CommentReply? parentComment;
 
   @JsonKey(name: 'is_liked')
   final bool isLiked;
-  CommentReplyEntity(
-      {required this.id,
-      required this.userId,
-      required this.text,
-      required this.level,
-      required this.likesCount,
-      required this.commentsCount,
-      required this.menuItems,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.isLiked});
+  CommentReplyEntity({
+    required this.id,
+    required this.userId,
+    required this.text,
+    required this.level,
+    required this.likesCount,
+    required this.commentsCount,
+    required this.menuItems,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.isLiked,
+    this.parentComment,
+    this.isEdited,
+  });
   factory CommentReplyEntity.fromJson(Map<String, dynamic> data) =>
       _$CommentReplyEntityFromJson(data);
 

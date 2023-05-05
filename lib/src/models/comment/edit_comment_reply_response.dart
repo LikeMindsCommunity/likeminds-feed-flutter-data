@@ -1,22 +1,22 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 
-part 'add_comment_reply_response.g.dart';
+part 'edit_comment_reply_response.g.dart';
 
-class AddCommentReplyResponse {
+class EditCommentReplyResponse {
   final bool success;
   final String? errorMessage;
   final CommentReply? reply;
 
-  AddCommentReplyResponse({
+  EditCommentReplyResponse({
     required this.success,
     this.errorMessage,
     this.reply,
   });
 
-  factory AddCommentReplyResponse.fromEntity(
-      AddCommentReplyResponseEntity entity) {
-    return AddCommentReplyResponse(
+  factory EditCommentReplyResponse.fromEntity(
+      EditCommentReplyResponseEntity entity) {
+    return EditCommentReplyResponse(
       success: entity.success,
       errorMessage: entity.errorMessage,
       reply: entity.reply,
@@ -25,20 +25,20 @@ class AddCommentReplyResponse {
 }
 
 @JsonSerializable()
-class AddCommentReplyResponseEntity {
+class EditCommentReplyResponseEntity {
   final bool success;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
   final CommentReply? reply;
 
-  AddCommentReplyResponseEntity({
+  EditCommentReplyResponseEntity({
     required this.success,
     this.errorMessage,
     this.reply,
   });
 
-  factory AddCommentReplyResponseEntity.fromJson(Map<String, dynamic> data) =>
-      _$AddCommentReplyResponseEntityFromJson(data);
+  factory EditCommentReplyResponseEntity.fromJson(Map<String, dynamic> data) =>
+      _$EditCommentReplyResponseEntityFromJson(data);
 
-  Map<String, dynamic> toJson() => _$AddCommentReplyResponseEntityToJson(this);
+  Map<String, dynamic> toJson() => _$EditCommentReplyResponseEntityToJson(this);
 }

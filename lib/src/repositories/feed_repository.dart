@@ -36,6 +36,16 @@ class FeedRepository {
         : null;
   }
 
+  Future<EditCommentResponse?> editComment(
+      EditCommentRequest editCommentRequest) async {
+    final EditCommentResponseEntity? responseEntity =
+        await commentService.editComment(editCommentRequest);
+
+    return responseEntity != null
+        ? EditCommentResponse.fromEntity(responseEntity)
+        : null;
+  }
+
   Future<ToggleLikeCommentResponse?> toggleLikeComment(
       ToggleLikeCommentRequest request) async {
     final ToggleLikeCommentResponseEntity? responseEntity =
@@ -74,6 +84,15 @@ class FeedRepository {
         await commentService.addCommentReply(request);
     return responseEntity != null
         ? AddCommentReplyResponse.fromEntity(responseEntity)
+        : null;
+  }
+
+  Future<EditCommentReplyResponse?> editCommentReply(
+      EditCommentReplyRequest request) async {
+    final EditCommentReplyResponseEntity? responseEntity =
+        await commentService.editCommentReply(request);
+    return responseEntity != null
+        ? EditCommentReplyResponse.fromEntity(responseEntity)
         : null;
   }
 

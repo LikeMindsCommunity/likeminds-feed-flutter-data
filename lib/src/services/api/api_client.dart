@@ -55,6 +55,7 @@ class ApiClient {
     Map<String, dynamic> headers = {
       "x-platform-code": EnvDev.platformCode,
       "x-version-code": EnvDev.versionCode,
+      "x-sdk-source": EnvDev.xSDKSource,
     };
 
     if (accessToken != null && isRefresh != null ? !isRefresh : true) {

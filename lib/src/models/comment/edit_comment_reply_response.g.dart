@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'add_comment_reply_response.dart';
+part of 'edit_comment_reply_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AddCommentReplyResponseEntity _$AddCommentReplyResponseEntityFromJson(
+EditCommentReplyResponseEntity _$EditCommentReplyResponseEntityFromJson(
         Map<String, dynamic> json) =>
-    AddCommentReplyResponseEntity(
+    EditCommentReplyResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
       reply: CommentReply.fromEntity(
@@ -18,8 +18,8 @@ AddCommentReplyResponseEntity _$AddCommentReplyResponseEntityFromJson(
       ),
     );
 
-Map<String, dynamic> _$AddCommentReplyResponseEntityToJson(
-        AddCommentReplyResponseEntity instance) =>
+Map<String, dynamic> _$EditCommentReplyResponseEntityToJson(
+        EditCommentReplyResponseEntity instance) =>
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
