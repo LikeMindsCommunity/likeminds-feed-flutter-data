@@ -1,4 +1,4 @@
-abstract class LMSdkCallback {
+abstract class LMSDKCallback {
   void eventFiredCallback(String eventKey, Map<String, dynamic> propertiesMap);
   void loginRequiredCallback();
   void logoutCallback();

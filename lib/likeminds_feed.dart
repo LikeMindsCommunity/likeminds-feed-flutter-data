@@ -13,25 +13,14 @@ import 'src/models/models.dart';
 const _prod = true;
 
 class LMFeedClient {
-  late final SdkApplication _sdkApplication;
+  late final SDKApplication _sdkApplication;
 
   LMFeedClient._({
     required String apiKey,
-    required LMSdkCallback sdkCallback,
+    required LMSDKCallback sdkCallback,
   }) {
     DIService.instance.init(apiKey, _prod, sdkCallback);
-    _sdkApplication = SdkApplication();
-  }
-
-  static LMFeedClient initiateLikeMinds({
-    required String apiKey,
-    required LMSdkCallback sdkCallback,
-  }) {
-    debugPrint("SDK Initiation point reached");
-    return LMFeedClient._(
-      apiKey: apiKey,
-      sdkCallback: sdkCallback,
-    );
+    _sdkApplication = SDKApplication();
   }
 
   FeedApi getFeedApi() {
@@ -137,5 +126,32 @@ class LMFeedClient {
   Future<GetDeleteReasonResponse> getReportTags(
       GetDeleteReasonRequest request) async {
     return await _sdkApplication.getModerationApi().getDeleteReasons(request);
+  }
+}
+
+class LMFeedClientBuilder {
+  String? _apiKey;
+  LMSDKCallback? _sdkCallback;
+
+  void apiKey(String apiKey) {
+    _apiKey = apiKey;
+  }
+
+  void sdkCallback(LMSDKCallback sdkCallback) {
+    _sdkCallback = sdkCallback;
+  }
+
+  LMFeedClient build() {
+    if (_apiKey == null) {
+      throw Exception("API Key is not provided");
+    }
+    if (_sdkCallback == null) {
+      throw Exception("SDK Callback is not provided");
+    }
+    debugPrint("SDK Initiation point reached");
+    return LMFeedClient._(
+      apiKey: _apiKey!,
+      sdkCallback: _sdkCallback!,
+    );
   }
 }
