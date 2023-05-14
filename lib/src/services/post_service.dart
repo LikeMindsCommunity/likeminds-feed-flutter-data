@@ -135,6 +135,10 @@ class PostService extends IPostService {
     try {
       final response = await apiClient.client().get(
             "${apiClient.getEndpoints.addPostEndpoint}/${getPostLikesRequest.postId}/like",
+            queryParameters: {
+              'page': getPostLikesRequest.page,
+              'page_size': getPostLikesRequest.pageSize,
+            },
             options: Options(
               headers: {
                 'Authorization': '${apiClient.accessToken}',

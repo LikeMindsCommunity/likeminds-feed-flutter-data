@@ -30,7 +30,7 @@ class DIService {
 
   /// Init function to register all the dependencies
   /// This function should be called before using any of the methods
-  void init(String apiKey, bool isProduction, LMSdkCallback sdkCallback) {
+  void init(String apiKey, bool isProduction, LMSDKCallback sdkCallback) {
     ApiClient apiClient = ApiClient(
       apiKey: apiKey,
       isProduction: isProduction,

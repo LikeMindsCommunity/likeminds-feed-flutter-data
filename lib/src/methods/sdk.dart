@@ -11,8 +11,8 @@ import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 
-class SdkApplication {
-  SdkApplication();
+class SDKApplication {
+  SDKApplication();
 
   AuthApi getAuthApi() {
     return AuthApi(
