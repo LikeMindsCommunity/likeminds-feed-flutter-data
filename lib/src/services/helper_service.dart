@@ -4,11 +4,11 @@ import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class HelperService {
-  late final LMSdkCallback callback;
+  late final LMSDKCallback callback;
   final ApiClient apiClient;
 
   HelperService({required this.apiClient}) {
-    callback = DIService.getIt.get<LMSdkCallback>(
+    callback = DIService.getIt.get<LMSDKCallback>(
       instanceName: "LMCallback",
     );
   }
