@@ -27,6 +27,7 @@ class FeedService {
       return UniversalFeedResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
     } catch (e) {}
+    return null;
   }
 
   Future<GetFeedRoomResponseEntity> getFeedRoom(

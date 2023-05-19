@@ -23,6 +23,7 @@ class CommentService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<UniversalFeedResponseEntity?> getUniversalFeed(
@@ -43,6 +44,7 @@ class CommentService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<AddCommentResponseEntity?> addComment(
@@ -63,6 +65,7 @@ class CommentService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<EditCommentResponseEntity?> editComment(
@@ -83,6 +86,7 @@ class CommentService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<ToggleLikeCommentResponseEntity?> toggleLikeComment(
@@ -103,6 +107,7 @@ class CommentService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<CommentDetailResponseEntity?> getComment(
@@ -122,6 +127,7 @@ class CommentService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<DeleteCommentResponseEntity> deleteComment(
@@ -168,6 +174,7 @@ class CommentService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<EditCommentReplyResponseEntity?> editCommentReply(
@@ -188,6 +195,7 @@ class CommentService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   Future<GetCommentLikesResponseEntity> getCommentLikes(

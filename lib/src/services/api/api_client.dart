@@ -72,6 +72,6 @@ class ApiClient {
   // Future<bool> getAccessType(String accessType) async =>
   //     await AccessService(apiClient: this).getAccess(accessType);
 
-  Future<bool> getMemberState() async =>
-      await AccessService(apiClient: this).getMemberState();
+  // Future<bool> getMemberState() async =>
+  //     await AccessService(apiClient: this).getMemberState();
 }

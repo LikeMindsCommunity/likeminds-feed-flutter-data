@@ -10,7 +10,7 @@ import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
 import 'src/models/models.dart';
 
-const _prod = true;
+const _prod = false;
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
@@ -102,7 +102,7 @@ class LMFeedClient {
     return await _sdkApplication.getFeedApi().getFeedRoom(request);
   }
 
-  Future<bool> getMemberState() async {
+  Future<MemberStateResponse> getMemberState() async {
     return await _sdkApplication.getAccessApi().getMemberState();
   }
 
