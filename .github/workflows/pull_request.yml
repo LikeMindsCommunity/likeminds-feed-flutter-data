@@ -3,7 +3,7 @@ name: Feed SDK test on every PR
 on:
   pull_request:
     branches-ignore: #exclude the branches from the test
-      - main
+      - master
 jobs:
   run-flutter-test:
     runs-on: ubuntu-latest
