@@ -12,13 +12,12 @@ import 'test_callback.dart';
 /// Flutter flavour/environment manager v0.0.1
 const prod = !bool.fromEnvironment('DEBUG');
 
+//Testing credentials, and callback
 final TestCallback testingCallback = TestCallback();
-
-const String testingBetaAPIKey = EnvTest.testingBetaAPIKey;
-const String testingBetaBotID = EnvTest.testingBetaBotID;
-
-const String testingProdAPIKey = EnvTest.testingProdAPIKey;
-const String testingProdBotID = EnvTest.testingProdBotID;
+final String testingBetaAPIKey = EnvTest.testingBetaAPIKey;
+final String testingBetaBotID = EnvTest.testingBetaBotID;
+final String testingProdAPIKey = EnvTest.testingProdAPIKey;
+final String testingProdBotID = EnvTest.testingProdBotID;
 
 void main() {
   debugPrint("Initiating unit tests now...");
