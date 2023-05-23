@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
@@ -39,7 +40,7 @@ class HelperService {
         );
       }
     } on DioError catch (e) {
-      print("Error from get tags: $e");
+      debugPrint("Error from get tags: $e");
       return GetTaggingListResponseEntity(
         success: false,
         errorMessage: e.message,
@@ -70,7 +71,7 @@ class HelperService {
         );
       }
     } on DioError catch (e) {
-      print("Error from get tags: $e");
+      debugPrint("Error from get tags: $e");
       return DecodeUrlResponseEntity(
         success: false,
         errorMessage: e.message,

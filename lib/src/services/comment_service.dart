@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
@@ -17,15 +18,15 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
+      debugPrint(response.data);
       return AddCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return AddCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return AddCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -43,15 +44,15 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
+      debugPrint(response.data);
       return EditCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return EditCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return EditCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -69,15 +70,15 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
+      debugPrint(response.data);
       return ToggleLikeCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return ToggleLikeCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return ToggleLikeCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -93,15 +94,15 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
+      debugPrint(response.data);
       return GetCommentResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return GetCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return GetCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -121,15 +122,15 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
+      debugPrint(response.data);
       return DeleteCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return DeleteCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return DeleteCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -147,15 +148,15 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
+      debugPrint(response.data);
       return AddCommentReplyResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return AddCommentReplyResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return AddCommentReplyResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -173,15 +174,15 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
+      debugPrint(response.data);
       return EditCommentReplyResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return EditCommentReplyResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return EditCommentReplyResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -204,16 +205,16 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
+      debugPrint(response.data);
       return GetCommentLikesResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return GetCommentLikesResponseEntity(
         success: false,
         errorMessage: 'An error occurred, please try again later',
       );
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return GetCommentLikesResponseEntity(
         success: false,
         errorMessage: 'An error occurred, please try again later',

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
@@ -17,19 +18,19 @@ class FeedService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      print(response.data);
+      debugPrint(response.data);
       return PostDetailResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
-      print(e.toString() + "dsa");
+      debugPrint(e.toString());
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
     return null;
   }
 
   Future<GetFeedResponseEntity?> getUniversalFeed(
       GetFeedRequest universalFeedRequest) async {
-    print(apiClient.getEndpoints
+    debugPrint(apiClient.getEndpoints
         .getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
       final response = await apiClient.client().get(
@@ -45,9 +46,9 @@ class FeedService {
           );
       return GetFeedResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
-      print(e.toString() + "dsa");
+      debugPrint(e.toString());
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
     return null;
   }
