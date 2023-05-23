@@ -4,10 +4,10 @@ name: Merge to master
 on:
   pull_request:
     branches:
-      - master
+      - mock-master
   push:
     branches:
-      - master
+      - mock-master
 
 env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
@@ -53,6 +53,6 @@ jobs:
       - name: Make a new release and tag
         uses: avakar/tag-and-release@v1
         with:
-          tag_name: "v${{ env.VERSION_CODE }}"
+          tag_name: "test-v${{ env.VERSION_CODE }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,6 @@
+projectKey=flutter-lm-feed-sdk
+serverUrl=http://localhost:9000
+serverVersion=10.0.0.68432
+dashboardUrl=http://localhost:9000/dashboard?id=flutter-lm-feed-sdk
+ceTaskId=AYhI0ZPAcP9dZpACNnen
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYhI0ZPAcP9dZpACNnen
