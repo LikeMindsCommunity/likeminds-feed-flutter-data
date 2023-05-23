@@ -13,9 +13,9 @@ class FeedApi {
     return universalFeedResponse;
   }
 
-  Future<PostDetailResponse?> getPost(
+  Future<PostDetailResponse> getPost(
       PostDetailRequest postDetailRequest) async {
-    final PostDetailResponse? postDetailResponse =
+    final PostDetailResponse postDetailResponse =
         await feedRepository.getPost(postDetailRequest);
     return postDetailResponse;
   }

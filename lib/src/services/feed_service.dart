@@ -8,7 +8,7 @@ class FeedService {
   FeedService({required this.apiClient});
   // final String authHost = "https://betaauth.likeminds.community/feed/";
 
-  Future<PostDetailResponseEntity?> getPost(
+  Future<PostDetailResponseEntity> getPost(
       PostDetailRequest postDetailRequest) async {
     try {
       final response = await apiClient.client().get(
@@ -19,13 +19,18 @@ class FeedService {
             ),
           );
       debugPrint(response.data);
-      return PostDetailResponseEntity.fromJson(response.data['data']);
+      return PostDetailResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      return PostDetailResponseEntity(
+          success: false,
+          errorMessage: "An error occured, please try again later");
     } catch (e) {
       debugPrint(e.toString());
+      return PostDetailResponseEntity(
+          success: false,
+          errorMessage: "An error occured, please try again later");
     }
-    return null;
   }
 
   Future<GetFeedResponseEntity?> getUniversalFeed(
@@ -44,7 +49,7 @@ class FeedService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      return GetFeedResponseEntity.fromJson(response.data['data']);
+      return GetFeedResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
     } catch (e) {
