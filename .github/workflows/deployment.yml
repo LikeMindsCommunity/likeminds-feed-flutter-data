@@ -1,0 +1,31 @@
+# Main Github Actions CI/CD file
+name: Feed SDK test on every PR
+on:
+  push:
+    branches:
+      - master
+      - deployment
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prints the current branch name
+        run: echo "${GITHUB_BRANCH##*/}"
+
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        # with:
+        #   ref: ${{ env.BRANCH_NAME }}
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2 #plugin for setting up the java
+        with:
+          distribution: "zulu"
+          java-version: "11" #define the java version
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ‘3.10.0’ #Flutter latest version defined
+      - run: flutter pub get #installing the plugins for the flutter project
+      - run: flutter test #running flutter test
+

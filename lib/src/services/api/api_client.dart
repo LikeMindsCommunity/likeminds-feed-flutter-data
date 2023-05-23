@@ -2,7 +2,6 @@
 import 'package:dio/dio.dart';
 import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/environment/env.dart';
-import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/token_interceptor.dart';
 import 'package:likeminds_feed/src/services/api/log_interceptor.dart';
 
@@ -68,10 +67,4 @@ class ApiClient {
     dio.interceptors.add(TokenInterceptor(apiClient: this));
     return dio;
   }
-
-  // Future<bool> getAccessType(String accessType) async =>
-  //     await AccessService(apiClient: this).getAccess(accessType);
-
-  // Future<bool> getMemberState() async =>
-  //     await AccessService(apiClient: this).getMemberState();
 }
