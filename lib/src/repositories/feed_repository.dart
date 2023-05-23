@@ -14,14 +14,12 @@ class FeedRepository {
         : null;
   }
 
-  Future<PostDetailResponse?> getPost(
+  Future<PostDetailResponse> getPost(
       PostDetailRequest postDetailRequest) async {
-    final PostDetailResponseEntity? responseEntity =
+    final PostDetailResponseEntity responseEntity =
         await feedService.getPost(postDetailRequest);
 
-    return responseEntity != null
-        ? PostDetailResponse.fromEntity(responseEntity)
-        : null;
+    return PostDetailResponse.fromEntity(responseEntity);
   }
 
   Future<GetFeedRoomResponse> getFeedRoom(

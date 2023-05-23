@@ -141,8 +141,7 @@ void main() {
             ..commentId(commentId ?? "")
             ..page(1))
           .build();
-      GetCommentResponse response =
-          await client.getCommentApi().getComment(request);
+      GetCommentResponse response = await client.getComment(request);
       expect(response, isNotNull);
     });
 
@@ -175,8 +174,7 @@ void main() {
             ..text("Comment Reply Request")
             ..postId(postId ?? ""))
           .build();
-      AddCommentReplyResponse response =
-          await client.getCommentApi().addCommentReply(request);
+      AddCommentReplyResponse response = await client.addCommentReply(request);
       if (response.success) {
         replyId = response.reply!.id;
       }
@@ -191,7 +189,7 @@ void main() {
             ..replyId(replyId ?? ""))
           .build();
       EditCommentReplyResponse response =
-          await client.getCommentApi().editCommentReply(request);
+          await client.editCommentReply(request);
       expect(response, isNotNull);
     });
 

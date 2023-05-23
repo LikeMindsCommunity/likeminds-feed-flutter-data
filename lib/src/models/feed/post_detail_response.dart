@@ -4,28 +4,40 @@ import 'package:json_annotation/json_annotation.dart';
 part 'post_detail_response.g.dart';
 
 class PostDetailResponse {
-  final PostReplies postReplies;
-  final Map<String, User> users;
+  final bool success;
+  final String? errorMessage;
+  final PostReplies? postReplies;
+  final Map<String, User>? users;
   PostDetailResponse({
-    required this.postReplies,
-    required this.users,
+    this.postReplies,
+    required this.success,
+    this.errorMessage,
+    this.users,
   });
   factory PostDetailResponse.fromEntity(PostDetailResponseEntity entity) {
     return PostDetailResponse(
-        postReplies: PostReplies.fromEntity(entity.postReplies),
+        success: entity.success,
+        errorMessage: entity.errorMessage,
+        postReplies: entity.postReplies == null
+            ? null
+            : PostReplies.fromEntity(entity.postReplies!),
         users: entity.users
-            .map((key, value) => MapEntry(key, User.fromEntity(value))));
+            ?.map((key, value) => MapEntry(key, User.fromEntity(value))));
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class PostDetailResponseEntity {
+  final bool success;
+  final String? errorMessage;
   @JsonKey(name: 'post')
-  final PostRepliesEntity postReplies;
-  final Map<String, UserEntity> users;
+  final PostRepliesEntity? postReplies;
+  final Map<String, UserEntity>? users;
   PostDetailResponseEntity({
-    required this.postReplies,
-    required this.users,
+    required this.success,
+    this.errorMessage,
+    this.postReplies,
+    this.users,
   });
   factory PostDetailResponseEntity.fromJson(Map<String, dynamic> data) =>
       _$PostDetailResponseEntityFromJson(data);

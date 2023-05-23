@@ -9,10 +9,10 @@ part of 'universal_feed_response.dart';
 GetFeedResponseEntity _$GetFeedResponseEntityFromJson(
         Map<String, dynamic> json) =>
     GetFeedResponseEntity(
-      posts: (json['posts'] as List<dynamic>)
+      posts: (json['data']['posts'] as List<dynamic>)
           .map((e) => PostEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      users: (json['users'] as Map<String, dynamic>).map(
+      users: (json['data']['users'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
     );

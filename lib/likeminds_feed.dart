@@ -25,12 +25,34 @@ class LMFeedClient {
     _sdkApplication = SDKApplication();
   }
 
-  FeedApi getFeedApi() {
-    return _sdkApplication.getFeedApi();
+  Future<GetFeedResponse?> getUniversalFeed(
+      GetFeedRequest universalFeedRequest) async {
+    final GetFeedResponse? universalFeedResponse = await _sdkApplication
+        .getFeedApi()
+        .getUniversalFeed(universalFeedRequest);
+    return universalFeedResponse;
   }
 
-  CommentApi getCommentApi() {
-    return _sdkApplication.getCommentApi();
+  Future<PostDetailResponse> getPostDetails(
+      PostDetailRequest postDetailRequest) async {
+    final PostDetailResponse postDetailResponse =
+        await _sdkApplication.getFeedApi().getPost(postDetailRequest);
+    return postDetailResponse;
+  }
+
+  Future<GetFeedRoomResponse> getFeedRoom(
+      GetFeedRoomRequest getFeedRoomRequest) async {
+    final GetFeedRoomResponse response =
+        await _sdkApplication.getFeedApi().getFeedRoom(getFeedRoomRequest);
+    return response;
+  }
+
+  Future<GetFeedOfFeedRoomResponse> getFeedOfFeedRoom(
+      GetFeedOfFeedRoomRequest getFeedFeedRoomRequest) async {
+    final GetFeedOfFeedRoomResponse response = await _sdkApplication
+        .getFeedApi()
+        .getFeedOfFeedRoom(getFeedFeedRoomRequest);
+    return response;
   }
 
   Future<InitiateUserResponse> initiateUser(InitiateUserRequest request) async {
@@ -100,15 +122,6 @@ class LMFeedClient {
         .toggleLikeComment(likeCommentRequest);
   }
 
-  Future<GetFeedOfFeedRoomResponse> getFeedOfFeedRoom(
-      GetFeedOfFeedRoomRequest request) async {
-    return await _sdkApplication.getFeedApi().getFeedOfFeedRoom(request);
-  }
-
-  Future<GetFeedRoomResponse> getFeedRoom(GetFeedRoomRequest request) async {
-    return await _sdkApplication.getFeedApi().getFeedRoom(request);
-  }
-
   Future<MemberStateResponse> getMemberState() async {
     return await _sdkApplication.getAccessApi().getMemberState();
   }
@@ -136,6 +149,33 @@ class LMFeedClient {
   Future<GetDeleteReasonResponse> getReportTags(
       GetDeleteReasonRequest request) async {
     return await _sdkApplication.getModerationApi().getDeleteReasons(request);
+  }
+
+  Future<ToggleLikeCommentResponse> toggleLikeComment(
+      ToggleLikeCommentRequest request) async {
+    final ToggleLikeCommentResponse response =
+        await _sdkApplication.getCommentApi().toggleLikeComment(request);
+    return response;
+  }
+
+  Future<GetCommentResponse> getComment(GetCommentRequest request) async {
+    final GetCommentResponse response =
+        await _sdkApplication.getCommentApi().getComment(request);
+    return response;
+  }
+
+  Future<AddCommentReplyResponse> addCommentReply(
+      AddCommentReplyRequest request) async {
+    final AddCommentReplyResponse response =
+        await _sdkApplication.getCommentApi().addCommentReply(request);
+    return response;
+  }
+
+  Future<EditCommentReplyResponse> editCommentReply(
+      EditCommentReplyRequest request) async {
+    final EditCommentReplyResponse response =
+        await _sdkApplication.getCommentApi().editCommentReply(request);
+    return response;
   }
 }
 
