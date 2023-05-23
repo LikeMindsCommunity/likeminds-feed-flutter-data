@@ -53,7 +53,10 @@ class MemberStateResponse {
       errorMessage: json['error_message'],
       createdAt: json['created_at'],
       editRequired: json['edit_required'],
-      member: json['member'] != null ? null : null,
+      member: json['member'] != null
+          ? User.fromEntity(
+              UserEntity.fromJson(json['member'] as Map<String, dynamic>))
+          : null,
       memberRights: json['member_rights'] != null
           ? (json['member_rights'] as List)
               .map((e) => MemberRight.fromJson(e))
