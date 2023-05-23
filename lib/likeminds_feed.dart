@@ -11,8 +11,7 @@ import 'package:likeminds_feed/src/methods/sdk.dart';
 import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const _prod = false;
-// !bool.fromEnvironment('DEBUG');
+const _prod = !bool.fromEnvironment('DEBUG');
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
