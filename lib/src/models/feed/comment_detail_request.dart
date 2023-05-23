@@ -1,10 +1,10 @@
-class CommentDetailRequest {
+class GetCommentRequest {
   final String commentId;
   final String postId;
   final int page;
   // final int pageSize;
 
-  CommentDetailRequest._({
+  GetCommentRequest._({
     required this.commentId,
     required this.page,
     required this.postId,
@@ -17,12 +17,12 @@ class CommentDetailRequest {
       };
 }
 
-class CommentDetailRequestBuilder {
+class GetCommentRequestBuilder {
   String? _commentId;
   String? _postId;
   int? _page;
 
-  CommentDetailRequestBuilder();
+  GetCommentRequestBuilder();
 
   void commentId(String commentId) {
     _commentId = commentId;
@@ -36,8 +36,8 @@ class CommentDetailRequestBuilder {
     _postId = postId;
   }
 
-  CommentDetailRequest build() {
-    return CommentDetailRequest._(
+  GetCommentRequest build() {
+    return GetCommentRequest._(
       commentId: _commentId!,
       page: _page!,
       postId: _postId!,

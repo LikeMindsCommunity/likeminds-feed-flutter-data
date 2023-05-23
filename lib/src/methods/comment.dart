@@ -34,9 +34,8 @@ class CommentApi {
     return response;
   }
 
-  Future<CommentDetailResponse?> getComment(
-      CommentDetailRequest request) async {
-    final CommentDetailResponse? response =
+  Future<GetCommentResponse> getComment(GetCommentRequest request) async {
+    final GetCommentResponse response =
         await commentRepository.getComment(request);
     return response;
   }

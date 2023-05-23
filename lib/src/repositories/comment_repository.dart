@@ -35,13 +35,10 @@ class CommentRepository {
     return GetCommentLikesResponse.fromEntity(responseEntity);
   }
 
-  Future<CommentDetailResponse?> getComment(
-      CommentDetailRequest request) async {
-    final CommentDetailResponseEntity? responseEntity =
+  Future<GetCommentResponse> getComment(GetCommentRequest request) async {
+    final GetCommentResponseEntity responseEntity =
         await commentService.getComment(request);
-    return responseEntity != null
-        ? CommentDetailResponse.fromEntity(responseEntity)
-        : null;
+    return GetCommentResponse.fromEntity(responseEntity);
   }
 
   Future<DeleteCommentResponse> deleteComment(

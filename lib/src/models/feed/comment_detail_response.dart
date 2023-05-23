@@ -3,32 +3,46 @@ import 'package:likeminds_feed/src/models/models.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'comment_detail_response.g.dart';
 
-class CommentDetailResponse {
+class GetCommentResponse {
+  final bool success;
+  final String? errorMessage;
   final CommentReplies? postReplies;
   final Map<String, User>? users;
-  CommentDetailResponse({
+  GetCommentResponse({
     this.postReplies,
+    this.errorMessage,
+    required this.success,
     this.users,
   });
-  factory CommentDetailResponse.fromEntity(CommentDetailResponseEntity entity) {
-    return CommentDetailResponse(
-        postReplies: CommentReplies.fromEntity(entity.postReplies),
-        users: entity.users
-            .map((key, value) => MapEntry(key, User.fromEntity(value))));
+  factory GetCommentResponse.fromEntity(GetCommentResponseEntity entity) {
+    return GetCommentResponse(
+        success: entity.success,
+        errorMessage: entity.errorMessage,
+        postReplies: entity.postReplies != null
+            ? CommentReplies.fromEntity(entity.postReplies!)
+            : null,
+        users: entity.users != null
+            ? entity.users!
+                .map((key, value) => MapEntry(key, User.fromEntity(value)))
+            : null);
   }
 }
 
 @JsonSerializable(explicitToJson: true)
-class CommentDetailResponseEntity {
+class GetCommentResponseEntity {
+  final bool success;
+  final String? errorMessage;
   @JsonKey(name: 'comment')
-  final CommentRepliesEntity postReplies;
-  final Map<String, UserEntity> users;
-  CommentDetailResponseEntity({
-    required this.postReplies,
-    required this.users,
+  final CommentRepliesEntity? postReplies;
+  final Map<String, UserEntity>? users;
+  GetCommentResponseEntity({
+    this.postReplies,
+    required this.success,
+    this.errorMessage,
+    this.users,
   });
-  factory CommentDetailResponseEntity.fromJson(Map<String, dynamic> data) =>
-      _$CommentDetailResponseEntityFromJson(data);
+  factory GetCommentResponseEntity.fromJson(Map<String, dynamic> data) =>
+      _$GetCommentResponseEntityFromJson(data);
 
-  Map<String, dynamic> toJson() => _$CommentDetailResponseEntityToJson(this);
+  Map<String, dynamic> toJson() => _$GetCommentResponseEntityToJson(this);
 }

@@ -84,8 +84,7 @@ class CommentService {
     }
   }
 
-  Future<CommentDetailResponseEntity?> getComment(
-      CommentDetailRequest request) async {
+  Future<GetCommentResponseEntity> getComment(GetCommentRequest request) async {
     try {
       final response = await apiClient.client().get(
             apiClient.getEndpoints.getCommentEndPoint(
@@ -95,13 +94,18 @@ class CommentService {
             ),
           );
       print(response.data);
-      return CommentDetailResponseEntity.fromJson(response.data['data']);
+      return GetCommentResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
       print(e.toString());
+      return GetCommentResponseEntity(
+          success: false,
+          errorMessage: 'An error occurred, please try again later');
     } catch (e) {
       print(e);
+      return GetCommentResponseEntity(
+          success: false,
+          errorMessage: 'An error occurred, please try again later');
     }
-    return null;
   }
 
   Future<DeleteCommentResponseEntity> deleteComment(
