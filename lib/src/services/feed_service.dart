@@ -19,7 +19,7 @@ class FeedService {
             ),
           );
       debugPrint(response.data);
-      return PostDetailResponseEntity.fromJson(response.data);
+      return PostDetailResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
       debugPrint(e.toString());
       return PostDetailResponseEntity(

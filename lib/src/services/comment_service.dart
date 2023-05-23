@@ -19,7 +19,7 @@ class CommentService {
             ),
           );
       debugPrint(response.data);
-      return AddCommentResponseEntity.fromJson(response.data);
+      return AddCommentResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
       debugPrint(e.toString());
       return AddCommentResponseEntity(

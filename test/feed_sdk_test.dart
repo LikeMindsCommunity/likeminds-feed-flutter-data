@@ -10,8 +10,7 @@ import 'environment/test_env.dart';
 import 'test_callback.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const prod = false;
-// !bool.fromEnvironment('DEBUG');
+const prod = !bool.fromEnvironment('DEBUG');
 
 //Testing credentials, and callback
 final TestCallback testingCallback = TestCallback();
@@ -19,6 +18,8 @@ final String testingBetaAPIKey = EnvTest.testingBetaAPIKey;
 final String testingBetaBotID = EnvTest.testingBetaBotID;
 final String testingProdAPIKey = EnvTest.testingProdAPIKey;
 final String testingProdBotID = EnvTest.testingProdBotID;
+
+String? postId;
 
 void main() {
   debugPrint("Initiating unit tests now...");
@@ -49,7 +50,6 @@ void main() {
       expect(response, isNotNull);
     });
 
-    String? postId;
     test('Testing Add Post', () async {
       AddPostRequest request = (AddPostRequestBuilder()
             ..attachments([])
