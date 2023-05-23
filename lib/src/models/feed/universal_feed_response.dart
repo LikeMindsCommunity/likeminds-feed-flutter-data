@@ -4,18 +4,17 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'universal_feed_response.g.dart';
 
-class UniversalFeedResponse {
+class GetFeedResponse {
   final List<Post> posts;
   final Map<String, User> users;
 
-  UniversalFeedResponse({
+  GetFeedResponse({
     required this.posts,
     required this.users,
   });
 
-  factory UniversalFeedResponse.fromEntity(
-      {required UniversalFeedResponseEntity entity}) {
-    return UniversalFeedResponse(
+  factory GetFeedResponse.fromEntity({required GetFeedResponseEntity entity}) {
+    return GetFeedResponse(
         posts: entity.posts.map((e) => Post.fromEntity(postEntity: e)).toList(),
         users: entity.users
             .map((key, value) => MapEntry(key, User.fromEntity(value))));
@@ -23,15 +22,15 @@ class UniversalFeedResponse {
 }
 
 @JsonSerializable(explicitToJson: true)
-class UniversalFeedResponseEntity {
+class GetFeedResponseEntity {
   final List<PostEntity> posts;
   final Map<String, UserEntity> users;
-  UniversalFeedResponseEntity({
+  GetFeedResponseEntity({
     required this.posts,
     required this.users,
   });
-  factory UniversalFeedResponseEntity.fromJson(Map<String, dynamic> data) =>
-      _$UniversalFeedResponseEntityFromJson(data);
+  factory GetFeedResponseEntity.fromJson(Map<String, dynamic> data) =>
+      _$GetFeedResponseEntityFromJson(data);
 
-  Map<String, dynamic> toJson() => _$UniversalFeedResponseEntityToJson(this);
+  Map<String, dynamic> toJson() => _$GetFeedResponseEntityToJson(this);
 }

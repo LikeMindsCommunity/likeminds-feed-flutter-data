@@ -6,9 +6,9 @@ part of 'tag_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TagResponseModelEntity _$TagResponseModelEntityFromJson(
+GetTaggingListResponseEntity _$GetTaggingListResponseEntityFromJson(
         Map<String, dynamic> json) =>
-    TagResponseModelEntity(
+    GetTaggingListResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
       groupTags: (json['data']['group_tags'] as List<dynamic>?)
@@ -19,8 +19,8 @@ TagResponseModelEntity _$TagResponseModelEntityFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$TagResponseModelEntityToJson(
-        TagResponseModelEntity instance) =>
+Map<String, dynamic> _$GetTaggingListResponseEntityToJson(
+        GetTaggingListResponseEntity instance) =>
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,

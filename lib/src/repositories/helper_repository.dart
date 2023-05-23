@@ -6,11 +6,11 @@ class HelperRepository {
 
   HelperRepository({required this.helperService});
 
-  Future<TagResponseModel> getTags({
-    required TagRequestModel request,
+  Future<GetTaggingListResponse> getTaggingList({
+    required GetTaggingListRequest request,
   }) async {
-    final response = await helperService.getTags(request: request);
-    return TagResponseModel.fromEntity(response);
+    final response = await helperService.getTaggingList(request: request);
+    return GetTaggingListResponse.fromEntity(response);
   }
 
   Future<DecodeUrlResponse> decodeUrl({

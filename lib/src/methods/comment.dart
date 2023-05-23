@@ -6,23 +6,23 @@ class CommentApi {
 
   final CommentRepository commentRepository;
 
-  Future<AddCommentResponse?> addComment(
+  Future<AddCommentResponse> addComment(
       AddCommentRequest addCommentRequest) async {
-    final AddCommentResponse? addCommentResponse =
+    final AddCommentResponse addCommentResponse =
         await commentRepository.addComment(addCommentRequest);
     return addCommentResponse;
   }
 
-  Future<EditCommentResponse?> editComment(
+  Future<EditCommentResponse> editComment(
       EditCommentRequest editCommentRequest) async {
-    final EditCommentResponse? editCommentResponse =
+    final EditCommentResponse editCommentResponse =
         await commentRepository.editComment(editCommentRequest);
     return editCommentResponse;
   }
 
-  Future<ToggleLikeCommentResponse?> toggleLikeComment(
+  Future<ToggleLikeCommentResponse> toggleLikeComment(
       ToggleLikeCommentRequest request) async {
-    final ToggleLikeCommentResponse? response =
+    final ToggleLikeCommentResponse response =
         await commentRepository.toggleLikeComment(request);
     return response;
   }
@@ -34,9 +34,8 @@ class CommentApi {
     return response;
   }
 
-  Future<CommentDetailResponse?> getComment(
-      CommentDetailRequest request) async {
-    final CommentDetailResponse? response =
+  Future<GetCommentResponse> getComment(GetCommentRequest request) async {
+    final GetCommentResponse response =
         await commentRepository.getComment(request);
     return response;
   }
@@ -48,16 +47,16 @@ class CommentApi {
     return response;
   }
 
-  Future<AddCommentReplyResponse?> addCommentReply(
+  Future<AddCommentReplyResponse> addCommentReply(
       AddCommentReplyRequest request) async {
-    final AddCommentReplyResponse? response =
+    final AddCommentReplyResponse response =
         await commentRepository.addCommentReply(request);
     return response;
   }
 
-  Future<EditCommentReplyResponse?> editCommentReply(
+  Future<EditCommentReplyResponse> editCommentReply(
       EditCommentReplyRequest request) async {
-    final EditCommentReplyResponse? response =
+    final EditCommentReplyResponse response =
         await commentRepository.editCommentReply(request);
     return response;
   }

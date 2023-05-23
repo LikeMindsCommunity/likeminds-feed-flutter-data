@@ -27,8 +27,8 @@ class FeedService {
     return null;
   }
 
-  Future<UniversalFeedResponseEntity?> getUniversalFeed(
-      UniversalFeedRequest universalFeedRequest) async {
+  Future<GetFeedResponseEntity?> getUniversalFeed(
+      GetFeedRequest universalFeedRequest) async {
     print(apiClient.getEndpoints
         .getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
@@ -43,7 +43,7 @@ class FeedService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      return UniversalFeedResponseEntity.fromJson(response.data['data']);
+      return GetFeedResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
       print(e.toString() + "dsa");
     } catch (e) {

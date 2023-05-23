@@ -5,33 +5,27 @@ class CommentRepository {
   CommentRepository({required this.commentService});
   final CommentService commentService;
 
-  Future<AddCommentResponse?> addComment(
+  Future<AddCommentResponse> addComment(
       AddCommentRequest addCommentRequest) async {
-    final AddCommentResponseEntity? responseEntity =
+    final AddCommentResponseEntity responseEntity =
         await commentService.addComment(addCommentRequest);
 
-    return responseEntity != null
-        ? AddCommentResponse.fromEntity(responseEntity)
-        : null;
+    return AddCommentResponse.fromEntity(responseEntity);
   }
 
-  Future<EditCommentResponse?> editComment(
+  Future<EditCommentResponse> editComment(
       EditCommentRequest editCommentRequest) async {
-    final EditCommentResponseEntity? responseEntity =
+    final EditCommentResponseEntity responseEntity =
         await commentService.editComment(editCommentRequest);
 
-    return responseEntity != null
-        ? EditCommentResponse.fromEntity(responseEntity)
-        : null;
+    return EditCommentResponse.fromEntity(responseEntity);
   }
 
-  Future<ToggleLikeCommentResponse?> toggleLikeComment(
+  Future<ToggleLikeCommentResponse> toggleLikeComment(
       ToggleLikeCommentRequest request) async {
-    final ToggleLikeCommentResponseEntity? responseEntity =
+    final ToggleLikeCommentResponseEntity responseEntity =
         await commentService.toggleLikeComment(request);
-    return responseEntity != null
-        ? ToggleLikeCommentResponse.fromEntity(responseEntity)
-        : null;
+    return ToggleLikeCommentResponse.fromEntity(responseEntity);
   }
 
   Future<GetCommentLikesResponse> getCommentLikes(
@@ -41,13 +35,10 @@ class CommentRepository {
     return GetCommentLikesResponse.fromEntity(responseEntity);
   }
 
-  Future<CommentDetailResponse?> getComment(
-      CommentDetailRequest request) async {
-    final CommentDetailResponseEntity? responseEntity =
+  Future<GetCommentResponse> getComment(GetCommentRequest request) async {
+    final GetCommentResponseEntity responseEntity =
         await commentService.getComment(request);
-    return responseEntity != null
-        ? CommentDetailResponse.fromEntity(responseEntity)
-        : null;
+    return GetCommentResponse.fromEntity(responseEntity);
   }
 
   Future<DeleteCommentResponse> deleteComment(
@@ -57,21 +48,17 @@ class CommentRepository {
     return DeleteCommentResponse.fromEntity(responseEntity);
   }
 
-  Future<AddCommentReplyResponse?> addCommentReply(
+  Future<AddCommentReplyResponse> addCommentReply(
       AddCommentReplyRequest request) async {
-    final AddCommentReplyResponseEntity? responseEntity =
+    final AddCommentReplyResponseEntity responseEntity =
         await commentService.addCommentReply(request);
-    return responseEntity != null
-        ? AddCommentReplyResponse.fromEntity(responseEntity)
-        : null;
+    return AddCommentReplyResponse.fromEntity(responseEntity);
   }
 
-  Future<EditCommentReplyResponse?> editCommentReply(
+  Future<EditCommentReplyResponse> editCommentReply(
       EditCommentReplyRequest request) async {
-    final EditCommentReplyResponseEntity? responseEntity =
+    final EditCommentReplyResponseEntity responseEntity =
         await commentService.editCommentReply(request);
-    return responseEntity != null
-        ? EditCommentReplyResponse.fromEntity(responseEntity)
-        : null;
+    return EditCommentReplyResponse.fromEntity(responseEntity);
   }
 }
