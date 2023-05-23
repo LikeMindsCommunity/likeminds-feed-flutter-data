@@ -3,6 +3,7 @@ import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/moderation.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
+import 'package:likeminds_feed/src/repositories/comment_repository.dart';
 import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
@@ -34,6 +35,14 @@ class SDKApplication {
     return FeedApi(
       feedRepository: GetIt.instance.get<FeedRepository>(
         instanceName: DIService.kInstanceFeedRepository,
+      ),
+    );
+  }
+
+  CommentApi getCommentApi() {
+    return CommentApi(
+      commentRepository: GetIt.instance.get<CommentRepository>(
+        instanceName: DIService.kInstanceCommentRepository,
       ),
     );
   }

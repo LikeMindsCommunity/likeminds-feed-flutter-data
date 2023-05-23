@@ -11,7 +11,8 @@ import 'package:likeminds_feed/src/methods/sdk.dart';
 import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const _prod = !bool.fromEnvironment('DEBUG');
+const _prod = false;
+// !bool.fromEnvironment('DEBUG');
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
@@ -26,6 +27,10 @@ class LMFeedClient {
 
   FeedApi getFeedApi() {
     return _sdkApplication.getFeedApi();
+  }
+
+  CommentApi getCommentApi() {
+    return _sdkApplication.getCommentApi();
   }
 
   Future<InitiateUserResponse> initiateUser(InitiateUserRequest request) async {
@@ -68,29 +73,31 @@ class LMFeedClient {
   Future<DeleteCommentResponse> deleteComment(
       DeleteCommentRequest deleteCommentRequest) async {
     return await _sdkApplication
-        .getFeedApi()
+        .getCommentApi()
         .deleteComment(deleteCommentRequest);
   }
 
   Future<AddCommentResponse?> addComment(
       AddCommentRequest addCommentRequest) async {
-    return await _sdkApplication.getFeedApi().addComment(addCommentRequest);
+    return await _sdkApplication.getCommentApi().addComment(addCommentRequest);
   }
 
   Future<EditCommentResponse?> editComment(
       EditCommentRequest editCommentRequest) async {
-    return await _sdkApplication.getFeedApi().editComment(editCommentRequest);
+    return await _sdkApplication
+        .getCommentApi()
+        .editComment(editCommentRequest);
   }
 
   Future<GetCommentLikesResponse> getCommentLikes(
       GetCommentLikesRequest request) async {
-    return await _sdkApplication.getFeedApi().getCommentLikes(request);
+    return await _sdkApplication.getCommentApi().getCommentLikes(request);
   }
 
   Future<ToggleLikeCommentResponse?> likeComment(
       ToggleLikeCommentRequest likeCommentRequest) async {
     return await _sdkApplication
-        .getFeedApi()
+        .getCommentApi()
         .toggleLikeComment(likeCommentRequest);
   }
 

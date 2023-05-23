@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
@@ -8,8 +7,30 @@ class FeedService {
   FeedService({required this.apiClient});
   // final String authHost = "https://betaauth.likeminds.community/feed/";
 
+  Future<PostDetailResponseEntity?> getPost(
+      PostDetailRequest postDetailRequest) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getPostEndPoint(
+                postDetailRequest.postId, postDetailRequest.page),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      print(response.data);
+      return PostDetailResponseEntity.fromJson(response.data['data']);
+    } on DioError catch (e) {
+      print(e.toString() + "dsa");
+    } catch (e) {
+      print(e);
+    }
+    return null;
+  }
+
   Future<UniversalFeedResponseEntity?> getUniversalFeed(
       UniversalFeedRequest universalFeedRequest) async {
+    print(apiClient.getEndpoints
+        .getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
       final response = await apiClient.client().get(
             apiClient.getEndpoints
@@ -24,9 +45,9 @@ class FeedService {
           );
       return UniversalFeedResponseEntity.fromJson(response.data['data']);
     } on DioError catch (e) {
-      debugPrint(e.toString());
+      print(e.toString() + "dsa");
     } catch (e) {
-      debugPrint(e.toString());
+      print(e);
     }
     return null;
   }

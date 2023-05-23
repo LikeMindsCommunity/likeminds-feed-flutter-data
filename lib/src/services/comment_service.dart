@@ -6,47 +6,6 @@ class CommentService {
   final ApiClient apiClient;
   CommentService({required this.apiClient});
 
-  Future<PostDetailResponseEntity?> getPost(
-      PostDetailRequest postDetailRequest) async {
-    try {
-      final response = await apiClient.client().get(
-            apiClient.getEndpoints.getPostEndPoint(
-                postDetailRequest.postId, postDetailRequest.page),
-            options: Options(
-              headers: {'Authorization': '${apiClient.accessToken}'},
-            ),
-          );
-      print(response.data);
-      return PostDetailResponseEntity.fromJson(response.data['data']);
-    } on DioError catch (e) {
-      print(e.toString() + "dsa");
-    } catch (e) {
-      print(e);
-    }
-    return null;
-  }
-
-  Future<UniversalFeedResponseEntity?> getUniversalFeed(
-      UniversalFeedRequest universalFeedRequest) async {
-    try {
-      final response = await apiClient.client().get(
-            apiClient.getEndpoints
-                .getUniversalFeedEndPoint(universalFeedRequest.page),
-            // data: universalFeedRequest.toJson(),
-            options: Options(
-              headers: {'Authorization': '${apiClient.accessToken}'},
-            ),
-          );
-      print(response.data);
-      return UniversalFeedResponseEntity.fromJson(response.data['data']);
-    } on DioError catch (e) {
-      print(e.toString() + "dsa");
-    } catch (e) {
-      print(e);
-    }
-    return null;
-  }
-
   Future<AddCommentResponseEntity?> addComment(
       AddCommentRequest addCommentRequest) async {
     try {
