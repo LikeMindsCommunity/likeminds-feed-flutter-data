@@ -1,10 +1,13 @@
 # Main Github Actions CI/CD file
-name: Merge to development
+name: Merge to master
 
 on:
+  pull_request:
+    branches:
+      - master
   push:
     branches:
-      - development
+      - master
 
 env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
@@ -32,8 +35,24 @@ jobs:
       - name: Set up Flutter and dependencies
         run: flutter pub get
 
-      - name: Run tests
-        run: flutter test --dart-define=DEBUG=true
+      - name: Run PROD tests
+        run: flutter test
 
-      - name: Dry run for pub.dev
-        run: flutter pub publish --dry-run
+      - name: Get version
+        id: yq
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq -r '.version' 'pubspec.yaml'
+
+      - name: Print version and set in env
+        run: echo "VERSION_CODE=$(echo ${{ steps.yq.outputs.result }} | cut -c 1-6)" >> $GITHUB_ENV
+
+      - name: Test
+        run: echo "The latest version is $VERSION_CODE"
+
+      - name: Make a new release and tag
+        uses: avakar/tag-and-release@v1
+        with:
+          tag_name: "v${{ env.VERSION_CODE }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

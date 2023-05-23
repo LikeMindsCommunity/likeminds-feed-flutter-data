@@ -1,8 +1,11 @@
 # Main Github Actions CI/CD file
 name: Feed SDK test on every PR
-on: pull_request
+on:
+  pull_request:
+    branches-ignore: #exclude the branches from the test
+      - main
 jobs:
-  check-bats-version:
+  run-flutter-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -14,5 +17,4 @@ jobs:
         with:
           flutter-version: 3.10.0 #Flutter latest version defined
       - run: flutter pub get #installing the plugins for the flutter project
-      - run: flutter test #running flutter test
-
+      - run: flutter test --dart-define=DEBUG=true
