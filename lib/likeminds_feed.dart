@@ -37,8 +37,7 @@ class LMFeedClient {
     return await _sdkApplication.getAuthApi().initiateUser(request);
   }
 
-  Future<UniversalFeedResponse?> getUniversalFeed(
-      UniversalFeedRequest request) async {
+  Future<GetFeedResponse?> getFeed(GetFeedRequest request) async {
     return await _sdkApplication.getFeedApi().getUniversalFeed(request);
   }
 
@@ -77,7 +76,7 @@ class LMFeedClient {
         .deleteComment(deleteCommentRequest);
   }
 
-  Future<AddCommentResponse?> addComment(
+  Future<AddCommentResponse> addComment(
       AddCommentRequest addCommentRequest) async {
     return await _sdkApplication.getCommentApi().addComment(addCommentRequest);
   }
@@ -119,8 +118,11 @@ class LMFeedClient {
     return await LMNotifications.registerDevice(request);
   }
 
-  Future<TagResponseModel> getTags({required TagRequestModel request}) async {
-    return await _sdkApplication.getHelperApi().getTags(request: request);
+  Future<GetTaggingListResponse> getTaggingList(
+      {required GetTaggingListRequest request}) async {
+    return await _sdkApplication
+        .getHelperApi()
+        .getTaggingList(request: request);
   }
 
   void routeToProfile(String userId) {

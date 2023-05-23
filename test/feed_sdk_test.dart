@@ -41,11 +41,11 @@ void main() {
     });
 
     test('Testing Get Universal Feed', () async {
-      UniversalFeedRequest request = (UniversalFeedRequestBuilder()
+      GetFeedRequest request = (GetFeedRequestBuilder()
             ..page(1)
             ..pageSize(10))
           .build();
-      UniversalFeedResponse? response = await client.getUniversalFeed(request);
+      GetFeedResponse? response = await client.getFeed(request);
       expect(response, isNotNull);
     });
   });

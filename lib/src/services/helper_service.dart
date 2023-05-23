@@ -13,8 +13,8 @@ class HelperService {
     );
   }
 
-  Future<TagResponseModelEntity> getTags(
-      {required TagRequestModel request}) async {
+  Future<GetTaggingListResponseEntity> getTaggingList(
+      {required GetTaggingListRequest request}) async {
     try {
       final response = await apiClient.client().get(
         apiClient.getEndpoints.tagsEndpoint,
@@ -31,16 +31,16 @@ class HelperService {
         },
       );
       if (response.data['success'] == true) {
-        return TagResponseModelEntity.fromJson(response.data);
+        return GetTaggingListResponseEntity.fromJson(response.data);
       } else {
-        return TagResponseModelEntity(
+        return GetTaggingListResponseEntity(
           success: false,
           errorMessage: response.data['message'],
         );
       }
     } on DioError catch (e) {
       print("Error from get tags: $e");
-      return TagResponseModelEntity(
+      return GetTaggingListResponseEntity(
         success: false,
         errorMessage: e.message,
       );

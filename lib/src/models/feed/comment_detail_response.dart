@@ -4,11 +4,11 @@ import 'package:json_annotation/json_annotation.dart';
 part 'comment_detail_response.g.dart';
 
 class CommentDetailResponse {
-  final CommentReplies postReplies;
-  final Map<String, User> users;
+  final CommentReplies? postReplies;
+  final Map<String, User>? users;
   CommentDetailResponse({
-    required this.postReplies,
-    required this.users,
+    this.postReplies,
+    this.users,
   });
   factory CommentDetailResponse.fromEntity(CommentDetailResponseEntity entity) {
     return CommentDetailResponse(

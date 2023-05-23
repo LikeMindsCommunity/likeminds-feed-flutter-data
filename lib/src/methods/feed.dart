@@ -6,9 +6,9 @@ class FeedApi {
 
   final FeedRepository feedRepository;
 
-  Future<UniversalFeedResponse?> getUniversalFeed(
-      UniversalFeedRequest universalFeedRequest) async {
-    final UniversalFeedResponse? universalFeedResponse =
+  Future<GetFeedResponse?> getUniversalFeed(
+      GetFeedRequest universalFeedRequest) async {
+    final GetFeedResponse? universalFeedResponse =
         await feedRepository.getUniversalFeed(universalFeedRequest);
     return universalFeedResponse;
   }
