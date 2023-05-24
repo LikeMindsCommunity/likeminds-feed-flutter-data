@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/environment/env.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 import 'package:simple_s3/simple_s3.dart';
@@ -38,7 +38,7 @@ class MediaService {
       );
       return result;
     } on SimpleS3Errors catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return null;
     }
   }
@@ -56,7 +56,7 @@ class MediaService {
       );
       return result;
     } on SimpleS3Errors catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return null;
     }
   }

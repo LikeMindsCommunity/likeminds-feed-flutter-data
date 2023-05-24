@@ -1,3 +1,4 @@
+import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
 
 class AccessRepository {
@@ -9,7 +10,8 @@ class AccessRepository {
   //   return await accessService.getAccess(accesType);
   // }
 
-  Future<bool> getMemberState() async {
-    return await accessService.getMemberState();
+  Future<MemberStateResponse> getMemberState() async {
+    final response = await accessService.getMemberState();
+    return MemberStateResponse.fromEntity(response);
   }
 }

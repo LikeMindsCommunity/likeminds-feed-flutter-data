@@ -36,3 +36,7 @@ Moderation support
 ## 1.1.0
 
 Edit Comment & Reply
+
+# 1.1.1
+
+Hotfix for pagination in likes

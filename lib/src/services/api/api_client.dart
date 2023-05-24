@@ -2,7 +2,6 @@
 import 'package:dio/dio.dart';
 import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/environment/env.dart';
-import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/token_interceptor.dart';
 import 'package:likeminds_feed/src/services/api/log_interceptor.dart';
 
@@ -29,12 +28,12 @@ class ApiClient {
   set setUserId(int? userId) => this.userId = userId;
   set setCommunityId(int? communityId) => this.communityId = communityId;
 
-  get getUserId => userId;
-  get getCommunityId => communityId;
-  get getAccessToken => accessToken;
-  get getRefreshToken => refreshToken;
-  get getApiKey => apiKey;
-  get getIsProduction => isProduction;
+  int? get getUserId => userId;
+  int? get getCommunityId => communityId;
+  String? get getAccessToken => accessToken;
+  String? get getRefreshToken => refreshToken;
+  String get getApiKey => apiKey;
+  bool get getIsProduction => isProduction;
   EndPoints get getEndpoints => endPoints;
 
   void initTokens(String accessToken, String refreshToken) {
@@ -68,10 +67,4 @@ class ApiClient {
     dio.interceptors.add(TokenInterceptor(apiClient: this));
     return dio;
   }
-
-  // Future<bool> getAccessType(String accessType) async =>
-  //     await AccessService(apiClient: this).getAccess(accessType);
-
-  Future<bool> getMemberState() async =>
-      await AccessService(apiClient: this).getMemberState();
 }

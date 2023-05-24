@@ -38,7 +38,7 @@ class InitiateUserResponse {
     );
   }
 
-  toEntity() {
+  InitiateUserResponseEntity toEntity() {
     return InitiateUserResponseEntity(
       success: success,
       appAccess: appAccess,

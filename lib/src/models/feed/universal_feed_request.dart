@@ -1,8 +1,8 @@
-class UniversalFeedRequest {
+class GetFeedRequest {
   final int page;
   final int pageSize;
 
-  UniversalFeedRequest._({
+  GetFeedRequest._({
     required this.page,
     required this.pageSize,
   });
@@ -13,11 +13,11 @@ class UniversalFeedRequest {
       };
 }
 
-class UniversalFeedRequestBuilder {
+class GetFeedRequestBuilder {
   int? _page;
   int? _pageSize;
 
-  UniversalFeedRequestBuilder();
+  GetFeedRequestBuilder();
 
   void page(int page) {
     _page = page;
@@ -27,8 +27,8 @@ class UniversalFeedRequestBuilder {
     _pageSize = pageSize;
   }
 
-  UniversalFeedRequest build() {
-    return UniversalFeedRequest._(
+  GetFeedRequest build() {
+    return GetFeedRequest._(
       page: _page!,
       pageSize: _pageSize!,
     );

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
@@ -24,7 +25,7 @@ class PostService extends IPostService {
   @override
   Future<AddPostResponseEntity> addPost(AddPostRequest addPostRequest) async {
     try {
-      print("Access granted");
+      debugPrint("Access granted");
       final response = await apiClient.client().post(
             apiClient.getEndpoints.addPostEndpoint,
             data: addPostRequest.toJson(),
@@ -34,7 +35,7 @@ class PostService extends IPostService {
               },
             ),
           );
-      print("Response from add post: ${response.data}");
+      debugPrint("Response from add post: ${response.data}");
       AddPostResponseEntity addPostResponseEntity =
           AddPostResponseEntity.fromJson(response.data);
       return addPostResponseEntity;
@@ -60,12 +61,12 @@ class PostService extends IPostService {
               },
             ),
           );
-      print("Response from get post: ${response.data}");
+      debugPrint("Response from get post: ${response.data}");
       GetPostResponseEntity getPostResponseEntity =
           GetPostResponseEntity.fromJson(response.data);
       return getPostResponseEntity;
     } on DioError catch (e) {
-      print("Error from get post: $e");
+      debugPrint("Error from get post: $e");
       GetPostResponseEntity getPostResponseEntity =
           GetPostResponseEntity.fromJson(e.response?.data);
       return getPostResponseEntity;
@@ -85,12 +86,12 @@ class PostService extends IPostService {
               },
             ),
           );
-      print("Response from delete post: ${response.data}");
+      debugPrint("Response from delete post: ${response.data}");
       DeletePostResponseEntity deletePostResponseEntity =
           DeletePostResponseEntity.fromJson(response.data);
       return deletePostResponseEntity;
     } on DioError catch (e) {
-      print("Error from delete post: ${e.response?.data}");
+      debugPrint("Error from delete post: ${e.response?.data}");
       DeletePostResponseEntity deletePostResponseEntity =
           DeletePostResponseEntity.fromJson(e.response?.data);
       return deletePostResponseEntity;
@@ -109,7 +110,7 @@ class PostService extends IPostService {
               },
             ),
           );
-      print("Response from like post: ${response.data}");
+      debugPrint("Response from like post: ${response.data}");
       final postResponse = await getPost(
         (GetPostRequestBuilder()
               ..postId(likePostRequest.postId)
@@ -122,7 +123,7 @@ class PostService extends IPostService {
       likePostResponseEntity.setLikes = postResponse.post!.likeCount;
       return likePostResponseEntity;
     } on DioError catch (e) {
-      print("Error from like post: ${e.response?.data}");
+      debugPrint("Error from like post: ${e.response?.data}");
       LikePostResponseEntity likePostResponseEntity =
           LikePostResponseEntity.fromJson(e.response?.data);
       return likePostResponseEntity;
@@ -135,18 +136,22 @@ class PostService extends IPostService {
     try {
       final response = await apiClient.client().get(
             "${apiClient.getEndpoints.addPostEndpoint}/${getPostLikesRequest.postId}/like",
+            queryParameters: {
+              'page': getPostLikesRequest.page,
+              'page_size': getPostLikesRequest.pageSize,
+            },
             options: Options(
               headers: {
                 'Authorization': '${apiClient.accessToken}',
               },
             ),
           );
-      print("Response from get likes on post: ${response.data}");
+      debugPrint("Response from get likes on post: ${response.data}");
       GetPostLikesResponseEntity getPostLikesResponseEntity =
           GetPostLikesResponseEntity.fromJson(response.data);
       return getPostLikesResponseEntity;
     } on DioError catch (e) {
-      print("Error from like post: ${e.response?.data}");
+      debugPrint("Error from like post: ${e.response?.data}");
       return GetPostLikesResponseEntity(
         success: false,
         errorMessage: "${e.response?.data}",
@@ -169,7 +174,7 @@ class PostService extends IPostService {
           PinPostResponseEntity.fromJson(response.data);
       return pinPostResponseEntity;
     } on DioError catch (e) {
-      print("Error from pin post: ${e.response?.data}");
+      debugPrint("Error from pin post: ${e.response?.data}");
       PinPostResponseEntity pinPostResponseEntity =
           PinPostResponseEntity(success: false, errorMessage: e.message);
       return pinPostResponseEntity;
@@ -193,7 +198,7 @@ class PostService extends IPostService {
           EditPostResponseEntity.fromJson(response.data);
       return editPostResponseEntity;
     } on DioError catch (e) {
-      print("Error from edit post: ${e.response?.data}");
+      debugPrint("Error from edit post: ${e.response?.data}");
       EditPostResponseEntity editPostResponseEntity =
           EditPostResponseEntity(success: false, errorMessage: e.message);
       return editPostResponseEntity;

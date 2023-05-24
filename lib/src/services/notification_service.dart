@@ -24,7 +24,7 @@ class NotificationService implements INotificationService {
             options: Options(
               headers: {
                 'x-member-id': '${request.memberId}',
-                'x-api-key': '${apiClient.getApiKey}',
+                'x-api-key': apiClient.getApiKey,
                 'x-device-id': request.deviceId,
               },
             ),

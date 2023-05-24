@@ -7,18 +7,21 @@ part of 'post_detail_response.dart';
 // **************************************************************************
 
 PostDetailResponseEntity _$PostDetailResponseEntityFromJson(
-        Map<String, dynamic> json) =>
-    PostDetailResponseEntity(
-      postReplies:
-          PostRepliesEntity.fromJson(json['post'] as Map<String, dynamic>),
-      users: (json['users'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
-      ),
-    );
+    Map<String, dynamic> json) {
+  return PostDetailResponseEntity(
+    success: json['success'] as bool,
+    errorMessage: json['error_message'] as String?,
+    postReplies: PostRepliesEntity.fromJson(
+        json['data']['post'] as Map<String, dynamic>),
+    users: (json['data']['users'] as Map<String, dynamic>).map(
+      (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
+    ),
+  );
+}
 
 Map<String, dynamic> _$PostDetailResponseEntityToJson(
         PostDetailResponseEntity instance) =>
     <String, dynamic>{
-      'post': instance.postReplies.toJson(),
-      'users': instance.users.map((k, e) => MapEntry(k, e.toJson())),
+      'post': instance.postReplies?.toJson(),
+      'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
     };

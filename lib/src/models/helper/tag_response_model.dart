@@ -4,21 +4,22 @@ import 'package:likeminds_feed/src/models/models.dart';
 
 part 'tag_response_model.g.dart';
 
-class TagResponseModel {
+class GetTaggingListResponse {
   final bool success;
   final String? errorMessage;
   final List<GroupTag>? groupTags;
   final List<UserTag>? members;
 
-  TagResponseModel({
+  GetTaggingListResponse({
     required this.success,
     this.errorMessage,
     this.groupTags,
     this.members,
   });
 
-  factory TagResponseModel.fromEntity(TagResponseModelEntity entity) {
-    return TagResponseModel(
+  factory GetTaggingListResponse.fromEntity(
+      GetTaggingListResponseEntity entity) {
+    return GetTaggingListResponse(
       success: entity.success,
       errorMessage: entity.errorMessage,
       groupTags: entity.groupTags?.map((e) => GroupTag.fromEntity(e)).toList(),
@@ -26,8 +27,8 @@ class TagResponseModel {
     );
   }
 
-  TagResponseModelEntity toEntity() {
-    return TagResponseModelEntity(
+  GetTaggingListResponseEntity toEntity() {
+    return GetTaggingListResponseEntity(
       success: success,
       errorMessage: errorMessage,
       groupTags: groupTags?.map((e) => e.toEntity()).toList(),
@@ -37,7 +38,7 @@ class TagResponseModel {
 }
 
 @JsonSerializable()
-class TagResponseModelEntity {
+class GetTaggingListResponseEntity {
   final bool success;
 
   @JsonKey(name: 'error_message')
@@ -49,15 +50,15 @@ class TagResponseModelEntity {
   @JsonKey(name: 'community_members')
   final List<UserTagEntity>? members;
 
-  TagResponseModelEntity({
+  GetTaggingListResponseEntity({
     required this.success,
     this.errorMessage,
     this.groupTags,
     this.members,
   });
 
-  factory TagResponseModelEntity.fromJson(Map<String, dynamic> json) =>
-      _$TagResponseModelEntityFromJson(json);
+  factory GetTaggingListResponseEntity.fromJson(Map<String, dynamic> json) =>
+      _$GetTaggingListResponseEntityFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TagResponseModelEntityToJson(this);
+  Map<String, dynamic> toJson() => _$GetTaggingListResponseEntityToJson(this);
 }
