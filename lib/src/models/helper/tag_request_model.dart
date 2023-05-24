@@ -1,10 +1,10 @@
-class TagRequestModel {
+class GetTaggingListRequest {
   final int? feedroomId;
   final int? page;
   final int? pageSize;
   final String? searchQuery;
 
-  TagRequestModel._({
+  GetTaggingListRequest._({
     this.feedroomId,
     this.page,
     this.pageSize,
@@ -21,7 +21,7 @@ class TagRequestModel {
   }
 }
 
-class TagRequestModelBuilder {
+class GetTaggingListRequestBuilder {
   int? _feedroomId;
   int? _page;
   int? _pageSize;
@@ -43,8 +43,8 @@ class TagRequestModelBuilder {
     _searchQuery = searchQuery;
   }
 
-  TagRequestModel build() {
-    return TagRequestModel._(
+  GetTaggingListRequest build() {
+    return GetTaggingListRequest._(
       feedroomId: _feedroomId,
       page: _page,
       pageSize: _pageSize,

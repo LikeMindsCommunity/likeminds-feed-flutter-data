@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 import 'package:likeminds_feed/src/services/auth_service.dart';
@@ -11,12 +12,12 @@ class TokenInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
     if (response.statusCode == 401 &&
         response.data["error_message"] == "Invalid LTM!") {
-      print("Authenticated request failed LTM in response");
+      debugPrint("Authenticated request failed LTM in response");
       await refreshToken();
       // final newRes = await _retry(response.requestOptions);
       return super.onResponse(response, handler);
     } else {
-      print("Authenticated request completed pew pew");
+      debugPrint("Authenticated request completed pew pew");
       return super.onResponse(response, handler);
     }
   }
@@ -26,21 +27,21 @@ class TokenInterceptor extends Interceptor {
     Dio dio = Dio();
     if (err.response?.statusCode == 401 &&
         err.response?.data["error_message"] == "Invalid LTM!") {
-      print("Authenticated request failed in onError");
+      debugPrint("Authenticated request failed in onError");
       await refreshToken();
       final newRes = await _retry(dio, err.requestOptions);
       handler.resolve(newRes);
     } else {
-      print("Authenticated request failed except LTM");
+      debugPrint("Authenticated request failed except LTM");
       return super.onError(err, handler);
     }
   }
 
   Future<void> refreshToken() async {
-    print("Refreshing token");
+    debugPrint("Refreshing token");
     final refreshToken = apiClient.getRefreshToken;
-    final response = await AuthService(apiClient: apiClient)
-        .refresh((RefreshRequestBuilder()..refreshToken(refreshToken)).build());
+    final response = await AuthService(apiClient: apiClient).refresh(
+        (RefreshRequestBuilder()..refreshToken(refreshToken!)).build());
 
     if (response.success) {
       apiClient.initTokens(

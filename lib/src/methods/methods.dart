@@ -1,5 +1,6 @@
 export 'package:likeminds_feed/src/methods/auth.dart';
 export 'package:likeminds_feed/src/methods/feed.dart';
+export 'package:likeminds_feed/src/methods/comment.dart';
 export 'package:likeminds_feed/src/methods/post.dart';
 export 'package:likeminds_feed/src/methods/access.dart';
 export 'package:likeminds_feed/src/methods/notification.dart';

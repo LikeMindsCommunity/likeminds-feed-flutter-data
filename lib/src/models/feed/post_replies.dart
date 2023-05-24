@@ -10,12 +10,12 @@ class PostReplies {
   final String text;
   final List<Attachment>? attachments;
   final int communityId;
-  final bool isPinned;
-  final bool isLiked;
+  final bool? isPinned;
+  final bool? isLiked;
   final String userId;
   final int likeCount;
   int commentsCount;
-  final bool isSaved;
+  final bool? isSaved;
   final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -73,7 +73,7 @@ class PostRepliesEntity {
   @JsonKey(name: 'community_id')
   final int communityId;
   @JsonKey(name: 'is_pinned')
-  final bool isPinned;
+  final bool? isPinned;
   @JsonKey(name: 'user_id')
   final String userId;
   @JsonKey(name: 'likes_count')
@@ -81,9 +81,9 @@ class PostRepliesEntity {
   @JsonKey(name: 'comments_count')
   final int commentsCount;
   @JsonKey(name: 'is_saved')
-  final bool isSaved;
+  final bool? isSaved;
   @JsonKey(name: 'is_liked')
-  final bool isLiked;
+  final bool? isLiked;
   @JsonKey(name: 'menu_items')
   final List<PopupMenuItemModelEntity> menuItems;
   @JsonKey(name: 'created_at')

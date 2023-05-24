@@ -6,10 +6,10 @@ class HelperApi {
 
   HelperApi({required this.helperRepository});
 
-  Future<TagResponseModel> getTags({
-    required TagRequestModel request,
+  Future<GetTaggingListResponse> getTaggingList({
+    required GetTaggingListRequest request,
   }) async {
-    return await helperRepository.getTags(request: request);
+    return await helperRepository.getTaggingList(request: request);
   }
 
   Future<DecodeUrlResponse> decodeUrl({

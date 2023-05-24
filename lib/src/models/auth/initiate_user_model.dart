@@ -19,7 +19,7 @@ class InitiateUser {
     );
   }
 
-  toEntity() {
+  InitiateUserEntity toEntity() {
     return InitiateUserEntity(
       user: user.toEntity(),
       community: community.toEntity(),

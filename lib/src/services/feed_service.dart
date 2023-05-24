@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class FeedService {
@@ -8,9 +8,33 @@ class FeedService {
   FeedService({required this.apiClient});
   // final String authHost = "https://betaauth.likeminds.community/feed/";
 
-  Future<UniversalFeedResponseEntity?> getUniversalFeed(
-      UniversalFeedRequest universalFeedRequest) async {
-    print(apiClient.getEndpoints
+  Future<PostDetailResponseEntity> getPost(
+      PostDetailRequest postDetailRequest) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getPostEndPoint(
+                postDetailRequest.postId, postDetailRequest.page),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      return PostDetailResponseEntity.fromJson(response.data);
+    } on DioError catch (e) {
+      debugPrint(e.toString());
+      return PostDetailResponseEntity(
+          success: false,
+          errorMessage: "An error occured, please try again later");
+    } catch (e) {
+      debugPrint(e.toString());
+      return PostDetailResponseEntity(
+          success: false,
+          errorMessage: "An error occured, please try again later");
+    }
+  }
+
+  Future<GetFeedResponseEntity?> getUniversalFeed(
+      GetFeedRequest universalFeedRequest) async {
+    debugPrint(apiClient.getEndpoints
         .getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
       final response = await apiClient.client().get(
@@ -24,9 +48,13 @@ class FeedService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      return UniversalFeedResponseEntity.fromJson(response.data['data']);
+      return GetFeedResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
-    } catch (e) {}
+      debugPrint(e.toString());
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return null;
   }
 
   Future<GetFeedRoomResponseEntity> getFeedRoom(

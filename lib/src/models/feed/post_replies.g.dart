@@ -14,13 +14,13 @@ PostRepliesEntity _$PostRepliesEntityFromJson(Map<String, dynamic> json) =>
           ?.map((e) => AttachmentEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       communityId: json['community_id'] as int,
-      isPinned: json['is_pinned'] as bool,
+      isPinned: json['is_pinned'] as bool?,
       userId: json['user_id'] as String,
       likeCount: json['likes_count'] as int,
       commentsCount: json['comments_count'] as int,
-      isSaved: json['is_saved'] as bool,
-      isLiked: json['is_liked'] as bool,
-      isEdited: json["is_edited"] as bool?,
+      isSaved: json['is_saved'] as bool?,
+      isLiked: json['is_liked'] as bool?,
+      isEdited: json['is_edited'] as bool?,
       menuItems: (json['menu_items'] as List<dynamic>)
           .map((e) =>
               PopupMenuItemModelEntity.fromJson(e as Map<String, dynamic>))

@@ -13,7 +13,7 @@ AddCommentResponseEntity _$AddCommentResponseEntityFromJson(
       errorMessage: json['error_message'] as String?,
       reply: Reply.fromEntity(
         ReplyEntity.fromJson(
-          json['data']['comment'] ?? {},
+          json['data']['comment'] as Map<String, dynamic>,
         ),
       ),
     );

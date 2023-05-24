@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
@@ -13,14 +14,14 @@ class HelperService {
     );
   }
 
-  Future<TagResponseModelEntity> getTags(
-      {required TagRequestModel request}) async {
+  Future<GetTaggingListResponseEntity> getTaggingList(
+      {required GetTaggingListRequest request}) async {
     try {
       final response = await apiClient.client().get(
         apiClient.getEndpoints.tagsEndpoint,
         options: Options(
           headers: {
-            'x-api-key': '${apiClient.getApiKey}',
+            'x-api-key': apiClient.getApiKey,
           },
         ),
         queryParameters: {
@@ -31,16 +32,16 @@ class HelperService {
         },
       );
       if (response.data['success'] == true) {
-        return TagResponseModelEntity.fromJson(response.data);
+        return GetTaggingListResponseEntity.fromJson(response.data);
       } else {
-        return TagResponseModelEntity(
+        return GetTaggingListResponseEntity(
           success: false,
           errorMessage: response.data['message'],
         );
       }
     } on DioError catch (e) {
-      print("Error from get tags: $e");
-      return TagResponseModelEntity(
+      debugPrint("Error from get tags: $e");
+      return GetTaggingListResponseEntity(
         success: false,
         errorMessage: e.message,
       );
@@ -70,7 +71,7 @@ class HelperService {
         );
       }
     } on DioError catch (e) {
-      print("Error from get tags: $e");
+      debugPrint("Error from get tags: $e");
       return DecodeUrlResponseEntity(
         success: false,
         errorMessage: e.message,
