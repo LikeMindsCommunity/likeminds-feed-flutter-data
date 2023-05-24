@@ -35,7 +35,7 @@ class MemberStateResponse {
     );
   }
 
-  toEntity() {
+  MemberStateResponseEntity toEntity() {
     return MemberStateResponseEntity(
       success: success,
       errorMessage: errorMessage,

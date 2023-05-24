@@ -61,7 +61,7 @@ class User {
     );
   }
 
-  toEntity() {
+  UserEntity toEntity() {
     return UserEntity(
       id: id,
       name: name,

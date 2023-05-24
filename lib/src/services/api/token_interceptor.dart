@@ -40,8 +40,8 @@ class TokenInterceptor extends Interceptor {
   Future<void> refreshToken() async {
     debugPrint("Refreshing token");
     final refreshToken = apiClient.getRefreshToken;
-    final response = await AuthService(apiClient: apiClient)
-        .refresh((RefreshRequestBuilder()..refreshToken(refreshToken)).build());
+    final response = await AuthService(apiClient: apiClient).refresh(
+        (RefreshRequestBuilder()..refreshToken(refreshToken!)).build());
 
     if (response.success) {
       apiClient.initTokens(

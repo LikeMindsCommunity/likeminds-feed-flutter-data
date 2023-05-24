@@ -9,7 +9,7 @@ class LikePostRequest {
         'post_id': postId,
       };
 
-  get getPostId => postId;
+  String get getPostId => postId;
 }
 
 class LikePostRequestBuilder {

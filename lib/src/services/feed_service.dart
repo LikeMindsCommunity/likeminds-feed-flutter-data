@@ -18,8 +18,7 @@ class FeedService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      debugPrint(response.data);
-      return PostDetailResponseEntity.fromJson(response.data['data']);
+      return PostDetailResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
       return PostDetailResponseEntity(

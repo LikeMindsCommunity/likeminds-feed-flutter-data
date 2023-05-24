@@ -5,7 +5,7 @@ class GetDeleteReasonRequest {
 
   GetDeleteReasonRequest._({required int type}) : _type = type;
 
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'type': type,
     };

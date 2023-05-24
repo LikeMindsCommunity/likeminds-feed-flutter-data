@@ -18,7 +18,7 @@ class LogoutResponse {
     );
   }
 
-  toEntity() {
+  LogoutResponseEntity toEntity() {
     return LogoutResponseEntity(
       success: success,
       errorMessage: errorMessage,

@@ -21,7 +21,7 @@ class HelperService {
         apiClient.getEndpoints.tagsEndpoint,
         options: Options(
           headers: {
-            'x-api-key': '${apiClient.getApiKey}',
+            'x-api-key': apiClient.getApiKey,
           },
         ),
         queryParameters: {

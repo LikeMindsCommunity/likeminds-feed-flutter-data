@@ -16,7 +16,7 @@ class AccessService {
             apiClient.getEndpoints.memberStateEndpoint,
             options: Options(
               headers: {
-                'x-api-key': '${apiClient.getApiKey}',
+                'x-api-key': apiClient.getApiKey,
               },
             ),
           );

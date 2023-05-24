@@ -18,8 +18,8 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      debugPrint(response.data);
-      return AddCommentResponseEntity.fromJson(response.data['data']);
+      debugPrint(response.data.toString());
+      return AddCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
       return AddCommentResponseEntity(
@@ -44,7 +44,7 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      debugPrint(response.data);
+      debugPrint(response.data.toString());
       return EditCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
@@ -70,7 +70,7 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      debugPrint(response.data);
+      debugPrint(response.data.toString());
       return ToggleLikeCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
@@ -94,7 +94,7 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      debugPrint(response.data);
+      debugPrint(response.data.toString());
       return GetCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
@@ -122,7 +122,7 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      debugPrint(response.data);
+      debugPrint(response.data.toString());
       return DeleteCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
@@ -148,7 +148,7 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      debugPrint(response.data);
+      debugPrint(response.data.toString());
       return AddCommentReplyResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
@@ -174,7 +174,7 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      debugPrint(response.data);
+      debugPrint(response.data.toString());
       return EditCommentReplyResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
@@ -205,7 +205,7 @@ class CommentService {
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      debugPrint(response.data);
+      debugPrint(response.data.toString());
       return GetCommentLikesResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
