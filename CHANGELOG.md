@@ -40,3 +40,7 @@ Edit Comment & Reply
 # 1.1.1
 
 Hotfix for pagination in likes
+
+# 1.2.0
+
+Adding support for member rights
