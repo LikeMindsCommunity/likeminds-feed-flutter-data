@@ -15,7 +15,7 @@ class DeleteReason {
     );
   }
 
-  toEntity() {
+  DeleteReasonEntity toEntity() {
     return DeleteReasonEntity(
       id: id,
       name: name,

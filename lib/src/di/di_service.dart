@@ -1,6 +1,8 @@
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
+import 'package:likeminds_feed/src/repositories/comment_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/media_repository.dart';
@@ -57,9 +59,11 @@ class DIService {
         AccessRepository(accessService: accessService);
 
     CommentService commentService = CommentService(apiClient: apiClient);
+    CommentRepository commentRepository =
+        CommentRepository(commentService: commentService);
+
     FeedService feedService = FeedService(apiClient: apiClient);
-    FeedRepository feedRepository = FeedRepository(
-        feedService: feedService, commentService: commentService);
+    FeedRepository feedRepository = FeedRepository(feedService: feedService);
 
     PostService postService = PostService(apiClient: apiClient);
     PostRepository postRepository = PostRepository(postService: postService);
@@ -90,6 +94,10 @@ class DIService {
       () => feedRepository,
       instanceName: kInstanceFeedRepository,
     );
+    getIt.registerFactory<CommentRepository>(
+      () => commentRepository,
+      instanceName: kInstanceCommentRepository,
+    );
     getIt.registerFactory<AuthRepository>(
       () => authRepository,
       instanceName: kInstanceAuthRepository,
@@ -115,6 +123,7 @@ class DIService {
   static const String kInstanceAPIClient = 'api_client';
   static const String kInstanceAccessRepository = 'access_repository';
   static const String kInstanceFeedRepository = 'feed_repository';
+  static const String kInstanceCommentRepository = 'comment_repository';
   static const String kInstanceAuthRepository = 'auth_repository';
   static const String kInstancePostRepository = 'post_repository';
   static const String kInstanceMediaRepository = 'media_repository';

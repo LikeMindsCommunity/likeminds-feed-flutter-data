@@ -31,7 +31,7 @@ class CommunitySettingsRights {
     );
   }
 
-  toEntity() {
+  CommunitySettingsRightsEntity toEntity() {
     return CommunitySettingsRightsEntity(
       id: id,
       state: state,

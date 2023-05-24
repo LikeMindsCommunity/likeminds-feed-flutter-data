@@ -25,7 +25,7 @@ class GetDeleteReasonResponse {
     );
   }
 
-  toEntity() {
+  GetDeleteReasonResponseEntity toEntity() {
     return GetDeleteReasonResponseEntity(
       success: success,
       errorMessage: errorMessage,

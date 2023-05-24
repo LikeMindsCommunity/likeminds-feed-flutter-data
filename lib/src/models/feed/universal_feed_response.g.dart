@@ -6,19 +6,19 @@ part of 'universal_feed_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UniversalFeedResponseEntity _$UniversalFeedResponseEntityFromJson(
+GetFeedResponseEntity _$GetFeedResponseEntityFromJson(
         Map<String, dynamic> json) =>
-    UniversalFeedResponseEntity(
-      posts: (json['posts'] as List<dynamic>)
+    GetFeedResponseEntity(
+      posts: (json['data']['posts'] as List<dynamic>)
           .map((e) => PostEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      users: (json['users'] as Map<String, dynamic>).map(
+      users: (json['data']['users'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
     );
 
-Map<String, dynamic> _$UniversalFeedResponseEntityToJson(
-        UniversalFeedResponseEntity instance) =>
+Map<String, dynamic> _$GetFeedResponseEntityToJson(
+        GetFeedResponseEntity instance) =>
     <String, dynamic>{
       'posts': instance.posts.map((e) => e.toJson()).toList(),
       'users': instance.users.map((k, e) => MapEntry(k, e.toJson())),

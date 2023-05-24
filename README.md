@@ -29,7 +29,7 @@ The starting point is the LikeMinds website. Create your account and get and API
 Then add the package as dependency in pubspec.yaml
 
 ```
-likeminds_feed: 0.5.0
+likeminds_feed: 1.2.0
 ```
 
 or you can run this command in the terminal
@@ -43,5 +43,8 @@ flutter pub add likeminds_feed
 After adding the import, get an object of the SdkApplication that exposes public methods
 
 ```dart
-SdkApplication _sdkApplication = LMClient.initiateLikeMinds(apiKey);
+LMFeedClient _feedClient_ = (LMFeedClientBuilder()
+          ..apiKey(key)
+          ..sdkCallback(sdkCallback))
+        .build();
 ```
