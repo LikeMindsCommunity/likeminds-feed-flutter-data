@@ -5,7 +5,6 @@ import 'package:likeminds_feed/src/repositories/auth_repository.dart';
 import 'package:likeminds_feed/src/repositories/comment_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 import 'package:likeminds_feed/src/repositories/helper_repository.dart';
-import 'package:likeminds_feed/src/repositories/media_repository.dart';
 import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
@@ -14,7 +13,6 @@ import 'package:likeminds_feed/src/services/auth_service.dart';
 import 'package:likeminds_feed/src/services/comment_service.dart';
 import 'package:likeminds_feed/src/services/feed_service.dart';
 import 'package:likeminds_feed/src/services/helper_service.dart';
-import 'package:likeminds_feed/src/services/media_service.dart';
 import 'package:likeminds_feed/src/services/moderation_service.dart';
 import 'package:likeminds_feed/src/services/notification_service.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
@@ -68,10 +66,6 @@ class DIService {
     PostService postService = PostService(apiClient: apiClient);
     PostRepository postRepository = PostRepository(postService: postService);
 
-    MediaService mediaService = MediaService(apiClient: apiClient);
-    MediaRepository mediaRepository =
-        MediaRepository(mediaService: mediaService);
-
     ModerationService moderationService =
         ModerationService(apiClient: apiClient);
     ModerationRepository moderationRepository =
@@ -105,10 +99,6 @@ class DIService {
     getIt.registerFactory<PostRepository>(
       () => postRepository,
       instanceName: kInstancePostRepository,
-    );
-    getIt.registerFactory<MediaRepository>(
-      () => mediaRepository,
-      instanceName: kInstanceMediaRepository,
     );
     getIt.registerFactory<ModerationRepository>(
       () => moderationRepository,
