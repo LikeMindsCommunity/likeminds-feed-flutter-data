@@ -10,12 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^4.0.6
+  dio: ^5.1.2
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
   equatable: ^2.0.5
   get_it: ^7.2.0
-  simple_s3: ^0.3.2
   envied: ^0.3.0
 
 dev_dependencies:
