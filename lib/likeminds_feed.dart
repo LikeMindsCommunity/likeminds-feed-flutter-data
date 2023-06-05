@@ -176,6 +176,30 @@ class LMFeedClient {
         await _sdkApplication.getCommentApi().editCommentReply(request);
     return response;
   }
+
+  Future<GetNotificationFeedResponse> getNotificationFeed(
+      GetNotificationFeedRequest request) async {
+    final GetNotificationFeedResponse response = await _sdkApplication
+        .getNotificationFeedApi()
+        .getNotificationFeed(request);
+    return response;
+  }
+
+  Future<MarkReadNotificationResponse> markReadNotification(
+      MarkReadNotificationRequest request) async {
+    final MarkReadNotificationResponse response = await _sdkApplication
+        .getNotificationFeedApi()
+        .markReadNotification(request);
+    return response;
+  }
+
+  Future<GetUnreadNotificationCountResponse>
+      getUnreadNotificationCount() async {
+    final GetUnreadNotificationCountResponse response = await _sdkApplication
+        .getNotificationFeedApi()
+        .getUnreadNotificationCount();
+    return response;
+  }
 }
 
 class LMFeedClientBuilder {

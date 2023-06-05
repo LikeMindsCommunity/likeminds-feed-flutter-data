@@ -57,7 +57,11 @@ class ApiClient {
       "x-sdk-source": EnvDev.xSDKSource,
     };
 
-    if (accessToken != null && isRefresh != null ? !isRefresh : true) {
+    if (accessToken != null &&
+            isRefresh != null &&
+            !headers.containsKey('Authorization')
+        ? !isRefresh
+        : true) {
       headers.addAll({'Authorization': '$accessToken'});
     }
 

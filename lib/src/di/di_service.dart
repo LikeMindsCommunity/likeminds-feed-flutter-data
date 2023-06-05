@@ -119,4 +119,6 @@ class DIService {
   static const String kInstanceMediaRepository = 'media_repository';
   static const String kInstanceHelperRepository = 'helper_repository';
   static const String kInstanceModerationRepository = 'moderation_repository';
+  static const String kInstanceNotificationFeedRepository =
+      'notification_feed_repository';
 }

@@ -34,6 +34,13 @@ class EndPoints {
 
   String get memberStateEndpoint => "$KETTLE_HOST/community/member/state";
 
+  String get getNotificationFeedEndpoint => "$KETTLE_HOST/feed/user/activity";
+  String get getUnreadNotificationCountEndpoint =>
+      "$KETTLE_HOST/feed/user/activity/unread_count";
+
+  String markReadNotificationEndpoint(String notificationId) =>
+      "$KETTLE_HOST/feed/user/activity/$notificationId/mark_read";
+
   String getUniversalFeedEndPoint(int page) {
     return "$feedUrl/universal?page=$page&page_size=$pageLimit";
   }
