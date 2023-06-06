@@ -5,10 +5,10 @@ class GetNotificationFeedRequest {
   GetNotificationFeedRequest._({required this.page, required this.pageSize});
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['page'] = page;
-    data['page_size'] = pageSize;
-    return data;
+    return {
+      'page': page,
+      'page_size': pageSize,
+    };
   }
 }
 
@@ -18,14 +18,12 @@ class GetNotificationFeedRequestBuilder {
 
   GetNotificationFeedRequestBuilder();
 
-  GetNotificationFeedRequestBuilder page(int page) {
+  void page(int page) {
     _page = page;
-    return this;
   }
 
-  GetNotificationFeedRequestBuilder pageSize(int pageSize) {
+  void pageSize(int pageSize) {
     _pageSize = pageSize;
-    return this;
   }
 
   GetNotificationFeedRequest build() {
