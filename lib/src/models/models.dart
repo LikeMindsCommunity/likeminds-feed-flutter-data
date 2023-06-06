@@ -38,6 +38,8 @@ export 'package:likeminds_feed/src/models/post/like_model.dart';
 export 'package:likeminds_feed/src/models/post/popup_menu_item_model.dart';
 export 'package:likeminds_feed/src/models/post/pin_post_request_model.dart';
 export 'package:likeminds_feed/src/models/post/pin_post_response_model.dart';
+export 'package:likeminds_feed/src/models/post/save_post_request.dart';
+export 'package:likeminds_feed/src/models/post/save_post_response.dart';
 export 'package:likeminds_feed/src/models/post/edit_post_request_model.dart';
 export 'package:likeminds_feed/src/models/post/edit_post_response_model.dart';
 export 'package:likeminds_feed/src/models/comment/comment_model.dart';

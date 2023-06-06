@@ -86,6 +86,10 @@ class LMFeedClient {
     return await _sdkApplication.getPostApi().pinPost(pinPostRequest);
   }
 
+  Future<SavePostResponse> savePost(SavePostRequest savePostRequest) async {
+    return await _sdkApplication.getPostApi().savePost(savePostRequest);
+  }
+
   Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
     return await _sdkApplication.getPostApi().editPost(editPostRequest);
   }

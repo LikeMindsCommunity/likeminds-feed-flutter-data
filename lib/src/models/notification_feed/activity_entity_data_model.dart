@@ -3,7 +3,7 @@ import 'package:likeminds_feed/likeminds_feed.dart';
 class ActivityEntityData {
   final String id;
   final List<Attachment>? attachments;
-  final int chatroomId;
+  final int? chatroomId;
   final int communityId;
   final String createdAt;
   final String? deleteReason;
@@ -22,7 +22,7 @@ class ActivityEntityData {
   ActivityEntityData({
     required this.id,
     this.attachments,
-    required this.chatroomId,
+    this.chatroomId,
     required this.communityId,
     required this.createdAt,
     this.deleteReason,
@@ -87,7 +87,7 @@ class ActivityEntityData {
 class ActivityEntityDataEntity {
   final String id;
   final List<Attachment>? attachments;
-  final int chatroomId;
+  final int? chatroomId;
   final int communityId;
   final String createdAt;
   final String? deleteReason;
@@ -106,7 +106,7 @@ class ActivityEntityDataEntity {
   ActivityEntityDataEntity({
     required this.id,
     this.attachments,
-    required this.chatroomId,
+    this.chatroomId,
     required this.communityId,
     required this.createdAt,
     this.deleteReason,
@@ -126,7 +126,7 @@ class ActivityEntityDataEntity {
   static fromJson(Map<String, dynamic> json) {
     return ActivityEntityDataEntity(
         id: json['_id'] as String,
-        chatroomId: json['chatroom_id'] as int,
+        chatroomId: json['chatroom_id'] as int?,
         communityId: json['community_id'] as int,
         createdAt: json['created_at'] as String,
         deleteReason: json['delete_reason'] as String?,
@@ -139,9 +139,6 @@ class ActivityEntityDataEntity {
         isPinned: json['is_pinned'] as bool?,
         text: json['text'] as String,
         updatedAt: json['updated_at'] as String,
-        replies: (json['replies'] as List<dynamic>?)
-            ?.map((e) => Reply.fromEntity(ReplyEntity.fromJson(e)))
-            .toList(),
         userId: json['user_id'] as String,
         attachments: (json['attachments'] as List<dynamic>?)
             ?.map((e) => Attachment.fromEntity(AttachmentEntity.fromJson(e)))

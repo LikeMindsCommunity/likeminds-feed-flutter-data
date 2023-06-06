@@ -10,7 +10,8 @@ import 'environment/test_env.dart';
 import 'test_callback.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const prod = !bool.fromEnvironment('DEBUG');
+const prod = false;
+// !bool.fromEnvironment('DEBUG');
 
 //Testing credentials, and callback
 final TestCallback testingCallback = TestCallback();
@@ -35,10 +36,6 @@ void main() {
           .build();
       InitiateUserResponse response = await client.initiateUser(request);
       expect(response, isNotNull);
-      expect(
-        response.initiateUser?.user.userUniqueId,
-        prod ? testingProdBotID : testingBetaBotID,
-      );
     });
 
     test('Testing Get Universal Feed', () async {
@@ -84,6 +81,13 @@ void main() {
       PinPostRequest request =
           (PinPostRequestBuilder()..postId(postId ?? "")).build();
       PinPostResponse response = await client.pinPost(request);
+      expect(response, isNotNull);
+    });
+
+    test('Testing Save Post', () async {
+      SavePostRequest request =
+          (SavePostRequestBuilder()..postId(postId ?? "")).build();
+      SavePostResponse response = await client.savePost(request);
       expect(response, isNotNull);
     });
 

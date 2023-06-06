@@ -16,7 +16,7 @@ class Post {
   final String userId;
   int likeCount;
   int commentCount;
-  final bool isSaved;
+  bool isSaved;
   final bool isLiked;
   final List<PopupMenuItemModel> menuItems;
   final DateTime createdAt;

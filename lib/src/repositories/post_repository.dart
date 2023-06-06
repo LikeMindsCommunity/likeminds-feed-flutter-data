@@ -44,6 +44,12 @@ class PostRepository {
     return PinPostResponse.fromEntity(pinPostResponseEntity);
   }
 
+  Future<SavePostResponse> savePost(SavePostRequest savePostRequest) async {
+    SavePostResponseEntity savePostResponseEntity =
+        await postService.savePost(savePostRequest);
+    return SavePostResponse.fromEntity(savePostResponseEntity);
+  }
+
   Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
     EditPostResponseEntity editPostResponseEntity =
         await postService.editPost(editPostRequest);
