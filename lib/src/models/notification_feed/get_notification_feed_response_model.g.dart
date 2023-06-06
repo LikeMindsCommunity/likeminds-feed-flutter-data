@@ -11,7 +11,7 @@ GetNotificationFeedResponseEntity _$GetNotificationFeedResponseEntityFromJson(
     GetNotificationFeedResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      items: (json['items'] as List<dynamic>?)
+      items: (json['data']['activities'] as List<dynamic>?)
           ?.map((e) =>
               NotificationFeedItemEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
