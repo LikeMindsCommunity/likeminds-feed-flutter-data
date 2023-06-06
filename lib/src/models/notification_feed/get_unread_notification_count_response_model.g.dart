@@ -12,7 +12,7 @@ GetUnreadNotificationCountResponseEntity
         GetUnreadNotificationCountResponseEntity(
           success: json['success'] as bool,
           errorMessage: json['errorMessage'] as String?,
-          count: json['count'] as int?,
+          count: json['data']['count'] as int?,
         );
 
 Map<String, dynamic> _$GetUnreadNotificationCountResponseEntityToJson(
