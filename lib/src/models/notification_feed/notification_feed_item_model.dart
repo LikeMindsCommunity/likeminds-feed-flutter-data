@@ -16,7 +16,7 @@ class NotificationFeedItem {
   final String entityId;
   final String? entityOwnerId;
   final int entityType;
-  final bool isRead;
+  bool isRead;
   final int updatedAt;
 
   NotificationFeedItem({
