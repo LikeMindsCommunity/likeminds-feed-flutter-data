@@ -11,7 +11,6 @@ class NotificationFeedItem {
   final String actionOn;
   final ActivityEntityData activityEntityData;
   final String activityText;
-  final Map<String, dynamic> activityUserData;
   final String? cta;
   final int createdAt;
   final String entityId;
@@ -27,7 +26,6 @@ class NotificationFeedItem {
     required this.actionOn,
     required this.activityEntityData,
     required this.activityText,
-    required this.activityUserData,
     this.cta,
     required this.createdAt,
     required this.entityId,
@@ -45,7 +43,6 @@ class NotificationFeedItem {
       actionOn: entity.actionOn,
       activityEntityData: entity.activityEntityData,
       activityText: entity.activityText,
-      activityUserData: entity.activityUserData,
       createdAt: entity.createdAt,
       cta: entity.cta,
       entityId: entity.entityId,
@@ -64,7 +61,6 @@ class NotificationFeedItem {
       actionOn: actionOn,
       activityEntityData: activityEntityData,
       activityText: activityText,
-      activityUserData: activityUserData,
       createdAt: createdAt,
       cta: cta,
       entityId: entityId,
@@ -84,7 +80,6 @@ class NotificationFeedItemEntity {
   final String actionOn;
   final ActivityEntityData activityEntityData;
   final String activityText;
-  final Map<String, dynamic> activityUserData;
   final String? cta;
   final int createdAt;
   final String entityId;
@@ -100,7 +95,6 @@ class NotificationFeedItemEntity {
     required this.actionOn,
     required this.activityEntityData,
     required this.activityText,
-    required this.activityUserData,
     this.cta,
     required this.createdAt,
     required this.entityId,
