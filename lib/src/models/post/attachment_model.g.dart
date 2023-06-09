@@ -27,7 +27,6 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
       size: json['size'] as int?,
       duration: json['duration'] as int?,
       pageCount: json['page_count'] as int?,
-      thumbnailUrl: json['thumbnail_url'] as String?,
       ogTags: json['og_tags'] == null
           ? null
           : AttachmentMetaOgTagsEntity.fromJson(
@@ -42,7 +41,6 @@ Map<String, dynamic> _$AttachmentMetaEntityToJson(
       'size': instance.size,
       'duration': instance.duration,
       'page_count': instance.pageCount,
-      'thumbnail_url': instance.thumbnailUrl,
       'og_tags': instance.ogTags,
     };
 
