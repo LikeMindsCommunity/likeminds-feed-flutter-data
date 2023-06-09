@@ -50,6 +50,7 @@ class AttachmentMeta {
   final int? size;
   final int? duration;
   final int? pageCount;
+  final String? thumbnailUrl;
   final AttachmentMetaOgTags? ogTags;
 
   AttachmentMeta({
@@ -59,6 +60,7 @@ class AttachmentMeta {
     this.duration,
     this.pageCount,
     this.ogTags,
+    this.thumbnailUrl,
   });
 
   factory AttachmentMeta.fromEntity(AttachmentMetaEntity entity) {
@@ -68,6 +70,7 @@ class AttachmentMeta {
       size: entity.size,
       duration: entity.duration,
       pageCount: entity.pageCount,
+      thumbnailUrl: entity.thumbnailUrl,
       ogTags: entity.ogTags != null
           ? AttachmentMetaOgTags.fromEntity(entity.ogTags!)
           : null,
@@ -80,6 +83,7 @@ class AttachmentMeta {
       format: format,
       size: size,
       duration: duration,
+      thumbnailUrl: thumbnailUrl,
       pageCount: pageCount,
       ogTags: ogTags != null ? ogTags!.toEntity() : null,
     );
@@ -96,6 +100,8 @@ class AttachmentMetaEntity {
   final int? pageCount;
   @JsonKey(name: 'og_tags')
   final AttachmentMetaOgTagsEntity? ogTags;
+  @JsonKey(name: 'thumbnail_url')
+  final String? thumbnailUrl;
 
   AttachmentMetaEntity({
     this.url,
@@ -104,6 +110,7 @@ class AttachmentMetaEntity {
     this.duration,
     this.pageCount,
     this.ogTags,
+    this.thumbnailUrl,
   });
 
   factory AttachmentMetaEntity.fromJson(Map<String, dynamic> json) =>
