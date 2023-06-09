@@ -47,6 +47,22 @@ void main() {
       expect(response, isNotNull);
     });
 
+    test('Testing Get Notification Feed', () async {
+      GetNotificationFeedRequest request = (GetNotificationFeedRequestBuilder()
+            ..page(1)
+            ..pageSize(10))
+          .build();
+      GetNotificationFeedResponse? response =
+          await client.getNotificationFeed(request);
+      expect(response, isNotNull);
+    });
+
+    test('Testing Get Unread Count for Notification Feed', () async {
+      GetUnreadNotificationCountResponse? response =
+          await client.getUnreadNotificationCount();
+      expect(response, isNotNull);
+    });
+
     test('Testing Add Post', () async {
       AddPostRequest request = (AddPostRequestBuilder()
             ..attachments([])
