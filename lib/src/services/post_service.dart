@@ -12,6 +12,7 @@ abstract class IPostService {
       DeletePostRequest deletePostRequest);
   Future<LikePostResponseEntity> likePost(LikePostRequest likePostRequest);
   Future<PinPostResponseEntity> pinPost(PinPostRequest pinPostRequest);
+  Future<SavePostResponseEntity> savePost(SavePostRequest savePostRequest);
   Future<EditPostResponseEntity> editPost(EditPostRequest editPostRequest);
 }
 
@@ -178,6 +179,29 @@ class PostService extends IPostService {
       PinPostResponseEntity pinPostResponseEntity =
           PinPostResponseEntity(success: false, errorMessage: e.message);
       return pinPostResponseEntity;
+    }
+  }
+
+  @override
+  Future<SavePostResponseEntity> savePost(
+      SavePostRequest savePostRequest) async {
+    try {
+      final response = await apiClient.client().put(
+            "${apiClient.getEndpoints.addPostEndpoint}/${savePostRequest.postId}/save",
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      SavePostResponseEntity savePostResponseEntity =
+          SavePostResponseEntity.fromJson(response.data);
+      return savePostResponseEntity;
+    } on DioError catch (e) {
+      debugPrint("Error from save post: ${e.response?.data}");
+      SavePostResponseEntity savePostResponseEntity =
+          SavePostResponseEntity(success: false, errorMessage: e.message);
+      return savePostResponseEntity;
     }
   }
 

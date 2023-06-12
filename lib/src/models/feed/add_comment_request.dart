@@ -8,7 +8,7 @@ class AddCommentRequest {
   });
 
   Map<String, dynamic> toJson() => {
-        'post_id': postId, // 'post_id' instead of 'postId'
+        'post_id': postId,
         'text': text,
       };
 }
