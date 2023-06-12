@@ -10,8 +10,7 @@ import 'environment/test_env.dart';
 import 'test_callback.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const prod = false;
-// !bool.fromEnvironment('DEBUG');
+const prod = !bool.fromEnvironment('DEBUG');
 
 //Testing credentials, and callback
 final TestCallback testingCallback = TestCallback();
