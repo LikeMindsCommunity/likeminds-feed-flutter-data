@@ -44,3 +44,13 @@ Hotfix for pagination in likes
 # 1.2.0
 
 Adding support for member rights
+
+# 1.2.1
+
+Updating Dio library
+Removing media service
+
+# 1.3.0
+
+Adding Notification feed
+Adding Save post

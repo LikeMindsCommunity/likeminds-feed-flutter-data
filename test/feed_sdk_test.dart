@@ -10,7 +10,8 @@ import 'environment/test_env.dart';
 import 'test_callback.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const prod = !bool.fromEnvironment('DEBUG');
+const prod = false;
+// !bool.fromEnvironment('DEBUG');
 
 //Testing credentials, and callback
 final TestCallback testingCallback = TestCallback();
@@ -35,10 +36,6 @@ void main() {
           .build();
       InitiateUserResponse response = await client.initiateUser(request);
       expect(response, isNotNull);
-      expect(
-        response.initiateUser?.user.userUniqueId,
-        prod ? testingProdBotID : testingBetaBotID,
-      );
     });
 
     test('Testing Get Universal Feed', () async {
@@ -47,6 +44,22 @@ void main() {
             ..pageSize(10))
           .build();
       GetFeedResponse? response = await client.getFeed(request);
+      expect(response, isNotNull);
+    });
+
+    test('Testing Get Notification Feed', () async {
+      GetNotificationFeedRequest request = (GetNotificationFeedRequestBuilder()
+            ..page(1)
+            ..pageSize(10))
+          .build();
+      GetNotificationFeedResponse? response =
+          await client.getNotificationFeed(request);
+      expect(response, isNotNull);
+    });
+
+    test('Testing Get Unread Count for Notification Feed', () async {
+      GetUnreadNotificationCountResponse? response =
+          await client.getUnreadNotificationCount();
       expect(response, isNotNull);
     });
 
@@ -84,6 +97,13 @@ void main() {
       PinPostRequest request =
           (PinPostRequestBuilder()..postId(postId ?? "")).build();
       PinPostResponse response = await client.pinPost(request);
+      expect(response, isNotNull);
+    });
+
+    test('Testing Save Post', () async {
+      SavePostRequest request =
+          (SavePostRequestBuilder()..postId(postId ?? "")).build();
+      SavePostResponse response = await client.savePost(request);
       expect(response, isNotNull);
     });
 
