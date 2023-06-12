@@ -32,6 +32,10 @@ class PostApi {
     return await postRepository.pinPost(pinPostRequest);
   }
 
+  Future<SavePostResponse> savePost(SavePostRequest savePostRequest) async {
+    return await postRepository.savePost(savePostRequest);
+  }
+
   Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
     return await postRepository.editPost(editPostRequest);
   }

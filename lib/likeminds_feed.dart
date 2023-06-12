@@ -86,6 +86,10 @@ class LMFeedClient {
     return await _sdkApplication.getPostApi().pinPost(pinPostRequest);
   }
 
+  Future<SavePostResponse> savePost(SavePostRequest savePostRequest) async {
+    return await _sdkApplication.getPostApi().savePost(savePostRequest);
+  }
+
   Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
     return await _sdkApplication.getPostApi().editPost(editPostRequest);
   }
@@ -174,6 +178,30 @@ class LMFeedClient {
       EditCommentReplyRequest request) async {
     final EditCommentReplyResponse response =
         await _sdkApplication.getCommentApi().editCommentReply(request);
+    return response;
+  }
+
+  Future<GetNotificationFeedResponse> getNotificationFeed(
+      GetNotificationFeedRequest request) async {
+    final GetNotificationFeedResponse response = await _sdkApplication
+        .getNotificationFeedApi()
+        .getNotificationFeed(request);
+    return response;
+  }
+
+  Future<MarkReadNotificationResponse> markReadNotification(
+      MarkReadNotificationRequest request) async {
+    final MarkReadNotificationResponse response = await _sdkApplication
+        .getNotificationFeedApi()
+        .markReadNotification(request);
+    return response;
+  }
+
+  Future<GetUnreadNotificationCountResponse>
+      getUnreadNotificationCount() async {
+    final GetUnreadNotificationCountResponse response = await _sdkApplication
+        .getNotificationFeedApi()
+        .getUnreadNotificationCount();
     return response;
   }
 }

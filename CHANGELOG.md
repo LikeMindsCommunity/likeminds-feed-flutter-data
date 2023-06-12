@@ -49,3 +49,8 @@ Adding support for member rights
 
 Updating Dio library
 Removing media service
+
+# 1.3.0
+
+Adding Notification feed
+Adding Save post
