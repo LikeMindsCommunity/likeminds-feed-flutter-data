@@ -5,7 +5,7 @@ class ActivityEntityData {
   final List<Attachment>? attachments;
   final int? chatroomId;
   final int communityId;
-  final String createdAt;
+  final int createdAt;
   final String? deleteReason;
   final String? deleteBy;
   final String? heading;
@@ -16,7 +16,7 @@ class ActivityEntityData {
   final bool? isEdited;
   final String text;
   final List<Reply>? replies;
-  final String? updatedAt;
+  final int? updatedAt;
   final String userId;
 
   ActivityEntityData({
@@ -89,7 +89,7 @@ class ActivityEntityDataEntity {
   final List<Attachment>? attachments;
   final int? chatroomId;
   final int communityId;
-  final String createdAt;
+  final int createdAt;
   final String? deleteReason;
   final String? deleteBy;
   final String? heading;
@@ -100,7 +100,7 @@ class ActivityEntityDataEntity {
   final bool? isEdited;
   final String text;
   final List<Reply>? replies;
-  final String? updatedAt;
+  final int? updatedAt;
   final String userId;
 
   ActivityEntityDataEntity({
@@ -128,7 +128,7 @@ class ActivityEntityDataEntity {
         id: json['_id'] as String,
         chatroomId: json['chatroom_id'] as int?,
         communityId: json['community_id'] as int,
-        createdAt: json['created_at'] as String,
+        createdAt: json['created_at'] as int,
         deleteReason: json['delete_reason'] as String?,
         deleteBy: json['deleted_by'] as String?,
         heading: json['heading'] as String?,
@@ -138,7 +138,10 @@ class ActivityEntityDataEntity {
         postId: json['post_id'] as String?,
         isPinned: json['is_pinned'] as bool?,
         text: json['text'] as String,
-        updatedAt: json['updated_at'] as String,
+        replies: (json['replies'] as List<dynamic>?)
+            ?.map((e) => Reply.fromEntity(ReplyEntity.fromJson(e)))
+            .toList(),
+        updatedAt: json['updated_at'] as int,
         userId: json['user_id'] as String,
         attachments: (json['attachments'] as List<dynamic>?)
             ?.map((e) => Attachment.fromEntity(AttachmentEntity.fromJson(e)))

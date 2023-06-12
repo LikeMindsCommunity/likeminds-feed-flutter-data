@@ -7,11 +7,13 @@ class GetNotificationFeedResponse {
   final bool success;
   final String? errorMessage;
   final List<NotificationFeedItem>? items;
+  final Map<String, User>? users;
 
   GetNotificationFeedResponse({
     required this.success,
     this.errorMessage,
     this.items,
+    this.users,
   });
 
   factory GetNotificationFeedResponse.fromEntity(
@@ -21,6 +23,12 @@ class GetNotificationFeedResponse {
       errorMessage: entity.errorMessage,
       items:
           entity.items?.map((e) => NotificationFeedItem.fromEntity(e)).toList(),
+      users: entity.users?.map(
+        (key, value) => MapEntry(
+          key,
+          User.fromEntity(value),
+        ),
+      ),
     );
   }
 
@@ -39,11 +47,13 @@ class GetNotificationFeedResponseEntity {
   @JsonKey(name: 'error_message')
   final String? errorMessage;
   final List<NotificationFeedItemEntity>? items;
+  final Map<String, UserEntity>? users;
 
   GetNotificationFeedResponseEntity({
     required this.success,
     this.errorMessage,
     this.items,
+    this.users,
   });
 
   factory GetNotificationFeedResponseEntity.fromJson(

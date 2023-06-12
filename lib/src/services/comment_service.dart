@@ -23,13 +23,15 @@ class CommentService {
     } on DioError catch (e) {
       debugPrint(e.toString());
       return AddCommentResponseEntity(
-          success: false,
-          errorMessage: 'An error occurred, please try again later');
+        success: false,
+        errorMessage: 'An error occurred, please try again later',
+      );
     } catch (e) {
       debugPrint(e.toString());
       return AddCommentResponseEntity(
-          success: false,
-          errorMessage: 'An error occurred, please try again later');
+        success: false,
+        errorMessage: 'An error occurred, please try again later',
+      );
     }
   }
 

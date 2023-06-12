@@ -12,9 +12,20 @@ GetNotificationFeedResponseEntity _$GetNotificationFeedResponseEntityFromJson(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
       items: (json['data']['activities'] as List<dynamic>?)
-          ?.map((e) =>
-              NotificationFeedItemEntity.fromJson(e as Map<String, dynamic>))
+          ?.map(
+            (e) => NotificationFeedItemEntity.fromJson(
+              e as Map<String, dynamic>,
+            ),
+          )
           .toList(),
+      users: (json['data']['users'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+          k,
+          UserEntity.fromJson(
+            e as Map<String, dynamic>,
+          ),
+        ),
+      ),
     );
 
 Map<String, dynamic> _$GetNotificationFeedResponseEntityToJson(
