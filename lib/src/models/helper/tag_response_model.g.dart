@@ -14,7 +14,8 @@ GetTaggingListResponseEntity _$GetTaggingListResponseEntityFromJson(
       groupTags: (json['data']['group_tags'] as List<dynamic>?)
           ?.map((e) => GroupTagEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      members: (json['data']['community_members'] as List<dynamic>?)
+      members: (json['data']['community_members'] as List<dynamic>? ??
+              json['data']['members'] as List<dynamic>?)
           ?.map((e) => UserTagEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
