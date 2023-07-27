@@ -54,3 +54,7 @@ Removing media service
 
 Adding Notification feed
 Adding Save post
+
+# 1.3.1
+
+Fixed tagging api response
