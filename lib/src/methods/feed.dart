@@ -33,4 +33,9 @@ class FeedApi {
         await feedRepository.getFeedOfFeedRoom(getFeedFeedRoomRequest);
     return response;
   }
+
+  Future<GetTopicsResponse> getTopics(GetTopicsRequest request) async {
+    final GetTopicsResponse response = await feedRepository.getTopics(request);
+    return response;
+  }
 }

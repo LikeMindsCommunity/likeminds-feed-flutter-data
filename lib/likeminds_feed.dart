@@ -54,6 +54,12 @@ class LMFeedClient {
     return response;
   }
 
+  Future<GetTopicsResponse> getTopics(GetTopicsRequest request) async {
+    final GetTopicsResponse response =
+        await _sdkApplication.getFeedApi().getTopics(request);
+    return response;
+  }
+
   Future<InitiateUserResponse> initiateUser(InitiateUserRequest request) async {
     return await _sdkApplication.getAuthApi().initiateUser(request);
   }

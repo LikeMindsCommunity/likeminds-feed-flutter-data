@@ -10,12 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^5.2.1+1
-  json_annotation: ^4.8.0
-  json_serializable: ^6.6.1
-  equatable: ^2.0.5
-  get_it: ^7.2.0
-  envied: ^0.3.0
+  dio: 
+  json_annotation: 
+  json_serializable: 
+  equatable: 
+  get_it: 
+  envied: 
 
 dev_dependencies:
   flutter_test:

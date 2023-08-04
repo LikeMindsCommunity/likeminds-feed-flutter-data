@@ -115,4 +115,26 @@ class FeedService {
       return responseEntity;
     }
   }
+
+  Future<GetTopicsResponseEntity> getTopics(GetTopicsRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getTopicFeedEndpoint(request.page,
+                request.pageSize, request.search, request.searchType),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      final GetTopicsResponseEntity responseEntity =
+          GetTopicsResponseEntity.fromJson(response.data);
+      return responseEntity;
+    } on DioError catch (e) {
+      final GetTopicsResponseEntity response = GetTopicsResponseEntity(
+        success: false,
+        errorMessage: e.toString(),
+        topics: [],
+      );
+      return response;
+    }
+  }
 }
