@@ -94,11 +94,7 @@ class FeedService {
     try {
       final response = await apiClient.client().get(
             apiClient.getEndpoints.feedOfFeedroomEndpoint,
-            queryParameters: {
-              'page': feedRoomRequest.page,
-              'feedroom_id': feedRoomRequest.feedroomId,
-              'page_size': feedRoomRequest.pageSize,
-            },
+            queryParameters: feedRoomRequest.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
