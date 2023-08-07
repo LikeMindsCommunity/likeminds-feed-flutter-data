@@ -17,6 +17,11 @@ GetFeedOfFeedRoomResponseEntity _$GetFeedOfFeedRoomResponseEntityFromJson(
       users: (json['data']['users'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      topics: (json['data']['topics'] as Map<String, dynamic>?)?.map(
+            (k, e) =>
+                MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
+          ) ??
+          {},
     );
 
 Map<String, dynamic> _$GetFeedOfFeedRoomResponseEntityToJson(
@@ -26,4 +31,5 @@ Map<String, dynamic> _$GetFeedOfFeedRoomResponseEntityToJson(
       'error_message': instance.errorMessage,
       'posts': instance.posts,
       'users': instance.users,
+      'topics': instance.topics,
     };

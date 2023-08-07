@@ -23,7 +23,7 @@ class Post {
   final DateTime createdAt;
   final DateTime updatedAt;
   final bool isEdited;
-  final List<Topic>? topics;
+  final List<String>? topics;
 
   Post({
     required this.id,
@@ -61,7 +61,7 @@ class Post {
         menuItems: postEntity.menuItems
             .map((e) => PopupMenuItemModel.fromEntity(entity: e))
             .toList(),
-        topics: postEntity.topics?.map((e) => Topic.fromEntity(e)).toList(),
+        topics: postEntity.topics,
         createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
         updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt));
   }
@@ -82,7 +82,7 @@ class Post {
       menuItems: menuItems.map((e) => e.toEntity()).toList(),
       createdAt: createdAt.millisecondsSinceEpoch.toInt(),
       updatedAt: updatedAt.millisecondsSinceEpoch.toInt(),
-      topics: topics?.map((e) => e.toEntity()).toList(),
+      topics: topics,
     );
   }
 }
@@ -115,7 +115,7 @@ class PostEntity {
   final int createdAt;
   @JsonKey(name: 'updated_at')
   final int updatedAt;
-  final List<TopicEntity>? topics;
+  final List<String>? topics;
   PostEntity({
     required this.id,
     required this.text,

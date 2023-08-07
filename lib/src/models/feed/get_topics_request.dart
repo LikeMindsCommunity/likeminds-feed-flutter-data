@@ -16,6 +16,7 @@ class GetTopicsRequest {
   Map<String, dynamic> toJson() => {
         'is_enabled': isEnabled,
         'page': page,
+        'page_size': pageSize,
         'search': search,
         'search_type': searchType,
       };
@@ -38,7 +39,7 @@ class GetTopicsRequestBuilder {
     _pageSize = pageSize;
   }
 
-  void isEnabled(bool isEnabled) {
+  void isEnabled(bool? isEnabled) {
     _isEnabled = isEnabled;
   }
 

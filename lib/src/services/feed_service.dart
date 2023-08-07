@@ -107,6 +107,7 @@ class FeedService {
         errorMessage: e.toString(),
         posts: [],
         users: {},
+        topics: {},
       );
       return responseEntity;
     }
@@ -115,8 +116,8 @@ class FeedService {
   Future<GetTopicsResponseEntity> getTopics(GetTopicsRequest request) async {
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints.getTopicFeedEndpoint(request.page,
-                request.pageSize, request.search, request.searchType),
+            apiClient.getEndpoints.topicFeedEndpoint,
+            queryParameters: request.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
