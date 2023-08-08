@@ -8,12 +8,14 @@ class EditPostResponse {
   final String? errorMessage;
   final Post? post;
   final Map<String, User>? user;
+  final Map<String, Topic>? topics;
 
   EditPostResponse({
     required this.success,
     this.errorMessage,
     this.post,
     this.user,
+    this.topics,
   });
 
   factory EditPostResponse.fromEntity(EditPostResponseEntity entity) {
@@ -22,6 +24,12 @@ class EditPostResponse {
       errorMessage: entity.errorMessage,
       post: entity.post,
       user: entity.users,
+      topics: entity.topics?.map(
+        (key, value) => MapEntry(
+          key,
+          Topic.fromEntity(value),
+        ),
+      ),
     );
   }
 
@@ -31,6 +39,12 @@ class EditPostResponse {
       errorMessage: errorMessage,
       post: post,
       users: user,
+      topics: topics?.map(
+        (key, value) => MapEntry(
+          key,
+          value.toEntity(),
+        ),
+      ),
     );
   }
 }
@@ -42,12 +56,14 @@ class EditPostResponseEntity {
   final String? errorMessage;
   final Post? post;
   final Map<String, User>? users;
+  final Map<String, TopicEntity>? topics;
 
   EditPostResponseEntity({
     required this.success,
     this.errorMessage,
     this.post,
     this.users,
+    this.topics,
   });
 
   factory EditPostResponseEntity.fromJson(Map<String, dynamic> json) =>

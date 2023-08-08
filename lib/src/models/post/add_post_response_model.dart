@@ -8,21 +8,24 @@ class AddPostResponse {
   final String? errorMessage;
   final Post? post;
   final Map<String, User>? user;
+  final Map<String, Topic>? topics;
 
   AddPostResponse({
     required this.success,
     required this.errorMessage,
     required this.post,
     required this.user,
+    required this.topics,
   });
 
   factory AddPostResponse.fromEntity({required AddPostResponseEntity entity}) {
     return AddPostResponse(
-      success: entity.success,
-      errorMessage: entity.errorMessage,
-      post: entity.post,
-      user: entity.users,
-    );
+        success: entity.success,
+        errorMessage: entity.errorMessage,
+        post: entity.post,
+        user: entity.users,
+        topics: entity.topics
+            ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))));
   }
 }
 
@@ -31,6 +34,7 @@ class AddPostResponseEntity {
   final bool success;
   final Post? post;
   final Map<String, User>? users;
+  final Map<String, TopicEntity>? topics;
 
   @JsonKey(name: 'error_message')
   final String? errorMessage;
@@ -40,6 +44,7 @@ class AddPostResponseEntity {
     required this.errorMessage,
     required this.post,
     required this.users,
+    required this.topics,
   });
 
   factory AddPostResponseEntity.fromJson(Map<String, dynamic> data) =>
