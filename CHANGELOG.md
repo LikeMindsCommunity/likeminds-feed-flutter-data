@@ -58,3 +58,7 @@ Adding Save post
 # 1.3.1
 
 Fixed tagging api response
+
+# 1.3.2
+
+Make LMSDKCallback optional
