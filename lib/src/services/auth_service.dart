@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
@@ -61,6 +62,8 @@ class AuthService {
         return initiateUserResponse;
       }
     } on DioError catch (e) {
+      debugPrint(e.toString());
+      debugPrint(e.response!.data);
       InitiateUserResponseEntity initiateUserResponse =
           InitiateUserResponseEntity.fromJson(e.response?.data);
       return initiateUserResponse;
@@ -110,7 +113,7 @@ class AuthService {
 
       LogoutResponseEntity logoutResponse =
           LogoutResponseEntity.fromJson(response.data);
-      request.callback.logoutCallback();
+      request.callback?.logoutCallback();
       apiClient.clearTokens();
       return logoutResponse;
     } on DioError catch (e) {
