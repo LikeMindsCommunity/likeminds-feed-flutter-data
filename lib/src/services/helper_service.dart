@@ -5,13 +5,14 @@ import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class HelperService {
-  late final LMSDKCallback callback;
+  LMSDKCallback? callback;
   final ApiClient apiClient;
 
   HelperService({required this.apiClient}) {
-    callback = DIService.getIt.get<LMSDKCallback>(
-      instanceName: "LMCallback",
-    );
+    callback =
+        DIService.getIt.isRegistered<LMSDKCallback>(instanceName: "LMCallback")
+            ? DIService.getIt.get<LMSDKCallback>(instanceName: "LMCallback")
+            : null;
   }
 
   Future<GetTaggingListResponseEntity> getTaggingList(
@@ -80,6 +81,6 @@ class HelperService {
   }
 
   void routeProfilePage(String userId) {
-    callback.profileRouteCallback(lmUserId: userId);
+    callback?.profileRouteCallback(lmUserId: userId);
   }
 }

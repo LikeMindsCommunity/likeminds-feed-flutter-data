@@ -10,7 +10,7 @@ import 'environment/test_env.dart';
 import 'test_callback.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const prod = !bool.fromEnvironment('DEBUG');
+const prod = !bool.fromEnvironment('DEBUG', defaultValue: true);
 
 //Testing credentials, and callback
 final TestCallback testingCallback = TestCallback();
@@ -25,8 +25,8 @@ void main() {
   debugPrint("Initiating unit tests now...");
   group('Testing LMFeedClient SDK layer\n', () {
     LMFeedClient client = (LMFeedClientBuilder()
-          ..apiKey(prod ? testingProdAPIKey : testingBetaAPIKey)
-          ..sdkCallback(testingCallback))
+          ..apiKey(prod ? testingProdAPIKey : testingBetaAPIKey))
+        //..sdkCallback(testingCallback))
         .build();
 
     test('Testing Initiate User', () async {
@@ -228,6 +228,15 @@ void main() {
           .build();
       DeletePostResponse response = await client.deletePost(request);
       expect(response, isNotNull);
+    });
+
+    // logout call without LMSDKCallback
+    test('Testing Logout without LMSDKCallback', () async {
+      LogoutRequest request = (LogoutRequestBuilder()
+            ..deviceId("deviceId")
+            ..refreshToken("refreshToken"))
+          .build();
+      expect(request, isNotNull);
     });
   });
 }
