@@ -32,7 +32,7 @@ class DIService {
 
   /// Init function to register all the dependencies
   /// This function should be called before using any of the methods
-  void init(String apiKey, bool isProduction, LMSDKCallback sdkCallback) {
+  void init(String apiKey, bool isProduction, LMSDKCallback? sdkCallback) {
     ApiClient apiClient = ApiClient(
       apiKey: apiKey,
       isProduction: isProduction,
@@ -42,10 +42,12 @@ class DIService {
     getIt.registerLazySingleton(
       () => NotificationService(apiClient: apiClient),
     );
-    getIt.registerLazySingleton(
-      () => sdkCallback,
-      instanceName: "LMCallback",
-    );
+    if (sdkCallback != null) {
+      getIt.registerLazySingleton(
+        () => sdkCallback,
+        instanceName: "LMCallback",
+      );
+    }
 
     AuthService authService = AuthService(apiClient: apiClient);
     AuthRepository authRepository = AuthRepository(authService: authService);
