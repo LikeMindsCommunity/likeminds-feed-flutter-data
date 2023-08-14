@@ -58,6 +58,14 @@ class LMFeedClient {
     return await _sdkApplication.getAuthApi().initiateUser(request);
   }
 
+  Future<RefreshResponse> refreshUser(RefreshRequest refreshRequest) async {
+    return await _sdkApplication.getAuthApi().refreshUser(refreshRequest);
+  }
+
+  Future<LogoutResponse> logout(LogoutRequest request) async {
+    return await _sdkApplication.getAuthApi().logoutUser(request);
+  }
+
   Future<GetFeedResponse?> getFeed(GetFeedRequest request) async {
     return await _sdkApplication.getFeedApi().getUniversalFeed(request);
   }
