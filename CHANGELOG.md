@@ -62,3 +62,8 @@ Fixed tagging api response
 # 1.3.2
 
 Make LMSDKCallback optional
+
+# 1.3.3
+
+Fixed tagging api response
+Adding logout service
