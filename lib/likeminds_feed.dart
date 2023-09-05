@@ -18,7 +18,7 @@ class LMFeedClient {
 
   LMFeedClient._({
     required String apiKey,
-    required LMSDKCallback sdkCallback,
+    LMSDKCallback? sdkCallback,
   }) {
     DIService.instance.init(apiKey, _prod, sdkCallback);
     _sdkApplication = SDKApplication();
@@ -62,6 +62,14 @@ class LMFeedClient {
 
   Future<InitiateUserResponse> initiateUser(InitiateUserRequest request) async {
     return await _sdkApplication.getAuthApi().initiateUser(request);
+  }
+
+  Future<RefreshResponse> refreshUser(RefreshRequest refreshRequest) async {
+    return await _sdkApplication.getAuthApi().refreshUser(refreshRequest);
+  }
+
+  Future<LogoutResponse> logout(LogoutRequest request) async {
+    return await _sdkApplication.getAuthApi().logoutUser(request);
   }
 
   Future<GetFeedResponse?> getFeed(GetFeedRequest request) async {
@@ -220,7 +228,7 @@ class LMFeedClientBuilder {
     _apiKey = apiKey;
   }
 
-  void sdkCallback(LMSDKCallback sdkCallback) {
+  void sdkCallback(LMSDKCallback? sdkCallback) {
     _sdkCallback = sdkCallback;
   }
 
@@ -228,13 +236,10 @@ class LMFeedClientBuilder {
     if (_apiKey == null) {
       throw Exception("API Key is not provided");
     }
-    if (_sdkCallback == null) {
-      throw Exception("SDK Callback is not provided");
-    }
     debugPrint("SDK Initiation point reached");
     return LMFeedClient._(
       apiKey: _apiKey!,
-      sdkCallback: _sdkCallback!,
+      sdkCallback: _sdkCallback,
     );
   }
 }

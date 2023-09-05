@@ -10,7 +10,7 @@ SDKClientInfo _$SDKClientInfoFromJson(Map<String, dynamic> json) =>
     SDKClientInfo(
       community: json['community'] as int,
       user: json['user'] as int,
-      userUniqueId: json['user_unique_id'] as String,
+      userUniqueId: (json['user_unique_id'] ?? json['uuid']) as String,
     );
 
 Map<String, dynamic> _$SDKClientInfoToJson(SDKClientInfo instance) =>
