@@ -34,16 +34,10 @@ class FeedService {
 
   Future<GetFeedResponseEntity?> getUniversalFeed(
       GetFeedRequest universalFeedRequest) async {
-    debugPrint(apiClient.getEndpoints
-        .getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints
-                .getUniversalFeedEndPoint(universalFeedRequest.page),
-            queryParameters: {
-              'page': universalFeedRequest.page,
-              'page_size': universalFeedRequest.pageSize,
-            },
+            apiClient.getEndpoints.universalFeed,
+            queryParameters: universalFeedRequest.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),

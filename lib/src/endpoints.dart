@@ -22,6 +22,7 @@ class EndPoints {
   String get registerDeviceEndpoint => "$KETTLE_HOST/user/device/push";
 
   String get feedUrl => "$KETTLE_HOST/feed";
+  String get universalFeed => "$feedUrl/universal";
   String get feedroomEndpoint => "$KETTLE_HOST/feedroom";
   String get feedOfFeedroomEndpoint => "$KETTLE_HOST/feed/group";
 
@@ -43,10 +44,6 @@ class EndPoints {
 
   String markReadNotificationEndpoint(String notificationId) =>
       "$KETTLE_HOST/feed/user/activity/$notificationId/mark_read";
-
-  String getUniversalFeedEndPoint(int page) {
-    return "$feedUrl/universal?page=$page&page_size=$pageLimit";
-  }
 
   String getPostEndPoint(String postId, int page) {
     return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";

@@ -16,6 +16,7 @@ dependencies:
   equatable:
   get_it:
   envied:
+  curl_logger_dio_interceptor: ^1.0.0
 
 dev_dependencies:
   flutter_test:
