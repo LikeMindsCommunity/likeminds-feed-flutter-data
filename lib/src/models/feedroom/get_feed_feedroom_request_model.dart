@@ -17,7 +17,7 @@ class GetFeedOfFeedRoomRequest {
         'page': page,
         'pageSize': pageSize,
         'feedroom_id': feedroomId,
-        'topic_ids': topics?.map((e) => e.id).toList(),
+        'topic_ids': topics?.map((e) => e.id).toList().toString(),
       };
 }
 
