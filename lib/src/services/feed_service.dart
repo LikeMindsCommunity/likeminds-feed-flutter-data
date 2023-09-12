@@ -34,16 +34,10 @@ class FeedService {
 
   Future<GetFeedResponseEntity?> getUniversalFeed(
       GetFeedRequest universalFeedRequest) async {
-    debugPrint(apiClient.getEndpoints
-        .getUniversalFeedEndPoint(universalFeedRequest.page));
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints
-                .getUniversalFeedEndPoint(universalFeedRequest.page),
-            queryParameters: {
-              'page': universalFeedRequest.page,
-              'page_size': universalFeedRequest.pageSize,
-            },
+            apiClient.getEndpoints.universalFeed,
+            queryParameters: universalFeedRequest.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
@@ -94,11 +88,7 @@ class FeedService {
     try {
       final response = await apiClient.client().get(
             apiClient.getEndpoints.feedOfFeedroomEndpoint,
-            queryParameters: {
-              'page': feedRoomRequest.page,
-              'feedroom_id': feedRoomRequest.feedroomId,
-              'page_size': feedRoomRequest.pageSize,
-            },
+            queryParameters: feedRoomRequest.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
@@ -111,8 +101,31 @@ class FeedService {
         errorMessage: e.toString(),
         posts: [],
         users: {},
+        topics: {},
       );
       return responseEntity;
+    }
+  }
+
+  Future<GetTopicsResponseEntity> getTopics(GetTopicsRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.topicFeedEndpoint,
+            queryParameters: request.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      final GetTopicsResponseEntity responseEntity =
+          GetTopicsResponseEntity.fromJson(response.data);
+      return responseEntity;
+    } on DioError catch (e) {
+      final GetTopicsResponseEntity response = GetTopicsResponseEntity(
+        success: false,
+        errorMessage: e.toString(),
+        topics: [],
+      );
+      return response;
     }
   }
 }

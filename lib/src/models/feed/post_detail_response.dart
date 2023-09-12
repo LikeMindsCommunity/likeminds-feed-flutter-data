@@ -8,11 +8,13 @@ class PostDetailResponse {
   final String? errorMessage;
   final PostReplies? postReplies;
   final Map<String, User>? users;
+  final Map<String, Topic>? topics;
   PostDetailResponse({
     this.postReplies,
     required this.success,
     this.errorMessage,
     this.users,
+    this.topics,
   });
   factory PostDetailResponse.fromEntity(PostDetailResponseEntity entity) {
     return PostDetailResponse(
@@ -22,7 +24,9 @@ class PostDetailResponse {
             ? null
             : PostReplies.fromEntity(entity.postReplies!),
         users: entity.users
-            ?.map((key, value) => MapEntry(key, User.fromEntity(value))));
+            ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
+        topics: entity.topics
+            ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))));
   }
 }
 
@@ -33,11 +37,14 @@ class PostDetailResponseEntity {
   @JsonKey(name: 'post')
   final PostRepliesEntity? postReplies;
   final Map<String, UserEntity>? users;
+  final Map<String, TopicEntity>? topics;
+
   PostDetailResponseEntity({
     required this.success,
     this.errorMessage,
     this.postReplies,
     this.users,
+    this.topics,
   });
   factory PostDetailResponseEntity.fromJson(Map<String, dynamic> data) =>
       _$PostDetailResponseEntityFromJson(data);

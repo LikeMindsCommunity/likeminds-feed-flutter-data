@@ -4,17 +4,20 @@ class EditPostRequest {
   final String postId;
   final String postText;
   final List<Attachment>? attachments;
+  final List<Topic>? topics;
 
   EditPostRequest._({
     required this.postId,
     required this.postText,
     required this.attachments,
+    this.topics,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'text': postText,
       'attachments': attachments?.map((e) => e.toEntity().toJson()).toList(),
+      'topic_ids': topics?.map((e) => e.id).toList(),
     };
   }
 }
@@ -23,6 +26,7 @@ class EditPostRequestBuilder {
   String? _postId;
   String? _postText;
   List<Attachment>? _attachments;
+  List<Topic>? _topics;
 
   EditPostRequestBuilder();
 
@@ -38,11 +42,16 @@ class EditPostRequestBuilder {
     _attachments = attachments;
   }
 
+  void topics(List<Topic> topics) {
+    _topics = topics;
+  }
+
   EditPostRequest build() {
     return EditPostRequest._(
       postId: _postId!,
       postText: _postText!,
       attachments: _attachments!,
+      topics: _topics,
     );
   }
 }

@@ -8,30 +8,34 @@ class GetFeedOfFeedRoomResponse {
   final String? errorMessage;
   final List<Post>? posts;
   final Map<String, User> users;
+  final Map<String, Topic> topics;
 
   GetFeedOfFeedRoomResponse({
     required this.success,
     required this.errorMessage,
     required this.posts,
     required this.users,
+    required this.topics,
   });
 
   factory GetFeedOfFeedRoomResponse.fromEntity(
           {required GetFeedOfFeedRoomResponseEntity entity}) =>
       GetFeedOfFeedRoomResponse(
-        success: entity.success,
-        errorMessage: entity.errorMessage,
-        posts:
-            entity.posts?.map((e) => Post.fromEntity(postEntity: e)).toList(),
-        users: entity.users
-            .map((key, value) => MapEntry(key, User.fromEntity(value))),
-      );
+          success: entity.success,
+          errorMessage: entity.errorMessage,
+          posts:
+              entity.posts?.map((e) => Post.fromEntity(postEntity: e)).toList(),
+          users: entity.users
+              .map((key, value) => MapEntry(key, User.fromEntity(value))),
+          topics: entity.topics
+              .map((key, value) => MapEntry(key, Topic.fromEntity(value))));
 
   GetFeedOfFeedRoomResponseEntity toEntity() => GetFeedOfFeedRoomResponseEntity(
         success: success,
         errorMessage: errorMessage,
         posts: posts?.map((e) => e.toEntity()).toList(),
         users: users.map((key, value) => MapEntry(key, value.toEntity())),
+        topics: topics.map((key, value) => MapEntry(key, value.toEntity())),
       );
 }
 
@@ -42,12 +46,14 @@ class GetFeedOfFeedRoomResponseEntity {
   final String? errorMessage;
   final List<PostEntity>? posts;
   final Map<String, UserEntity> users;
+  final Map<String, TopicEntity> topics;
 
   GetFeedOfFeedRoomResponseEntity({
     required this.success,
     required this.errorMessage,
     required this.posts,
     required this.users,
+    required this.topics,
   });
 
   factory GetFeedOfFeedRoomResponseEntity.fromJson(Map<String, dynamic> json) =>

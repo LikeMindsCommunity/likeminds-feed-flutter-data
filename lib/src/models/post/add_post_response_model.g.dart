@@ -23,6 +23,9 @@ AddPostResponseEntity _$AddPostResponseEntityFromJson(
           ),
         ),
       ),
+      topics: (json['data']['topics'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
+      ),
     );
 
 Map<String, dynamic> _$AddPostResponseEntityToJson(

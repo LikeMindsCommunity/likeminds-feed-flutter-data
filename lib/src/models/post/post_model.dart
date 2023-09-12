@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // import 'package:likeminds_feed/src/models/feed/post.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 
 import 'package:likeminds_feed/src/models/post/attachment_model.dart';
 import 'package:likeminds_feed/src/models/post/popup_menu_item_model.dart';
@@ -22,6 +23,8 @@ class Post {
   final DateTime createdAt;
   final DateTime updatedAt;
   final bool isEdited;
+  final List<String>? topics;
+
   Post({
     required this.id,
     required this.text,
@@ -37,6 +40,7 @@ class Post {
     required this.isLiked,
     required this.commentCount,
     required this.isEdited,
+    required this.topics,
   });
 
   factory Post.fromEntity({required PostEntity postEntity}) {
@@ -57,6 +61,7 @@ class Post {
         menuItems: postEntity.menuItems
             .map((e) => PopupMenuItemModel.fromEntity(entity: e))
             .toList(),
+        topics: postEntity.topics,
         createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
         updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt));
   }
@@ -77,6 +82,7 @@ class Post {
       menuItems: menuItems.map((e) => e.toEntity()).toList(),
       createdAt: createdAt.millisecondsSinceEpoch.toInt(),
       updatedAt: updatedAt.millisecondsSinceEpoch.toInt(),
+      topics: topics,
     );
   }
 }
@@ -109,6 +115,7 @@ class PostEntity {
   final int createdAt;
   @JsonKey(name: 'updated_at')
   final int updatedAt;
+  final List<String>? topics;
   PostEntity({
     required this.id,
     required this.text,
@@ -124,6 +131,7 @@ class PostEntity {
     required this.isLiked,
     required this.commentCount,
     required this.isEdited,
+    required this.topics,
   });
   factory PostEntity.fromJson(Map<String, dynamic> data) =>
       _$PostEntityFromJson(data);
