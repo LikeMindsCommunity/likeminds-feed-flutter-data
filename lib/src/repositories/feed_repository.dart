@@ -37,4 +37,10 @@ class FeedRepository {
         await feedService.getFeedOfFeedRoom(getFeedFeedRoomRequest);
     return GetFeedOfFeedRoomResponse.fromEntity(entity: responseEntity);
   }
+
+  Future<GetTopicsResponse> getTopics(GetTopicsRequest request) async {
+    final GetTopicsResponseEntity responseEntity =
+        await feedService.getTopics(request);
+    return GetTopicsResponse.fromEntity(responseEntity);
+  }
 }

@@ -8,12 +8,14 @@ class GetPostResponse {
   final String? errorMessage;
   final Post? post;
   final Map<String, User>? users;
+  final Map<String, Topic>? topics;
 
   GetPostResponse({
     required this.success,
     this.errorMessage,
     this.post,
     this.users,
+    this.topics,
   });
 
   factory GetPostResponse.fromEntity({required GetPostResponseEntity entity}) {
@@ -26,6 +28,12 @@ class GetPostResponse {
       users: entity.users?.map((key, value) {
         return MapEntry(key, User.fromEntity(value));
       }),
+      topics: entity.topics?.map(
+        (key, value) => MapEntry(
+          key,
+          Topic.fromEntity(value),
+        ),
+      ),
     );
   }
 
@@ -37,6 +45,12 @@ class GetPostResponse {
       users: users?.map((key, value) {
         return MapEntry(key, value.toEntity());
       }),
+      topics: topics?.map(
+        (key, value) => MapEntry(
+          key,
+          value.toEntity(),
+        ),
+      ),
     );
   }
 }
@@ -48,12 +62,14 @@ class GetPostResponseEntity {
   final String? errorMessage;
   final PostEntity? post;
   final Map<String, UserEntity>? users;
+  final Map<String, TopicEntity>? topics;
 
   GetPostResponseEntity({
     required this.success,
     this.errorMessage,
     this.post,
     this.users,
+    this.topics,
   });
 
   factory GetPostResponseEntity.fromJson(Map<String, dynamic> data) =>

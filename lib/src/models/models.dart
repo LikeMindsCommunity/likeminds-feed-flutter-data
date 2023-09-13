@@ -53,6 +53,9 @@ export 'package:likeminds_feed/src/models/feed/edit_comment_response.dart';
 export 'package:likeminds_feed/src/models/feed/toggle_like_comment_request.dart';
 export 'package:likeminds_feed/src/models/feed/toggle_like_comment_response.dart';
 export 'package:likeminds_feed/src/models/moderation/delete_reason_model.dart';
+export 'package:likeminds_feed/src/models/feed/get_topics_request.dart';
+export 'package:likeminds_feed/src/models/feed/get_topics_response.dart';
+export 'package:likeminds_feed/src/models/feed/topic_model.dart';
 
 export 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
 export 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';
@@ -80,7 +83,7 @@ export 'package:likeminds_feed/src/models/notifications/register_device_response
 export 'package:likeminds_feed/src/models/notification_feed/get_notification_feed_request_model.dart';
 export 'package:likeminds_feed/src/models/notification_feed/get_notification_feed_response_model.dart';
 export 'package:likeminds_feed/src/models/notification_feed/get_unread_notification_count_response_model.dart';
-export 'package:likeminds_feed/src/models//notification_feed/mark_read_notification_request_model.dart';
+export 'package:likeminds_feed/src/models/notification_feed/mark_read_notification_request_model.dart';
 export 'package:likeminds_feed/src/models/notification_feed/mark_read_notification_response_model.dart';
 export 'package:likeminds_feed/src/models/notification_feed/notification_feed_item_model.dart';
 

@@ -16,6 +16,9 @@ PostDetailResponseEntity _$PostDetailResponseEntityFromJson(
     users: (json['data']['users'] as Map<String, dynamic>).map(
       (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
     ),
+    topics: (json['data']['topics'] as Map<String, dynamic>).map(
+      (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
+    ),
   );
 }
 
@@ -24,4 +27,5 @@ Map<String, dynamic> _$PostDetailResponseEntityToJson(
     <String, dynamic>{
       'post': instance.postReplies?.toJson(),
       'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
+      'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
     };

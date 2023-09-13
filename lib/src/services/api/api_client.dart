@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/environment/env.dart';
@@ -69,6 +70,7 @@ class ApiClient {
     dio.options = options;
     dio.interceptors.add(Logging());
     dio.interceptors.add(TokenInterceptor(apiClient: this));
+    dio.interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
     return dio;
   }
 }

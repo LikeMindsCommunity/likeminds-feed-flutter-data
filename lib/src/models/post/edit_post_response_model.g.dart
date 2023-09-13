@@ -23,6 +23,9 @@ EditPostResponseEntity _$EditPostResponseEntityFromJson(
           ),
         ),
       ),
+      topics: (json['data']['topics'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
+      ),
     );
 
 Map<String, dynamic> _$EditPostResponseEntityToJson(
@@ -32,4 +35,5 @@ Map<String, dynamic> _$EditPostResponseEntityToJson(
       'error_message': instance.errorMessage,
       'post': instance.post?.toEntity().toJson(),
       'users': instance.users,
+      'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
     };

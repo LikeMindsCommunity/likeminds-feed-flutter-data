@@ -26,6 +26,8 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
           .toList(),
       createdAt: json['created_at'] as int,
       updatedAt: json['updated_at'] as int,
+      topics:
+          (json['topics'] as List<dynamic>?)?.map((e) => e.toString()).toList(),
     );
 
 Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
@@ -44,4 +46,5 @@ Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       'is_liked': instance.isLiked,
+      'topics': instance.topics,
     };
