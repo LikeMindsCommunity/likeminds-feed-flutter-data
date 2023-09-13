@@ -67,3 +67,7 @@ Make LMSDKCallback optional
 
 Fixed tagging api response
 Adding logout service
+
+# 1.4.0
+
+Added support for Topic Feed
