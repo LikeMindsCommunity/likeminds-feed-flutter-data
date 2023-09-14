@@ -15,6 +15,6 @@ jobs:
           java-version: "11" #define the java version
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.10.0 #Flutter latest version defined
+          flutter-version: ${{ env.FLUTTER_VERSION }}
       - run: flutter pub get #installing the plugins for the flutter project
       - run: flutter test --dart-define=DEBUG=true
