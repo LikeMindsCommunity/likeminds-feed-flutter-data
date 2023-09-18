@@ -18,6 +18,8 @@ class EndPoints {
   String get authEndpoint => "$KETTLE_HOST/sdk/initiate";
   String get authRefreshEndpoint => "$KETTLE_HOST/user/refresh";
   String get authLogoutEndpoint => "$KETTLE_HOST/user/logout";
+  String get communityConfigurationsEndpoint =>
+      "$KETTLE_HOST/community/configurations";
 
   String get registerDeviceEndpoint => "$KETTLE_HOST/user/device/push";
 

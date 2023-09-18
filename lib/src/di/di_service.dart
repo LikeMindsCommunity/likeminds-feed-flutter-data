@@ -3,6 +3,7 @@ import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
 import 'package:likeminds_feed/src/repositories/comment_repository.dart';
+import 'package:likeminds_feed/src/repositories/community_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
@@ -12,6 +13,7 @@ import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 import 'package:likeminds_feed/src/services/auth_service.dart';
 import 'package:likeminds_feed/src/services/comment_service.dart';
+import 'package:likeminds_feed/src/services/community_service.dart';
 import 'package:likeminds_feed/src/services/feed_service.dart';
 import 'package:likeminds_feed/src/services/helper_service.dart';
 import 'package:likeminds_feed/src/services/moderation_service.dart';
@@ -64,6 +66,10 @@ class DIService {
     CommentRepository commentRepository =
         CommentRepository(commentService: commentService);
 
+    CommunityService communityService = CommunityService(apiClient: apiClient);
+    CommunityRepository communityRepository =
+        CommunityRepository(communityService: communityService);
+
     FeedService feedService = FeedService(apiClient: apiClient);
     FeedRepository feedRepository = FeedRepository(feedService: feedService);
 
@@ -102,6 +108,10 @@ class DIService {
       () => commentRepository,
       instanceName: kInstanceCommentRepository,
     );
+    getIt.registerFactory<CommunityRepository>(
+      () => communityRepository,
+      instanceName: kInstanceCommunityRepository,
+    );
     getIt.registerFactory<AuthRepository>(
       () => authRepository,
       instanceName: kInstanceAuthRepository,
@@ -128,6 +138,7 @@ class DIService {
   static const String kInstanceAccessRepository = 'access_repository';
   static const String kInstanceFeedRepository = 'feed_repository';
   static const String kInstanceCommentRepository = 'comment_repository';
+  static const String kInstanceCommunityRepository = 'community_repository';
   static const String kInstanceAuthRepository = 'auth_repository';
   static const String kInstancePostRepository = 'post_repository';
   static const String kInstanceMediaRepository = 'media_repository';

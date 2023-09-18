@@ -63,7 +63,7 @@ class AuthService {
       }
     } on DioError catch (e) {
       debugPrint(e.toString());
-      debugPrint(e.response!.data);
+      debugPrint(e.response!.data.toString());
       InitiateUserResponseEntity initiateUserResponse =
           InitiateUserResponseEntity.fromJson(e.response?.data);
       return initiateUserResponse;
