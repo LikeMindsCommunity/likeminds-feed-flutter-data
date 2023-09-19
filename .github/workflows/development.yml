@@ -1,4 +1,3 @@
-# Main Github Actions CI/CD file
 name: Merge to development
 
 on:

@@ -1,9 +1,10 @@
-# Main Github Actions CI/CD file
 name: Feed SDK test on every PR
+
 on:
   pull_request:
     branches-ignore: #exclude the branches from the test
       - master
+      
 jobs:
   run-flutter-test:
     runs-on: ubuntu-latest
@@ -21,7 +22,14 @@ jobs:
       - run: flutter pub get #installing the plugins for the flutter project
       
       - name: Lint
-        run: flutter analyze
+        run: flutter analyze | tee  lint-results.txt
+
+      - name: Upload the lint results as an artifact
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: lint-results
+          path: lint-results.txt
       
       - name : Tests
         if: always()
