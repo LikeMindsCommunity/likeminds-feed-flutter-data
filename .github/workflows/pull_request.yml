@@ -22,7 +22,7 @@ jobs:
       - run: flutter pub get #installing the plugins for the flutter project
       
       - name: Lint
-        run: flutter analyze | tee  lint-results.txt
+        run: flutter analyze > lint-results.txt
 
       - name: Upload the lint results as an artifact
         if: always()
