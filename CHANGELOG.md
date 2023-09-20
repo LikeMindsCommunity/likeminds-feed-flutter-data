@@ -71,3 +71,7 @@ Adding logout service
 # 1.4.0
 
 Added support for Topic Feed
+
+# 1.4.1
+
+Added support for Community Configuration

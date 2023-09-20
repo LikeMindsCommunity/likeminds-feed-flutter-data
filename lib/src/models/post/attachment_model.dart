@@ -51,6 +51,9 @@ class AttachmentMeta {
   final int? duration;
   final int? pageCount;
   final AttachmentMetaOgTags? ogTags;
+  final double? height;
+  final double? width;
+  final double? aspectRatio;
 
   AttachmentMeta({
     this.url,
@@ -59,6 +62,9 @@ class AttachmentMeta {
     this.duration,
     this.pageCount,
     this.ogTags,
+    this.aspectRatio,
+    this.width,
+    this.height,
   });
 
   factory AttachmentMeta.fromEntity(AttachmentMetaEntity entity) {
@@ -68,6 +74,9 @@ class AttachmentMeta {
       size: entity.size,
       duration: entity.duration,
       pageCount: entity.pageCount,
+      height: entity.height,
+      width: entity.width,
+      aspectRatio: entity.aspectRatio,
       ogTags: entity.ogTags != null
           ? AttachmentMetaOgTags.fromEntity(entity.ogTags!)
           : null,
@@ -81,6 +90,9 @@ class AttachmentMeta {
       size: size,
       duration: duration,
       pageCount: pageCount,
+      height: height,
+      width: width,
+      aspectRatio: aspectRatio,
       ogTags: ogTags != null ? ogTags!.toEntity() : null,
     );
   }
@@ -96,6 +108,10 @@ class AttachmentMetaEntity {
   final int? pageCount;
   @JsonKey(name: 'og_tags')
   final AttachmentMetaOgTagsEntity? ogTags;
+  final double? height;
+  final double? width;
+  @JsonKey(name: 'aspect_ratio')
+  final double? aspectRatio;
 
   AttachmentMetaEntity({
     this.url,
@@ -104,6 +120,9 @@ class AttachmentMetaEntity {
     this.duration,
     this.pageCount,
     this.ogTags,
+    this.aspectRatio,
+    this.width,
+    this.height,
   });
 
   factory AttachmentMetaEntity.fromJson(Map<String, dynamic> json) =>

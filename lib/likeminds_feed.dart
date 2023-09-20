@@ -60,6 +60,13 @@ class LMFeedClient {
     return response;
   }
 
+  Future<GetCommunityConfigurationsResponse>
+      getCommunityConfigurations() async {
+    final GetCommunityConfigurationsResponse response =
+        await _sdkApplication.getCommunityApi().getCommunityConfigurations();
+    return response;
+  }
+
   Future<InitiateUserResponse> initiateUser(InitiateUserRequest request) async {
     return await _sdkApplication.getAuthApi().initiateUser(request);
   }
