@@ -25,8 +25,8 @@ void main() {
   debugPrint("Initiating unit tests now...");
   group('Testing LMFeedClient SDK layer\n', () {
     LMFeedClient client = (LMFeedClientBuilder()
-          ..apiKey(prod ? testingProdAPIKey : testingBetaAPIKey))
-        //..sdkCallback(testingCallback))
+          ..apiKey(prod ? testingProdAPIKey : testingBetaAPIKey)
+          ..sdkCallback(testingCallback))
         .build();
 
     test('Testing Initiate User', () async {
@@ -34,6 +34,12 @@ void main() {
             ..userId(prod ? testingProdBotID : testingBetaBotID))
           .build();
       InitiateUserResponse response = await client.initiateUser(request);
+      expect(response, isNotNull);
+    });
+
+    test('Testing the community configurations APi', () async {
+      GetCommunityConfigurationsResponse response =
+          await client.getCommunityConfigurations();
       expect(response, isNotNull);
     });
 

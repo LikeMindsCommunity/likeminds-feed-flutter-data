@@ -10,6 +10,8 @@ export 'package:likeminds_feed/src/models/auth/member_state_response_model.dart'
 
 export 'package:likeminds_feed/src/models/community/community_model.dart';
 export 'package:likeminds_feed/src/models/community/community_settings_rights_model.dart';
+export 'package:likeminds_feed/src/models/community/community_configurations_model.dart';
+export 'package:likeminds_feed/src/models/community/get_community_configurations_response_model.dart';
 
 export 'package:likeminds_feed/src/models/helper/tag_response_model.dart';
 export 'package:likeminds_feed/src/models/helper/group_tag_model.dart';
