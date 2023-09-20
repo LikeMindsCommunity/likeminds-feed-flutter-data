@@ -1,17 +1,19 @@
-# Main Github Actions CI/CD file
-name: Merge to master
+name: Merge to development
 
 on:
   push:
     branches:
-      - master
+      - development
 
 env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 jobs:
-  publish:
+  build-and-dry-publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Prints the current branch name
+        run: echo "${GITHUB_BRANCH}"
+
       - name: Checkout the repository
         uses: actions/checkout@v3
 
@@ -21,11 +23,5 @@ jobs:
           distribution: "zulu"
           java-version: "11"
 
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-      - name: Set up Flutter and dependencies
-        run: flutter pub get
-
-      - name: Publish to pub.dev
-        run: flutter pub publish
+      - name: Dry run for pub.dev
+        run: flutter pub publish --dry-run
