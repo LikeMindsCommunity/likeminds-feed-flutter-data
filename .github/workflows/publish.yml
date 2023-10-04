@@ -33,14 +33,17 @@ jobs:
       - name: Set up Flutter and dependencies
         run: flutter pub get
 
-      - name: generate gcloud identity token
+      - name: Generate gcloud identity token and publish to pub.dev
         run: |
-            gcloud auth print-identity-token \
-              --audiences=https://pub.dev \
-              | flutter pub token add https://pub.dev
-
-      - name: Publish to pub.dev
-        run: flutter pub publish --force
+          export TOKEN=$(gcloud auth print-identity-token --impersonate-service-account="pub-dev@likeminds-nonprod-prj-24e1.iam.gserviceaccount.com" --audiences="https://pub.dev" --include-email)
+          if [ $? -eq 0 ]; then
+            echo "Identity token successfully generated"
+            flutter pub token add https://pub.dev --env-var TOKEN
+            flutter pub token list
+            flutter pub publish --force
+          else
+            echo "Error generating identity token"
+          fi
         
   create-github-release:
     name: Create GitHub Release
