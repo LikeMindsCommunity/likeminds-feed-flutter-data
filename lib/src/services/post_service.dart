@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/models/models.dart';
+import 'package:likeminds_feed/src/models/post/post_report_request.dart';
+import 'package:likeminds_feed/src/models/post/post_report_response.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class IPostService {
@@ -14,6 +16,8 @@ abstract class IPostService {
   Future<PinPostResponseEntity> pinPost(PinPostRequest pinPostRequest);
   Future<SavePostResponseEntity> savePost(SavePostRequest savePostRequest);
   Future<EditPostResponseEntity> editPost(EditPostRequest editPostRequest);
+  Future<PostReportResponseEntity> postReport(
+      PostReportRequest postReportRequest);
 }
 
 class PostService extends IPostService {
@@ -226,6 +230,30 @@ class PostService extends IPostService {
       EditPostResponseEntity editPostResponseEntity =
           EditPostResponseEntity(success: false, errorMessage: e.message);
       return editPostResponseEntity;
+    }
+  }
+
+  @override
+  Future<PostReportResponseEntity> postReport(
+      PostReportRequest postReportRequest) async {
+    try {
+      final response = await apiClient.client().post(
+            apiClient.getEndpoints.postReportEndpoint,
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+            data: postReportRequest.toJson(),
+          );
+      PostReportResponseEntity postReportResponseEntity =
+          PostReportResponseEntity.fromJson(response.data);
+      return postReportResponseEntity;
+    } on DioError catch (e) {
+      debugPrint("Error from report post: ${e.response?.data}");
+      PostReportResponseEntity postReportResponseEntity =
+          PostReportResponseEntity(success: false, errorMessage: e.message);
+      return postReportResponseEntity;
     }
   }
 }
