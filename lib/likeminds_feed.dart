@@ -8,6 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
+import 'package:likeminds_feed/src/models/post/post_report_request.dart';
+import 'package:likeminds_feed/src/models/post/post_report_response.dart';
 import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
@@ -113,6 +115,11 @@ class LMFeedClient {
 
   Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
     return await _sdkApplication.getPostApi().editPost(editPostRequest);
+  }
+
+  Future<PostReportResponse> postReport(
+      PostReportRequest postReportRequest) async {
+    return await _sdkApplication.getPostApi().postReport(postReportRequest);
   }
 
   Future<DeleteCommentResponse> deleteComment(

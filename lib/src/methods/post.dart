@@ -1,4 +1,6 @@
 import 'package:likeminds_feed/src/models/models.dart';
+import 'package:likeminds_feed/src/models/post/post_report_request.dart';
+import 'package:likeminds_feed/src/models/post/post_report_response.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
 
 class PostApi {
@@ -38,5 +40,10 @@ class PostApi {
 
   Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
     return await postRepository.editPost(editPostRequest);
+  }
+
+  Future<PostReportResponse> postReport(
+      PostReportRequest postReportRequest) async {
+    return await postRepository.postReport(postReportRequest);
   }
 }

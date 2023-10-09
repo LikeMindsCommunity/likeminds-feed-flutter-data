@@ -1,4 +1,6 @@
 import 'package:likeminds_feed/src/models/models.dart';
+import 'package:likeminds_feed/src/models/post/post_report_request.dart';
+import 'package:likeminds_feed/src/models/post/post_report_response.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
 
 class PostRepository {
@@ -54,5 +56,12 @@ class PostRepository {
     EditPostResponseEntity editPostResponseEntity =
         await postService.editPost(editPostRequest);
     return EditPostResponse.fromEntity(editPostResponseEntity);
+  }
+
+  Future<PostReportResponse> postReport(
+      PostReportRequest postReportRequest) async {
+    PostReportResponseEntity postReportResponseEntity =
+        await postService.postReport(postReportRequest);
+    return PostReportResponse.fromEntity(postReportResponseEntity);
   }
 }

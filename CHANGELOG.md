@@ -75,3 +75,7 @@ Added support for Topic Feed
 # 1.4.1
 
 Added support for Community Configuration
+
+# 1.5.0
+
+Added report service
