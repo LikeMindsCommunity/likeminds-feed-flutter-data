@@ -79,3 +79,7 @@ Added support for Community Configuration
 # 1.5.0
 
 Added report service
+
+# 1.5.1
+
+Added CI/CD pipelines
