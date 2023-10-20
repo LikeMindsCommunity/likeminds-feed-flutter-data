@@ -8,6 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
+import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
+import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 import 'package:likeminds_feed/src/models/post/post_report_request.dart';
 import 'package:likeminds_feed/src/models/post/post_report_response.dart';
 import 'src/models/models.dart';
@@ -59,6 +61,12 @@ class LMFeedClient {
   Future<GetTopicsResponse> getTopics(GetTopicsRequest request) async {
     final GetTopicsResponse response =
         await _sdkApplication.getFeedApi().getTopics(request);
+    return response;
+  }
+
+  Future<GetUserFeedResponse> getUserFeed(GetUserFeedRequest request) async {
+    final GetUserFeedResponse response =
+        await _sdkApplication.getFeedApi().getUserFeed(request);
     return response;
   }
 

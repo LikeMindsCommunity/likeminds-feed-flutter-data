@@ -49,6 +49,8 @@ export 'package:likeminds_feed/src/models/post/post_report_response.dart';
 export 'package:likeminds_feed/src/models/comment/comment_model.dart';
 export 'package:likeminds_feed/src/models/feed/post_detail_response.dart';
 export 'package:likeminds_feed/src/models/feed/post_detail_request.dart';
+export 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
+export 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 export 'package:likeminds_feed/src/models/feed/post_replies.dart';
 export 'package:likeminds_feed/src/models/feed/add_comment_request.dart';
 export 'package:likeminds_feed/src/models/feed/add_comment_response.dart';

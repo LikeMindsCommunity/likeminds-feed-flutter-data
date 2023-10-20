@@ -52,6 +52,10 @@ class EndPoints {
     return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";
   }
 
+  String getUserFeedEndPoint(String userId) {
+    return "$feedUrl/user/$userId/post";
+  }
+
   String getAddCommentEndPoint(String postId) {
     return "$feedUrl/post/$postId/comment";
   }

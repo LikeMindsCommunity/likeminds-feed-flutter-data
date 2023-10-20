@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
+import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class FeedService {
@@ -75,7 +77,6 @@ class FeedService {
           GetFeedRoomResponseEntity(
         success: false,
         chatroom: null,
-        chatrooms: null,
         participantCount: null,
         errorMessage: e.toString(),
       );
@@ -124,6 +125,28 @@ class FeedService {
         success: false,
         errorMessage: e.toString(),
         topics: [],
+      );
+      return response;
+    }
+  }
+
+  Future<GetUserFeedResponseEntity> getUserFeed(
+      GetUserFeedRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getUserFeedEndPoint(request.userId),
+            queryParameters: request.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      final GetUserFeedResponseEntity responseEntity =
+          GetUserFeedResponseEntity.fromJson(response.data);
+      return responseEntity;
+    } on DioError catch (e) {
+      final GetUserFeedResponseEntity response = GetUserFeedResponseEntity(
+        success: false,
+        errorMessage: e.toString(),
       );
       return response;
     }
