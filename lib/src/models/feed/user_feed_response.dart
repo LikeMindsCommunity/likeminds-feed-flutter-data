@@ -6,6 +6,7 @@ class GetUserFeedResponse {
   final List<Post>? posts;
   final Map<String, User>? users;
   final Map<String, Topic>? topics;
+  final Map<String, WidgetModel>? widgets;
 
   GetUserFeedResponse({
     required this.success,
@@ -13,6 +14,7 @@ class GetUserFeedResponse {
     this.posts,
     this.users,
     this.topics,
+    this.widgets,
   });
 
   factory GetUserFeedResponse.fromEntity(
@@ -25,6 +27,7 @@ class GetUserFeedResponse {
           ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
       topics: entity.topics
           ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))),
+      widgets: entity.widgets,
     );
   }
 }
@@ -35,6 +38,7 @@ class GetUserFeedResponseEntity {
   final List<PostEntity>? posts;
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
+  final Map<String, WidgetModel>? widgets;
 
   GetUserFeedResponseEntity({
     required this.success,
@@ -42,6 +46,7 @@ class GetUserFeedResponseEntity {
     this.posts,
     this.users,
     this.topics,
+    this.widgets,
   });
   factory GetUserFeedResponseEntity.fromJson(Map<String, dynamic> data) =>
       _$GetUserFeedResponseEntityFromJson(data);
@@ -62,6 +67,12 @@ GetUserFeedResponseEntity _$GetUserFeedResponseEntityFromJson(
       ),
       topics: (json['data']['topics'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
+      ),
+      widgets: (json['data']['widgets'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(
+            k,
+            WidgetModel.fromEntity(
+                WidgetModelEntity.fromJson(e as Map<String, dynamic>))),
       ),
     );
 

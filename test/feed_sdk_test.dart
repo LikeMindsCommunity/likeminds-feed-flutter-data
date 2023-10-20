@@ -2,8 +2,6 @@
 ///To run tests, run the following command in the terminal:
 ///flutter test --dart-define=DEBUG=true
 
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';

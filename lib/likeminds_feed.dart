@@ -240,6 +240,12 @@ class LMFeedClient {
         .getUnreadNotificationCount();
     return response;
   }
+
+  Future<GetWidgetResponse> getWidgets(GetWidgetRequest request) async {
+    final GetWidgetResponse response =
+        await _sdkApplication.getWidgetApi().getWidgets(request);
+    return response;
+  }
 }
 
 class LMFeedClientBuilder {

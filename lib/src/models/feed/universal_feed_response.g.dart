@@ -18,6 +18,10 @@ GetFeedResponseEntity _$GetFeedResponseEntityFromJson(
       topics: (json['data']['topics'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      widgets: (json['data']['widgets'] as Map<String, dynamic>).map(
+        (k, e) =>
+            MapEntry(k, WidgetModelEntity.fromJson(e as Map<String, dynamic>)),
+      ),
     );
 
 Map<String, dynamic> _$GetFeedResponseEntityToJson(
