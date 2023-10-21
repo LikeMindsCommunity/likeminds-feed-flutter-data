@@ -8,8 +8,6 @@ import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
-import 'package:likeminds_feed/src/models/post/post_report_request.dart';
-import 'package:likeminds_feed/src/models/post/post_report_response.dart';
 import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
@@ -59,6 +57,12 @@ class LMFeedClient {
   Future<GetTopicsResponse> getTopics(GetTopicsRequest request) async {
     final GetTopicsResponse response =
         await _sdkApplication.getFeedApi().getTopics(request);
+    return response;
+  }
+
+  Future<GetUserFeedResponse> getUserFeed(GetUserFeedRequest request) async {
+    final GetUserFeedResponse response =
+        await _sdkApplication.getFeedApi().getUserFeed(request);
     return response;
   }
 
@@ -230,6 +234,12 @@ class LMFeedClient {
     final GetUnreadNotificationCountResponse response = await _sdkApplication
         .getNotificationFeedApi()
         .getUnreadNotificationCount();
+    return response;
+  }
+
+  Future<GetWidgetResponse> getWidgets(GetWidgetRequest request) async {
+    final GetWidgetResponse response =
+        await _sdkApplication.getWidgetApi().getWidgets(request);
     return response;
   }
 }

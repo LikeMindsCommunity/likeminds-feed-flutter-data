@@ -5,7 +5,7 @@ part 'community_configurations_model.g.dart';
 class CommunityConfigurations {
   final String? description;
   final String? type;
-  final Map<String, int>? value;
+  final Map<String, dynamic>? value;
 
   CommunityConfigurations({
     this.description,
@@ -24,9 +24,9 @@ class CommunityConfigurations {
 
   CommunityConfigurationsEntity toEntity() {
     return CommunityConfigurationsEntity(
-      description: this.description,
-      type: this.type,
-      value: this.value,
+      description: description,
+      type: type,
+      value: value,
     );
   }
 }
@@ -35,7 +35,7 @@ class CommunityConfigurations {
 class CommunityConfigurationsEntity {
   final String? description;
   final String? type;
-  final Map<String, int>? value;
+  final Map<String, dynamic>? value;
 
   CommunityConfigurationsEntity({
     this.description,

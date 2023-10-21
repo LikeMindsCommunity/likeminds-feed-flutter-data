@@ -9,6 +9,7 @@ class GetPostResponse {
   final Post? post;
   final Map<String, User>? users;
   final Map<String, Topic>? topics;
+  final Map<String, WidgetModel>? widgets;
 
   GetPostResponse({
     required this.success,
@@ -16,6 +17,7 @@ class GetPostResponse {
     this.post,
     this.users,
     this.topics,
+    this.widgets,
   });
 
   factory GetPostResponse.fromEntity({required GetPostResponseEntity entity}) {
@@ -34,6 +36,7 @@ class GetPostResponse {
           Topic.fromEntity(value),
         ),
       ),
+      widgets: entity.widgets,
     );
   }
 
@@ -51,6 +54,7 @@ class GetPostResponse {
           value.toEntity(),
         ),
       ),
+      widgets: widgets,
     );
   }
 }
@@ -63,6 +67,7 @@ class GetPostResponseEntity {
   final PostEntity? post;
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
+  final Map<String, WidgetModel>? widgets;
 
   GetPostResponseEntity({
     required this.success,
@@ -70,6 +75,7 @@ class GetPostResponseEntity {
     this.post,
     this.users,
     this.topics,
+    this.widgets,
   });
 
   factory GetPostResponseEntity.fromJson(Map<String, dynamic> data) =>
