@@ -8,10 +8,6 @@ import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
-import 'package:likeminds_feed/src/models/post/post_report_request.dart';
-import 'package:likeminds_feed/src/models/post/post_report_response.dart';
 import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
