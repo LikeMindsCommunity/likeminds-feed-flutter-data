@@ -83,3 +83,7 @@ Added report service
 # 1.5.1
 
 Added CI/CD pipelines
+
+# 1.6.0
+
+Added user feed
