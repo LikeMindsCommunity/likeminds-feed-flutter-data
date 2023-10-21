@@ -1,3 +1,5 @@
+import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
+import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/feed_service.dart';
 
@@ -42,5 +44,11 @@ class FeedRepository {
     final GetTopicsResponseEntity responseEntity =
         await feedService.getTopics(request);
     return GetTopicsResponse.fromEntity(responseEntity);
+  }
+
+  Future<GetUserFeedResponse> getUserFeed(GetUserFeedRequest request) async {
+    final GetUserFeedResponseEntity responseEntity =
+        await feedService.getUserFeed(request);
+    return GetUserFeedResponse.fromEntity(entity: responseEntity);
   }
 }

@@ -9,6 +9,7 @@ import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
 import 'package:likeminds_feed/src/repositories/notification_feed_repository.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
+import 'package:likeminds_feed/src/repositories/widget_repository.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 import 'package:likeminds_feed/src/services/auth_service.dart';
@@ -21,6 +22,7 @@ import 'package:likeminds_feed/src/services/notification_feed_service.dart';
 import 'package:likeminds_feed/src/services/notification_service.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:likeminds_feed/src/services/widgets_service.dart';
 
 /// Dependency Injection Service
 /// This class is responsible for registering all the dependencies
@@ -76,6 +78,10 @@ class DIService {
     PostService postService = PostService(apiClient: apiClient);
     PostRepository postRepository = PostRepository(postService: postService);
 
+    WidgetsService widgetsService = WidgetsService(apiClient: apiClient);
+    WidgetRepository widgetRepository =
+        WidgetRepository(widgetsService: widgetsService);
+
     ModerationService moderationService =
         ModerationService(apiClient: apiClient);
     ModerationRepository moderationRepository =
@@ -128,6 +134,11 @@ class DIService {
       () => notificationFeedRepository,
       instanceName: kInstanceNotificationFeedRepository,
     );
+
+    getIt.registerFactory<WidgetRepository>(
+      () => widgetRepository,
+      instanceName: kInstanceWidgetRepository,
+    );
   }
 
   // Get the static instance of GetIt to get the dependencies
@@ -146,4 +157,5 @@ class DIService {
   static const String kInstanceModerationRepository = 'moderation_repository';
   static const String kInstanceNotificationFeedRepository =
       'notification_feed_repository';
+  static const String kInstanceWidgetRepository = 'widget_repository';
 }

@@ -3,6 +3,7 @@ import 'package:likeminds_feed/src/methods/helper.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/moderation.dart';
 import 'package:likeminds_feed/src/methods/notification_feed.dart';
+import 'package:likeminds_feed/src/methods/widgets.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
 import 'package:likeminds_feed/src/repositories/comment_repository.dart';
@@ -15,6 +16,7 @@ import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
+import 'package:likeminds_feed/src/repositories/widget_repository.dart';
 
 class SDKApplication {
   SDKApplication();
@@ -88,6 +90,14 @@ class SDKApplication {
       notificationFeedRepository:
           GetIt.instance.get<NotificationFeedRepository>(
         instanceName: DIService.kInstanceNotificationFeedRepository,
+      ),
+    );
+  }
+
+  WidgetApi getWidgetApi() {
+    return WidgetApi(
+      widgetRepository: GetIt.instance.get<WidgetRepository>(
+        instanceName: DIService.kInstanceWidgetRepository,
       ),
     );
   }

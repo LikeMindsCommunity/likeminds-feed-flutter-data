@@ -12,7 +12,7 @@ CommunityConfigurationsEntity _$CommunityConfigurationsEntityFromJson(
       description: json['description'] as String?,
       type: json['type'] as String?,
       value: (json['value'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as int),
+        (k, e) => MapEntry(k, e),
       ),
     );
 

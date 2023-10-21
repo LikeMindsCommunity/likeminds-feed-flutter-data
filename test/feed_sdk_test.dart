@@ -5,12 +5,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
+import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 
 import 'environment/test_env.dart';
 import 'test_callback.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const prod = !bool.fromEnvironment('DEBUG', defaultValue: true);
+const prod = !bool.fromEnvironment('DEBUG');
 
 //Testing credentials, and callback
 final TestCallback testingCallback = TestCallback();
@@ -50,6 +52,22 @@ void main() {
           .build();
       GetFeedResponse? response = await client.getFeed(request);
       expect(response, isNotNull);
+    });
+
+    test('Testing Get Feed Room', () async {
+      GetUserFeedRequest request = (GetUserFeedRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..userId(prod ? testingProdBotID : testingBetaBotID))
+          .build();
+      GetUserFeedResponse? response = await client.getUserFeed(request);
+      expect(response, isNotNull);
+      debugPrint('-----------------------------------');
+      debugPrint('${response.success}');
+      debugPrint('${response.posts}');
+      debugPrint('${response.topics}');
+      debugPrint('${response.users}');
+      debugPrint('-----------------------------------');
     });
 
     test('Testing Get Notification Feed', () async {

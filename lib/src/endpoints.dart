@@ -42,6 +42,8 @@ class EndPoints {
 
   String get topicFeedEndpoint => "$KETTLE_HOST/feed/topic";
 
+  String get widgetsEndpoint => "$KETTLE_HOST/widget";
+
   String get getUnreadNotificationCountEndpoint =>
       "$KETTLE_HOST/feed/user/activity/unread_count";
 
@@ -50,6 +52,10 @@ class EndPoints {
 
   String getPostEndPoint(String postId, int page) {
     return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";
+  }
+
+  String getUserFeedEndPoint(String userId) {
+    return "$feedUrl/user/$userId/post";
   }
 
   String getAddCommentEndPoint(String postId) {

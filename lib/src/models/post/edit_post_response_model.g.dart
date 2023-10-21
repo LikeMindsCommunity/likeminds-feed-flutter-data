@@ -26,6 +26,13 @@ EditPostResponseEntity _$EditPostResponseEntityFromJson(
       topics: (json['data']['topics'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      widgets: json['data'] != null &&
+              json['data']['widgets'] != null &&
+              json['data']['widgets'].isNotEmpty
+          ? ((json['data']['widgets'] as Map<String, dynamic>?)?.map((k, e) =>
+              MapEntry(
+                  k, WidgetModel.fromEntity(WidgetModelEntity.fromJson(e)))))
+          : null,
     );
 
 Map<String, dynamic> _$EditPostResponseEntityToJson(
