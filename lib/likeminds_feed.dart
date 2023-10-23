@@ -177,6 +177,10 @@ class LMFeedClient {
     _sdkApplication.getHelperApi().routeProfilePage(userId);
   }
 
+  void routeToCompany(String companyId) {
+    _sdkApplication.getHelperApi().routeCompanyPage(companyId);
+  }
+
   Future<DecodeUrlResponse> decodeUrl(DecodeUrlRequest request) async {
     return await _sdkApplication.getHelperApi().decodeUrl(request: request);
   }

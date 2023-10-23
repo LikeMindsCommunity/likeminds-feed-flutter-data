@@ -21,4 +21,8 @@ class HelperApi {
   void routeProfilePage(String userId) {
     helperRepository.routeProfilePage(userId);
   }
+
+  void routeCompanyPage(String companyId) {
+    helperRepository.routeCompanyPage(companyId);
+  }
 }

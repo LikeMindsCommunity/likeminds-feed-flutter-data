@@ -23,4 +23,8 @@ class HelperRepository {
   void routeProfilePage(String userId) {
     helperService.routeProfilePage(userId);
   }
+
+  void routeCompanyPage(String companyId) {
+    helperService.routeCompanyPage(companyId);
+  }
 }
