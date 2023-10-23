@@ -3,4 +3,5 @@ abstract class LMSDKCallback {
   void loginRequiredCallback();
   void logoutCallback();
   void profileRouteCallback({required String lmUserId}) {}
+  void routeToCompanyCallback({required String companyId}) {}
 }
