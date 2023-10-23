@@ -87,3 +87,7 @@ Added CI/CD pipelines
 # 1.6.0
 
 Added user feed
+
+# 1.6.1
+
+Added support for company page route
