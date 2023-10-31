@@ -17,6 +17,13 @@ class QuestionAnswer {
       'question': question.toJson(),
     };
   }
+
+  factory QuestionAnswer.fromEntity(QuestionAnswerEntity entity) {
+    return QuestionAnswer(
+      answer: Answer.fromEntity(entity.answer),
+      question: Question.fromEntity(entity.question),
+    );
+  }
 }
 
 class QuestionAnswerEntity {

@@ -4,7 +4,7 @@ class GetProfileRequest{
   GetProfileRequest._({required this.userUniqueId});
 
   Map<String, dynamic> toJson() => {
-    "user_unique_id": userUniqueId,
+    "uuid": userUniqueId,
   };
 }
 

@@ -43,7 +43,7 @@ class AccessService {
       GetProfileRequest request) async {
     try {
       final response = await apiClient.client().get(
-        apiClient.getEndpoints.communityProfileEndpoint,
+        apiClient.getEndpoints.memberProfileEndpoint,
         queryParameters: request.toJson(),
       );
 
@@ -69,9 +69,9 @@ class AccessService {
   Future<EditProfileResponseEntity> editProfile(
       EditProfileRequest request) async {
     try {
-      final response = await apiClient.client().get(
-        apiClient.getEndpoints.communityProfileEndpoint,
-        queryParameters: request.toJson(),
+      final response = await apiClient.client().put(
+        apiClient.getEndpoints.memberProfileEndpoint,
+        data: request.toJson(),
       );
 
       final communityProfile =
@@ -84,7 +84,7 @@ class AccessService {
       return EditProfileResponseEntity(
           success: false, errorMessage: e.response?.statusMessage);
     } catch (err) {
-      debugPrint("Error from get community profile: ${err.toString()}");
+      debugPrint("Error from edit community profile: ${err.toString()}");
       return EditProfileResponseEntity(
           success: false, errorMessage: err.toString());
     }

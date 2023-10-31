@@ -25,8 +25,10 @@ class GetProfileResponse {
       errorMessage: entity.errorMessage,
       member: entity.member != null ? User.fromEntity(entity.member!) : null,
       communityName: entity.communityName,
-      menu: entity.,
-      questionAnswer: entity.,
+      menu: entity.menu?.map((e) => MemberAction.fromEntity(e)).toList(),
+      questionAnswer: entity.questionAnswer
+          ?.map((e) => QuestionAnswer.fromEntity(e))
+          .toList(),
     );
   }
 }
@@ -44,7 +46,8 @@ class GetProfileResponseEntity {
     this.errorMessage,
     this.member,
     this.communityName,
-    this.menu, this.questionAnswer,
+    this.menu,
+    this.questionAnswer,
   });
 
   factory GetProfileResponseEntity.fromJson(Map<String, dynamic> json) {
@@ -53,10 +56,16 @@ class GetProfileResponseEntity {
       errorMessage: json['error_message'],
       communityName: json['data']['community_name'],
       member: json['data']['member'] != null
-          ? UserEntity.fromJson(json['data']['user'])
+          ? UserEntity.fromJson(json['data']['member'])
           : null,
-      questionAnswer: ,
-      menu: ,
+      questionAnswer: json['data']['question_answer'] != null
+          ? List<QuestionAnswerEntity>.from(json['data']['question_answer']
+              .map((x) => QuestionAnswerEntity.fromJson(x)))
+          : null,
+      menu: json['data']['menu'] != null
+          ? List<MemberActionEntity>.from(
+              json['data']['menu'].map((x) => MemberActionEntity.fromJson(x)))
+          : null,
     );
   }
 }

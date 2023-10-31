@@ -4,41 +4,53 @@ class EditProfileRequest {
   String? name;
   String? imageUrl;
   String userUniqueId;
-  List<QuestionCommunityJoin>? questionCommunityJoin ;
+  List<QuestionCommunityJoin>? questionCommunityJoin;
 
-  EditProfileRequest._(
-      {this.name, this.imageUrl, required this.userUniqueId});
+  EditProfileRequest._({
+    this.name,
+    this.imageUrl,
+    required this.userUniqueId,
+    this.questionCommunityJoin,
+  });
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "image_url": imageUrl,
-    "uuid": userUniqueId,
-    "question_answer": questionCommunityJoin!.map((e) => e.toJson()).toList(),
-  };
+        "name": name,
+        "image_url": imageUrl,
+        "uuid": userUniqueId,
+        "question_answer":
+            questionCommunityJoin?.map((e) => e.toJson()).toList(),
+      };
 }
 
-class EditCommunityProfileBuilder{
+class EditProfileRequestBuilder {
   String? _name;
   String? _imageUrl;
   String? _userUniqueId;
+  List<QuestionCommunityJoin>? _questionCommunityJoin;
 
-  void name(String name){
+  void name(String name) {
     _name = name;
   }
 
-  void imageUrl(String imageUrl){
+  void imageUrl(String imageUrl) {
     _imageUrl = imageUrl;
   }
 
-  void userUniqueId(String userUniqueId){
+  void userUniqueId(String userUniqueId) {
     _userUniqueId = userUniqueId;
   }
 
-  EditProfileRequest build(){
+  void questionCommunityJoin(
+      List<QuestionCommunityJoin> questionCommunityJoin) {
+    _questionCommunityJoin = questionCommunityJoin;
+  }
+
+  EditProfileRequest build() {
     return EditProfileRequest._(
       name: _name,
       imageUrl: _imageUrl,
       userUniqueId: _userUniqueId!,
+      questionCommunityJoin: _questionCommunityJoin,
     );
   }
 }
