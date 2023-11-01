@@ -95,3 +95,7 @@ Added support for company page route
 # 1.6.2
 
 Added support for edit profile and get profile
+
+# 1.6.3
+
+Fixed edit profile and get profile model issue

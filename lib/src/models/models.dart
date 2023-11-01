@@ -8,6 +8,16 @@ export 'package:likeminds_feed/src/models/auth/logout_response_model.dart';
 export 'package:likeminds_feed/src/models/auth/logout_request_model.dart';
 export 'package:likeminds_feed/src/models/auth/member_state_response_model.dart';
 
+export 'package:likeminds_feed/src/models/access/answer.dart';
+export 'package:likeminds_feed/src/models/access/edit_profile_request.dart';
+export 'package:likeminds_feed/src/models/access/edit_profile_response.dart';
+export 'package:likeminds_feed/src/models/access/get_profile_request.dart';
+export 'package:likeminds_feed/src/models/access/get_profile_response.dart';
+export 'package:likeminds_feed/src/models/access/member_action.dart';
+export 'package:likeminds_feed/src/models/access/question.dart';
+export 'package:likeminds_feed/src/models/access/question_answer.dart';
+export 'package:likeminds_feed/src/models/access/question_community_join.dart';
+
 export 'package:likeminds_feed/src/models/community/community_model.dart';
 export 'package:likeminds_feed/src/models/community/community_settings_rights_model.dart';
 export 'package:likeminds_feed/src/models/community/community_configurations_model.dart';
