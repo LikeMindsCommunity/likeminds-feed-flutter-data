@@ -91,3 +91,7 @@ Added user feed
 # 1.6.1
 
 Added support for company page route
+
+# 1.6.2
+
+Added support for edit profile and get profile
