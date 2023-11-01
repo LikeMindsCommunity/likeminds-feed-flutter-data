@@ -5,6 +5,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/models/access/edit_profile_request.dart';
+import 'package:likeminds_feed/src/models/access/edit_profile_response.dart';
+import 'package:likeminds_feed/src/models/access/get_profile_request.dart';
+import 'package:likeminds_feed/src/models/access/get_profile_response.dart';
 import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
 import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 
@@ -36,7 +40,27 @@ void main() {
             ..userId(prod ? testingProdBotID : testingBetaBotID))
           .build();
       InitiateUserResponse response = await client.initiateUser(request);
-      expect(response, isNotNull);
+      expect(response.success, true);
+    });
+
+    test('Testing Get Profile', () async {
+      GetProfileRequest request = (GetProfileRequestBuilder()
+            ..userUniqueId(prod ? testingProdBotID : testingBetaBotID))
+          .build();
+      GetProfileResponse response = await client.getProfile(request);
+      expect(response.success, true);
+    });
+
+    test('Testing Edit Profile', () async {
+      String currentTimeStamp =
+          DateTime.now().millisecondsSinceEpoch.toString();
+      EditProfileRequest request = (EditProfileRequestBuilder()
+            ..name(prod ? testingProdBotID : testingBetaBotID)
+            ..imageUrl(currentTimeStamp)
+            ..userUniqueId(prod ? testingProdBotID : testingBetaBotID))
+          .build();
+      EditProfileResponse response = await client.editProfile(request);
+      expect(response.success, true);
     });
 
     test('Testing the community configurations APi', () async {
