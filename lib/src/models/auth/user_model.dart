@@ -7,7 +7,7 @@ class User {
   final int id;
   final String name;
   final String imageUrl;
-  final bool isGuest;
+  final bool? isGuest;
   final bool? isDeleted;
   final String userUniqueId;
   final String? organisationName;
@@ -92,7 +92,7 @@ class UserEntity {
   final String imageUrl;
 
   @JsonKey(name: 'is_guest')
-  final bool isGuest;
+  final bool? isGuest;
 
   @JsonKey(name: 'user_unique_id')
   final String userUniqueId;

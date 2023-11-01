@@ -1,3 +1,7 @@
+import 'package:likeminds_feed/src/models/access/edit_profile_request.dart';
+import 'package:likeminds_feed/src/models/access/edit_profile_response.dart';
+import 'package:likeminds_feed/src/models/access/get_profile_request.dart';
+import 'package:likeminds_feed/src/models/access/get_profile_response.dart';
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
 
@@ -14,4 +18,15 @@ class AccessRepository {
     final response = await accessService.getMemberState();
     return MemberStateResponse.fromEntity(response);
   }
+
+  Future<GetProfileResponse> getProfile(GetProfileRequest request) async {
+    final response = await accessService.getProfile(request);
+    return GetProfileResponse.fromEntity(response);
+  }
+
+  Future<EditProfileResponse> editProfile(EditProfileRequest request) async {
+    final response = await accessService.editProfile(request);
+    return EditProfileResponse.fromEntity(response);
+  }
+
 }
