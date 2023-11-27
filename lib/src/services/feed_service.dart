@@ -7,7 +7,9 @@ import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class FeedService {
   final ApiClient apiClient;
+
   FeedService({required this.apiClient});
+
   // final String authHost = "https://betaauth.likeminds.community/feed/";
 
   Future<PostDetailResponseEntity> getPost(
@@ -23,14 +25,18 @@ class FeedService {
       return PostDetailResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return PostDetailResponseEntity(
-          success: false,
-          errorMessage: "An error occured, please try again later");
-    } catch (e) {
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (e) {
       debugPrint(e.toString());
       return PostDetailResponseEntity(
-          success: false,
-          errorMessage: "An error occured, please try again later");
+          success: false, errorMessage: "An error occurred");
     }
   }
 
@@ -73,12 +79,16 @@ class FeedService {
           GetFeedRoomResponseEntity.fromJson(response.data);
       return responseEntity;
     } on DioError catch (e) {
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       final GetFeedRoomResponseEntity responseEntity =
           GetFeedRoomResponseEntity(
         success: false,
         chatroom: null,
         participantCount: null,
-        errorMessage: e.toString(),
+        errorMessage: errorMessage ?? "An error occurred",
       );
       return responseEntity;
     }
@@ -96,10 +106,14 @@ class FeedService {
           );
       return GetFeedOfFeedRoomResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       final GetFeedOfFeedRoomResponseEntity responseEntity =
           GetFeedOfFeedRoomResponseEntity(
         success: false,
-        errorMessage: e.toString(),
+        errorMessage: errorMessage ?? "An error occurred",
         posts: [],
         users: {},
         topics: {},
@@ -121,9 +135,13 @@ class FeedService {
           GetTopicsResponseEntity.fromJson(response.data);
       return responseEntity;
     } on DioError catch (e) {
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       final GetTopicsResponseEntity response = GetTopicsResponseEntity(
         success: false,
-        errorMessage: e.toString(),
+        errorMessage: errorMessage ?? "An error occurred",
         topics: [],
       );
       return response;
@@ -144,9 +162,13 @@ class FeedService {
           GetUserFeedResponseEntity.fromJson(response.data);
       return responseEntity;
     } on DioError catch (e) {
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       final GetUserFeedResponseEntity response = GetUserFeedResponseEntity(
         success: false,
-        errorMessage: e.toString(),
+        errorMessage: errorMessage ?? "An error occurred",
       );
       return response;
     }

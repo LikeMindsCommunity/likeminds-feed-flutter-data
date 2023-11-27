@@ -30,9 +30,14 @@ class WidgetsService extends IWidgetsService {
           GetWidgetResponse.fromJson(response.data);
       return getWidgetResponse;
     } on DioError catch (e) {
-      GetWidgetResponse getWidgetResponse =
-          GetWidgetResponse.fromJson(e.response?.data);
-      return getWidgetResponse;
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return GetWidgetResponse(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 }

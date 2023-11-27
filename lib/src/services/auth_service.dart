@@ -10,6 +10,7 @@ import 'package:likeminds_feed/src/services/api/api_client.dart';
 /// requires [ApiClient] to talk to backend
 class AuthService {
   final ApiClient apiClient;
+
   AuthService({required this.apiClient});
 
   /// Initiate user
@@ -64,9 +65,14 @@ class AuthService {
     } on DioError catch (e) {
       debugPrint(e.toString());
       debugPrint(e.response!.data.toString());
-      InitiateUserResponseEntity initiateUserResponse =
-          InitiateUserResponseEntity.fromJson(e.response?.data);
-      return initiateUserResponse;
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return InitiateUserResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -91,9 +97,14 @@ class AuthService {
 
       return refreshResponse;
     } on DioError catch (e) {
-      RefreshResponseEntity refreshResponse =
-          RefreshResponseEntity.fromJson(e.response?.data);
-      return refreshResponse;
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return RefreshResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -117,9 +128,14 @@ class AuthService {
       apiClient.clearTokens();
       return logoutResponse;
     } on DioError catch (e) {
-      LogoutResponseEntity logoutResponse =
-          LogoutResponseEntity.fromJson(e.response?.data);
-      return logoutResponse;
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LogoutResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 }

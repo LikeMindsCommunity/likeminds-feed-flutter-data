@@ -16,9 +16,13 @@ class ModerationService {
           );
       return GetDeleteReasonResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetDeleteReasonResponseEntity(
-        errorMessage: e.message,
         success: false,
+        errorMessage: errorMessage ?? "An error occurred",
       );
     }
   }

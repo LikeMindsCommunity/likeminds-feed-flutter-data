@@ -23,8 +23,14 @@ class CommunityService {
       return communityConfigurations;
     } on DioError catch (e) {
       debugPrint("Error from get community configurations: ${e.toString()}");
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetCommunityConfigurationsResponseEntity(
-          success: false, errorMessage: e.toString());
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 }

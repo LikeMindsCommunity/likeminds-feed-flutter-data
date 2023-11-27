@@ -5,6 +5,7 @@ import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class CommentService {
   final ApiClient apiClient;
+
   CommentService({required this.apiClient});
 
   Future<AddCommentResponseEntity> addComment(
@@ -22,11 +23,15 @@ class CommentService {
       return AddCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return AddCommentResponseEntity(
         success: false,
-        errorMessage: 'An error occurred, please try again later',
+        errorMessage: errorMessage ?? "An error occurred",
       );
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint(e.toString());
       return AddCommentResponseEntity(
         success: false,
@@ -50,10 +55,15 @@ class CommentService {
       return EditCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return EditCommentResponseEntity(
-          success: false,
-          errorMessage: 'An error occurred, please try again later');
-    } catch (e) {
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (e) {
       debugPrint(e.toString());
       return EditCommentResponseEntity(
           success: false,
@@ -76,10 +86,15 @@ class CommentService {
       return ToggleLikeCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return ToggleLikeCommentResponseEntity(
-          success: false,
-          errorMessage: 'An error occurred, please try again later');
-    } catch (e) {
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (e) {
       debugPrint(e.toString());
       return ToggleLikeCommentResponseEntity(
           success: false,
@@ -100,10 +115,15 @@ class CommentService {
       return GetCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetCommentResponseEntity(
-          success: false,
-          errorMessage: 'An error occurred, please try again later');
-    } catch (e) {
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (e) {
       debugPrint(e.toString());
       return GetCommentResponseEntity(
           success: false,
@@ -128,10 +148,15 @@ class CommentService {
       return DeleteCommentResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return DeleteCommentResponseEntity(
-          success: false,
-          errorMessage: 'An error occurred, please try again later');
-    } catch (e) {
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (e) {
       debugPrint(e.toString());
       return DeleteCommentResponseEntity(
           success: false,
@@ -154,10 +179,15 @@ class CommentService {
       return AddCommentReplyResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return AddCommentReplyResponseEntity(
-          success: false,
-          errorMessage: 'An error occurred, please try again later');
-    } catch (e) {
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (e) {
       debugPrint(e.toString());
       return AddCommentReplyResponseEntity(
           success: false,
@@ -180,10 +210,15 @@ class CommentService {
       return EditCommentReplyResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return EditCommentReplyResponseEntity(
-          success: false,
-          errorMessage: 'An error occurred, please try again later');
-    } catch (e) {
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (e) {
       debugPrint(e.toString());
       return EditCommentReplyResponseEntity(
           success: false,
@@ -211,11 +246,15 @@ class CommentService {
       return GetCommentLikesResponseEntity.fromJson(response.data);
     } on DioError catch (e) {
       debugPrint(e.toString());
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetCommentLikesResponseEntity(
         success: false,
-        errorMessage: 'An error occurred, please try again later',
+        errorMessage: errorMessage ?? "An error occurred",
       );
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint(e.toString());
       return GetCommentLikesResponseEntity(
         success: false,

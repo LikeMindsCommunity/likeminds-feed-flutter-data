@@ -31,38 +31,43 @@ class AccessService {
       return memberStateResponseEntity;
     } on DioError catch (e) {
       debugPrint("Error from get member state access: $e");
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return MemberStateResponseEntity(
-          success: false, errorMessage: e.toString());
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
-
   // Get the profile of a User in the community
   // Returns the profile of the user
-  Future<GetProfileResponseEntity> getProfile(
-      GetProfileRequest request) async {
+  Future<GetProfileResponseEntity> getProfile(GetProfileRequest request) async {
     try {
       final response = await apiClient.client().get(
-        apiClient.getEndpoints.memberProfileEndpoint,
-        queryParameters: request.toJson(),
-      );
+            apiClient.getEndpoints.memberProfileEndpoint,
+            queryParameters: request.toJson(),
+          );
 
-      final communityProfile =
-      GetProfileResponseEntity.fromJson(response.data);
+      final communityProfile = GetProfileResponseEntity.fromJson(response.data);
 
       return communityProfile;
     } on DioException catch (e) {
       // Handle Dio errors
+
       debugPrint("Dio error: $e");
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetProfileResponseEntity(
-          success: false, errorMessage: e.response?.statusMessage);
-    } catch (err) {
-      debugPrint("Error from get community profile: ${err.toString()}");
-      return GetProfileResponseEntity(
-          success: false, errorMessage: err.toString());
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
-
 
   // Edits the profile of a User in the community
   // Returns a boolean success
@@ -70,20 +75,26 @@ class AccessService {
       EditProfileRequest request) async {
     try {
       final response = await apiClient.client().put(
-        apiClient.getEndpoints.memberProfileEndpoint,
-        data: request.toJson(),
-      );
+            apiClient.getEndpoints.memberProfileEndpoint,
+            data: request.toJson(),
+          );
 
       final communityProfile =
-      EditProfileResponseEntity.fromJson(response.data);
+          EditProfileResponseEntity.fromJson(response.data);
 
       return communityProfile;
     } on DioException catch (e) {
       // Handle Dio errors
-      debugPrint("Dio error: $e");
+      debugPrint("Error from edit profile: $e");
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return EditProfileResponseEntity(
-          success: false, errorMessage: e.response?.statusMessage);
-    } catch (err) {
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (err) {
       debugPrint("Error from edit community profile: ${err.toString()}");
       return EditProfileResponseEntity(
           success: false, errorMessage: err.toString());

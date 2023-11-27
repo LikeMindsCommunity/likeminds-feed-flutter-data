@@ -32,10 +32,14 @@ class NotificationService implements INotificationService {
       final entity = RegisterDeviceResponseEntity.fromJson(response.data);
       return RegisterDeviceResponse.fromEntity(entity);
     } on DioError catch (e) {
-      return RegisterDeviceResponse(
-        errorMessage: e.message,
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return RegisterDeviceResponse.fromEntity(RegisterDeviceResponseEntity(
         success: false,
-      );
+        errorMessage: errorMessage ?? "An error occurred",
+      ));
     }
   }
 }
