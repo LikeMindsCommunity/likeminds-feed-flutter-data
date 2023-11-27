@@ -258,6 +258,12 @@ class LMFeedClient {
         await _sdkApplication.getWidgetApi().getWidgets(request);
     return response;
   }
+
+  Future<PushLogResponse> pushLogs(PushLogRequest request) async {
+    final PushLogResponse response =
+        await _sdkApplication.getLoggerApi().pushLogs(request: request);
+    return response;
+  }
 }
 
 class LMFeedClientBuilder {

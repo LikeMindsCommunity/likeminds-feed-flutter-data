@@ -45,6 +45,8 @@ class EndPoints {
 
   String get widgetsEndpoint => "$KETTLE_HOST/widget";
 
+  String get loggerEndpoint => "$KETTLE_HOST/logs/frontend";
+
   String get getUnreadNotificationCountEndpoint =>
       "$KETTLE_HOST/feed/user/activity/unread_count";
 

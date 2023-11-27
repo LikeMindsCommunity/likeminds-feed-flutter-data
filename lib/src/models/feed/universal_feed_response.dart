@@ -44,6 +44,7 @@ class GetFeedResponseEntity {
     required this.topics,
     required this.widgets,
   });
+
   factory GetFeedResponseEntity.fromJson(Map<String, dynamic> data) =>
       _$GetFeedResponseEntityFromJson(data);
 
