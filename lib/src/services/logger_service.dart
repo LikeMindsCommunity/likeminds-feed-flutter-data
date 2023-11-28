@@ -12,8 +12,8 @@ class LoggerService {
   Future<PushLogResponseEntity> pushLogs(
       {required PushLogRequest request}) async {
     try {
-      final response = await apiClient.client().get(
-            apiClient.getEndpoints.tagsEndpoint,
+      final response = await apiClient.client().post(
+            apiClient.getEndpoints.loggerEndpoint,
             options: Options(
               headers: {
                 'x-api-key': apiClient.getApiKey,
