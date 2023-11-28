@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/models/notifications/register_device_request_model.dart';
-import 'package:likeminds_feed/src/models/notifications/register_device_response_model.dart';
+import 'package:flutter/foundation.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class INotificationService {
@@ -31,7 +31,11 @@ class NotificationService implements INotificationService {
           );
       final entity = RegisterDeviceResponseEntity.fromJson(response.data);
       return RegisterDeviceResponse.fromEntity(entity);
-    } on DioException catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

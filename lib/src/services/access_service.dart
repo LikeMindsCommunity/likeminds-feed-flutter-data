@@ -1,10 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:likeminds_feed/src/models/access/edit_profile_request.dart';
-import 'package:likeminds_feed/src/models/access/edit_profile_response.dart';
-import 'package:likeminds_feed/src/models/access/get_profile_request.dart';
-import 'package:likeminds_feed/src/models/access/get_profile_response.dart';
-import 'package:likeminds_feed/src/models/auth/member_state_response_model.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class AccessService {
@@ -29,8 +25,11 @@ class AccessService {
           MemberStateResponseEntity.fromJson(response.data);
 
       return memberStateResponseEntity;
-    } on DioException catch (e) {
+    } on DioException catch (e, stacktrace) {
       debugPrint("Error from get member state access: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -54,10 +53,11 @@ class AccessService {
       final communityProfile = GetProfileResponseEntity.fromJson(response.data);
 
       return communityProfile;
-    } on DioException catch (e) {
-      // Handle Dio errors
-
+    } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -83,9 +83,11 @@ class AccessService {
           EditProfileResponseEntity.fromJson(response.data);
 
       return communityProfile;
-    } on DioException catch (e) {
-      // Handle Dio errors
-      debugPrint("Error from edit profile: $e");
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -94,10 +96,13 @@ class AccessService {
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );
-    } on Exception catch (err) {
-      debugPrint("Error from edit community profile: ${err.toString()}");
+    } on Exception catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       return EditProfileResponseEntity(
-          success: false, errorMessage: err.toString());
+          success: false, errorMessage: e.toString());
     }
   }
 }

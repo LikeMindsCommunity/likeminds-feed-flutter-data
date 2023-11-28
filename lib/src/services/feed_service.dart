@@ -21,8 +21,11 @@ class FeedService {
             ),
           );
       return PostDetailResponseEntity.fromJson(response.data);
-    } on DioException catch (e) {
-      debugPrint(e.toString());
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -31,8 +34,11 @@ class FeedService {
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );
-    } on Exception catch (e) {
-      debugPrint(e.toString());
+    } on Exception catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       return PostDetailResponseEntity(
           success: false, errorMessage: "An error occurred");
     }
@@ -49,10 +55,16 @@ class FeedService {
             ),
           );
       return GetFeedResponseEntity.fromJson(response.data);
-    } on DioException catch (e) {
-      debugPrint(e.toString());
-    } on Exception catch (e) {
-      debugPrint(e.toString());
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
+    } on Exception catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
     }
     return null;
   }
@@ -76,7 +88,11 @@ class FeedService {
       final GetFeedRoomResponseEntity responseEntity =
           GetFeedRoomResponseEntity.fromJson(response.data);
       return responseEntity;
-    } on DioException catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -103,7 +119,11 @@ class FeedService {
             ),
           );
       return GetFeedOfFeedRoomResponseEntity.fromJson(response.data);
-    } on DioException catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -132,7 +152,11 @@ class FeedService {
       final GetTopicsResponseEntity responseEntity =
           GetTopicsResponseEntity.fromJson(response.data);
       return responseEntity;
-    } on DioException catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -159,7 +183,11 @@ class FeedService {
       final GetUserFeedResponseEntity responseEntity =
           GetUserFeedResponseEntity.fromJson(response.data);
       return responseEntity;
-    } on DioException catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:likeminds_feed/src/models/logger/push_log_request.dart';
-import 'package:likeminds_feed/src/models/logger/push_log_response.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class LoggerService {
@@ -29,8 +28,11 @@ class LoggerService {
           errorMessage: response.data['message'],
         );
       }
-    } on DioException catch (e) {
-      debugPrint("Error from push logs: $e");
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

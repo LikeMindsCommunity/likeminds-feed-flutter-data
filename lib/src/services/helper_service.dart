@@ -40,8 +40,11 @@ class HelperService {
           errorMessage: response.data['message'],
         );
       }
-    } on DioException catch (e) {
-      debugPrint("Error from get tags: $e");
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -69,8 +72,11 @@ class HelperService {
       );
 
       return DecodeUrlResponseEntity.fromJson(response.data);
-    } on DioException catch (e) {
-      debugPrint("Error from get tags: $e");
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

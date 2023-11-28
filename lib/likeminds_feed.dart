@@ -15,13 +15,17 @@ const _prod = !bool.fromEnvironment('DEBUG');
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
+  static Function(Exception, StackTrace)? onErrorHandler;
 
   LMFeedClient._({
     required String apiKey,
     LMSDKCallback? sdkCallback,
+    Function(Exception, StackTrace)? onErrorHandler,
   }) {
     DIService.instance.init(apiKey, _prod, sdkCallback);
     _sdkApplication = SDKApplication();
+    // ignore: prefer_initializing_formals
+    LMFeedClient.onErrorHandler = onErrorHandler;
   }
 
   Future<GetFeedResponse?> getUniversalFeed(
@@ -265,6 +269,7 @@ class LMFeedClient {
 class LMFeedClientBuilder {
   String? _apiKey;
   LMSDKCallback? _sdkCallback;
+  Function(Exception, StackTrace)? _onErrorHandler;
 
   void apiKey(String apiKey) {
     _apiKey = apiKey;
@@ -272,6 +277,10 @@ class LMFeedClientBuilder {
 
   void sdkCallback(LMSDKCallback? sdkCallback) {
     _sdkCallback = sdkCallback;
+  }
+
+  void onErrorHandler(Function(Exception, StackTrace) onErrorHandler) {
+    _onErrorHandler = onErrorHandler;
   }
 
   LMFeedClient build() {
@@ -282,6 +291,7 @@ class LMFeedClientBuilder {
     return LMFeedClient._(
       apiKey: _apiKey!,
       sdkCallback: _sdkCallback,
+      onErrorHandler: _onErrorHandler,
     );
   }
 }

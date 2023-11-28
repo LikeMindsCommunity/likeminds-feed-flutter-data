@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/models/models.dart';
+import 'package:flutter/foundation.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class INotificationFeedService {
@@ -30,7 +31,11 @@ class NotificationFeedService implements INotificationFeedService {
       );
       final entity = GetNotificationFeedResponseEntity.fromJson(response.data);
       return entity;
-    } on DioException catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -54,7 +59,11 @@ class NotificationFeedService implements INotificationFeedService {
       );
       final entity = MarkReadNotificationResponseEntity.fromJson(response.data);
       return entity;
-    } on DioException catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -76,7 +85,11 @@ class NotificationFeedService implements INotificationFeedService {
       final entity =
           GetUnreadNotificationCountResponseEntity.fromJson(response.data);
       return entity;
-    } on DioException catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      if (LMFeedClient.onErrorHandler != null) {
+        LMFeedClient.onErrorHandler!(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
