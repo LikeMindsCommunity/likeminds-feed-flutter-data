@@ -40,7 +40,7 @@ class HelperService {
           errorMessage: response.data['message'],
         );
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("Error from get tags: $e");
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
@@ -69,7 +69,7 @@ class HelperService {
       );
 
       return DecodeUrlResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("Error from get tags: $e");
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {

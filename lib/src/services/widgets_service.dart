@@ -29,7 +29,7 @@ class WidgetsService extends IWidgetsService {
       GetWidgetResponse getWidgetResponse =
           GetWidgetResponse.fromJson(response.data);
       return getWidgetResponse;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

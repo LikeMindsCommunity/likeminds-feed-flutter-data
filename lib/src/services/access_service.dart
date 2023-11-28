@@ -29,7 +29,7 @@ class AccessService {
           MemberStateResponseEntity.fromJson(response.data);
 
       return memberStateResponseEntity;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("Error from get member state access: $e");
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {

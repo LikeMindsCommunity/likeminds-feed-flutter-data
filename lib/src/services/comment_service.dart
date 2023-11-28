@@ -21,7 +21,7 @@ class CommentService {
           );
       debugPrint(response.data.toString());
       return AddCommentResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
@@ -53,7 +53,7 @@ class CommentService {
           );
       debugPrint(response.data.toString());
       return EditCommentResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
@@ -84,7 +84,7 @@ class CommentService {
           );
       debugPrint(response.data.toString());
       return ToggleLikeCommentResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
@@ -113,7 +113,7 @@ class CommentService {
           );
       debugPrint(response.data.toString());
       return GetCommentResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
@@ -146,7 +146,7 @@ class CommentService {
           );
       debugPrint(response.data.toString());
       return DeleteCommentResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
@@ -177,7 +177,7 @@ class CommentService {
           );
       debugPrint(response.data.toString());
       return AddCommentReplyResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
@@ -208,7 +208,7 @@ class CommentService {
           );
       debugPrint(response.data.toString());
       return EditCommentReplyResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
@@ -244,7 +244,7 @@ class CommentService {
           );
       debugPrint(response.data.toString());
       return GetCommentLikesResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {

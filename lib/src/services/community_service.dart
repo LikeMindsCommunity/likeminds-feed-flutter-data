@@ -21,7 +21,7 @@ class CommunityService {
           GetCommunityConfigurationsResponseEntity.fromJson(response.data);
 
       return communityConfigurations;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("Error from get community configurations: ${e.toString()}");
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {

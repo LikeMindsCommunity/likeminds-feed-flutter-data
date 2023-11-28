@@ -23,7 +23,8 @@ class TokenInterceptor extends Interceptor {
   }
 
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(
+      DioException err, ErrorInterceptorHandler handler) async {
     Dio dio = Dio();
     if (err.response?.statusCode == 401 &&
         err.response?.data["error_message"] == "Invalid LTM!") {

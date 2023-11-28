@@ -3,9 +3,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 
-import 'package:likeminds_feed/src/models/post/attachment_model.dart';
-import 'package:likeminds_feed/src/models/post/popup_menu_item_model.dart';
-
 part 'post_model.g.dart';
 
 class Post {

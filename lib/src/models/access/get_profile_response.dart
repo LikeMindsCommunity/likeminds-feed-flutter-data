@@ -1,6 +1,4 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/models/access/member_action.dart';
-import 'package:likeminds_feed/src/models/access/question_answer.dart';
 
 class GetProfileResponse {
   bool success;

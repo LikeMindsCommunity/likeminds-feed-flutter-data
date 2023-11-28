@@ -29,7 +29,7 @@ class LoggerService {
           errorMessage: response.data['message'],
         );
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("Error from push logs: $e");
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {

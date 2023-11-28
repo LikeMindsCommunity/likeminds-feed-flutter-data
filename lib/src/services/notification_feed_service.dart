@@ -30,7 +30,7 @@ class NotificationFeedService implements INotificationFeedService {
       );
       final entity = GetNotificationFeedResponseEntity.fromJson(response.data);
       return entity;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -54,7 +54,7 @@ class NotificationFeedService implements INotificationFeedService {
       );
       final entity = MarkReadNotificationResponseEntity.fromJson(response.data);
       return entity;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -76,7 +76,7 @@ class NotificationFeedService implements INotificationFeedService {
       final entity =
           GetUnreadNotificationCountResponseEntity.fromJson(response.data);
       return entity;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

@@ -1,5 +1,4 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/models/post/attachment_model.dart';
 
 class AddPostRequest {
   final String text;

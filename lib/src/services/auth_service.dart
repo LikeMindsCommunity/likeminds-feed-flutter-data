@@ -18,7 +18,7 @@ class AuthService {
   /// Also updates tokens and sets user id and community id
   /// Returns [InitiateUserResponseEntity] if success
   /// Takes [InitiateUserRequest] as input
-  /// Throws [DioError] if error
+  /// Throws [DioException] if error
   Future<InitiateUserResponseEntity> initiateUser(
     InitiateUserRequest initiateUserRequest,
   ) async {
@@ -62,7 +62,7 @@ class AuthService {
       } else {
         return initiateUserResponse;
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       debugPrint(e.response!.data.toString());
       String? errorMessage;
@@ -80,7 +80,7 @@ class AuthService {
   /// Refreshes a SDK user, and updates tokens
   /// Returns [RefreshResponseEntity] if success
   /// Takes [RefreshRequest] as input
-  /// Throws [DioError] if error
+  /// Throws [DioException] if error
   Future<RefreshResponseEntity> refresh(RefreshRequest request) async {
     Dio dio = Dio();
     try {
@@ -96,7 +96,7 @@ class AuthService {
           RefreshResponseEntity.fromJson(response.data);
 
       return refreshResponse;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -112,7 +112,7 @@ class AuthService {
   /// Logs out a SDK user, and clears tokens
   /// Returns [LogoutResponseEntity] if success
   /// Takes [LogoutRequest] as input
-  /// Throws [DioError] if error
+  /// Throws [DioException] if error
   Future<LogoutResponseEntity> logout(LogoutRequest? request) async {
     try {
       final response = await apiClient.client().post(
@@ -127,7 +127,7 @@ class AuthService {
       request.callback?.logoutCallback();
       apiClient.clearTokens();
       return logoutResponse;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

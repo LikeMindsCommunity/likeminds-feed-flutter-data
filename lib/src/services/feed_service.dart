@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class FeedService {
@@ -23,7 +21,7 @@ class FeedService {
             ),
           );
       return PostDetailResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
@@ -51,9 +49,9 @@ class FeedService {
             ),
           );
       return GetFeedResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint(e.toString());
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint(e.toString());
     }
     return null;
@@ -78,7 +76,7 @@ class FeedService {
       final GetFeedRoomResponseEntity responseEntity =
           GetFeedRoomResponseEntity.fromJson(response.data);
       return responseEntity;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -105,7 +103,7 @@ class FeedService {
             ),
           );
       return GetFeedOfFeedRoomResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -134,7 +132,7 @@ class FeedService {
       final GetTopicsResponseEntity responseEntity =
           GetTopicsResponseEntity.fromJson(response.data);
       return responseEntity;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -161,7 +159,7 @@ class FeedService {
       final GetUserFeedResponseEntity responseEntity =
           GetUserFeedResponseEntity.fromJson(response.data);
       return responseEntity;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

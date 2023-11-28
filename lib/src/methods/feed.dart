@@ -1,6 +1,4 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 
 class FeedApi {
