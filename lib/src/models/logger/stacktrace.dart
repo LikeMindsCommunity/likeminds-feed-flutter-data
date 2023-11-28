@@ -1,27 +1,25 @@
-import 'package:json_annotation/json_annotation.dart';
-
 class LMStackTrace {
-  final String error;
+  final String exception;
   final String stack;
 
   LMStackTrace._({
-    required this.error,
+    required this.exception,
     required this.stack,
   });
 
   factory LMStackTrace.fromJson(Map<String, dynamic> json) {
-    return LMStackTrace._(error: json['error'], stack: json['stack']);
+    return LMStackTrace._(exception: json['exception'], stack: json['stack']);
   }
 
-  Map<String, dynamic> toJson() => {'error': error, 'stack': stack};
+  Map<String, dynamic> toJson() => {'exception': exception, 'stack': stack};
 }
 
 class LMStackTraceBuilder {
-  String? _error;
+  String? _exception;
   String? _stack;
 
-  void error(String error) {
-    _error = error;
+  void exception(String exception) {
+    _exception = exception;
   }
 
   void stack(String stack) {
@@ -30,7 +28,7 @@ class LMStackTraceBuilder {
 
   LMStackTrace build() {
     return LMStackTrace._(
-      error: _error!,
+      exception: _exception!,
       stack: _stack!,
     );
   }

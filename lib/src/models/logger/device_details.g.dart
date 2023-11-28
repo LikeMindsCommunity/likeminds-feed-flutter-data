@@ -11,8 +11,8 @@ DeviceDetails _$DeviceDetailsFromJson(Map<String, dynamic> json) =>
       os: json['os'] as String,
       versionOS: json['version_os'] as String,
       deviceName: json['device_name'] as String,
-      screenHeight: json['screen_height'] as int,
-      screenWidth: json['screen_width'] as int,
+      screenHeight: json['screen_height'] as int?,
+      screenWidth: json['screen_width'] as int?,
       wifi: json['wifi'] as bool,
     );
 

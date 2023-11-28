@@ -10,17 +10,17 @@ class DeviceDetails {
   @JsonKey(name: 'device_name')
   String deviceName;
   @JsonKey(name: 'screen_height')
-  int screenHeight;
+  int? screenHeight;
   @JsonKey(name: 'screen_width')
-  int screenWidth;
+  int? screenWidth;
   bool wifi;
 
   DeviceDetails({
     required this.os,
     required this.versionOS,
     required this.deviceName,
-    required this.screenHeight,
-    required this.screenWidth,
+    this.screenHeight,
+    this.screenWidth,
     required this.wifi,
   });
 
@@ -66,16 +66,14 @@ class DeviceDetailsBuilder {
     if (_os == null) throw Exception('os is required');
     if (_versionOS == null) throw Exception('versionOS is required');
     if (_deviceName == null) throw Exception('deviceName is required');
-    if (_screenHeight == null) throw Exception('screenHeight is required');
-    if (_screenWidth == null) throw Exception('screenWidth is required');
     if (_wifi == null) throw Exception('wifi is required');
 
     return DeviceDetails(
       os: _os!,
       versionOS: _versionOS!,
       deviceName: _deviceName!,
-      screenHeight: _screenHeight!,
-      screenWidth: _screenWidth!,
+      screenHeight: _screenHeight,
+      screenWidth: _screenWidth,
       wifi: _wifi!,
     );
   }

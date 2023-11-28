@@ -8,8 +8,8 @@ part of 'log.dart';
 
 LMLog _$LMLogFromJson(Map<String, dynamic> json) => LMLog(
       timestamp: json['timestamp'] as int,
-      deviceDetails: DeviceDetails.fromJson(
-          json['device_details'] as Map<String, dynamic>),
+      deviceMeta:
+          DeviceDetails.fromJson(json['device_meta'] as Map<String, dynamic>),
       stackTrace:
           LMStackTrace.fromJson(json['stack_trace'] as Map<String, dynamic>),
       sdkMeta: json['sdk_meta'] == null
@@ -20,20 +20,20 @@ LMLog _$LMLogFromJson(Map<String, dynamic> json) => LMLog(
 
 Map<String, dynamic> _$LMLogToJson(LMLog instance) => <String, dynamic>{
       'timestamp': instance.timestamp,
-      'device_details': instance.deviceDetails.toJson(),
+      'device_meta': instance.deviceMeta.toJson(),
       'stack_trace': instance.stackTrace.toJson(),
       'sdk_meta': instance.sdkMeta?.toJson(),
       'severity': _$SeverityEnumMap[instance.severity],
     };
 
 const _$SeverityEnumMap = {
-  Severity.DEBUG: 'DEBUG',
-  Severity.INFO: 'INFO',
-  Severity.NOTICE: 'NOTICE',
-  Severity.WARNING: 'WARNING',
-  Severity.ERROR: 'ERROR',
-  Severity.CRITICAL: 'CRITICAL',
-  Severity.ALERT: 'ALERT',
-  Severity.EMERGENCY: 'EMERGENCY',
-  Severity.DEFAULT: 'DEFAULT',
+  Severity.DEBUG: 'debug',
+  Severity.INFO: 'info',
+  Severity.NOTICE: 'notice',
+  Severity.WARNING: 'warning',
+  Severity.ERROR: 'error',
+  Severity.CRITICAL: 'critical',
+  Severity.ALERT: 'alert',
+  Severity.EMERGENCY: 'emergency',
+  Severity.DEFAULT: 'default',
 };

@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:likeminds_feed/src/models/logger/device_details.dart';
 import 'package:likeminds_feed/src/models/logger/sdk_meta.dart';
@@ -20,8 +22,8 @@ enum Severity {
 @JsonSerializable()
 class LMLog {
   int timestamp;
-  @JsonKey(name: 'device_details')
-  DeviceDetails deviceDetails;
+  @JsonKey(name: 'device_meta')
+  DeviceDetails deviceMeta;
   @JsonKey(name: 'stack_trace')
   LMStackTrace stackTrace;
   @JsonKey(name: 'sdk_meta')
@@ -31,21 +33,21 @@ class LMLog {
 
   LMLog({
     required this.timestamp,
-    required this.deviceDetails,
+    required this.deviceMeta,
     required this.stackTrace,
     this.sdkMeta,
     this.severity,
   });
 
-  factory LMLog.fromJson(Map<String,dynamic> json) => _$LMLogFromJson(json);
+  factory LMLog.fromJson(Map<String, dynamic> json) => _$LMLogFromJson(json);
 
-  Map<String,dynamic> toJson() =>_$LMLogToJson(this);
+  Map<String, dynamic> toJson() => _$LMLogToJson(this);
 }
 
 class LMLogBuilder {
   int? _timestamp;
-  DeviceDetails? _deviceDetails;
   LMStackTrace? _stackTrace;
+  DeviceDetails? _deviceMeta;
   LMSDKMeta? _sdkMeta;
   Severity? _severity;
 
@@ -53,8 +55,8 @@ class LMLogBuilder {
     _timestamp = timestamp;
   }
 
-  void deviceDetails(DeviceDetails deviceDetails) {
-    _deviceDetails = deviceDetails;
+  void deviceMeta(DeviceDetails deviceMeta) {
+    _deviceMeta = deviceMeta;
   }
 
   void stackTrace(LMStackTrace stackTrace) {
@@ -71,12 +73,12 @@ class LMLogBuilder {
 
   LMLog build() {
     if (_timestamp == null) throw Exception("timestamp cannot be null");
-    if (_deviceDetails == null) throw Exception("deviceDetails cannot be null");
+    if (_deviceMeta == null) throw Exception("deviceDetails cannot be null");
     if (_stackTrace == null) throw Exception("stackTrace cannot be null");
 
     return LMLog(
       timestamp: _timestamp!,
-      deviceDetails: _deviceDetails!,
+      deviceMeta: _deviceMeta!,
       stackTrace: _stackTrace!,
       sdkMeta: _sdkMeta,
       severity: _severity,
