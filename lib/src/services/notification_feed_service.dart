@@ -1,12 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/models/models.dart';
+import 'package:flutter/foundation.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class INotificationFeedService {
   Future<GetNotificationFeedResponseEntity> getNotificationFeed(
       GetNotificationFeedRequest request);
+
   Future<MarkReadNotificationResponseEntity> markReadNotification(
       MarkReadNotificationRequest request);
+
   Future<GetUnreadNotificationCountResponseEntity> getUnreadNotificationCount();
 }
 
@@ -28,10 +31,16 @@ class NotificationFeedService implements INotificationFeedService {
       );
       final entity = GetNotificationFeedResponseEntity.fromJson(response.data);
       return entity;
-    } on DioError catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetNotificationFeedResponseEntity(
-        errorMessage: e.message,
         success: false,
+        errorMessage: errorMessage ?? "An error occurred",
       );
     }
   }
@@ -48,10 +57,16 @@ class NotificationFeedService implements INotificationFeedService {
       );
       final entity = MarkReadNotificationResponseEntity.fromJson(response.data);
       return entity;
-    } on DioError catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return MarkReadNotificationResponseEntity(
-        errorMessage: e.message,
         success: false,
+        errorMessage: errorMessage ?? "An error occurred",
       );
     }
   }
@@ -66,10 +81,16 @@ class NotificationFeedService implements INotificationFeedService {
       final entity =
           GetUnreadNotificationCountResponseEntity.fromJson(response.data);
       return entity;
-    } on DioError catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetUnreadNotificationCountResponseEntity(
-        errorMessage: e.message,
         success: false,
+        errorMessage: errorMessage ?? "An error occurred",
       );
     }
   }

@@ -51,10 +51,10 @@ class AddPostResponseEntity {
   AddPostResponseEntity({
     required this.success,
     required this.errorMessage,
-    required this.post,
-    required this.users,
-    required this.topics,
-    required this.widgets,
+    this.post,
+    this.users,
+    this.topics,
+    this.widgets,
   });
 
   factory AddPostResponseEntity.fromJson(Map<String, dynamic> data) =>

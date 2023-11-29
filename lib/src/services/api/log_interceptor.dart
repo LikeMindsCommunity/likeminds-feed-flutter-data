@@ -11,13 +11,16 @@ class Logging extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     debugPrint(
-      'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path} ${response.data}',
+      '''
+      RESPONSE[${response.statusCode}] => PATH: 
+        ${response.requestOptions.path} ${response.data}''',
     );
     return super.onResponse(response, handler);
   }
 
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(
+      DioException err, ErrorInterceptorHandler handler) async {
     debugPrint(
       'ERROR[${err.response?.toString()}] => PATH: ${err.requestOptions.path}',
     );

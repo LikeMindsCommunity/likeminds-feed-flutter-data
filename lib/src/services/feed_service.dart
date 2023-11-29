@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class FeedService {
   final ApiClient apiClient;
+
   FeedService({required this.apiClient});
+
   // final String authHost = "https://betaauth.likeminds.community/feed/";
 
   Future<PostDetailResponseEntity> getPost(
@@ -21,16 +21,22 @@ class FeedService {
             ),
           );
       return PostDetailResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
-      debugPrint(e.toString());
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return PostDetailResponseEntity(
-          success: false,
-          errorMessage: "An error occured, please try again later");
-    } catch (e) {
-      debugPrint(e.toString());
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return PostDetailResponseEntity(
-          success: false,
-          errorMessage: "An error occured, please try again later");
+          success: false, errorMessage: "An error occurred");
     }
   }
 
@@ -45,10 +51,12 @@ class FeedService {
             ),
           );
       return GetFeedResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
-      debugPrint(e.toString());
-    } catch (e) {
-      debugPrint(e.toString());
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+    } on Exception catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
     }
     return null;
   }
@@ -72,13 +80,19 @@ class FeedService {
       final GetFeedRoomResponseEntity responseEntity =
           GetFeedRoomResponseEntity.fromJson(response.data);
       return responseEntity;
-    } on DioError catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       final GetFeedRoomResponseEntity responseEntity =
           GetFeedRoomResponseEntity(
         success: false,
         chatroom: null,
         participantCount: null,
-        errorMessage: e.toString(),
+        errorMessage: errorMessage ?? "An error occurred",
       );
       return responseEntity;
     }
@@ -95,11 +109,17 @@ class FeedService {
             ),
           );
       return GetFeedOfFeedRoomResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       final GetFeedOfFeedRoomResponseEntity responseEntity =
           GetFeedOfFeedRoomResponseEntity(
         success: false,
-        errorMessage: e.toString(),
+        errorMessage: errorMessage ?? "An error occurred",
         posts: [],
         users: {},
         topics: {},
@@ -120,10 +140,16 @@ class FeedService {
       final GetTopicsResponseEntity responseEntity =
           GetTopicsResponseEntity.fromJson(response.data);
       return responseEntity;
-    } on DioError catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       final GetTopicsResponseEntity response = GetTopicsResponseEntity(
         success: false,
-        errorMessage: e.toString(),
+        errorMessage: errorMessage ?? "An error occurred",
         topics: [],
       );
       return response;
@@ -143,10 +169,16 @@ class FeedService {
       final GetUserFeedResponseEntity responseEntity =
           GetUserFeedResponseEntity.fromJson(response.data);
       return responseEntity;
-    } on DioError catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       final GetUserFeedResponseEntity response = GetUserFeedResponseEntity(
         success: false,
-        errorMessage: e.toString(),
+        errorMessage: errorMessage ?? "An error occurred",
       );
       return response;
     }

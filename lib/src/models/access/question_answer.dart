@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:likeminds_feed/src/models/access/answer.dart';
 import 'package:likeminds_feed/src/models/access/question.dart';
 
@@ -42,4 +41,3 @@ class QuestionAnswerEntity {
     );
   }
 }
-

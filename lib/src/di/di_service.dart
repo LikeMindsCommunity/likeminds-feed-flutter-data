@@ -6,6 +6,7 @@ import 'package:likeminds_feed/src/repositories/comment_repository.dart';
 import 'package:likeminds_feed/src/repositories/community_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 import 'package:likeminds_feed/src/repositories/helper_repository.dart';
+import 'package:likeminds_feed/src/repositories/logger_repository.dart';
 import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
 import 'package:likeminds_feed/src/repositories/notification_feed_repository.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
@@ -17,6 +18,7 @@ import 'package:likeminds_feed/src/services/comment_service.dart';
 import 'package:likeminds_feed/src/services/community_service.dart';
 import 'package:likeminds_feed/src/services/feed_service.dart';
 import 'package:likeminds_feed/src/services/helper_service.dart';
+import 'package:likeminds_feed/src/services/logger_service.dart';
 import 'package:likeminds_feed/src/services/moderation_service.dart';
 import 'package:likeminds_feed/src/services/notification_feed_service.dart';
 import 'package:likeminds_feed/src/services/notification_service.dart';
@@ -30,6 +32,7 @@ import 'package:likeminds_feed/src/services/widgets_service.dart';
 /// This class is a singleton class
 class DIService {
   static DIService? _instance;
+
   static DIService get instance => _instance ??= DIService._();
 
   DIService._();
@@ -93,11 +96,13 @@ class DIService {
         NotificationFeedRepository(
             notificationFeedService: notificationFeedService);
 
+    LoggerService loggerService = LoggerService(apiClient: apiClient);
+    LoggerRepository loggerRepository =
+        LoggerRepository(loggerService: loggerService);
+
     // Register all the dependencies in the getIt instance
-    getIt.registerFactory<ApiClient>(
-      () => apiClient,
-      instanceName: kInstanceAPIClient,
-    );
+    getIt.registerFactory<ApiClient>(() => apiClient,
+        instanceName: kInstanceAPIClient);
     getIt.registerFactory<AccessRepository>(
       () => accessRepository,
       instanceName: kInstanceAccessRepository,
@@ -134,10 +139,13 @@ class DIService {
       () => notificationFeedRepository,
       instanceName: kInstanceNotificationFeedRepository,
     );
-
     getIt.registerFactory<WidgetRepository>(
       () => widgetRepository,
       instanceName: kInstanceWidgetRepository,
+    );
+    getIt.registerFactory<LoggerRepository>(
+      () => loggerRepository,
+      instanceName: kInstanceLoggerRepository,
     );
   }
 
@@ -158,4 +166,5 @@ class DIService {
   static const String kInstanceNotificationFeedRepository =
       'notification_feed_repository';
   static const String kInstanceWidgetRepository = 'widget_repository';
+  static const String kInstanceLoggerRepository = 'logger_repository';
 }

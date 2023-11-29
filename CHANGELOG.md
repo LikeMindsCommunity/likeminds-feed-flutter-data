@@ -98,4 +98,4 @@ Added support for edit profile and get profile
 
 # 1.6.3
 
-Fixed edit profile and get profile model issue
+Fixed edit profile and get profile model issue̦

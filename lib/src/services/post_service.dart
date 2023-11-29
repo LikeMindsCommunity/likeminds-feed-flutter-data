@@ -1,21 +1,27 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:likeminds_feed/src/models/models.dart';
-import 'package:likeminds_feed/src/models/post/post_report_request.dart';
-import 'package:likeminds_feed/src/models/post/post_report_response.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class IPostService {
   Future<AddPostResponseEntity> addPost(AddPostRequest addPostRequest);
+
   Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest);
+
   Future<GetPostLikesResponseEntity> getPostLikes(
       GetPostLikesRequest getPostLikesRequest);
+
   Future<DeletePostResponseEntity> deletePost(
       DeletePostRequest deletePostRequest);
+
   Future<LikePostResponseEntity> likePost(LikePostRequest likePostRequest);
+
   Future<PinPostResponseEntity> pinPost(PinPostRequest pinPostRequest);
+
   Future<SavePostResponseEntity> savePost(SavePostRequest savePostRequest);
+
   Future<EditPostResponseEntity> editPost(EditPostRequest editPostRequest);
+
   Future<PostReportResponseEntity> postReport(
       PostReportRequest postReportRequest);
 }
@@ -44,10 +50,17 @@ class PostService extends IPostService {
       AddPostResponseEntity addPostResponseEntity =
           AddPostResponseEntity.fromJson(response.data);
       return addPostResponseEntity;
-    } on DioError catch (e) {
-      AddPostResponseEntity addPostResponseEntity =
-          AddPostResponseEntity.fromJson(e.response?.data);
-      return addPostResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return AddPostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -70,11 +83,17 @@ class PostService extends IPostService {
       GetPostResponseEntity getPostResponseEntity =
           GetPostResponseEntity.fromJson(response.data);
       return getPostResponseEntity;
-    } on DioError catch (e) {
-      debugPrint("Error from get post: $e");
-      GetPostResponseEntity getPostResponseEntity =
-          GetPostResponseEntity.fromJson(e.response?.data);
-      return getPostResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return GetPostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -95,11 +114,17 @@ class PostService extends IPostService {
       DeletePostResponseEntity deletePostResponseEntity =
           DeletePostResponseEntity.fromJson(response.data);
       return deletePostResponseEntity;
-    } on DioError catch (e) {
-      debugPrint("Error from delete post: ${e.response?.data}");
-      DeletePostResponseEntity deletePostResponseEntity =
-          DeletePostResponseEntity.fromJson(e.response?.data);
-      return deletePostResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return DeletePostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -127,11 +152,17 @@ class PostService extends IPostService {
           LikePostResponseEntity.fromJson(response.data);
       likePostResponseEntity.setLikes = postResponse.post!.likeCount;
       return likePostResponseEntity;
-    } on DioError catch (e) {
-      debugPrint("Error from like post: ${e.response?.data}");
-      LikePostResponseEntity likePostResponseEntity =
-          LikePostResponseEntity.fromJson(e.response?.data);
-      return likePostResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LikePostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -155,11 +186,16 @@ class PostService extends IPostService {
       GetPostLikesResponseEntity getPostLikesResponseEntity =
           GetPostLikesResponseEntity.fromJson(response.data);
       return getPostLikesResponseEntity;
-    } on DioError catch (e) {
-      debugPrint("Error from like post: ${e.response?.data}");
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetPostLikesResponseEntity(
         success: false,
-        errorMessage: "${e.response?.data}",
+        errorMessage: errorMessage ?? "An error occurred",
       );
     }
   }
@@ -178,11 +214,17 @@ class PostService extends IPostService {
       PinPostResponseEntity pinPostResponseEntity =
           PinPostResponseEntity.fromJson(response.data);
       return pinPostResponseEntity;
-    } on DioError catch (e) {
-      debugPrint("Error from pin post: ${e.response?.data}");
-      PinPostResponseEntity pinPostResponseEntity =
-          PinPostResponseEntity(success: false, errorMessage: e.message);
-      return pinPostResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return PinPostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -201,11 +243,17 @@ class PostService extends IPostService {
       SavePostResponseEntity savePostResponseEntity =
           SavePostResponseEntity.fromJson(response.data);
       return savePostResponseEntity;
-    } on DioError catch (e) {
-      debugPrint("Error from save post: ${e.response?.data}");
-      SavePostResponseEntity savePostResponseEntity =
-          SavePostResponseEntity(success: false, errorMessage: e.message);
-      return savePostResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return SavePostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -225,11 +273,17 @@ class PostService extends IPostService {
       EditPostResponseEntity editPostResponseEntity =
           EditPostResponseEntity.fromJson(response.data);
       return editPostResponseEntity;
-    } on DioError catch (e) {
-      debugPrint("Error from edit post: ${e.response?.data}");
-      EditPostResponseEntity editPostResponseEntity =
-          EditPostResponseEntity(success: false, errorMessage: e.message);
-      return editPostResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return EditPostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -249,11 +303,17 @@ class PostService extends IPostService {
       PostReportResponseEntity postReportResponseEntity =
           PostReportResponseEntity.fromJson(response.data);
       return postReportResponseEntity;
-    } on DioError catch (e) {
-      debugPrint("Error from report post: ${e.response?.data}");
-      PostReportResponseEntity postReportResponseEntity =
-          PostReportResponseEntity(success: false, errorMessage: e.message);
-      return postReportResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return PostReportResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 }

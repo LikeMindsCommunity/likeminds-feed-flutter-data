@@ -15,7 +15,7 @@ class QuestionCommunityJoin {
   }
 }
 
-class QuestionCommunityJoinBuilder{
+class QuestionCommunityJoinBuilder {
   int? _questionId;
   String? _answer;
 

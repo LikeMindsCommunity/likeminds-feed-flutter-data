@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:likeminds_feed/src/models/models.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 /// Auth service to talk to our backend.
@@ -10,6 +10,7 @@ import 'package:likeminds_feed/src/services/api/api_client.dart';
 /// requires [ApiClient] to talk to backend
 class AuthService {
   final ApiClient apiClient;
+
   AuthService({required this.apiClient});
 
   /// Initiate user
@@ -17,7 +18,7 @@ class AuthService {
   /// Also updates tokens and sets user id and community id
   /// Returns [InitiateUserResponseEntity] if success
   /// Takes [InitiateUserRequest] as input
-  /// Throws [DioError] if error
+  /// Throws [DioException] if error
   Future<InitiateUserResponseEntity> initiateUser(
     InitiateUserRequest initiateUserRequest,
   ) async {
@@ -61,12 +62,17 @@ class AuthService {
       } else {
         return initiateUserResponse;
       }
-    } on DioError catch (e) {
-      debugPrint(e.toString());
-      debugPrint(e.response!.data.toString());
-      InitiateUserResponseEntity initiateUserResponse =
-          InitiateUserResponseEntity.fromJson(e.response?.data);
-      return initiateUserResponse;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return InitiateUserResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -74,7 +80,7 @@ class AuthService {
   /// Refreshes a SDK user, and updates tokens
   /// Returns [RefreshResponseEntity] if success
   /// Takes [RefreshRequest] as input
-  /// Throws [DioError] if error
+  /// Throws [DioException] if error
   Future<RefreshResponseEntity> refresh(RefreshRequest request) async {
     Dio dio = Dio();
     try {
@@ -90,10 +96,17 @@ class AuthService {
           RefreshResponseEntity.fromJson(response.data);
 
       return refreshResponse;
-    } on DioError catch (e) {
-      RefreshResponseEntity refreshResponse =
-          RefreshResponseEntity.fromJson(e.response?.data);
-      return refreshResponse;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return RefreshResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 
@@ -101,7 +114,7 @@ class AuthService {
   /// Logs out a SDK user, and clears tokens
   /// Returns [LogoutResponseEntity] if success
   /// Takes [LogoutRequest] as input
-  /// Throws [DioError] if error
+  /// Throws [DioException] if error
   Future<LogoutResponseEntity> logout(LogoutRequest? request) async {
     try {
       final response = await apiClient.client().post(
@@ -116,10 +129,17 @@ class AuthService {
       request.callback?.logoutCallback();
       apiClient.clearTokens();
       return logoutResponse;
-    } on DioError catch (e) {
-      LogoutResponseEntity logoutResponse =
-          LogoutResponseEntity.fromJson(e.response?.data);
-      return logoutResponse;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LogoutResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 }

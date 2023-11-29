@@ -1,5 +1,5 @@
 name: likeminds_feed
-description: Flutter SDK package for LikeMinds feed.
+description: Flutter SDK package for LikeMinds feed, empowers you to integrate personalized and engaging feeds into your Flutter application.
 version: 1.6.3
 homepage: "https://likeminds.community"
 
@@ -16,6 +16,10 @@ dependencies:
   equatable:
   get_it:
   envied:
+  device_info_plus:
+  connectivity_plus:
+  stack_trace: ^1.11.0
+  realm: 1.6.0
   curl_logger_dio_interceptor: ^1.0.0
 
 dev_dependencies:
@@ -26,4 +30,4 @@ dev_dependencies:
   envied_generator: ^0.3.0
 
 false_secrets:
- - /*.json
+  - /*.json
