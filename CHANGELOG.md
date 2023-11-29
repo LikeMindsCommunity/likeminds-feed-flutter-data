@@ -103,3 +103,7 @@ Fixed edit profile and get profile model issue̦
 # 1.6.4
 
 Added Error Logging service
+
+# 1.6.5
+
+Fixed LMFeedLogger handler issue

@@ -31,17 +31,17 @@ class LogDBHandler {
   }
 
   // Accepts [InsertLogRequest] object as parameter
-  // Creates a LogDBModel object and inserts it in the DB
+  // Creates a LMLogDBModel object and inserts it in the DB
   void insertLog(InsertLogRequest request) {
     checkIfRealmClosed();
-    StackTraceDBModel stackTraceRO = StackTraceDBModel(
+    LMStackTraceDBModel stackTraceRO = LMStackTraceDBModel(
         request.stackTrace.exception, request.stackTrace.stack);
-    SDKMetaDBModel sdkMetaRO = SDKMetaDBModel(
+    LMSDKMetaDBModel sdkMetaRO = LMSDKMetaDBModel(
         sampleAppVersion: request.sdkMeta?.sampleAppVersion ?? '',
         uiVersion: request.sdkMeta?.uiVersion ?? '',
         middlewareVersion: request.sdkMeta?.middlewareVersion ?? '');
     realm!.write(() {
-      realm!.add(LogDBModel(
+      realm!.add(LMLogDBModel(
         request.timestamp,
         request.severity,
         stackTrace: stackTraceRO,
@@ -51,15 +51,15 @@ class LogDBHandler {
     closeLoggerRealm();
   }
 
-  // Returns a list of LogDBModel objects
+  // Returns a list of LMLogDBModel objects
   // which are older than the timestamp passed as parameter
   GetLogResponse getLogs(int timestamp) {
     checkIfRealmClosed();
-    //RealmResults<LogDBModel> realmResults = realm!.all<LogDBModel>();
-    RealmResults<LogDBModel> queryResults =
-        realm!.query<LogDBModel>('timestamp <= $timestamp');
+    //RealmResults<LMLogDBModel> realmResults = realm!.all<LMLogDBModel>();
+    RealmResults<LMLogDBModel> queryResults =
+        realm!.query<LMLogDBModel>('timestamp <= $timestamp');
 
-    // Converting LogDBModel to LMLog while
+    // Converting LMLogDBModel to LMLog while
     // Mapping LMLog list with Device Details
     List<LMLogBuilder> lmLogBuilderList = queryResults.map((e) {
       LMStackTrace stackTrace = (LMStackTraceBuilder()
@@ -90,8 +90,8 @@ class LogDBHandler {
   // Deletes the logs passed as parameter
   void clearLogs(ClearLogRequest request) async {
     checkIfRealmClosed();
-    RealmResults<LogDBModel> queryResults =
-        realm!.query<LogDBModel>('timestamp <= ${request.timestamp}');
+    RealmResults<LMLogDBModel> queryResults =
+        realm!.query<LMLogDBModel>('timestamp <= ${request.timestamp}');
 
     realm!.write(() {
       realm!.deleteMany(queryResults);
