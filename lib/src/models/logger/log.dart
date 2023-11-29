@@ -7,18 +7,6 @@ import 'package:likeminds_feed/src/models/logger/stacktrace.dart';
 
 part 'log.g.dart';
 
-enum Severity {
-  DEBUG,
-  INFO,
-  NOTICE,
-  WARNING,
-  ERROR,
-  CRITICAL,
-  ALERT,
-  EMERGENCY,
-  DEFAULT
-}
-
 @JsonSerializable()
 class LMLog {
   int timestamp;
@@ -84,4 +72,16 @@ class LMLogBuilder {
       severity: _severity,
     );
   }
+}
+
+enum Severity {
+  INFO,
+  DEBUG,
+  NOTICE,
+  WARNING,
+  ERROR,
+  CRITICAL,
+  ALERT,
+  EMERGENCY,
+  DEFAULT
 }

@@ -28,11 +28,11 @@ class LMSDKMetaBuilder {
   String? _uiVersion;
   String? _middlewareVersion;
 
-  void sampleAppVersion(String sampleAppVersion) {
+  void sampleAppVersion(String? sampleAppVersion) {
     _sampleAppVersion = sampleAppVersion;
   }
 
-  void uiVersion(String uiVersion) {
+  void uiVersion(String? uiVersion) {
     _uiVersion = uiVersion;
   }
 

@@ -23,9 +23,7 @@ class CommentService {
       return AddCommentResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -36,9 +34,7 @@ class CommentService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return AddCommentResponseEntity(
         success: false,
         errorMessage: 'An error occurred, please try again later',
@@ -61,9 +57,7 @@ class CommentService {
       return EditCommentResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -74,9 +68,7 @@ class CommentService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return EditCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -98,9 +90,7 @@ class CommentService {
       return ToggleLikeCommentResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -111,9 +101,7 @@ class CommentService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return ToggleLikeCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -133,9 +121,7 @@ class CommentService {
       return GetCommentResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -146,9 +132,7 @@ class CommentService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return GetCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -172,9 +156,7 @@ class CommentService {
       return DeleteCommentResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -185,9 +167,7 @@ class CommentService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return DeleteCommentResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -209,9 +189,7 @@ class CommentService {
       return AddCommentReplyResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -222,9 +200,7 @@ class CommentService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return AddCommentReplyResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -246,9 +222,7 @@ class CommentService {
       return EditCommentReplyResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -259,9 +233,7 @@ class CommentService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return EditCommentReplyResponseEntity(
           success: false,
           errorMessage: 'An error occurred, please try again later');
@@ -288,9 +260,7 @@ class CommentService {
       return GetCommentLikesResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -301,9 +271,7 @@ class CommentService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      if (LMFeedClient.onErrorHandler != null) {
-        LMFeedClient.onErrorHandler!(e, stacktrace);
-      }
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return GetCommentLikesResponseEntity(
         success: false,
         errorMessage: 'An error occurred, please try again later',

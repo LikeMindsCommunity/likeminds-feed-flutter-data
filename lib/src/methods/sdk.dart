@@ -21,7 +21,11 @@ import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/repositories/widget_repository.dart';
 
 class SDKApplication {
-  SDKApplication();
+  static SDKApplication? _instance;
+
+  static SDKApplication get instance => _instance ??= SDKApplication._();
+
+  SDKApplication._();
 
   AuthApi getAuthApi() {
     return AuthApi(

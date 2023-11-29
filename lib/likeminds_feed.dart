@@ -3,11 +3,13 @@ library likeminds_feed;
 export 'src/methods/sdk.dart';
 export 'src/methods/methods.dart';
 export 'src/models/models.dart';
+export 'src/persistence/logger/logger.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
+import 'package:likeminds_feed/src/persistence/logger/logger.dart';
 import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
@@ -15,17 +17,19 @@ const _prod = !bool.fromEnvironment('DEBUG');
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
-  static Function(Exception, StackTrace)? onErrorHandler;
 
   LMFeedClient._({
     required String apiKey,
     LMSDKCallback? sdkCallback,
-    Function(Exception, StackTrace)? onErrorHandler,
+    InitiateLoggerRequest? initiateLoggerRequest,
   }) {
     DIService.instance.init(apiKey, _prod, sdkCallback);
-    _sdkApplication = SDKApplication();
+    _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
-    LMFeedClient.onErrorHandler = onErrorHandler;
+    if (initiateLoggerRequest != null) {
+      LMFeedLogger.instance
+          .initialise(initiateLoggerRequest: initiateLoggerRequest);
+    }
   }
 
   Future<GetFeedResponse?> getUniversalFeed(
@@ -269,7 +273,7 @@ class LMFeedClient {
 class LMFeedClientBuilder {
   String? _apiKey;
   LMSDKCallback? _sdkCallback;
-  Function(Exception, StackTrace)? _onErrorHandler;
+  InitiateLoggerRequest? _initiateLoggerRequest;
 
   void apiKey(String apiKey) {
     _apiKey = apiKey;
@@ -279,8 +283,8 @@ class LMFeedClientBuilder {
     _sdkCallback = sdkCallback;
   }
 
-  void onErrorHandler(Function(Exception, StackTrace) onErrorHandler) {
-    _onErrorHandler = onErrorHandler;
+  void initiateLoggerRequest(InitiateLoggerRequest initiateLoggerRequest) {
+    _initiateLoggerRequest = initiateLoggerRequest;
   }
 
   LMFeedClient build() {
@@ -291,7 +295,7 @@ class LMFeedClientBuilder {
     return LMFeedClient._(
       apiKey: _apiKey!,
       sdkCallback: _sdkCallback,
-      onErrorHandler: _onErrorHandler,
+      initiateLoggerRequest: _initiateLoggerRequest,
     );
   }
 }
