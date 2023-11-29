@@ -47,9 +47,9 @@ class LMFeedLogger {
     // Initialising LogDBHandler with all the neccessary schemas
     logDBHandler = LogDBHandler(
         config: realm.Configuration.local([
-      StackTraceDBModel.schema,
-      SDKMetaDBModel.schema,
-      LogDBModel.schema
+      LMStackTraceDBModel.schema,
+      LMSDKMetaDBModel.schema,
+      LMLogDBModel.schema
     ]));
   }
 

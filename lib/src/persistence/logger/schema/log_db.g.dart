@@ -7,13 +7,13 @@ part of 'log_db.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
-class LogDBModel extends _LogDBModel
+class LMLogDBModel extends _LMLogDBModel
     with RealmEntity, RealmObjectBase, RealmObject {
-  LogDBModel(
+  LMLogDBModel(
     int timestamp,
     String severity, {
-    StackTraceDBModel? stackTrace,
-    SDKMetaDBModel? sdkMeta,
+    LMStackTraceDBModel? stackTrace,
+    LMSDKMetaDBModel? sdkMeta,
   }) {
     RealmObjectBase.set(this, 'timestamp', timestamp);
     RealmObjectBase.set(this, 'stack_trace', stackTrace);
@@ -21,7 +21,7 @@ class LogDBModel extends _LogDBModel
     RealmObjectBase.set(this, 'severity', severity);
   }
 
-  LogDBModel._();
+  LMLogDBModel._();
 
   @override
   int get timestamp => RealmObjectBase.get<int>(this, 'timestamp') as int;
@@ -29,18 +29,19 @@ class LogDBModel extends _LogDBModel
   set timestamp(int value) => throw RealmUnsupportedSetError();
 
   @override
-  StackTraceDBModel? get stackTrace =>
-      RealmObjectBase.get<StackTraceDBModel>(this, 'stack_trace')
-          as StackTraceDBModel?;
+  LMStackTraceDBModel? get stackTrace =>
+      RealmObjectBase.get<LMStackTraceDBModel>(this, 'stack_trace')
+          as LMStackTraceDBModel?;
   @override
-  set stackTrace(covariant StackTraceDBModel? value) =>
+  set stackTrace(covariant LMStackTraceDBModel? value) =>
       throw RealmUnsupportedSetError();
 
   @override
-  SDKMetaDBModel? get sdkMeta =>
-      RealmObjectBase.get<SDKMetaDBModel>(this, 'sdk_meta') as SDKMetaDBModel?;
+  LMSDKMetaDBModel? get sdkMeta =>
+      RealmObjectBase.get<LMSDKMetaDBModel>(this, 'sdk_meta')
+          as LMSDKMetaDBModel?;
   @override
-  set sdkMeta(covariant SDKMetaDBModel? value) =>
+  set sdkMeta(covariant LMSDKMetaDBModel? value) =>
       throw RealmUnsupportedSetError();
 
   @override
@@ -50,33 +51,34 @@ class LogDBModel extends _LogDBModel
   set severity(String value) => throw RealmUnsupportedSetError();
 
   @override
-  Stream<RealmObjectChanges<LogDBModel>> get changes =>
-      RealmObjectBase.getChanges<LogDBModel>(this);
+  Stream<RealmObjectChanges<LMLogDBModel>> get changes =>
+      RealmObjectBase.getChanges<LMLogDBModel>(this);
 
   @override
-  LogDBModel freeze() => RealmObjectBase.freezeObject<LogDBModel>(this);
+  LMLogDBModel freeze() => RealmObjectBase.freezeObject<LMLogDBModel>(this);
 
   static SchemaObject get schema => _schema ??= _initSchema();
   static SchemaObject? _schema;
   static SchemaObject _initSchema() {
-    RealmObjectBase.registerFactory(LogDBModel._);
+    RealmObjectBase.registerFactory(LMLogDBModel._);
     return const SchemaObject(
-        ObjectType.realmObject, LogDBModel, 'LogDBModel', [
+        ObjectType.realmObject, LMLogDBModel, 'LMLogDBModel', [
       SchemaProperty('timestamp', RealmPropertyType.int, primaryKey: true),
       SchemaProperty('stackTrace', RealmPropertyType.object,
           mapTo: 'stack_trace',
           optional: true,
-          linkTarget: 'StackTraceDBModel'),
+          linkTarget: 'LMStackTraceDBModel'),
       SchemaProperty('sdkMeta', RealmPropertyType.object,
-          mapTo: 'sdk_meta', optional: true, linkTarget: 'SDKMetaDBModel'),
+          mapTo: 'sdk_meta', optional: true, linkTarget: 'LMSDKMetaDBModel'),
       SchemaProperty('severity', RealmPropertyType.string),
     ]);
   }
 }
 
-class SDKMetaDBModel extends _SDKMetaDBModel
+// ignore_for_file: type=lint
+class LMSDKMetaDBModel extends _LMSDKMetaDBModel
     with RealmEntity, RealmObjectBase, RealmObject {
-  SDKMetaDBModel({
+  LMSDKMetaDBModel({
     String? sampleAppVersion,
     String? uiVersion,
     String? middlewareVersion,
@@ -86,7 +88,7 @@ class SDKMetaDBModel extends _SDKMetaDBModel
     RealmObjectBase.set(this, 'middleware_version', middlewareVersion);
   }
 
-  SDKMetaDBModel._();
+  LMSDKMetaDBModel._();
 
   @override
   String? get sampleAppVersion =>
@@ -107,18 +109,19 @@ class SDKMetaDBModel extends _SDKMetaDBModel
   set middlewareVersion(String? value) => throw RealmUnsupportedSetError();
 
   @override
-  Stream<RealmObjectChanges<SDKMetaDBModel>> get changes =>
-      RealmObjectBase.getChanges<SDKMetaDBModel>(this);
+  Stream<RealmObjectChanges<LMSDKMetaDBModel>> get changes =>
+      RealmObjectBase.getChanges<LMSDKMetaDBModel>(this);
 
   @override
-  SDKMetaDBModel freeze() => RealmObjectBase.freezeObject<SDKMetaDBModel>(this);
+  LMSDKMetaDBModel freeze() =>
+      RealmObjectBase.freezeObject<LMSDKMetaDBModel>(this);
 
   static SchemaObject get schema => _schema ??= _initSchema();
   static SchemaObject? _schema;
   static SchemaObject _initSchema() {
-    RealmObjectBase.registerFactory(SDKMetaDBModel._);
+    RealmObjectBase.registerFactory(LMSDKMetaDBModel._);
     return const SchemaObject(
-        ObjectType.realmObject, SDKMetaDBModel, 'SDKMetaDBModel', [
+        ObjectType.realmObject, LMSDKMetaDBModel, 'LMSDKMetaDBModel', [
       SchemaProperty('sampleAppVersion', RealmPropertyType.string,
           mapTo: 'sample_app_version', optional: true),
       SchemaProperty('uiVersion', RealmPropertyType.string,
@@ -129,9 +132,10 @@ class SDKMetaDBModel extends _SDKMetaDBModel
   }
 }
 
-class StackTraceDBModel extends _StackTraceDBModel
+// ignore_for_file: type=lint
+class LMStackTraceDBModel extends _LMStackTraceDBModel
     with RealmEntity, RealmObjectBase, RealmObject {
-  StackTraceDBModel(
+  LMStackTraceDBModel(
     String exception,
     String trace,
   ) {
@@ -139,7 +143,7 @@ class StackTraceDBModel extends _StackTraceDBModel
     RealmObjectBase.set(this, 'trace', trace);
   }
 
-  StackTraceDBModel._();
+  LMStackTraceDBModel._();
 
   @override
   String get exception =>
@@ -153,19 +157,19 @@ class StackTraceDBModel extends _StackTraceDBModel
   set trace(String value) => throw RealmUnsupportedSetError();
 
   @override
-  Stream<RealmObjectChanges<StackTraceDBModel>> get changes =>
-      RealmObjectBase.getChanges<StackTraceDBModel>(this);
+  Stream<RealmObjectChanges<LMStackTraceDBModel>> get changes =>
+      RealmObjectBase.getChanges<LMStackTraceDBModel>(this);
 
   @override
-  StackTraceDBModel freeze() =>
-      RealmObjectBase.freezeObject<StackTraceDBModel>(this);
+  LMStackTraceDBModel freeze() =>
+      RealmObjectBase.freezeObject<LMStackTraceDBModel>(this);
 
   static SchemaObject get schema => _schema ??= _initSchema();
   static SchemaObject? _schema;
   static SchemaObject _initSchema() {
-    RealmObjectBase.registerFactory(StackTraceDBModel._);
+    RealmObjectBase.registerFactory(LMStackTraceDBModel._);
     return const SchemaObject(
-        ObjectType.realmObject, StackTraceDBModel, 'StackTraceDBModel', [
+        ObjectType.realmObject, LMStackTraceDBModel, 'LMStackTraceDBModel', [
       SchemaProperty('exception', RealmPropertyType.string),
       SchemaProperty('trace', RealmPropertyType.string),
     ]);

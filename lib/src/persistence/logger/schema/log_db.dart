@@ -3,13 +3,13 @@ import 'package:realm/realm.dart';
 part 'log_db.g.dart';
 
 @RealmModel()
-class _LogDBModel {
+class _LMLogDBModel {
   @PrimaryKey()
   late final int timestamp;
   @MapTo('stack_trace')
-  late final _StackTraceDBModel? stackTrace;
+  late final _LMStackTraceDBModel? stackTrace;
   @MapTo('sdk_meta')
-  late final _SDKMetaDBModel? sdkMeta;
+  late final _LMSDKMetaDBModel? sdkMeta;
 
   late final String severity;
 
@@ -24,7 +24,7 @@ class _LogDBModel {
 }
 
 @RealmModel()
-class _SDKMetaDBModel {
+class _LMSDKMetaDBModel {
   @MapTo('sample_app_version')
   late final String? sampleAppVersion;
   @MapTo('ui_version')
@@ -42,7 +42,7 @@ class _SDKMetaDBModel {
 }
 
 @RealmModel()
-class _StackTraceDBModel {
+class _LMStackTraceDBModel {
   late final String exception;
   late final String trace;
 

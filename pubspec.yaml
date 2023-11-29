@@ -18,7 +18,7 @@ dependencies:
   envied:
   device_info_plus:
   connectivity_plus:
-  stack_trace: 1.11.0
+  stack_trace: ^1.11.0
   realm: 1.6.0
   curl_logger_dio_interceptor: ^1.0.0
 
