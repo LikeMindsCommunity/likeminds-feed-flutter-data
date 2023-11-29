@@ -5,12 +5,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/models/access/edit_profile_request.dart';
-import 'package:likeminds_feed/src/models/access/edit_profile_response.dart';
-import 'package:likeminds_feed/src/models/access/get_profile_request.dart';
-import 'package:likeminds_feed/src/models/access/get_profile_response.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
-import 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
 
 import 'environment/test_env.dart';
 import 'test_callback.dart';

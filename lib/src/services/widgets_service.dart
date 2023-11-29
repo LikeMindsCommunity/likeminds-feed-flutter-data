@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/models/widget/get_widget_request.dart';
-import 'package:likeminds_feed/src/models/widget/get_widget_response.dart';
+import 'package:flutter/foundation.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class IWidgetsService {
@@ -29,10 +29,17 @@ class WidgetsService extends IWidgetsService {
       GetWidgetResponse getWidgetResponse =
           GetWidgetResponse.fromJson(response.data);
       return getWidgetResponse;
-    } on DioError catch (e) {
-      GetWidgetResponse getWidgetResponse =
-          GetWidgetResponse.fromJson(e.response?.data);
-      return getWidgetResponse;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return GetWidgetResponse(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 }

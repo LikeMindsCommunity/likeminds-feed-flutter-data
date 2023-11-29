@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:likeminds_feed/src/models/community/get_community_configurations_response_model.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class CommunityService {
@@ -21,10 +21,18 @@ class CommunityService {
           GetCommunityConfigurationsResponseEntity.fromJson(response.data);
 
       return communityConfigurations;
-    } on DioError catch (e) {
-      debugPrint("Error from get community configurations: ${e.toString()}");
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetCommunityConfigurationsResponseEntity(
-          success: false, errorMessage: e.toString());
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
 }

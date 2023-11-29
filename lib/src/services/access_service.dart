@@ -1,10 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:likeminds_feed/src/models/access/edit_profile_request.dart';
-import 'package:likeminds_feed/src/models/access/edit_profile_response.dart';
-import 'package:likeminds_feed/src/models/access/get_profile_request.dart';
-import 'package:likeminds_feed/src/models/access/get_profile_response.dart';
-import 'package:likeminds_feed/src/models/auth/member_state_response_model.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class AccessService {
@@ -29,40 +25,45 @@ class AccessService {
           MemberStateResponseEntity.fromJson(response.data);
 
       return memberStateResponseEntity;
-    } on DioError catch (e) {
+    } on DioException catch (e, stacktrace) {
       debugPrint("Error from get member state access: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return MemberStateResponseEntity(
-          success: false, errorMessage: e.toString());
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
-
 
   // Get the profile of a User in the community
   // Returns the profile of the user
-  Future<GetProfileResponseEntity> getProfile(
-      GetProfileRequest request) async {
+  Future<GetProfileResponseEntity> getProfile(GetProfileRequest request) async {
     try {
       final response = await apiClient.client().get(
-        apiClient.getEndpoints.memberProfileEndpoint,
-        queryParameters: request.toJson(),
-      );
+            apiClient.getEndpoints.memberProfileEndpoint,
+            queryParameters: request.toJson(),
+          );
 
-      final communityProfile =
-      GetProfileResponseEntity.fromJson(response.data);
+      final communityProfile = GetProfileResponseEntity.fromJson(response.data);
 
       return communityProfile;
-    } on DioException catch (e) {
-      // Handle Dio errors
+    } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetProfileResponseEntity(
-          success: false, errorMessage: e.response?.statusMessage);
-    } catch (err) {
-      debugPrint("Error from get community profile: ${err.toString()}");
-      return GetProfileResponseEntity(
-          success: false, errorMessage: err.toString());
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
     }
   }
-
 
   // Edits the profile of a User in the community
   // Returns a boolean success
@@ -70,23 +71,30 @@ class AccessService {
       EditProfileRequest request) async {
     try {
       final response = await apiClient.client().put(
-        apiClient.getEndpoints.memberProfileEndpoint,
-        data: request.toJson(),
-      );
+            apiClient.getEndpoints.memberProfileEndpoint,
+            data: request.toJson(),
+          );
 
       final communityProfile =
-      EditProfileResponseEntity.fromJson(response.data);
+          EditProfileResponseEntity.fromJson(response.data);
 
       return communityProfile;
-    } on DioException catch (e) {
-      // Handle Dio errors
+    } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return EditProfileResponseEntity(
-          success: false, errorMessage: e.response?.statusMessage);
-    } catch (err) {
-      debugPrint("Error from edit community profile: ${err.toString()}");
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    } on Exception catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
       return EditProfileResponseEntity(
-          success: false, errorMessage: err.toString());
+          success: false, errorMessage: e.toString());
     }
   }
 }

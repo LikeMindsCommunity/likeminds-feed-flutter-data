@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:likeminds_feed/src/models/models.dart';
+import 'package:flutter/foundation.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class ModerationService {
@@ -15,10 +16,16 @@ class ModerationService {
             queryParameters: request.toJson(),
           );
       return GetDeleteReasonResponseEntity.fromJson(response.data);
-    } on DioError catch (e) {
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetDeleteReasonResponseEntity(
-        errorMessage: e.message,
         success: false,
+        errorMessage: errorMessage ?? "An error occurred",
       );
     }
   }

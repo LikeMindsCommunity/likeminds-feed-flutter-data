@@ -40,11 +40,16 @@ class HelperService {
           errorMessage: response.data['message'],
         );
       }
-    } on DioError catch (e) {
-      debugPrint("Error from get tags: $e");
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return GetTaggingListResponseEntity(
         success: false,
-        errorMessage: e.message,
+        errorMessage: errorMessage ?? "An error occurred",
       );
     }
   }
@@ -63,19 +68,18 @@ class HelperService {
           'url': request.url,
         },
       );
-      if (response.data['success'] == true) {
-        return DecodeUrlResponseEntity.fromJson(response.data);
-      } else {
-        return DecodeUrlResponseEntity(
-          success: false,
-          errorMessage: response.data['message'],
-        );
+
+      return DecodeUrlResponseEntity.fromJson(response.data);
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
       }
-    } on DioError catch (e) {
-      debugPrint("Error from get tags: $e");
       return DecodeUrlResponseEntity(
         success: false,
-        errorMessage: e.message,
+        errorMessage: errorMessage ?? "An error occurred",
       );
     }
   }

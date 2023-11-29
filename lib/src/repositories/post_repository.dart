@@ -1,6 +1,4 @@
 import 'package:likeminds_feed/src/models/models.dart';
-import 'package:likeminds_feed/src/models/post/post_report_request.dart';
-import 'package:likeminds_feed/src/models/post/post_report_response.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
 
 class PostRepository {
