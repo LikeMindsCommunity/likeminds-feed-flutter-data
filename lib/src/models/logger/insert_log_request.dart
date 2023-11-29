@@ -8,13 +8,13 @@ import 'package:likeminds_feed/likeminds_feed.dart';
 class InsertLogRequest {
   final LMStackTrace stackTrace;
   final LMSDKMeta? sdkMeta;
-  final String? severity;
+  final String severity;
   final int timestamp;
 
   InsertLogRequest._({
     required this.stackTrace,
     this.sdkMeta,
-    this.severity,
+    required this.severity,
     required this.timestamp,
   });
 }
@@ -50,7 +50,7 @@ class InsertLogRequestBuilder {
     return InsertLogRequest._(
       stackTrace: _stackTrace!,
       sdkMeta: _sdkMeta,
-      severity: _severity,
+      severity: _severity!,
       timestamp: _timestamp!,
     );
   }

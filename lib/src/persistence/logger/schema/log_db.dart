@@ -11,7 +11,7 @@ class _LogDBModel {
   @MapTo('sdk_meta')
   late final _SDKMetaDBModel? sdkMeta;
 
-  late final String? severity;
+  late final String severity;
 
   Map<String, dynamic> toJson() {
     return {

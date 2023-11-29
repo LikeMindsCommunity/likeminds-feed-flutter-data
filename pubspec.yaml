@@ -21,7 +21,6 @@ dependencies:
   stack_trace: 1.11.0
   realm: 1.6.0
   curl_logger_dio_interceptor: ^1.0.0
-  package_info_plus: ^4.2.0
 
 dev_dependencies:
   flutter_test:

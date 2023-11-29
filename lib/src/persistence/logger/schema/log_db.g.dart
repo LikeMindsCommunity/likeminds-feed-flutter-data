@@ -10,10 +10,10 @@ part of 'log_db.dart';
 class LogDBModel extends _LogDBModel
     with RealmEntity, RealmObjectBase, RealmObject {
   LogDBModel(
-    int timestamp, {
+    int timestamp,
+    String severity, {
     StackTraceDBModel? stackTrace,
     SDKMetaDBModel? sdkMeta,
-    String? severity,
   }) {
     RealmObjectBase.set(this, 'timestamp', timestamp);
     RealmObjectBase.set(this, 'stack_trace', stackTrace);
@@ -44,10 +44,10 @@ class LogDBModel extends _LogDBModel
       throw RealmUnsupportedSetError();
 
   @override
-  String? get severity =>
-      RealmObjectBase.get<String>(this, 'severity') as String?;
+  String get severity =>
+      RealmObjectBase.get<String>(this, 'severity') as String;
   @override
-  set severity(String? value) => throw RealmUnsupportedSetError();
+  set severity(String value) => throw RealmUnsupportedSetError();
 
   @override
   Stream<RealmObjectChanges<LogDBModel>> get changes =>
@@ -69,7 +69,7 @@ class LogDBModel extends _LogDBModel
           linkTarget: 'StackTraceDBModel'),
       SchemaProperty('sdkMeta', RealmPropertyType.object,
           mapTo: 'sdk_meta', optional: true, linkTarget: 'SDKMetaDBModel'),
-      SchemaProperty('severity', RealmPropertyType.string, optional: true),
+      SchemaProperty('severity', RealmPropertyType.string),
     ]);
   }
 }

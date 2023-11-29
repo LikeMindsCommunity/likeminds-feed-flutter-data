@@ -6,7 +6,6 @@ import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/logger/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/logger/schema/log_db.dart';
 import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils.dart';
-import 'package:likeminds_feed/src/utils.dart';
 import 'package:realm/realm.dart' as realm;
 import 'package:stack_trace/stack_trace.dart';
 
@@ -61,18 +60,19 @@ class LMFeedLogger {
       return;
     }
     int currentTimestamp = DateTime.now().millisecondsSinceEpoch;
-    String middlewareVersion = await getFeedSDKVersion();
 
     LMSDKMeta lmSdkMeta = (LMSDKMetaBuilder()
-          ..middlewareVersion(middlewareVersion)
+          ..middlewareVersion(feedSDKVersion)
           ..sampleAppVersion(initiateLoggerRequest!.sampleAppVersion)
           ..uiVersion(initiateLoggerRequest!.uiVersion))
         .build();
 
+    String severityString = severityMap[severity]!;
+
     InsertLogRequest insertLogRequest = (InsertLogRequestBuilder()
           ..stackTrace(stackTrace)
           ..sdkMeta(lmSdkMeta)
-          ..severity(severity.toString())
+          ..severity(severityString)
           ..timestamp(currentTimestamp))
         .build();
     // insert the log in DB
@@ -186,10 +186,12 @@ class LMFeedLogger {
 
     if (initiateLoggerRequest!.shareLogsWithLM) {
       // Convert the stacktrace to string
-      String stackChain = Trace.format(stackTrace);
+      Chain stackChain = Chain.forTrace(stackTrace);
+
+      String stackChainString = stackChain.toString();
 
       LMStackTrace lmStackTrace = (LMStackTraceBuilder()
-            ..stack(stackChain)
+            ..stack(stackChainString)
             ..exception(exception.toString()))
           .build();
 

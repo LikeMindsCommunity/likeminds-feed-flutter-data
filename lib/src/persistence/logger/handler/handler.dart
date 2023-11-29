@@ -1,5 +1,6 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/logger/schema/log_db.dart';
+import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils.dart';
 import 'package:realm/realm.dart';
 
 // This class handles all the DB operations
@@ -42,9 +43,9 @@ class LogDBHandler {
     realm!.write(() {
       realm!.add(LogDBModel(
         request.timestamp,
+        request.severity,
         stackTrace: stackTraceRO,
         sdkMeta: sdkMetaRO,
-        severity: request.severity,
       ));
     });
     closeLoggerRealm();
@@ -56,7 +57,7 @@ class LogDBHandler {
     checkIfRealmClosed();
     //RealmResults<LogDBModel> realmResults = realm!.all<LogDBModel>();
     RealmResults<LogDBModel> queryResults =
-        realm!.query<LogDBModel>('timestamp >= $timestamp');
+        realm!.query<LogDBModel>('timestamp <= $timestamp');
 
     // Converting LogDBModel to LMLog while
     // Mapping LMLog list with Device Details
@@ -75,6 +76,7 @@ class LogDBHandler {
       LMLogBuilder lmLogBuilder = LMLogBuilder();
       lmLogBuilder
         ..timestamp(e.timestamp)
+        ..severity(getSeverityFromString(e.severity))
         ..sdkMeta(sdkMeta)
         ..stackTrace(stackTrace);
 
@@ -89,7 +91,7 @@ class LogDBHandler {
   void clearLogs(ClearLogRequest request) async {
     checkIfRealmClosed();
     RealmResults<LogDBModel> queryResults =
-        realm!.query<LogDBModel>('timestamp >= ${request.timestamp}');
+        realm!.query<LogDBModel>('timestamp <= ${request.timestamp}');
 
     realm!.write(() {
       realm!.deleteMany(queryResults);
