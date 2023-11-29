@@ -15,7 +15,7 @@ import 'src/models/models.dart';
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
 
-const String feedSDKVersion = "1.6.4";
+const String feedSDKVersion = "1.6.5";
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
