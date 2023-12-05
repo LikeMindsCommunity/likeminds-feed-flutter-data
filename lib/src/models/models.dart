@@ -94,7 +94,6 @@ export 'package:likeminds_feed/src/models/feedroom/get_feedroom_request_model.da
 export 'package:likeminds_feed/src/models/feedroom/get_feedroom_response_model.dart';
 export 'package:likeminds_feed/src/models/feedroom/get_feed_feedroom_request_model.dart';
 export 'package:likeminds_feed/src/models/feedroom/get_feed_feedroom_response_model.dart';
-export 'package:likeminds_feed/src/models/feedroom/feedroom_user_model.dart';
 
 export 'package:likeminds_feed/src/models/notifications/register_device_request_model.dart';
 export 'package:likeminds_feed/src/models/notifications/register_device_response_model.dart';
@@ -105,6 +104,7 @@ export 'package:likeminds_feed/src/models/notification_feed/get_unread_notificat
 export 'package:likeminds_feed/src/models/notification_feed/mark_read_notification_request_model.dart';
 export 'package:likeminds_feed/src/models/notification_feed/mark_read_notification_response_model.dart';
 export 'package:likeminds_feed/src/models/notification_feed/notification_feed_item_model.dart';
+export 'package:likeminds_feed/src/models/notification_feed/activity_entity_data_model.dart';
 
 export 'package:likeminds_feed/src/models/moderation/get_delete_reason_response_model.dart';
 export 'package:likeminds_feed/src/models/moderation/get_delete_reason_request_model.dart';
@@ -119,3 +119,5 @@ export 'package:likeminds_feed/src/models/logger/initiate_logger_request.dart';
 export 'package:likeminds_feed/src/models/logger/insert_log_request.dart';
 export 'package:likeminds_feed/src/models/logger/clear_log_request.dart';
 export 'package:likeminds_feed/src/models/logger/get_logs_response.dart';
+
+export 'package:likeminds_feed/src/models/sdk/sdk_client_info_model.dart';
