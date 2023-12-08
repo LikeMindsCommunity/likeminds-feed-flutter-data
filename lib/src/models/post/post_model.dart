@@ -21,6 +21,7 @@ class Post {
   final DateTime updatedAt;
   final bool isEdited;
   final List<String>? topics;
+  final List<Comment>? replies;
 
   Post({
     required this.id,
@@ -38,29 +39,33 @@ class Post {
     required this.commentCount,
     required this.isEdited,
     required this.topics,
+    this.replies,
   });
 
   factory Post.fromEntity({required PostEntity postEntity}) {
     return Post(
-        id: postEntity.id,
-        isEdited: postEntity.isEdited,
-        text: postEntity.text,
-        attachments: postEntity.attachments
-            ?.map((e) => Attachment.fromEntity(e))
-            .toList(),
-        communityId: postEntity.communityId,
-        isPinned: postEntity.isPinned,
-        userId: postEntity.userId,
-        likeCount: postEntity.likeCount,
-        commentCount: postEntity.commentCount,
-        isSaved: postEntity.isSaved,
-        isLiked: postEntity.isLiked,
-        menuItems: postEntity.menuItems
-            .map((e) => PopupMenuItemModel.fromEntity(entity: e))
-            .toList(),
-        topics: postEntity.topics,
-        createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
-        updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt));
+      id: postEntity.id,
+      isEdited: postEntity.isEdited,
+      text: postEntity.text,
+      attachments:
+          postEntity.attachments?.map((e) => Attachment.fromEntity(e)).toList(),
+      communityId: postEntity.communityId,
+      isPinned: postEntity.isPinned,
+      userId: postEntity.userId,
+      likeCount: postEntity.likeCount,
+      commentCount: postEntity.commentCount,
+      isSaved: postEntity.isSaved,
+      isLiked: postEntity.isLiked,
+      menuItems: postEntity.menuItems
+          .map((e) => PopupMenuItemModel.fromEntity(entity: e))
+          .toList(),
+      topics: postEntity.topics,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt),
+      replies: postEntity.replies
+          ?.map((e) => Comment.fromEntity(commentEntity: e))
+          .toList(),
+    );
   }
 
   PostEntity toEntity() {
@@ -80,6 +85,7 @@ class Post {
       createdAt: createdAt.millisecondsSinceEpoch.toInt(),
       updatedAt: updatedAt.millisecondsSinceEpoch.toInt(),
       topics: topics,
+      replies: replies?.map((e) => e.toEntity()).toList(),
     );
   }
 }
@@ -113,6 +119,9 @@ class PostEntity {
   @JsonKey(name: 'updated_at')
   final int updatedAt;
   final List<String>? topics;
+  @JsonKey(name: "replies")
+  final List<CommentEntity>? replies;
+
   PostEntity({
     required this.id,
     required this.text,
@@ -129,6 +138,7 @@ class PostEntity {
     required this.commentCount,
     required this.isEdited,
     required this.topics,
+    this.replies,
   });
   factory PostEntity.fromJson(Map<String, dynamic> data) =>
       _$PostEntityFromJson(data);

@@ -11,7 +11,7 @@ GetCommentResponseEntity _$GetCommentResponseEntityFromJson(
     GetCommentResponseEntity(
       success: json['success'],
       errorMessage: json['error_message'],
-      postReplies: CommentRepliesEntity.fromJson(
+      postReplies: CommentEntity.fromJson(
           json['data']['comment'] as Map<String, dynamic>),
       users: (json['data']['users'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),

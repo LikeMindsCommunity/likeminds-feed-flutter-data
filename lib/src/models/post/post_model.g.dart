@@ -26,6 +26,9 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
           .toList(),
       createdAt: json['created_at'] as int,
       updatedAt: json['updated_at'] as int,
+      replies: (json['replies'] as List<dynamic>?)
+          ?.map((e) => CommentEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
       topics:
           (json['topics'] as List<dynamic>?)?.map((e) => e.toString()).toList(),
     );
@@ -47,4 +50,5 @@ Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
       'updated_at': instance.updatedAt,
       'is_liked': instance.isLiked,
       'topics': instance.topics,
+      'replies': instance.replies?.map((e) => e.toJson()).toList(),
     };

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 
 part 'attachment_model.g.dart';
 
@@ -50,7 +51,7 @@ class AttachmentMeta {
   final int? size;
   final int? duration;
   final int? pageCount;
-  final AttachmentMetaOgTags? ogTags;
+  final OgTags? ogTags;
   final double? height;
   final double? width;
   final double? aspectRatio;
@@ -80,9 +81,7 @@ class AttachmentMeta {
       width: entity.width,
       aspectRatio: entity.aspectRatio,
       meta: entity.meta,
-      ogTags: entity.ogTags != null
-          ? AttachmentMetaOgTags.fromEntity(entity.ogTags!)
-          : null,
+      ogTags: entity.ogTags != null ? OgTags.fromEntity(entity.ogTags!) : null,
     );
   }
 
@@ -111,7 +110,7 @@ class AttachmentMetaEntity {
   @JsonKey(name: 'page_count')
   final int? pageCount;
   @JsonKey(name: 'og_tags')
-  final AttachmentMetaOgTagsEntity? ogTags;
+  final OgTagsEntity? ogTags;
   final double? height;
   final double? width;
   @JsonKey(name: 'aspect_ratio')
@@ -136,56 +135,4 @@ class AttachmentMetaEntity {
       _$AttachmentMetaEntityFromJson(json, attachmentType);
 
   Map<String, dynamic> toJson() => _$AttachmentMetaEntityToJson(this);
-}
-
-class AttachmentMetaOgTags {
-  final String? title;
-  final String? image;
-  final String? description;
-  final String? url;
-
-  AttachmentMetaOgTags({
-    this.title,
-    this.image,
-    this.description,
-    this.url,
-  });
-
-  factory AttachmentMetaOgTags.fromEntity(AttachmentMetaOgTagsEntity entity) {
-    return AttachmentMetaOgTags(
-      title: entity.title,
-      image: entity.image,
-      description: entity.description,
-      url: entity.url,
-    );
-  }
-
-  AttachmentMetaOgTagsEntity toEntity() {
-    return AttachmentMetaOgTagsEntity(
-      title: title,
-      image: image,
-      description: description,
-      url: url,
-    );
-  }
-}
-
-@JsonSerializable()
-class AttachmentMetaOgTagsEntity {
-  final String? title;
-  final String? image;
-  final String? description;
-  final String? url;
-
-  AttachmentMetaOgTagsEntity({
-    this.title,
-    this.image,
-    this.description,
-    this.url,
-  });
-
-  factory AttachmentMetaOgTagsEntity.fromJson(Map<String, dynamic> json) =>
-      _$AttachmentMetaOgTagsEntityFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AttachmentMetaOgTagsEntityToJson(this);
 }

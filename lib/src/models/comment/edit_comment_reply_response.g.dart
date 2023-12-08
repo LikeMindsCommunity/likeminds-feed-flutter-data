@@ -11,10 +11,8 @@ EditCommentReplyResponseEntity _$EditCommentReplyResponseEntityFromJson(
     EditCommentReplyResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      reply: CommentReply.fromEntity(
-        CommentReplyEntity.fromJson(
-          json['data']['comment'] ?? {},
-        ),
+      reply: CommentEntity.fromJson(
+        json['data']['comment'] ?? {},
       ),
     );
 

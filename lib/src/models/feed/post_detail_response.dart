@@ -6,13 +6,13 @@ part 'post_detail_response.g.dart';
 class PostDetailResponse {
   final bool success;
   final String? errorMessage;
-  final PostReplies? postReplies;
+  final Post? post;
   final Map<String, User>? users;
   final Map<String, Topic>? topics;
   final Map<String, WidgetModel>? widgets;
 
   PostDetailResponse({
-    this.postReplies,
+    this.post,
     required this.success,
     this.errorMessage,
     this.users,
@@ -23,9 +23,9 @@ class PostDetailResponse {
     return PostDetailResponse(
         success: entity.success,
         errorMessage: entity.errorMessage,
-        postReplies: entity.postReplies == null
+        post: entity.postReplies == null
             ? null
-            : PostReplies.fromEntity(entity.postReplies!),
+            : Post.fromEntity(postEntity: entity.postReplies!),
         users: entity.users
             ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
         topics: entity.topics
@@ -39,7 +39,7 @@ class PostDetailResponseEntity {
   final bool success;
   final String? errorMessage;
   @JsonKey(name: 'post')
-  final PostRepliesEntity? postReplies;
+  final PostEntity? postReplies;
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
   final Map<String, WidgetModel>? widgets;

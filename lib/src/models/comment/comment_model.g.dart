@@ -12,11 +12,22 @@ CommentEntity _$CommentEntityFromJson(Map<String, dynamic> json) =>
       text: json['text'] as String,
       level: json['level'] as int,
       likesCount: json['likes_count'] as int,
-      repliesCount: json['replies_count'] as int,
+      repliesCount: json['comments_count'] as int,
       menuItems: (json['menu_items'] as List<dynamic>)
           .map((e) =>
               PopupMenuItemModelEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
+      createdAt: json['created_at'] as int,
+      updatedAt: json['updated_Aat'] as int,
+      replies: (json['replies'] as List<dynamic>?)
+          ?.map((e) => CommentEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      parentComment: json['parent_comment'],
+      uuid: json['uuid'],
+      tempId: json['temp_id'],
+      id: json['_id'],
+      isEdited: json['is_edited'],
+      isLiked: json['is_liked'],
     );
 
 Map<String, dynamic> _$CommentEntityToJson(CommentEntity instance) =>
@@ -25,6 +36,15 @@ Map<String, dynamic> _$CommentEntityToJson(CommentEntity instance) =>
       'text': instance.text,
       'level': instance.level,
       'likes_count': instance.likesCount,
-      'replies_count': instance.repliesCount,
+      'comments_count': instance.repliesCount,
       'menu_items': instance.menuItems.map((e) => e.toJson()).toList(),
+      'created_at': instance.createdAt,
+      'updated_Aat': instance.updatedAt,
+      'replies': instance.replies?.map((e) => e.toJson()).toList(),
+      'parent_comment': instance.parentComment?.toJson(),
+      'uuid': instance.uuid,
+      'temp_id': instance.tempId,
+      '_id': instance.id,
+      'is_edited': instance.isEdited,
+      'is_liked': instance.isLiked,
     };

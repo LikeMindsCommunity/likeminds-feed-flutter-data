@@ -1,6 +1,5 @@
 export 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
 export 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
-export 'package:likeminds_feed/src/models/auth/initiate_user_model.dart';
 export 'package:likeminds_feed/src/models/auth/refresh_request_model.dart';
 export 'package:likeminds_feed/src/models/auth/refresh_response_model.dart';
 export 'package:likeminds_feed/src/models/auth/user_model.dart';
@@ -61,7 +60,6 @@ export 'package:likeminds_feed/src/models/feed/post_detail_response.dart';
 export 'package:likeminds_feed/src/models/feed/post_detail_request.dart';
 export 'package:likeminds_feed/src/models/feed/user_feed_request.dart';
 export 'package:likeminds_feed/src/models/feed/user_feed_response.dart';
-export 'package:likeminds_feed/src/models/feed/post_replies.dart';
 export 'package:likeminds_feed/src/models/feed/add_comment_request.dart';
 export 'package:likeminds_feed/src/models/widget/get_widget_request.dart';
 export 'package:likeminds_feed/src/models/widget/get_widget_response.dart';
@@ -78,14 +76,12 @@ export 'package:likeminds_feed/src/models/feed/topic_model.dart';
 
 export 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
 export 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';
-export 'package:likeminds_feed/src/models/feed/comment_replies.dart';
 export 'package:likeminds_feed/src/models/comment/add_comment_reply_request.dart';
 export 'package:likeminds_feed/src/models/comment/add_comment_reply_response.dart';
 export 'package:likeminds_feed/src/models/comment/edit_comment_reply_request.dart';
 export 'package:likeminds_feed/src/models/comment/edit_comment_reply_response.dart';
 export 'package:likeminds_feed/src/models/comment/delete_comment_request.dart';
 export 'package:likeminds_feed/src/models/comment/delete_comment_response.dart';
-export 'package:likeminds_feed/src/models/comment/comment_like_model.dart';
 export 'package:likeminds_feed/src/models/comment/get_comment_likes_request_model.dart';
 export 'package:likeminds_feed/src/models/comment/get_comment_likes_response_model.dart';
 

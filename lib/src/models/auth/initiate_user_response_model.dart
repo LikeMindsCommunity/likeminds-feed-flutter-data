@@ -6,7 +6,8 @@ part 'initiate_user_response_model.g.dart';
 class InitiateUserResponse {
   final bool success;
   final bool? appAccess;
-  final InitiateUser? initiateUser;
+  final User? user;
+  final Community? community;
   final LogoutResponse? logoutResponse;
   final String? accessToken;
   final String? refreshToken;
@@ -15,7 +16,8 @@ class InitiateUserResponse {
   InitiateUserResponse({
     required this.success,
     this.appAccess,
-    this.initiateUser,
+    this.user,
+    this.community,
     this.logoutResponse,
     this.accessToken,
     this.refreshToken,
@@ -26,8 +28,9 @@ class InitiateUserResponse {
     return InitiateUserResponse(
       success: entity.success,
       appAccess: entity.appAccess,
-      initiateUser: entity.initiateUser != null
-          ? InitiateUser.fromEntity(entity.initiateUser!)
+      user: entity.user != null ? User.fromEntity(entity.user!) : null,
+      community: entity.community != null
+          ? Community.fromEntity(entity.community!)
           : null,
       logoutResponse: entity.logoutResponse != null
           ? LogoutResponse.fromEntity(entity.logoutResponse!)
@@ -42,7 +45,8 @@ class InitiateUserResponse {
     return InitiateUserResponseEntity(
       success: success,
       appAccess: appAccess,
-      initiateUser: initiateUser?.toEntity(),
+      user: user?.toEntity(),
+      community: community?.toEntity(),
       logoutResponse: logoutResponse?.toEntity(),
       accessToken: accessToken,
       refreshToken: refreshToken,
@@ -58,8 +62,11 @@ class InitiateUserResponseEntity {
   @JsonKey(name: 'app_access')
   final bool? appAccess;
 
-  @JsonKey(name: 'initiate_user')
-  final InitiateUserEntity? initiateUser;
+  @JsonKey(name: 'user')
+  final UserEntity? user;
+
+  @JsonKey(name: 'community')
+  final CommunityEntity? community;
 
   @JsonKey(name: 'logout_response')
   final LogoutResponseEntity? logoutResponse;
@@ -76,7 +83,8 @@ class InitiateUserResponseEntity {
   InitiateUserResponseEntity({
     required this.success,
     this.appAccess,
-    this.initiateUser,
+    this.user,
+    this.community,
     this.logoutResponse,
     this.accessToken,
     this.refreshToken,
