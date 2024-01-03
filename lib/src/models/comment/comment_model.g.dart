@@ -10,7 +10,7 @@ CommentEntity _$CommentEntityFromJson(Map<String, dynamic> json) =>
     CommentEntity(
       userId: json['user_id'] as String,
       text: json['text'] as String,
-      level: json['level'] as int,
+      level: json['level'] as int?,
       likesCount: json['likes_count'] as int,
       repliesCount: json['comments_count'] as int,
       menuItems: (json['menu_items'] as List<dynamic>)
@@ -18,11 +18,14 @@ CommentEntity _$CommentEntityFromJson(Map<String, dynamic> json) =>
               PopupMenuItemModelEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: json['created_at'] as int,
-      updatedAt: json['updated_Aat'] as int,
+      updatedAt: json['updated_at'] as int,
       replies: (json['replies'] as List<dynamic>?)
           ?.map((e) => CommentEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      parentComment: json['parent_comment'],
+      parentComment: json['parent_comment'] != null
+          ? CommentEntity.fromJson(
+              json['parent_comment'] as Map<String, dynamic>)
+          : null,
       uuid: json['uuid'],
       tempId: json['temp_id'],
       id: json['_id'],

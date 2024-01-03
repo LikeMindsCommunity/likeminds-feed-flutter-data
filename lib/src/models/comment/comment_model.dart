@@ -9,7 +9,7 @@ class Comment {
   final bool isEdited;
   final String userId;
   final String text;
-  final int level;
+  final int? level;
   final int likesCount;
   final int repliesCount;
   final int createdAt;
@@ -26,7 +26,7 @@ class Comment {
     required this.isEdited,
     required this.userId,
     required this.text,
-    required this.level,
+    this.level,
     required this.likesCount,
     required this.repliesCount,
     required this.createdAt,
@@ -40,7 +40,7 @@ class Comment {
 
   factory Comment.fromEntity({required CommentEntity commentEntity}) {
     return Comment(
-      id: commentEntity.userId,
+      id: commentEntity.id,
       isLiked: commentEntity.isLiked,
       isEdited: commentEntity.isEdited,
       userId: commentEntity.userId,
@@ -89,7 +89,7 @@ class CommentEntity {
   @JsonKey(name: 'user_id')
   final String userId;
   final String text;
-  final int level;
+  final int? level;
   @JsonKey(name: 'likes_count')
   final int likesCount;
   @JsonKey(name: 'replies_count')
@@ -116,7 +116,7 @@ class CommentEntity {
   CommentEntity({
     required this.userId,
     required this.text,
-    required this.level,
+    this.level,
     required this.likesCount,
     required this.repliesCount,
     required this.menuItems,
