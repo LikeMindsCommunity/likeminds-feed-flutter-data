@@ -259,6 +259,13 @@ class LMFeedClient {
     return response;
   }
 
+  Future<GetUserActivityResponse> getUserActivity(
+      GetUserActivityRequest request) async {
+    final GetUserActivityResponse response =
+        await _sdkApplication.getNotificationFeedApi().getUserActivity(request);
+    return response;
+  }
+
   Future<GetWidgetResponse> getWidgets(GetWidgetRequest request) async {
     final GetWidgetResponse response =
         await _sdkApplication.getWidgetApi().getWidgets(request);
