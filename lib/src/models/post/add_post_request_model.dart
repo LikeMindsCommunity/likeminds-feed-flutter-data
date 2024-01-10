@@ -5,12 +5,14 @@ class AddPostRequest {
   final int? feedroomId;
   final List<Attachment>? attachments;
   final List<Topic>? topics;
+  final bool? isRepost;
 
   AddPostRequest._({
     required this.text,
     required this.attachments,
     this.feedroomId,
     this.topics,
+    this.isRepost,
   });
 
   Map<String, dynamic> toJson() {
@@ -19,6 +21,7 @@ class AddPostRequest {
       'attachments': attachments?.map((e) => e.toEntity().toJson()).toList(),
       'feedroom_id': feedroomId,
       'topic_ids': topics?.map((e) => e.id).toList(),
+      'is_repost': isRepost,
     };
   }
 }
@@ -28,6 +31,7 @@ class AddPostRequestBuilder {
   int? _feedroomId;
   List<Attachment>? _attachments;
   List<Topic>? _topics;
+  bool _isRepost = false;
 
   AddPostRequestBuilder();
 
@@ -47,12 +51,17 @@ class AddPostRequestBuilder {
     _topics = topics;
   }
 
+  void isRepost(bool isRepost) {
+    _isRepost = isRepost;
+  }
+
   AddPostRequest build() {
     return AddPostRequest._(
       attachments: _attachments,
       text: _text!,
       feedroomId: _feedroomId,
       topics: _topics,
+      isRepost: _isRepost,
     );
   }
 }

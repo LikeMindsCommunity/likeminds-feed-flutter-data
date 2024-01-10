@@ -55,6 +55,7 @@ class AttachmentMeta {
   final double? width;
   final double? aspectRatio;
   final Map<String, dynamic>? meta;
+  final String? postId;
 
   AttachmentMeta({
     this.url,
@@ -67,6 +68,7 @@ class AttachmentMeta {
     this.width,
     this.height,
     this.meta,
+    this.postId,
   });
 
   factory AttachmentMeta.fromEntity(AttachmentMetaEntity entity) {
@@ -83,6 +85,7 @@ class AttachmentMeta {
       ogTags: entity.ogTags != null
           ? AttachmentMetaOgTags.fromEntity(entity.ogTags!)
           : null,
+      postId: entity.postId,
     );
   }
 
@@ -98,6 +101,7 @@ class AttachmentMeta {
       aspectRatio: aspectRatio,
       meta: meta,
       ogTags: ogTags != null ? ogTags!.toEntity() : null,
+      postId: postId,
     );
   }
 }
@@ -117,6 +121,8 @@ class AttachmentMetaEntity {
   @JsonKey(name: 'aspect_ratio')
   final double? aspectRatio;
   final Map<String, dynamic>? meta;
+  @JsonKey(name: 'post_id')
+  final String? postId;
 
   AttachmentMetaEntity({
     this.url,
@@ -129,6 +135,7 @@ class AttachmentMetaEntity {
     this.width,
     this.height,
     this.meta,
+    this.postId,
   });
 
   factory AttachmentMetaEntity.fromJson(
