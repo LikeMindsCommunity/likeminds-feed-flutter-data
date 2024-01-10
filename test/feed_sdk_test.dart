@@ -104,6 +104,16 @@ void main() {
       expect(response, isNotNull);
     });
 
+    test('Testing Get User Activity', () async {
+      GetUserActivityRequest request = (GetUserActivityRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..uuid( prod ? testingProdBotID : testingBetaBotID))
+          .build();
+      GetUserActivityResponse? response = await client.getUserActivity(request);
+      expect(response, isNotNull);
+    });
+
     test('Testing Add Post', () async {
       AddPostRequest request = (AddPostRequestBuilder()
             ..attachments([])

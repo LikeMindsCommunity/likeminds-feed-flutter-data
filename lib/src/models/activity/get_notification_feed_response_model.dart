@@ -8,12 +8,16 @@ class GetNotificationFeedResponse {
   final String? errorMessage;
   final List<NotificationFeedItem>? items;
   final Map<String, User>? users;
+  final Map<String, Topic>? topics;
+  final Map<String, WidgetModel>? widgets;
 
   GetNotificationFeedResponse({
     required this.success,
     this.errorMessage,
     this.items,
     this.users,
+    this.topics,
+    this.widgets,
   });
 
   factory GetNotificationFeedResponse.fromEntity(
@@ -29,6 +33,18 @@ class GetNotificationFeedResponse {
           User.fromEntity(value),
         ),
       ),
+      topics: entity.topics?.map(
+        (key, value) => MapEntry(
+          key,
+          Topic.fromEntity(value),
+        ),
+      ),
+      widgets: entity.widgets?.map(
+        (key, value) => MapEntry(
+          key,
+          WidgetModel.fromEntity(value),
+        ),
+      ),
     );
   }
 
@@ -37,6 +53,9 @@ class GetNotificationFeedResponse {
       success: success,
       errorMessage: errorMessage,
       items: items?.map((e) => e.toEntity()).toList(),
+      users: users?.map((key, value) => MapEntry(key, value.toEntity())),
+      topics: topics?.map((key, value) => MapEntry(key, value.toEntity())),
+      widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
     );
   }
 }
@@ -48,12 +67,16 @@ class GetNotificationFeedResponseEntity {
   final String? errorMessage;
   final List<NotificationFeedItemEntity>? items;
   final Map<String, UserEntity>? users;
+  final Map<String, TopicEntity>? topics;
+  final Map<String, WidgetModelEntity>? widgets;
 
   GetNotificationFeedResponseEntity({
     required this.success,
     this.errorMessage,
     this.items,
     this.users,
+    this.topics,
+    this.widgets,
   });
 
   factory GetNotificationFeedResponseEntity.fromJson(
