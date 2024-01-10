@@ -1,5 +1,5 @@
 import 'package:likeminds_feed/src/models/models.dart';
-import 'package:likeminds_feed/src/repositories/notification_feed_repository.dart';
+import 'package:likeminds_feed/src/repositories/activity.dart';
 
 class NotificationFeedApi {
   final NotificationFeedRepository notificationFeedRepository;
@@ -19,5 +19,10 @@ class NotificationFeedApi {
   Future<GetUnreadNotificationCountResponse>
       getUnreadNotificationCount() async {
     return await notificationFeedRepository.getUnreadNotificationCount();
+  }
+
+  Future<GetUserActivityResponse> getUserActivity(
+      GetUserActivityRequest request) async {
+    return await notificationFeedRepository.getUserActivity(request);
   }
 }

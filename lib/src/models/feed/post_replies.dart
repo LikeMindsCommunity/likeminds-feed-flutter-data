@@ -165,6 +165,23 @@ class Reply {
       isEdited: replyEntity.isEdited,
     );
   }
+
+  ReplyEntity toEntity() {
+    return ReplyEntity(
+      userId: userId,
+      text: text,
+      level: level,
+      likesCount: likesCount,
+      repliesCount: repliesCount,
+      menuItems: menuItems.map((e) => e.toEntity()).toList(),
+      createdAt: createdAt.millisecondsSinceEpoch,
+      updatedAt: updatedAt.millisecondsSinceEpoch,
+      isLiked: isLiked,
+      id: id,
+      parentComment: parentComment,
+      isEdited: isEdited,
+    );
+  }
 }
 
 @JsonSerializable(explicitToJson: true)

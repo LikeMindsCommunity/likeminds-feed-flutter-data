@@ -3,7 +3,7 @@ import 'package:likeminds_feed/src/methods/helper.dart';
 import 'package:likeminds_feed/src/methods/logger.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/moderation.dart';
-import 'package:likeminds_feed/src/methods/notification_feed.dart';
+import 'package:likeminds_feed/src/methods/activity.dart';
 import 'package:likeminds_feed/src/methods/widgets.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
@@ -12,7 +12,7 @@ import 'package:likeminds_feed/src/repositories/community_repository.dart';
 import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/logger_repository.dart';
 import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
-import 'package:likeminds_feed/src/repositories/notification_feed_repository.dart';
+import 'package:likeminds_feed/src/repositories/activity.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 

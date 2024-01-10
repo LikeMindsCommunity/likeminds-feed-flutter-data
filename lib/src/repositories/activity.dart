@@ -1,5 +1,5 @@
 import 'package:likeminds_feed/src/models/models.dart';
-import 'package:likeminds_feed/src/services/notification_feed_service.dart';
+import 'package:likeminds_feed/src/services/activity_service.dart';
 
 class NotificationFeedRepository {
   final NotificationFeedService notificationFeedService;
@@ -22,5 +22,11 @@ class NotificationFeedRepository {
       getUnreadNotificationCount() async {
     final entity = await notificationFeedService.getUnreadNotificationCount();
     return GetUnreadNotificationCountResponse.fromEntity(entity);
+  }
+
+  Future<GetUserActivityResponse> getUserActivity(
+      GetUserActivityRequest request) async {
+    final entity = await notificationFeedService.getUserActivity(request);
+    return GetUserActivityResponse.fromEntity(entity);
   }
 }

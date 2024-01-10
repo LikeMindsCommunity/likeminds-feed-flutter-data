@@ -15,7 +15,7 @@ import 'src/models/models.dart';
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
 
-const String feedSDKVersion = "1.6.5";
+const String feedSDKVersion = "1.6.6";
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
@@ -256,6 +256,13 @@ class LMFeedClient {
     final GetUnreadNotificationCountResponse response = await _sdkApplication
         .getNotificationFeedApi()
         .getUnreadNotificationCount();
+    return response;
+  }
+
+  Future<GetUserActivityResponse> getUserActivity(
+      GetUserActivityRequest request) async {
+    final GetUserActivityResponse response =
+        await _sdkApplication.getNotificationFeedApi().getUserActivity(request);
     return response;
   }
 
