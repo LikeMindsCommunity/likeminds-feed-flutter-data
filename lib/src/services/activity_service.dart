@@ -11,6 +11,8 @@ abstract class INotificationFeedService {
       MarkReadNotificationRequest request);
 
   Future<GetUnreadNotificationCountResponseEntity> getUnreadNotificationCount();
+  Future<GetUserActivityResponseEntity> getUserActivity(
+      GetUserActivityRequest request);
 }
 
 class NotificationFeedService implements INotificationFeedService {
@@ -89,6 +91,33 @@ class NotificationFeedService implements INotificationFeedService {
         errorMessage = e.response!.data['error_message'];
       }
       return GetUnreadNotificationCountResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
+
+  @override
+  Future<GetUserActivityResponseEntity> getUserActivity(
+      GetUserActivityRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getUserActivityEndpoint(request.uuid),
+            queryParameters: request.toJson(),
+             options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      final entity = GetUserActivityResponseEntity.fromJson(response.data);
+      return entity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return GetUserActivityResponseEntity(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );

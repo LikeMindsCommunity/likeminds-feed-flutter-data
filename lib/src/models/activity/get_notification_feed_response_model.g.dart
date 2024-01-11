@@ -26,6 +26,22 @@ GetNotificationFeedResponseEntity _$GetNotificationFeedResponseEntityFromJson(
           ),
         ),
       ),
+      topics: (json['data']['topics'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+          k,
+          TopicEntity.fromJson(
+            e as Map<String, dynamic>,
+          ),
+        ),
+      ),
+      widgets: (json['data']['widgets'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+          k,
+          WidgetModelEntity.fromJson(
+            e as Map<String, dynamic>,
+          ),
+        ),
+      ),
     );
 
 Map<String, dynamic> _$GetNotificationFeedResponseEntityToJson(
@@ -34,4 +50,6 @@ Map<String, dynamic> _$GetNotificationFeedResponseEntityToJson(
       'success': instance.success,
       'error_message': instance.errorMessage,
       'items': instance.items,
+      'users': instance.users,
+      'topics': instance.topics,
     };

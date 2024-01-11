@@ -1,3 +1,5 @@
+import 'package:json_annotation/json_annotation.dart';
+
 class WidgetModel {
   String id;
   Map<String, dynamic>? lmMeta;
@@ -28,8 +30,21 @@ class WidgetModel {
       updatedAt: entity.updatedAt,
     );
   }
+
+  WidgetModelEntity toEntity() {
+    return WidgetModelEntity(
+      id: id,
+      lmMeta: lmMeta,
+      createdAt: createdAt,
+      metadata: metadata,
+      parentEntityId: parentEntityId,
+      parentEntityType: parentEntityType,
+      updatedAt: updatedAt,
+    );
+  }
 }
 
+@JsonSerializable()
 class WidgetModelEntity {
   String id;
   Map<String, dynamic>? lmMeta;
