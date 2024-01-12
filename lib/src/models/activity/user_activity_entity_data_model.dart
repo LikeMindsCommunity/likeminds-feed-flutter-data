@@ -19,7 +19,7 @@ class UserActivityEntityData {
   List<PopupMenuItemModel>? menuItems;
   Post? postData;
   String? postId;
-  List<Reply>? replies;
+  List<Comment>? replies;
   String? tempId;
   String text;
   List<String>? topics;
@@ -75,7 +75,9 @@ class UserActivityEntityData {
           ? Post.fromEntity(postEntity: entity.postData!)
           : null,
       postId: entity.postId,
-      replies: entity.replies?.map((e) => Reply.fromEntity(e)).toList(),
+      replies: entity.replies
+          ?.map((e) => Comment.fromEntity(commentEntity: e))
+          .toList(),
       tempId: entity.tempId,
       text: entity.text,
       topics: entity.topics,
@@ -142,7 +144,7 @@ class UserActivityEntityDataEntity {
   PostEntity? postData;
   @JsonKey(name: 'post_id')
   String? postId;
-  List<ReplyEntity>? replies;
+  List<CommentEntity>? replies;
   @JsonKey(name: 'temp_id')
   String? tempId;
   String text;

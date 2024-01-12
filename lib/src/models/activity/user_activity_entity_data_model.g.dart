@@ -32,7 +32,7 @@ UserActivityEntityDataEntity _$UserActivityEntityDataEntityFromJson(
           : PostEntity.fromJson(json['post_data'] as Map<String, dynamic>),
       postId: json['post_id'] as String?,
       replies: (json['replies'] as List<dynamic>?)
-          ?.map((e) => ReplyEntity.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => CommentEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       tempId: json['temp_id'] as String?,
       text: json['text'] as String,

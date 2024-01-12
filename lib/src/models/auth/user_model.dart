@@ -6,7 +6,7 @@ part 'user_model.g.dart';
 class User {
   final int id;
   final String name;
-  final String imageUrl;
+  final String? imageUrl;
   final bool? isGuest;
   final bool? isDeleted;
   final String userUniqueId;
@@ -89,7 +89,7 @@ class UserEntity {
   final String name;
 
   @JsonKey(name: 'image_url')
-  final String imageUrl;
+  final String? imageUrl;
 
   @JsonKey(name: 'is_guest')
   final bool? isGuest;
@@ -133,7 +133,7 @@ class UserEntity {
   UserEntity({
     required this.id,
     required this.name,
-    required this.imageUrl,
+    this.imageUrl,
     required this.isGuest,
     required this.userUniqueId,
     this.organisationName,
