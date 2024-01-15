@@ -9,12 +9,14 @@ class GetFeedResponse {
   final Map<String, User> users;
   final Map<String, Topic> topics;
   final Map<String, WidgetModel> widgets;
+  final Map<String, Post> repostedPosts;
 
   GetFeedResponse({
     required this.posts,
     required this.users,
     required this.topics,
     required this.widgets,
+    required this.repostedPosts,
   });
 
   factory GetFeedResponse.fromEntity({required GetFeedResponseEntity entity}) {
@@ -26,6 +28,8 @@ class GetFeedResponse {
           .map((key, value) => MapEntry(key, Topic.fromEntity(value))),
       widgets: entity.widgets
           .map((key, value) => MapEntry(key, WidgetModel.fromEntity(value))),
+      repostedPosts: entity.repostedPosts.map(
+          (key, value) => MapEntry(key, Post.fromEntity(postEntity: value))),
     );
   }
 }
@@ -36,12 +40,15 @@ class GetFeedResponseEntity {
   final Map<String, UserEntity> users;
   final Map<String, TopicEntity> topics;
   final Map<String, WidgetModelEntity> widgets;
+  @JsonKey(name: 'reposted_posts')
+  final Map<String, PostEntity> repostedPosts;
 
   GetFeedResponseEntity({
     required this.posts,
     required this.users,
     required this.topics,
     required this.widgets,
+    required this.repostedPosts,
   });
 
   factory GetFeedResponseEntity.fromJson(Map<String, dynamic> data) =>

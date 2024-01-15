@@ -10,6 +10,7 @@ class AddPostResponse {
   final Map<String, User>? user;
   final Map<String, Topic>? topics;
   final Map<String, WidgetModel>? widgets;
+  final Map<String, Post>? repostedPosts;
 
   AddPostResponse({
     required this.success,
@@ -18,6 +19,7 @@ class AddPostResponse {
     required this.user,
     required this.topics,
     required this.widgets,
+    required this.repostedPosts,
   });
 
   factory AddPostResponse.fromEntity({required AddPostResponseEntity entity}) {
@@ -33,6 +35,12 @@ class AddPostResponse {
         ),
       ),
       widgets: entity.widgets,
+      repostedPosts: entity.repostedPosts?.map(
+        (key, value) => MapEntry(
+          key,
+          Post.fromEntity(postEntity: value),
+        ),
+      ),
     );
   }
 }
@@ -44,6 +52,8 @@ class AddPostResponseEntity {
   final Map<String, User>? users;
   final Map<String, TopicEntity>? topics;
   final Map<String, WidgetModel>? widgets;
+  @JsonKey(name: 'reposted_posts')
+  final Map<String, PostEntity>? repostedPosts;
 
   @JsonKey(name: 'error_message')
   final String? errorMessage;
@@ -55,6 +65,7 @@ class AddPostResponseEntity {
     this.users,
     this.topics,
     this.widgets,
+    this.repostedPosts,
   });
 
   factory AddPostResponseEntity.fromJson(Map<String, dynamic> data) =>
