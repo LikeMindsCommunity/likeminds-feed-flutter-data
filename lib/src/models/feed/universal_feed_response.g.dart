@@ -22,6 +22,10 @@ GetFeedResponseEntity _$GetFeedResponseEntityFromJson(
         (k, e) =>
             MapEntry(k, WidgetModelEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      repostedPosts: (json['data']['reposted_posts'] as Map<String, dynamic>)
+          .map(
+        (k, e) => MapEntry(k, PostEntity.fromJson(e as Map<String, dynamic>)),
+      ),
     );
 
 Map<String, dynamic> _$GetFeedResponseEntityToJson(

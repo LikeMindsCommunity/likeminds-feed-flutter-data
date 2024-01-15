@@ -10,6 +10,7 @@ class GetPostResponse {
   final Map<String, User>? users;
   final Map<String, Topic>? topics;
   final Map<String, WidgetModel>? widgets;
+  final Map<String, Post>? repostedPosts;
 
   GetPostResponse({
     required this.success,
@@ -18,6 +19,7 @@ class GetPostResponse {
     this.users,
     this.topics,
     this.widgets,
+    this.repostedPosts,
   });
 
   factory GetPostResponse.fromEntity({required GetPostResponseEntity entity}) {
@@ -37,6 +39,8 @@ class GetPostResponse {
         ),
       ),
       widgets: entity.widgets,
+      repostedPosts: entity.repostedPosts?.map(
+          (key, value) => MapEntry(key, Post.fromEntity(postEntity: value))),
     );
   }
 
@@ -55,6 +59,8 @@ class GetPostResponse {
         ),
       ),
       widgets: widgets,
+      repostedPosts:
+          repostedPosts?.map((key, value) => MapEntry(key, value.toEntity())),
     );
   }
 }
@@ -68,6 +74,8 @@ class GetPostResponseEntity {
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
   final Map<String, WidgetModel>? widgets;
+  @JsonKey(name: 'reposted_post')
+  final Map<String, PostEntity>? repostedPosts;
 
   GetPostResponseEntity({
     required this.success,
@@ -76,6 +84,7 @@ class GetPostResponseEntity {
     this.users,
     this.topics,
     this.widgets,
+    this.repostedPosts,
   });
 
   factory GetPostResponseEntity.fromJson(Map<String, dynamic> data) =>
