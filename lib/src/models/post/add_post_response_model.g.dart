@@ -33,6 +33,15 @@ AddPostResponseEntity _$AddPostResponseEntityFromJson(
               MapEntry(
                   k, WidgetModel.fromEntity(WidgetModelEntity.fromJson(e)))))
           : null,
+      repostedPosts:
+          json['data'] != null && json['data']['reposted_posts'] != null
+              ? (json['data']['reposted_posts'] as Map<String, dynamic>?)?.map(
+                  (k, e) => MapEntry(
+                    k,
+                    PostEntity.fromJson(e as Map<String, dynamic>),
+                  ),
+                )
+              : {},
     );
 
 Map<String, dynamic> _$AddPostResponseEntityToJson(
@@ -42,4 +51,5 @@ Map<String, dynamic> _$AddPostResponseEntityToJson(
       'error_message': instance.errorMessage,
       'post': instance.post,
       'users': instance.users,
+      'reposted_posts': instance.repostedPosts,
     };

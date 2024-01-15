@@ -14,9 +14,6 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
           .toList(),
       communityId: json['community_id'] as int,
       isPinned: json['is_pinned'] as bool,
-      isLiked: json['is_liked'] as bool,
-      isEdited: json['is_edited'] as bool,
-      commentCount: json['comments_count'] as int,
       userId: json['user_id'] as String,
       likeCount: json['likes_count'] as int,
       isSaved: json['is_saved'] as bool,
@@ -29,8 +26,15 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
       replies: (json['replies'] as List<dynamic>?)
           ?.map((e) => CommentEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
+      isLiked: json['is_liked'] as bool,
+      commentCount: json['comments_count'] as int,
+      isEdited: json['is_edited'] as bool,
       topics:
-          (json['topics'] as List<dynamic>?)?.map((e) => e.toString()).toList(),
+          (json['topics'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      isRepost: json['is_repost'] as bool,
+      isRepostedByUser: json['is_reposted_by_user'] as bool,
+      repostCount: json['repost_count'] as int,
+      isDeleted: json['is_deleted'] ?? false,
     );
 
 Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
@@ -40,15 +44,19 @@ Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
       'attachments': instance.attachments?.map((e) => e.toJson()).toList(),
       'community_id': instance.communityId,
       'is_pinned': instance.isPinned,
+      'is_liked': instance.isLiked,
+      'is_edited': instance.isEdited,
+      'comments_count': instance.commentCount,
       'user_id': instance.userId,
       'likes_count': instance.likeCount,
-      'comment_count': instance.commentCount,
-      'is_edited': instance.isEdited,
       'is_saved': instance.isSaved,
       'menu_items': instance.menuItems.map((e) => e.toJson()).toList(),
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
-      'is_liked': instance.isLiked,
       'topics': instance.topics,
       'replies': instance.replies?.map((e) => e.toJson()).toList(),
+      'is_repost': instance.isRepost,
+      'is_reposted_by_user': instance.isRepostedByUser,
+      'repost_count': instance.repostCount,
+      'is_deleted': instance.isDeleted,
     };

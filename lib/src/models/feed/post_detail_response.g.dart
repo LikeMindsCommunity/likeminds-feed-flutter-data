@@ -25,6 +25,12 @@ PostDetailResponseEntity _$PostDetailResponseEntityFromJson(
         ? ((json['data']['widgets'] as Map<String, dynamic>?)?.map((k, e) =>
             MapEntry(k, WidgetModel.fromEntity(WidgetModelEntity.fromJson(e)))))
         : null,
+    repostedPosts: json['data'] != null &&
+            json['data']['reposted_posts'] != null &&
+            json['data']['reposted_posts'].isNotEmpty
+        ? ((json['data']['reposted_posts'] as Map<String, dynamic>?)
+            ?.map((k, e) => MapEntry(k, PostEntity.fromJson(e))))
+        : null,
   );
 }
 
