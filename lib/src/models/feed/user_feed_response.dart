@@ -7,6 +7,7 @@ class GetUserFeedResponse {
   final Map<String, User>? users;
   final Map<String, Topic>? topics;
   final Map<String, WidgetModel>? widgets;
+  final Map<String, Post>? repostedPosts;
 
   GetUserFeedResponse({
     required this.success,
@@ -15,6 +16,7 @@ class GetUserFeedResponse {
     this.users,
     this.topics,
     this.widgets,
+    this.repostedPosts,
   });
 
   factory GetUserFeedResponse.fromEntity(
@@ -28,6 +30,8 @@ class GetUserFeedResponse {
       topics: entity.topics
           ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))),
       widgets: entity.widgets,
+      repostedPosts: entity.repostedPosts?.map(
+          (key, value) => MapEntry(key, Post.fromEntity(postEntity: value))),
     );
   }
 }
@@ -39,6 +43,7 @@ class GetUserFeedResponseEntity {
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
   final Map<String, WidgetModel>? widgets;
+  final Map<String, PostEntity>? repostedPosts;
 
   GetUserFeedResponseEntity({
     required this.success,
@@ -47,6 +52,7 @@ class GetUserFeedResponseEntity {
     this.users,
     this.topics,
     this.widgets,
+    this.repostedPosts,
   });
   factory GetUserFeedResponseEntity.fromJson(Map<String, dynamic> data) =>
       _$GetUserFeedResponseEntityFromJson(data);
@@ -74,6 +80,10 @@ GetUserFeedResponseEntity _$GetUserFeedResponseEntityFromJson(
             WidgetModel.fromEntity(
                 WidgetModelEntity.fromJson(e as Map<String, dynamic>))),
       ),
+      repostedPosts:
+          (json['data']['reposted_posts'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, PostEntity.fromJson(e as Map<String, dynamic>)),
+      ),
     );
 
 Map<String, dynamic> _$GetUserFeedResponseEntityToJson(
@@ -84,4 +94,6 @@ Map<String, dynamic> _$GetUserFeedResponseEntityToJson(
       'posts': instance.posts?.map((e) => e.toJson()).toList(),
       'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
       'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+      'reposted_posts':
+          instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
     };

@@ -36,7 +36,7 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
           ? null
           : AttachmentMetaOgTagsEntity.fromJson(
               json['og_tags'] as Map<String, dynamic>),
-      postId: json['post_id'] as String?,
+      entityId: json['entity_id'] as String?,
     );
 
 Map<String, dynamic> _$AttachmentMetaEntityToJson(
@@ -49,7 +49,7 @@ Map<String, dynamic> _$AttachmentMetaEntityToJson(
         'duration': instance.duration,
         'page_count': instance.pageCount,
         'og_tags': instance.ogTags,
-        'post_id': instance.postId,
+        'entity_id': instance.entityId,
       };
   return attachmentMeta;
 }

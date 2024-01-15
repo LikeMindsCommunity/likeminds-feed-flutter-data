@@ -10,6 +10,7 @@ class PostDetailResponse {
   final Map<String, User>? users;
   final Map<String, Topic>? topics;
   final Map<String, WidgetModel>? widgets;
+  final Map<String, Post>? repostedPosts;
 
   PostDetailResponse({
     this.postReplies,
@@ -18,19 +19,23 @@ class PostDetailResponse {
     this.users,
     this.topics,
     this.widgets,
+    this.repostedPosts,
   });
   factory PostDetailResponse.fromEntity(PostDetailResponseEntity entity) {
     return PostDetailResponse(
-        success: entity.success,
-        errorMessage: entity.errorMessage,
-        postReplies: entity.postReplies == null
-            ? null
-            : PostReplies.fromEntity(entity.postReplies!),
-        users: entity.users
-            ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
-        topics: entity.topics
-            ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))),
-        widgets: entity.widgets);
+      success: entity.success,
+      errorMessage: entity.errorMessage,
+      postReplies: entity.postReplies == null
+          ? null
+          : PostReplies.fromEntity(entity.postReplies!),
+      users: entity.users
+          ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
+      topics: entity.topics
+          ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))),
+      widgets: entity.widgets,
+      repostedPosts: entity.repostedPosts?.map(
+          (key, value) => MapEntry(key, Post.fromEntity(postEntity: value))),
+    );
   }
 }
 
@@ -43,6 +48,8 @@ class PostDetailResponseEntity {
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
   final Map<String, WidgetModel>? widgets;
+  @JsonKey(name: 'reposted_post')
+  final Map<String, PostEntity>? repostedPosts;
 
   PostDetailResponseEntity({
     required this.success,
@@ -51,6 +58,7 @@ class PostDetailResponseEntity {
     this.users,
     this.topics,
     this.widgets,
+    this.repostedPosts,
   });
   factory PostDetailResponseEntity.fromJson(Map<String, dynamic> data) =>
       _$PostDetailResponseEntityFromJson(data);
