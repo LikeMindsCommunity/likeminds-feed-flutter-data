@@ -108,6 +108,7 @@ export 'package:likeminds_feed/src/models/activity/notification_feed_item_model.
 export 'package:likeminds_feed/src/models/activity/user_activity_item_model.dart';
 export 'package:likeminds_feed/src/models/activity/get_user_activity_request_model.dart';
 export 'package:likeminds_feed/src/models/activity/get_user_activity_response_model.dart';
+export 'package:likeminds_feed/src/models/activity/activity_entity_data_model.dart';
 
 export 'package:likeminds_feed/src/models/moderation/get_delete_reason_response_model.dart';
 export 'package:likeminds_feed/src/models/moderation/get_delete_reason_request_model.dart';
