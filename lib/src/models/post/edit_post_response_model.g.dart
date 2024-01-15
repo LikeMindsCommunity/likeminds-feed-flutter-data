@@ -34,7 +34,7 @@ EditPostResponseEntity _$EditPostResponseEntityFromJson(
                   k, WidgetModel.fromEntity(WidgetModelEntity.fromJson(e)))))
           : null,
       repostedPosts:
-          json['data'] != null && json['data']['reposted_post'] != null
+          json['data'] != null && json['data']['reposted_posts'] != null
               ? (json['data']['reposted_posts'] as Map<String, dynamic>?)?.map(
                   (k, e) => MapEntry(
                     k,
