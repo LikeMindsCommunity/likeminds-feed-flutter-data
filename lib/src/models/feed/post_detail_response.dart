@@ -23,16 +23,16 @@ class PostDetailResponse {
   });
   factory PostDetailResponse.fromEntity(PostDetailResponseEntity entity) {
     return PostDetailResponse(
-        success: entity.success,
-        errorMessage: entity.errorMessage,
-        post: entity.postReplies == null
-            ? null
-            : Post.fromEntity(postEntity: entity.postReplies!),
-        users: entity.users
-            ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
-        topics: entity.topics
-            ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))),
-        widgets: entity.widgets);
+      success: entity.success,
+      errorMessage: entity.errorMessage,
+      post: entity.postReplies == null
+          ? null
+          : Post.fromEntity(postEntity: entity.postReplies!),
+      users: entity.users
+          ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
+      topics: entity.topics
+          ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))),
+      widgets: entity.widgets,
       repostedPosts: entity.repostedPosts?.map(
           (key, value) => MapEntry(key, Post.fromEntity(postEntity: value))),
     );
