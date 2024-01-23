@@ -18,6 +18,7 @@ class UserActivityItem {
   bool isRead;
   int updatedAt;
   String uuid;
+
   UserActivityItem({
     required this.id,
     required this.action,
