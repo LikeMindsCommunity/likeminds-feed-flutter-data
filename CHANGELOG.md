@@ -107,3 +107,7 @@ Added Error Logging service
 # 1.6.5
 
 Fixed LMFeedLogger handler issue
+
+# 1.7.0
+
+Fixed model issues
