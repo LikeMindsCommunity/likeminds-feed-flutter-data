@@ -25,7 +25,7 @@ class LoggerService {
       } else {
         return PushLogResponseEntity(
           success: false,
-          errorMessage: response.data['message'],
+          errorMessage: response.data['error_message'],
         );
       }
     } on DioException catch (e, stacktrace) {

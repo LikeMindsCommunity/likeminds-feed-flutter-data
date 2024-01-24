@@ -6,7 +6,7 @@ part 'edit_comment_response.g.dart';
 class EditCommentResponse {
   final bool success;
   final String? errorMessage;
-  final Reply? reply;
+  final Comment? reply;
 
   EditCommentResponse({required this.success, this.errorMessage, this.reply});
 
@@ -24,7 +24,7 @@ class EditCommentResponseEntity {
   final bool success;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
-  final Reply? reply;
+  final Comment? reply;
 
   EditCommentResponseEntity({
     required this.success,

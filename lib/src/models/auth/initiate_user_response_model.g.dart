@@ -11,9 +11,13 @@ InitiateUserResponseEntity _$InitiateUserResponseEntityFromJson(
     InitiateUserResponseEntity(
       success: json['success'] as bool,
       appAccess: json['data']['app_access'] as bool?,
-      initiateUser: json['data']['community'] == null
+      user: json['data']['user'] == null
           ? null
-          : InitiateUserEntity.fromJson(json['data'] as Map<String, dynamic>),
+          : UserEntity.fromJson(json['data']['user'] as Map<String, dynamic>),
+      community: json['data']['community'] == null
+          ? null
+          : CommunityEntity.fromJson(
+              json['data']['community'] as Map<String, dynamic>),
       logoutResponse: json['data']['logout_response'] == null
           ? null
           : LogoutResponseEntity.fromJson(
@@ -28,7 +32,8 @@ Map<String, dynamic> _$InitiateUserResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'app_access': instance.appAccess,
-      'initiate_user': instance.initiateUser,
+      'user': instance.user?.toJson(),
+      'community': instance.community?.toJson(),
       'logout_response': instance.logoutResponse,
       'access_token': instance.accessToken,
       'refresh_token': instance.refreshToken,

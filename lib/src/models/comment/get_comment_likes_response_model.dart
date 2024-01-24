@@ -6,7 +6,7 @@ part 'get_comment_likes_response_model.g.dart';
 class GetCommentLikesResponse {
   final bool success;
   final String? errorMessage;
-  final List<CommentLike>? commentLikes;
+  final List<Like>? commentLikes;
   final Map<String, User>? users;
   final int? totalCount;
 
@@ -24,7 +24,7 @@ class GetCommentLikesResponse {
       success: entity.success,
       errorMessage: entity.errorMessage,
       commentLikes:
-          entity.commentLikes?.map((e) => CommentLike.fromEntity(e)).toList(),
+          entity.commentLikes?.map((e) => Like.fromEntity(e)).toList(),
       users: entity.users
           ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
       totalCount: entity.totalCount,
@@ -48,7 +48,7 @@ class GetCommentLikesResponseEntity {
   @JsonKey(name: 'error_message')
   final String? errorMessage;
   @JsonKey(name: 'likes')
-  final List<CommentLikeEntity>? commentLikes;
+  final List<LikeEntity>? commentLikes;
   @JsonKey(name: 'users')
   final Map<String, UserEntity>? users;
   @JsonKey(name: 'total_count')

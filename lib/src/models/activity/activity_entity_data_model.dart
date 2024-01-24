@@ -15,7 +15,7 @@ class ActivityEntityData {
   final bool? isPinned;
   final bool? isEdited;
   final String text;
-  final List<Reply>? replies;
+  final List<Comment>? replies;
   final int? updatedAt;
   final String userId;
 
@@ -51,7 +51,9 @@ class ActivityEntityData {
       heading: entity.heading,
       level: entity.level,
       postId: entity.postId,
-      replies: entity.replies,
+      replies: entity.replies
+          ?.map((e) => Comment.fromEntity(commentEntity: e))
+          .toList(),
       isDeleted: entity.isDeleted,
       isEdited: entity.isEdited,
       isPinned: entity.isPinned,
@@ -77,7 +79,7 @@ class ActivityEntityData {
       isEdited: isEdited,
       isPinned: isPinned,
       text: text,
-      replies: replies,
+      replies: replies?.map((e) => e.toEntity()).toList(),
       updatedAt: updatedAt,
       userId: userId,
     );
@@ -99,7 +101,7 @@ class ActivityEntityDataEntity {
   final bool? isPinned;
   final bool? isEdited;
   final String text;
-  final List<Reply>? replies;
+  final List<CommentEntity>? replies;
   final int? updatedAt;
   final String userId;
 
@@ -139,7 +141,7 @@ class ActivityEntityDataEntity {
         isPinned: json['is_pinned'] as bool?,
         text: json['text'] as String,
         replies: (json['replies'] as List<dynamic>?)
-            ?.map((e) => Reply.fromEntity(ReplyEntity.fromJson(e)))
+            ?.map((e) => CommentEntity.fromJson(e))
             .toList(),
         updatedAt: json['updated_at'] as int,
         userId: json['user_id'] as String,

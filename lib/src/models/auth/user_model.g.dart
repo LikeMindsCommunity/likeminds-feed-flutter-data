@@ -9,7 +9,7 @@ part of 'user_model.dart';
 UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       id: json['id'] as int,
       name: json['name'] as String,
-      imageUrl: json['image_url'] as String,
+      imageUrl: json['image_url'] as String?,
       isGuest: json['is_guest'] as bool?,
       userUniqueId: json['user_unique_id'] as String,
       organisationName: json['organisation_name'] as String?,

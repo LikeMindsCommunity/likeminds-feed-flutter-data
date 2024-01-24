@@ -11,8 +11,8 @@ AddCommentResponseEntity _$AddCommentResponseEntityFromJson(
     AddCommentResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      reply: Reply.fromEntity(
-        ReplyEntity.fromJson(
+      reply: Comment.fromEntity(
+        commentEntity: CommentEntity.fromJson(
           json['data']['comment'] as Map<String, dynamic>,
         ),
       ),

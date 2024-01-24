@@ -34,8 +34,7 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
       meta: attachtmentType == 5 ? json : null,
       ogTags: json['og_tags'] == null
           ? null
-          : AttachmentMetaOgTagsEntity.fromJson(
-              json['og_tags'] as Map<String, dynamic>),
+          : OgTagsEntity.fromJson(json['og_tags'] as Map<String, dynamic>),
       entityId: json['entity_id'] as String?,
     );
 
@@ -53,21 +52,3 @@ Map<String, dynamic> _$AttachmentMetaEntityToJson(
       };
   return attachmentMeta;
 }
-
-AttachmentMetaOgTagsEntity _$AttachmentMetaOgTagsEntityFromJson(
-        Map<String, dynamic> json) =>
-    AttachmentMetaOgTagsEntity(
-      title: json['title'] as String?,
-      image: json['image'] as String?,
-      description: json['description'] as String?,
-      url: json['url'] as String?,
-    );
-
-Map<String, dynamic> _$AttachmentMetaOgTagsEntityToJson(
-        AttachmentMetaOgTagsEntity instance) =>
-    <String, dynamic>{
-      'title': instance.title,
-      'image': instance.image,
-      'description': instance.description,
-      'url': instance.url,
-    };

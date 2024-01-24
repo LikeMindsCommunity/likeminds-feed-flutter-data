@@ -6,7 +6,7 @@ part 'edit_comment_reply_response.g.dart';
 class EditCommentReplyResponse {
   final bool success;
   final String? errorMessage;
-  final CommentReply? reply;
+  final Comment? reply;
 
   EditCommentReplyResponse({
     required this.success,
@@ -19,7 +19,9 @@ class EditCommentReplyResponse {
     return EditCommentReplyResponse(
       success: entity.success,
       errorMessage: entity.errorMessage,
-      reply: entity.reply,
+      reply: entity.reply != null
+          ? Comment.fromEntity(commentEntity: entity.reply!)
+          : null,
     );
   }
 }
@@ -29,7 +31,7 @@ class EditCommentReplyResponseEntity {
   final bool success;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
-  final CommentReply? reply;
+  final CommentEntity? reply;
 
   EditCommentReplyResponseEntity({
     required this.success,
