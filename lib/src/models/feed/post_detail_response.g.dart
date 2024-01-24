@@ -11,8 +11,8 @@ PostDetailResponseEntity _$PostDetailResponseEntityFromJson(
   return PostDetailResponseEntity(
     success: json['success'] as bool,
     errorMessage: json['error_message'] as String?,
-    postReplies: PostRepliesEntity.fromJson(
-        json['data']['post'] as Map<String, dynamic>),
+    postReplies:
+        PostEntity.fromJson(json['data']['post'] as Map<String, dynamic>),
     users: (json['data']['users'] as Map<String, dynamic>).map(
       (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
     ),

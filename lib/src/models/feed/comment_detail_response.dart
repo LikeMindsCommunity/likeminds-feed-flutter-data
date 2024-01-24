@@ -6,7 +6,7 @@ part 'comment_detail_response.g.dart';
 class GetCommentResponse {
   final bool success;
   final String? errorMessage;
-  final CommentReplies? postReplies;
+  final Comment? postReplies;
   final Map<String, User>? users;
   GetCommentResponse({
     this.postReplies,
@@ -19,7 +19,7 @@ class GetCommentResponse {
         success: entity.success,
         errorMessage: entity.errorMessage,
         postReplies: entity.postReplies != null
-            ? CommentReplies.fromEntity(entity.postReplies!)
+            ? Comment.fromEntity(commentEntity: entity.postReplies!)
             : null,
         users: entity.users != null
             ? entity.users!
@@ -33,7 +33,7 @@ class GetCommentResponseEntity {
   final bool success;
   final String? errorMessage;
   @JsonKey(name: 'comment')
-  final CommentRepliesEntity? postReplies;
+  final CommentEntity? postReplies;
   final Map<String, UserEntity>? users;
   GetCommentResponseEntity({
     this.postReplies,

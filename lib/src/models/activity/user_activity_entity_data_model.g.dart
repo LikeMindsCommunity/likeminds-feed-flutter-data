@@ -32,7 +32,7 @@ UserActivityEntityDataEntity _$UserActivityEntityDataEntityFromJson(
           : PostEntity.fromJson(json['post_data'] as Map<String, dynamic>),
       postId: json['post_id'] as String?,
       replies: (json['replies'] as List<dynamic>?)
-          ?.map((e) => ReplyEntity.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => CommentEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       tempId: json['temp_id'] as String?,
       text: json['text'] as String,
@@ -41,6 +41,10 @@ UserActivityEntityDataEntity _$UserActivityEntityDataEntityFromJson(
       updatedAt: json['updated_at'] as int?,
       userId: json['user_id'] as String?,
       uuid: json['uuid'] as String?,
+      isRepost: json['is_repost'] as bool?,
+      isRepostedByUser: json['is_reposted_by_user'] as bool?,
+      repostCount: json['repost_count'] as int?,
+      isDeleted: json['is_deleted'] as bool?,
     );
 
 Map<String, dynamic> _$UserActivityEntityDataEntityToJson(
@@ -68,4 +72,8 @@ Map<String, dynamic> _$UserActivityEntityDataEntityToJson(
       'updated_at': instance.updatedAt,
       'user_id': instance.userId,
       'uuid': instance.uuid,
+      'is_repost': instance.isRepost,
+      'is_reposted_by_user': instance.isRepostedByUser,
+      'repost_count': instance.repostCount,
+      'is_deleted': instance.isDeleted,
     };

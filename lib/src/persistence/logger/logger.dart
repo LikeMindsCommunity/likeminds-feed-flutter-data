@@ -55,7 +55,7 @@ class LMFeedLogger {
 
   // Creates a InsertLogRequest object and calls insertLog method
   // of LogDBHandler
-  Future<void> insertLogs(LMStackTrace stackTrace, Severity severity) async {
+  Future<void> _insertLogs(LMStackTrace stackTrace, Severity severity) async {
     if (!checkIfLoggerInitialised()) {
       return;
     }
@@ -84,7 +84,7 @@ class LMFeedLogger {
   // Creates a PushLogRequest object and calls pushLogs method
   // If the response is success, then deletes the logs from the database
   // upto the current timestamp
-  Future<PushLogResponse> pushLogs() async {
+  Future<PushLogResponse> _pushLogs() async {
     if (!checkIfLoggerInitialised()) {
       return PushLogResponse(
           success: false, errorMessage: 'LMFeedLogger not initialised');
@@ -161,7 +161,7 @@ class LMFeedLogger {
     if (response.success) {
       ClearLogRequest clearLogRequest =
           (ClearLogRequestBuilder()..timestamp(currentTimeStamp)).build();
-      clearLogs(clearLogRequest);
+      _clearLogs(clearLogRequest);
     }
     return response;
   }
@@ -195,7 +195,7 @@ class LMFeedLogger {
             ..exception(exception.toString()))
           .build();
 
-      insertLogs(lmStackTrace, errorSeverity);
+      _insertLogs(lmStackTrace, errorSeverity);
     }
     // Call error handling callback for client
     initiateLoggerRequest!.onErrorHandler(exception, stackTrace);
@@ -203,7 +203,7 @@ class LMFeedLogger {
 
   // Deletes all the logs upto the timestamp passed as parameter
   // Wrapper function for LogDBHandler
-  void clearLogs(ClearLogRequest clearLogRequest) {
+  void _clearLogs(ClearLogRequest clearLogRequest) {
     if (!checkIfLoggerInitialised()) {
       return;
     }
@@ -217,6 +217,6 @@ class LMFeedLogger {
   // push the logs to LM
   // Deletes the logs from DB
   Future<void> flushLogs() async {
-    await pushLogs();
+    await _pushLogs();
   }
 }

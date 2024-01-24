@@ -6,7 +6,7 @@ part 'add_comment_reply_response.g.dart';
 class AddCommentReplyResponse {
   final bool success;
   final String? errorMessage;
-  final CommentReply? reply;
+  final Comment? reply;
 
   AddCommentReplyResponse({
     required this.success,
@@ -19,7 +19,9 @@ class AddCommentReplyResponse {
     return AddCommentReplyResponse(
       success: entity.success,
       errorMessage: entity.errorMessage,
-      reply: entity.reply,
+      reply: entity.reply != null
+          ? Comment.fromEntity(commentEntity: entity.reply!)
+          : null,
     );
   }
 }
@@ -29,7 +31,7 @@ class AddCommentReplyResponseEntity {
   final bool success;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
-  final CommentReply? reply;
+  final CommentEntity? reply;
 
   AddCommentReplyResponseEntity({
     required this.success,

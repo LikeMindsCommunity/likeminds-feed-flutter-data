@@ -21,6 +21,7 @@ class Post {
   final DateTime updatedAt;
   final bool isEdited;
   final List<String>? topics;
+  final List<Comment>? replies;
   final bool isRepost;
   final bool isRepostedByUser;
   final int repostCount;
@@ -42,6 +43,7 @@ class Post {
     required this.commentCount,
     required this.isEdited,
     required this.topics,
+    this.replies,
     required this.isRepost,
     required this.isRepostedByUser,
     required this.repostCount,
@@ -68,6 +70,9 @@ class Post {
       topics: postEntity.topics,
       createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt),
+      replies: postEntity.replies
+          ?.map((e) => Comment.fromEntity(commentEntity: e))
+          .toList(),
       isRepost: postEntity.isRepost,
       isRepostedByUser: postEntity.isRepostedByUser,
       repostCount: postEntity.repostCount,
@@ -92,6 +97,7 @@ class Post {
       createdAt: createdAt.millisecondsSinceEpoch.toInt(),
       updatedAt: updatedAt.millisecondsSinceEpoch.toInt(),
       topics: topics,
+      replies: replies?.map((e) => e.toEntity()).toList(),
       isRepost: isRepost,
       isRepostedByUser: isRepostedByUser,
       repostCount: repostCount,
@@ -129,6 +135,8 @@ class PostEntity {
   @JsonKey(name: 'updated_at')
   final int updatedAt;
   final List<String>? topics;
+  @JsonKey(name: "replies")
+  final List<CommentEntity>? replies;
   @JsonKey(name: 'is_repost')
   final bool isRepost;
   @JsonKey(name: 'is_reposted_by_user')
@@ -138,27 +146,27 @@ class PostEntity {
   @JsonKey(name: 'is_deleted')
   final bool? isDeleted;
 
-  PostEntity({
-    required this.id,
-    required this.text,
-    required this.attachments,
-    required this.communityId,
-    required this.isPinned,
-    required this.userId,
-    required this.likeCount,
-    required this.isSaved,
-    required this.menuItems,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.isLiked,
-    required this.commentCount,
-    required this.isEdited,
-    required this.topics,
-    required this.isRepost,
-    required this.isRepostedByUser,
-    required this.repostCount,
-    this.isDeleted
-  });
+  PostEntity(
+      {required this.id,
+      required this.text,
+      required this.attachments,
+      required this.communityId,
+      required this.isPinned,
+      required this.userId,
+      required this.likeCount,
+      required this.isSaved,
+      required this.menuItems,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.isLiked,
+      required this.commentCount,
+      required this.isEdited,
+      required this.topics,
+      this.replies,
+      required this.isRepost,
+      required this.isRepostedByUser,
+      required this.repostCount,
+      this.isDeleted});
   factory PostEntity.fromJson(Map<String, dynamic> data) =>
       _$PostEntityFromJson(data);
 

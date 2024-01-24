@@ -19,13 +19,17 @@ class UserActivityEntityData {
   List<PopupMenuItemModel>? menuItems;
   Post? postData;
   String? postId;
-  List<Reply>? replies;
+  List<Comment>? replies;
   String? tempId;
   String text;
   List<String>? topics;
   int? updatedAt;
   String? userId;
   String? uuid;
+  bool? isRepost;
+  bool? isRepostedByUser;
+  int? repostCount;
+  bool? isDeleted;
 
   UserActivityEntityData({
     required this.id,
@@ -50,6 +54,10 @@ class UserActivityEntityData {
     this.updatedAt,
     this.userId,
     this.uuid,
+    this.isRepost,
+    this.isRepostedByUser,
+    this.repostCount,
+    this.isDeleted,
   });
 
   factory UserActivityEntityData.fromEntity(
@@ -75,13 +83,19 @@ class UserActivityEntityData {
           ? Post.fromEntity(postEntity: entity.postData!)
           : null,
       postId: entity.postId,
-      replies: entity.replies?.map((e) => Reply.fromEntity(e)).toList(),
+      replies: entity.replies
+          ?.map((e) => Comment.fromEntity(commentEntity: e))
+          .toList(),
       tempId: entity.tempId,
       text: entity.text,
       topics: entity.topics,
       updatedAt: entity.updatedAt,
       userId: entity.userId,
       uuid: entity.uuid,
+      isRepost: entity.isRepost,
+      isRepostedByUser: entity.isRepostedByUser,
+      repostCount: entity.repostCount,
+      isDeleted: entity.isDeleted,
     );
   }
 
@@ -109,6 +123,10 @@ class UserActivityEntityData {
       updatedAt: updatedAt,
       userId: userId,
       uuid: uuid,
+      isRepost: isRepost,
+      isRepostedByUser: isRepostedByUser,
+      repostCount: repostCount,
+      isDeleted: isDeleted,
     );
   }
 }
@@ -142,7 +160,7 @@ class UserActivityEntityDataEntity {
   PostEntity? postData;
   @JsonKey(name: 'post_id')
   String? postId;
-  List<ReplyEntity>? replies;
+  List<CommentEntity>? replies;
   @JsonKey(name: 'temp_id')
   String? tempId;
   String text;
@@ -152,6 +170,10 @@ class UserActivityEntityDataEntity {
   @JsonKey(name: 'user_id')
   String? userId;
   String? uuid;
+  bool? isRepost;
+  bool? isRepostedByUser;
+  int? repostCount;
+  bool? isDeleted;
 
   UserActivityEntityDataEntity({
     required this.id,
@@ -176,6 +198,10 @@ class UserActivityEntityDataEntity {
     this.updatedAt,
     this.userId,
     this.uuid,
+    this.isRepost,
+    this.isRepostedByUser,
+    this.repostCount,
+    this.isDeleted,
   });
 
   factory UserActivityEntityDataEntity.fromJson(Map<String, dynamic> json) =>
