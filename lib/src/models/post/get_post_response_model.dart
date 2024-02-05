@@ -48,7 +48,7 @@ class GetPostResponse {
     return GetPostResponseEntity(
       success: success,
       errorMessage: errorMessage,
-      post: post != null ? post!.toEntity() : null,
+      post: post?.toEntity(),
       users: users?.map((key, value) {
         return MapEntry(key, value.toEntity());
       }),

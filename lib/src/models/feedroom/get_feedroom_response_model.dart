@@ -26,9 +26,7 @@ class GetFeedRoomResponse {
           : null,
       participantCount: entity.participantCount,
       errorMessage: entity.errorMessage,
-      chatrooms: entity.chatrooms != null
-          ? entity.chatrooms!.map((e) => FeedRoom.fromEntity(e)).toList()
-          : null,
+      chatrooms: entity.chatrooms?.map((e) => FeedRoom.fromEntity(e)).toList(),
     );
   }
 

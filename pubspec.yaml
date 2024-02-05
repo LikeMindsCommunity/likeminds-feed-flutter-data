@@ -4,30 +4,30 @@ version: 1.7.0
 homepage: "https://likeminds.community"
 
 environment:
-  sdk: ">=2.18.5 <4.0.0"
-  flutter: ">=1.17.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  dio:
-  json_annotation:
-  json_serializable:
-  equatable:
-  get_it:
-  envied:
-  device_info_plus:
-  connectivity_plus:
-  stack_trace: ^1.11.0
-  realm: 1.6.0
+  dio: ^5.4.0
+  json_annotation: ^4.8.1
+  json_serializable: ^6.7.0
+  equatable: ^2.0.5
+  get_it: ^7.6.1
+  envied: ^0.5.0
+  device_info_plus: ^9.1.2
+  connectivity_plus: ^5.0.2
+  stack_trace: ^1.11.1
+  realm: 1.3.0
   curl_logger_dio_interceptor: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  build_runner:
-  envied_generator: ^0.3.0
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.4
+  envied_generator: ^0.5.0
 
 false_secrets:
   - /*.json
