@@ -22,9 +22,7 @@ class GetPostLikesResponse {
     return GetPostLikesResponse(
       success: entity.success,
       errorMessage: entity.errorMessage,
-      likes: entity.likes != null
-          ? entity.likes!.map((e) => Like.fromEntity(e)).toList()
-          : null,
+      likes: entity.likes?.map((e) => Like.fromEntity(e)).toList(),
       totalCount: entity.totalCount,
       users: entity.users?.map((key, value) {
         return MapEntry(key, User.fromEntity(value));
@@ -36,7 +34,7 @@ class GetPostLikesResponse {
     return GetPostLikesResponseEntity(
       success: success,
       errorMessage: errorMessage,
-      likes: likes != null ? likes!.map((e) => e.toEntity()).toList() : null,
+      likes: likes?.map((e) => e.toEntity()).toList(),
       totalCount: totalCount,
       users: users?.map((key, value) {
         return MapEntry(key, value.toEntity());

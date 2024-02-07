@@ -9,21 +9,23 @@ part of 'universal_feed_response.dart';
 GetFeedResponseEntity _$GetFeedResponseEntityFromJson(
         Map<String, dynamic> json) =>
     GetFeedResponseEntity(
-      posts: (json['data']['posts'] as List<dynamic>)
-          .map((e) => PostEntity.fromJson(e as Map<String, dynamic>))
+      success: json['success'] as bool,
+      errorMessage: json['error_message'] as String?,
+      posts: (json['data']['posts'] as List<dynamic>?)
+          ?.map((e) => PostEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      users: (json['data']['users'] as Map<String, dynamic>).map(
+      users: (json['data']['users'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
-      topics: (json['data']['topics'] as Map<String, dynamic>).map(
+      topics: (json['data']['topics'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
-      widgets: (json['data']['widgets'] as Map<String, dynamic>).map(
+      widgets: (json['data']['widgets'] as Map<String, dynamic>?)?.map(
         (k, e) =>
             MapEntry(k, WidgetModelEntity.fromJson(e as Map<String, dynamic>)),
       ),
-      repostedPosts: (json['data']['reposted_posts'] as Map<String, dynamic>)
-          .map(
+      repostedPosts:
+          (json['data']['reposted_posts'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, PostEntity.fromJson(e as Map<String, dynamic>)),
       ),
     );
@@ -31,7 +33,7 @@ GetFeedResponseEntity _$GetFeedResponseEntityFromJson(
 Map<String, dynamic> _$GetFeedResponseEntityToJson(
         GetFeedResponseEntity instance) =>
     <String, dynamic>{
-      'posts': instance.posts.map((e) => e.toJson()).toList(),
-      'users': instance.users.map((k, e) => MapEntry(k, e.toJson())),
-      'topics': instance.topics.map((k, e) => MapEntry(k, e.toJson())),
+      'posts': instance.posts?.map((e) => e.toJson()).toList(),
+      'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
+      'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
     };

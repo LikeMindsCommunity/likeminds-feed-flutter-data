@@ -16,15 +16,18 @@ class GetCommentResponse {
   });
   factory GetCommentResponse.fromEntity(GetCommentResponseEntity entity) {
     return GetCommentResponse(
-        success: entity.success,
-        errorMessage: entity.errorMessage,
-        postReplies: entity.postReplies != null
-            ? Comment.fromEntity(commentEntity: entity.postReplies!)
-            : null,
-        users: entity.users != null
-            ? entity.users!
-                .map((key, value) => MapEntry(key, User.fromEntity(value)))
-            : null);
+      success: entity.success,
+      errorMessage: entity.errorMessage,
+      postReplies: entity.postReplies != null
+          ? Comment.fromEntity(commentEntity: entity.postReplies!)
+          : null,
+      users: entity.users?.map(
+        (key, value) => MapEntry(
+          key,
+          User.fromEntity(value),
+        ),
+      ),
+    );
   }
 }
 

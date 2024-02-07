@@ -1,6 +1,6 @@
-///Unit tests for LM Feed SDK
-///To run tests, run the following command in the terminal:
-///flutter test --dart-define=DEBUG=true
+/// Unit tests for LM Feed SDK
+/// To run tests, run the following command in the terminal:
+/// flutter test --dart-define=DEBUG=true
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -108,7 +108,7 @@ void main() {
       GetUserActivityRequest request = (GetUserActivityRequestBuilder()
             ..page(1)
             ..pageSize(10)
-            ..uuid( prod ? testingProdBotID : testingBetaBotID))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       GetUserActivityResponse? response = await client.getUserActivity(request);
       expect(response, isNotNull);
