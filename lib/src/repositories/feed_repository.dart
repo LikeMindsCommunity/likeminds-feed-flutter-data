@@ -5,13 +5,11 @@ class FeedRepository {
   FeedRepository({required this.feedService});
   final FeedService feedService;
 
-  Future<GetFeedResponse?> getUniversalFeed(
+  Future<GetFeedResponse> getUniversalFeed(
       GetFeedRequest universalFeedRequest) async {
-    final GetFeedResponseEntity? responseEntity =
+    final GetFeedResponseEntity responseEntity =
         await feedService.getUniversalFeed(universalFeedRequest);
-    return responseEntity != null
-        ? GetFeedResponse.fromEntity(entity: responseEntity)
-        : null;
+    return GetFeedResponse.fromEntity(entity: responseEntity);
   }
 
   Future<PostDetailResponse> getPost(

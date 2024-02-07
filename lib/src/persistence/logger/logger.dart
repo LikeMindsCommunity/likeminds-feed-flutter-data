@@ -134,9 +134,15 @@ class LMFeedLogger {
       IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
       deviceDetailsBuilder
         ..os('ios')
-        ..versionOS(iosDeviceInfo.systemVersion)
-        ..deviceName(iosDeviceInfo.name)
         ..wifi(isOnWifi);
+
+      if (iosDeviceInfo.systemVersion != null) {
+        deviceDetailsBuilder.versionOS(iosDeviceInfo.systemVersion!);
+      }
+
+      if (iosDeviceInfo.name != null) {
+        deviceDetailsBuilder.deviceName(iosDeviceInfo.name!);
+      }
     }
 
     DeviceDetails deviceMeta = deviceDetailsBuilder.build();

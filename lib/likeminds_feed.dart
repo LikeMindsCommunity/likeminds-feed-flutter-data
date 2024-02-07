@@ -15,7 +15,7 @@ import 'src/models/models.dart';
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
 
-const String feedSDKVersion = "1.7.0";
+const String feedSDKVersion = "1.7.1";
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
@@ -34,9 +34,9 @@ class LMFeedClient {
     }
   }
 
-  Future<GetFeedResponse?> getUniversalFeed(
+  Future<GetFeedResponse> getUniversalFeed(
       GetFeedRequest universalFeedRequest) async {
-    final GetFeedResponse? universalFeedResponse = await _sdkApplication
+    final GetFeedResponse universalFeedResponse = await _sdkApplication
         .getFeedApi()
         .getUniversalFeed(universalFeedRequest);
     return universalFeedResponse;
@@ -95,7 +95,7 @@ class LMFeedClient {
     return await _sdkApplication.getAuthApi().logoutUser(request);
   }
 
-  Future<GetFeedResponse?> getFeed(GetFeedRequest request) async {
+  Future<GetFeedResponse> getFeed(GetFeedRequest request) async {
     return await _sdkApplication.getFeedApi().getUniversalFeed(request);
   }
 

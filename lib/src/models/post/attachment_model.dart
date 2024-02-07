@@ -99,7 +99,7 @@ class AttachmentMeta {
       width: width,
       aspectRatio: aspectRatio,
       meta: meta,
-      ogTags: ogTags != null ? ogTags!.toEntity() : null,
+      ogTags: ogTags?.toEntity(),
       entityId: entityId,
     );
   }

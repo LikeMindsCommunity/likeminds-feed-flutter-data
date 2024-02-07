@@ -40,7 +40,7 @@ class FeedService {
     }
   }
 
-  Future<GetFeedResponseEntity?> getUniversalFeed(
+  Future<GetFeedResponseEntity> getUniversalFeed(
       GetFeedRequest universalFeedRequest) async {
     try {
       final response = await apiClient.client().get(
@@ -54,11 +54,16 @@ class FeedService {
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
       LMFeedLogger.instance.handleException(e, stacktrace);
-    } on Exception catch (e, stacktrace) {
-      debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      final GetFeedResponseEntity responseEntity = GetFeedResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+      return responseEntity;
     }
-    return null;
   }
 
   Future<GetFeedRoomResponseEntity> getFeedRoom(

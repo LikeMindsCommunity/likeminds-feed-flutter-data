@@ -41,7 +41,7 @@ class MemberStateResponse {
       errorMessage: errorMessage,
       createdAt: createdAt,
       editRequired: editRequired,
-      member: member != null ? member!.toEntity() : null,
+      member: member?.toEntity(),
       memberRights: memberRights,
       state: state,
     );
