@@ -111,3 +111,7 @@ Fixed LMFeedLogger handler issue
 # 1.7.0
 
 Fixed model issues
+
+# 1.7.1
+
+Migrating to Flutter v3.10.6
