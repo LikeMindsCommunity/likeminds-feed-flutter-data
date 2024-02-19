@@ -6,12 +6,14 @@ class AddPostRequest {
   final List<Attachment>? attachments;
   final List<Topic>? topics;
   final bool? isRepost;
+  final String? heading;
 
   AddPostRequest._({
     required this.text,
     required this.attachments,
     this.feedroomId,
     this.topics,
+    this.heading,
     this.isRepost,
   });
 
@@ -22,6 +24,7 @@ class AddPostRequest {
       'feedroom_id': feedroomId,
       'topic_ids': topics?.map((e) => e.id).toList(),
       'is_repost': isRepost,
+      'heading': heading,
     };
   }
 }
@@ -32,6 +35,7 @@ class AddPostRequestBuilder {
   List<Attachment>? _attachments;
   List<Topic>? _topics;
   bool _isRepost = false;
+  String? _heading;
 
   AddPostRequestBuilder();
 
@@ -55,6 +59,10 @@ class AddPostRequestBuilder {
     _isRepost = isRepost;
   }
 
+  void heading(String heading) {
+    _heading = heading;
+  }
+
   AddPostRequest build() {
     return AddPostRequest._(
       attachments: _attachments,
@@ -62,6 +70,7 @@ class AddPostRequestBuilder {
       feedroomId: _feedroomId,
       topics: _topics,
       isRepost: _isRepost,
+      heading: _heading,
     );
   }
 }
