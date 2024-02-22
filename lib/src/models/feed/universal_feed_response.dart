@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -12,6 +13,7 @@ class GetFeedResponse {
   final Map<String, Topic>? topics;
   final Map<String, WidgetModel>? widgets;
   final Map<String, Post>? repostedPosts;
+  final Map<String, Comment>? filteredComments;
 
   GetFeedResponse({
     required this.success,
@@ -21,6 +23,7 @@ class GetFeedResponse {
     this.topics,
     this.widgets,
     this.repostedPosts,
+    this.filteredComments,
   });
 
   factory GetFeedResponse.fromEntity({required GetFeedResponseEntity entity}) {
@@ -36,6 +39,8 @@ class GetFeedResponse {
           ?.map((key, value) => MapEntry(key, WidgetModel.fromEntity(value))),
       repostedPosts: entity.repostedPosts?.map(
           (key, value) => MapEntry(key, Post.fromEntity(postEntity: value))),
+      filteredComments: entity.filteredCommentsEntity?.map((key, value) =>
+          MapEntry(key, Comment.fromEntity(commentEntity: value))),
     );
   }
 }
@@ -50,6 +55,8 @@ class GetFeedResponseEntity {
   final Map<String, WidgetModelEntity>? widgets;
   @JsonKey(name: 'reposted_posts')
   final Map<String, PostEntity>? repostedPosts;
+  @JsonKey(name: 'filtered_comments')
+  final Map<String, CommentEntity>? filteredCommentsEntity;
 
   GetFeedResponseEntity({
     required this.success,
@@ -59,6 +66,7 @@ class GetFeedResponseEntity {
     this.topics,
     this.widgets,
     this.repostedPosts,
+    this.filteredCommentsEntity,
   });
 
   factory GetFeedResponseEntity.fromJson(Map<String, dynamic> data) =>

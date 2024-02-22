@@ -28,6 +28,11 @@ GetFeedResponseEntity _$GetFeedResponseEntityFromJson(
           (json['data']['reposted_posts'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, PostEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      filteredCommentsEntity:
+          (json['data']['filtered_comments'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, CommentEntity.fromJson(e as Map<String, dynamic>)),
+      ),
     );
 
 Map<String, dynamic> _$GetFeedResponseEntityToJson(
@@ -36,4 +41,8 @@ Map<String, dynamic> _$GetFeedResponseEntityToJson(
       'posts': instance.posts?.map((e) => e.toJson()).toList(),
       'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
       'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+      'reposted_posts':
+          instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
+      'filtered_comments': instance.filteredCommentsEntity
+          ?.map((k, e) => MapEntry(k, e.toJson())),
     };
