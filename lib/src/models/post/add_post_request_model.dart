@@ -4,7 +4,7 @@ class AddPostRequest {
   final String text;
   final int? feedroomId;
   final List<Attachment>? attachments;
-  final List<Topic>? topics;
+  final List<String>? topics;
   final bool? isRepost;
   final String? heading;
 
@@ -22,7 +22,7 @@ class AddPostRequest {
       'text': text,
       'attachments': attachments?.map((e) => e.toEntity().toJson()).toList(),
       'feedroom_id': feedroomId,
-      'topic_ids': topics?.map((e) => e.id).toList(),
+      'topic_ids': topics,
       'is_repost': isRepost,
       'heading': heading,
     };
@@ -33,7 +33,7 @@ class AddPostRequestBuilder {
   String? _text;
   int? _feedroomId;
   List<Attachment>? _attachments;
-  List<Topic>? _topics;
+  List<String>? _topics;
   bool _isRepost = false;
   String? _heading;
 
@@ -51,7 +51,7 @@ class AddPostRequestBuilder {
     _attachments = attachments;
   }
 
-  void topics(List<Topic> topics) {
+  void topics(List<String> topics) {
     _topics = topics;
   }
 

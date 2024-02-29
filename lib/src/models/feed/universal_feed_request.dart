@@ -1,9 +1,7 @@
-import 'package:likeminds_feed/likeminds_feed.dart';
-
 class GetFeedRequest {
   final int page;
   final int pageSize;
-  final List<Topic>? topics;
+  final List<String>? topics;
   final List<String>? widgetIds;
 
   GetFeedRequest._({
@@ -16,7 +14,7 @@ class GetFeedRequest {
   Map<String, dynamic> toJson() => {
         'page': page,
         'page_size': pageSize,
-        'topic_ids': topics?.map((e) => e.id).toList().toString(),
+        'topic_ids': topics,
         'widget_ids': widgetIds?.toString(),
       };
 }
@@ -24,7 +22,7 @@ class GetFeedRequest {
 class GetFeedRequestBuilder {
   int? _page;
   int? _pageSize;
-  List<Topic>? _topics;
+  List<String>? _topics;
   List<String>? _widgetIds;
 
   GetFeedRequestBuilder();
@@ -37,7 +35,7 @@ class GetFeedRequestBuilder {
     _pageSize = pageSize;
   }
 
-  void topics(List<Topic> topics) {
+  void topics(List<String> topics) {
     _topics = topics;
   }
 
