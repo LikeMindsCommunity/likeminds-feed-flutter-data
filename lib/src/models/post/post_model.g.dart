@@ -39,6 +39,7 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
       commentIds: (json['comment_ids'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      tempId: json['temp_id'] as String?,
     );
 
 Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
@@ -65,4 +66,5 @@ Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
       'is_deleted': instance.isDeleted,
       'heading': instance.heading,
       'comment_ids': instance.commentIds,
+      'temp_id': instance.tempId,
     };
