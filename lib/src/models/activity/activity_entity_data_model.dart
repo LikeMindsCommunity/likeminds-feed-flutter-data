@@ -17,7 +17,7 @@ class ActivityEntityData {
   final String text;
   final List<Comment>? replies;
   final int? updatedAt;
-  final String userId;
+  final String uuid;
 
   ActivityEntityData({
     required this.id,
@@ -36,7 +36,7 @@ class ActivityEntityData {
     this.replies,
     required this.text,
     this.updatedAt,
-    required this.userId,
+    required this.uuid,
   });
 
   static ActivityEntityData fromEntity(ActivityEntityDataEntity entity) {
@@ -59,7 +59,7 @@ class ActivityEntityData {
       isPinned: entity.isPinned,
       text: entity.text,
       updatedAt: entity.updatedAt,
-      userId: entity.userId,
+      uuid: entity.uuid,
     );
   }
 
@@ -81,7 +81,7 @@ class ActivityEntityData {
       text: text,
       replies: replies?.map((e) => e.toEntity()).toList(),
       updatedAt: updatedAt,
-      userId: userId,
+      uuid: uuid,
     );
   }
 }
@@ -103,7 +103,7 @@ class ActivityEntityDataEntity {
   final String text;
   final List<CommentEntity>? replies;
   final int? updatedAt;
-  final String userId;
+  final String uuid;
 
   ActivityEntityDataEntity({
     required this.id,
@@ -122,7 +122,7 @@ class ActivityEntityDataEntity {
     this.replies,
     required this.text,
     this.updatedAt,
-    required this.userId,
+    required this.uuid,
   });
 
   static fromJson(Map<String, dynamic> json) {
@@ -144,7 +144,7 @@ class ActivityEntityDataEntity {
             ?.map((e) => CommentEntity.fromJson(e))
             .toList(),
         updatedAt: json['updated_at'] as int,
-        userId: json['user_id'] as String,
+        uuid: json['uuid'] as String,
         attachments: (json['attachments'] as List<dynamic>?)
             ?.map((e) => Attachment.fromEntity(AttachmentEntity.fromJson(e)))
             .toList());
@@ -166,7 +166,7 @@ class ActivityEntityDataEntity {
       'is_pinned': isPinned,
       'text': text,
       'updated_at': updatedAt,
-      'user_id': userId,
+      'uuid': uuid,
       'attachments': attachments?.map((e) => e.toEntity().toJson()).toList(),
     };
   }

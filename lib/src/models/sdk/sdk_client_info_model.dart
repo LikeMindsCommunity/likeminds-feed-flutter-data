@@ -7,13 +7,13 @@ class SDKClientInfo {
   final int community;
   final int user;
 
-  @JsonKey(name: 'user_unique_id')
-  final String userUniqueId;
+  @JsonKey(name: 'uuid')
+  final String uuid;
 
   SDKClientInfo({
     required this.community,
     required this.user,
-    required this.userUniqueId,
+    required this.uuid,
   });
 
   factory SDKClientInfo.fromJson(Map<String, dynamic> json) =>

@@ -31,7 +31,7 @@ void main() {
 
     test('Testing Initiate User', () async {
       InitiateUserRequest request = (InitiateUserRequestBuilder()
-            ..userId(prod ? testingProdBotID : testingBetaBotID))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       InitiateUserResponse response = await client.initiateUser(request);
       expect(response.success, true);
@@ -39,7 +39,7 @@ void main() {
 
     test('Testing Get Profile', () async {
       GetProfileRequest request = (GetProfileRequestBuilder()
-            ..userUniqueId(prod ? testingProdBotID : testingBetaBotID))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       GetProfileResponse response = await client.getProfile(request);
       expect(response.success, true);
@@ -51,7 +51,7 @@ void main() {
       EditProfileRequest request = (EditProfileRequestBuilder()
             ..name(prod ? testingProdBotID : testingBetaBotID)
             ..imageUrl(currentTimeStamp)
-            ..userUniqueId(prod ? testingProdBotID : testingBetaBotID))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       EditProfileResponse response = await client.editProfile(request);
       expect(response.success, true);
@@ -76,7 +76,7 @@ void main() {
       GetUserFeedRequest request = (GetUserFeedRequestBuilder()
             ..page(1)
             ..pageSize(10)
-            ..userId(prod ? testingProdBotID : testingBetaBotID))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       GetUserFeedResponse? response = await client.getUserFeed(request);
       expect(response, isNotNull);

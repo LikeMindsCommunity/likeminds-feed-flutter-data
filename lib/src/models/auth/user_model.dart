@@ -9,7 +9,7 @@ class User {
   final String? imageUrl;
   final bool? isGuest;
   final bool? isDeleted;
-  final String userUniqueId;
+  final String uuid;
   final String? organisationName;
   final SDKClientInfo? sdkClientInfo;
   final int? updatedAt;
@@ -26,7 +26,7 @@ class User {
     required this.name,
     required this.imageUrl,
     required this.isGuest,
-    required this.userUniqueId,
+    required this.uuid,
     this.organisationName,
     this.sdkClientInfo,
     this.updatedAt,
@@ -46,7 +46,7 @@ class User {
       name: entity.name,
       imageUrl: entity.imageUrl,
       isGuest: entity.isGuest,
-      userUniqueId: entity.userUniqueId,
+      uuid: entity.uuid,
       organisationName: entity.organisationName,
       sdkClientInfo: entity.sdkClientInfo,
       updatedAt: entity.updatedAt,
@@ -67,7 +67,7 @@ class User {
       name: name,
       imageUrl: imageUrl,
       isGuest: isGuest,
-      userUniqueId: userUniqueId,
+      uuid: uuid,
       organisationName: organisationName,
       sdkClientInfo: sdkClientInfo,
       updatedAt: updatedAt,
@@ -94,8 +94,8 @@ class UserEntity {
   @JsonKey(name: 'is_guest')
   final bool? isGuest;
 
-  @JsonKey(name: 'user_unique_id')
-  final String userUniqueId;
+  @JsonKey(name: 'uuid')
+  final String uuid;
 
   @JsonKey(name: 'organisation_name')
   final String? organisationName;
@@ -135,7 +135,7 @@ class UserEntity {
     required this.name,
     this.imageUrl,
     required this.isGuest,
-    required this.userUniqueId,
+    required this.uuid,
     this.organisationName,
     this.sdkClientInfo,
     this.updatedAt,

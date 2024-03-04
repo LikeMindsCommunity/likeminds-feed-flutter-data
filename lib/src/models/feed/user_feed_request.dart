@@ -1,12 +1,12 @@
 class GetUserFeedRequest {
   final int page;
   final int pageSize;
-  final String userId;
+  final String uuid;
 
   GetUserFeedRequest._({
     required this.page,
     required this.pageSize,
-    required this.userId,
+    required this.uuid,
   });
 
   Map<String, dynamic> toJson() => {
@@ -18,7 +18,7 @@ class GetUserFeedRequest {
 class GetUserFeedRequestBuilder {
   int? _page;
   int? _pageSize;
-  String? _userId;
+  String? _uuid;
 
   GetUserFeedRequestBuilder();
 
@@ -30,15 +30,15 @@ class GetUserFeedRequestBuilder {
     _pageSize = pageSize;
   }
 
-  void userId(String userId) {
-    _userId = userId;
+  void uuid(String uuid) {
+    _uuid = uuid;
   }
 
   GetUserFeedRequest build() {
     return GetUserFeedRequest._(
       page: _page!,
       pageSize: _pageSize!,
-      userId: _userId!,
+      uuid: _uuid!,
     );
   }
 }

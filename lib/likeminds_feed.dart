@@ -191,8 +191,8 @@ class LMFeedClient {
         .getTaggingList(request: request);
   }
 
-  void routeToProfile(String userId) {
-    _sdkApplication.getHelperApi().routeProfilePage(userId);
+  void routeToProfile(String uuid) {
+    _sdkApplication.getHelperApi().routeProfilePage(uuid);
   }
 
   void routeToCompany(String companyId) {

@@ -6,13 +6,13 @@ class Like {
   final String id;
   final int createdAt;
   final int updatedAt;
-  final String userId;
+  final String uuid;
 
   Like({
     required this.id,
     required this.createdAt,
     required this.updatedAt,
-    required this.userId,
+    required this.uuid,
   });
 
   factory Like.fromEntity(LikeEntity entity) {
@@ -20,7 +20,7 @@ class Like {
       id: entity.id,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
-      userId: entity.userId,
+      uuid: entity.uuid,
     );
   }
 
@@ -29,7 +29,7 @@ class Like {
       id: id,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      userId: userId,
+      uuid: uuid,
     );
   }
 }
@@ -42,14 +42,14 @@ class LikeEntity {
   final int createdAt;
   @JsonKey(name: 'updated_at')
   final int updatedAt;
-  @JsonKey(name: 'user_id')
-  final String userId;
+  @JsonKey(name: 'uuid')
+  final String uuid;
 
   LikeEntity({
     required this.id,
     required this.createdAt,
     required this.updatedAt,
-    required this.userId,
+    required this.uuid,
   });
 
   factory LikeEntity.fromJson(Map<String, dynamic> json) =>

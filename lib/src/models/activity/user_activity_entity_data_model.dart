@@ -24,7 +24,6 @@ class UserActivityEntityData {
   String text;
   List<String>? topics;
   int? updatedAt;
-  String? userId;
   String? uuid;
   bool? isRepost;
   bool? isRepostedByUser;
@@ -52,7 +51,6 @@ class UserActivityEntityData {
     required this.text,
     this.topics,
     this.updatedAt,
-    this.userId,
     this.uuid,
     this.isRepost,
     this.isRepostedByUser,
@@ -90,7 +88,6 @@ class UserActivityEntityData {
       text: entity.text,
       topics: entity.topics,
       updatedAt: entity.updatedAt,
-      userId: entity.userId,
       uuid: entity.uuid,
       isRepost: entity.isRepost,
       isRepostedByUser: entity.isRepostedByUser,
@@ -121,7 +118,6 @@ class UserActivityEntityData {
       text: text,
       topics: topics,
       updatedAt: updatedAt,
-      userId: userId,
       uuid: uuid,
       isRepost: isRepost,
       isRepostedByUser: isRepostedByUser,
@@ -167,8 +163,6 @@ class UserActivityEntityDataEntity {
   List<String>? topics;
   @JsonKey(name: 'updated_at')
   int? updatedAt;
-  @JsonKey(name: 'user_id')
-  String? userId;
   String? uuid;
   bool? isRepost;
   bool? isRepostedByUser;
@@ -196,7 +190,6 @@ class UserActivityEntityDataEntity {
     required this.text,
     this.topics,
     this.updatedAt,
-    this.userId,
     this.uuid,
     this.isRepost,
     this.isRepostedByUser,

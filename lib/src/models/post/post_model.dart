@@ -11,7 +11,7 @@ class Post {
   final List<Attachment>? attachments;
   final int communityId;
   final bool isPinned;
-  final String userId;
+  final String uuid;
   int likeCount;
   int commentCount;
   bool isSaved;
@@ -36,7 +36,7 @@ class Post {
     required this.attachments,
     required this.communityId,
     required this.isPinned,
-    required this.userId,
+    required this.uuid,
     required this.likeCount,
     required this.isSaved,
     required this.menuItems,
@@ -65,7 +65,7 @@ class Post {
           postEntity.attachments?.map((e) => Attachment.fromEntity(e)).toList(),
       communityId: postEntity.communityId,
       isPinned: postEntity.isPinned,
-      userId: postEntity.userId,
+      uuid: postEntity.uuid,
       likeCount: postEntity.likeCount,
       commentCount: postEntity.commentCount,
       isSaved: postEntity.isSaved,
@@ -97,7 +97,7 @@ class Post {
       attachments: attachments?.map((e) => e.toEntity()).toList(),
       communityId: communityId,
       isPinned: isPinned,
-      userId: userId,
+      uuid: uuid,
       likeCount: likeCount,
       isSaved: isSaved,
       isLiked: isLiked,
@@ -134,8 +134,8 @@ class PostEntity {
   final bool isEdited;
   @JsonKey(name: 'comments_count')
   final int commentCount;
-  @JsonKey(name: 'user_id')
-  final String userId;
+  @JsonKey(name: 'uuid')
+  final String uuid;
   @JsonKey(name: 'likes_count')
   final int likeCount;
   @JsonKey(name: 'is_saved')
@@ -169,7 +169,7 @@ class PostEntity {
     required this.attachments,
     required this.communityId,
     required this.isPinned,
-    required this.userId,
+    required this.uuid,
     required this.likeCount,
     required this.isSaved,
     required this.menuItems,

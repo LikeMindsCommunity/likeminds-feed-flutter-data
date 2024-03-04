@@ -14,7 +14,7 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
           .toList(),
       communityId: json['community_id'] as int,
       isPinned: json['is_pinned'] as bool,
-      userId: json['user_id'] as String,
+      uuid: json['uuid'] as String,
       likeCount: json['likes_count'] as int,
       isSaved: json['is_saved'] as bool,
       menuItems: (json['menu_items'] as List<dynamic>)
@@ -52,7 +52,7 @@ Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
       'is_liked': instance.isLiked,
       'is_edited': instance.isEdited,
       'comments_count': instance.commentCount,
-      'user_id': instance.userId,
+      'uuid': instance.uuid,
       'likes_count': instance.likeCount,
       'is_saved': instance.isSaved,
       'menu_items': instance.menuItems.map((e) => e.toJson()).toList(),

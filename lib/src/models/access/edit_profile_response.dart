@@ -18,6 +18,8 @@ class EditProfileResponseEntity {
 
   factory EditProfileResponseEntity.fromJson(Map<String, dynamic> json) {
     return EditProfileResponseEntity(
-        errorMessage: json['error_message'], success: json['success']);
+      errorMessage: json['error_message'],
+      success: json['success'],
+    );
   }
 }

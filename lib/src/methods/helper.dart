@@ -18,8 +18,8 @@ class HelperApi {
     return await helperRepository.decodeUrl(request: request);
   }
 
-  void routeProfilePage(String userId) {
-    helperRepository.routeProfilePage(userId);
+  void routeProfilePage(String uuid) {
+    helperRepository.routeProfilePage(uuid);
   }
 
   void routeCompanyPage(String companyId) {
