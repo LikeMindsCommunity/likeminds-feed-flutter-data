@@ -32,6 +32,8 @@ export 'package:likeminds_feed/src/models/helper/og_tags_model.dart';
 
 export 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
 export 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
+export 'package:likeminds_feed/src/models/feed/get_saved_post_request.dart';
+export 'package:likeminds_feed/src/models/feed/get_saved_post_response.dart';
 export 'package:likeminds_feed/src/models/post/post_model.dart';
 
 export 'package:likeminds_feed/src/models/post/attachment_model.dart';

@@ -47,4 +47,11 @@ class FeedRepository {
         await feedService.getUserFeed(request);
     return GetUserFeedResponse.fromEntity(entity: responseEntity);
   }
+
+  Future<GetSavedPostResponse> getSavedPosts(
+      GetSavedPostRequest request) async {
+    final GetSavedPostResponseEntity responseEntity =
+        await feedService.getSavedPost(request);
+    return GetSavedPostResponse.fromEntity(responseEntity);
+  }
 }

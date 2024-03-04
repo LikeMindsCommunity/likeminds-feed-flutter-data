@@ -80,12 +80,6 @@ void main() {
           .build();
       GetUserFeedResponse? response = await client.getUserFeed(request);
       expect(response, isNotNull);
-      debugPrint('-----------------------------------');
-      debugPrint('${response.success}');
-      debugPrint('${response.posts}');
-      debugPrint('${response.topics}');
-      debugPrint('${response.users}');
-      debugPrint('-----------------------------------');
     });
 
     test('Testing Get Notification Feed', () async {
@@ -156,6 +150,16 @@ void main() {
           (SavePostRequestBuilder()..postId(postId ?? "")).build();
       SavePostResponse response = await client.savePost(request);
       expect(response, isNotNull);
+    });
+
+    test('Testing Get Saved Post', () async {
+      GetSavedPostRequest request = (GetSavedPostRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..uuid('anuj'))
+          .build();
+      GetSavedPostResponse response = await client.getSavedPost(request);
+      expect(response.success, true);
     });
 
     test('Testing Edit Post', () async {

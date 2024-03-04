@@ -8,8 +8,6 @@ class FeedService {
 
   FeedService({required this.apiClient});
 
-  // final String authHost = "https://betaauth.likeminds.community/feed/";
-
   Future<PostDetailResponseEntity> getPost(
       PostDetailRequest postDetailRequest) async {
     try {
@@ -182,6 +180,31 @@ class FeedService {
         errorMessage = e.response!.data['error_message'];
       }
       final GetUserFeedResponseEntity response = GetUserFeedResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+      return response;
+    }
+  }
+
+  Future<GetSavedPostResponseEntity> getSavedPost(GetSavedPostRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getUserSavedPostEndPoint(request.uuid),
+            queryParameters: request.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      return GetSavedPostResponseEntity.fromJson(response.data);
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      final GetSavedPostResponseEntity response = GetSavedPostResponseEntity(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );

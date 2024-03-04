@@ -44,4 +44,10 @@ class FeedApi {
         await feedRepository.getUserFeed(request);
     return response;
   }
+
+  Future<GetSavedPostResponse> getSavedPost(GetSavedPostRequest request) async {
+    final GetSavedPostResponse response =
+        await feedRepository.getSavedPosts(request);
+    return response;
+  }
 }

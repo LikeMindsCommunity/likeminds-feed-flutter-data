@@ -76,6 +76,12 @@ class LMFeedClient {
     return response;
   }
 
+  Future<GetSavedPostResponse> getSavedPost(GetSavedPostRequest request) async {
+    final GetSavedPostResponse response =
+        await _sdkApplication.getFeedApi().getSavedPost(request);
+    return response;
+  }
+
   Future<GetCommunityConfigurationsResponse>
       getCommunityConfigurations() async {
     final GetCommunityConfigurationsResponse response =
