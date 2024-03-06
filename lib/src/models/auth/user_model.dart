@@ -11,7 +11,7 @@ class User {
   final bool? isDeleted;
   final String uuid;
   final String? organisationName;
-  final SDKClientInfo? sdkClientInfo;
+  final SDKClientInfo sdkClientInfo;
   final int? updatedAt;
   final bool? isOwner;
   final String? customTitle;
@@ -28,7 +28,7 @@ class User {
     required this.isGuest,
     required this.uuid,
     this.organisationName,
-    this.sdkClientInfo,
+    required this.sdkClientInfo,
     this.updatedAt,
     this.isOwner,
     this.customTitle,
@@ -101,7 +101,7 @@ class UserEntity {
   final String? organisationName;
 
   @JsonKey(name: 'sdk_client_info')
-  final SDKClientInfo? sdkClientInfo;
+  final SDKClientInfo sdkClientInfo;
 
   @JsonKey(name: 'updated_at')
   final int? updatedAt;
@@ -137,7 +137,7 @@ class UserEntity {
     required this.isGuest,
     required this.uuid,
     this.organisationName,
-    this.sdkClientInfo,
+    required this.sdkClientInfo,
     this.updatedAt,
     this.isOwner,
     this.customTitle,

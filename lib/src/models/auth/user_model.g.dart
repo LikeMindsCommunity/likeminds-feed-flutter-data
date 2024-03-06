@@ -13,10 +13,8 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       isGuest: json['is_guest'] as bool?,
       uuid: json['uuid'] as String,
       organisationName: json['organisation_name'] as String?,
-      sdkClientInfo: json['sdk_client_info'] == null
-          ? null
-          : SDKClientInfo.fromJson(
-              json['sdk_client_info'] as Map<String, dynamic>),
+      sdkClientInfo: SDKClientInfo.fromJson(
+          json['sdk_client_info'] as Map<String, dynamic>),
       updatedAt: json['updated_at'] as int?,
       isOwner: json['is_owner'] as bool?,
       customTitle: json['custom_title'] as String?,
