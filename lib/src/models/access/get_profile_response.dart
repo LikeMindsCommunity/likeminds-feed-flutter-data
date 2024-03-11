@@ -7,6 +7,7 @@ class GetProfileResponse {
   User? member;
   List<MemberAction>? menu;
   List<QuestionAnswer>? questionAnswer;
+  Map<String, WidgetModel>? widgets;
 
   GetProfileResponse({
     required this.success,
@@ -15,6 +16,7 @@ class GetProfileResponse {
     this.communityName,
     this.menu,
     this.questionAnswer,
+    this.widgets,
   });
 
   factory GetProfileResponse.fromEntity(GetProfileResponseEntity entity) {
@@ -27,6 +29,9 @@ class GetProfileResponse {
       questionAnswer: entity.questionAnswer
           ?.map((e) => QuestionAnswer.fromEntity(e))
           .toList(),
+      widgets: entity.widgets?.map((key, value) {
+        return MapEntry(key, WidgetModel.fromEntity(value));
+      }),
     );
   }
 }
@@ -38,6 +43,7 @@ class GetProfileResponseEntity {
   String? communityName;
   List<MemberActionEntity>? menu;
   List<QuestionAnswerEntity>? questionAnswer;
+  Map<String, WidgetModelEntity>? widgets;
 
   GetProfileResponseEntity({
     required this.success,
@@ -46,6 +52,7 @@ class GetProfileResponseEntity {
     this.communityName,
     this.menu,
     this.questionAnswer,
+    this.widgets,
   });
 
   factory GetProfileResponseEntity.fromJson(Map<String, dynamic> json) {
@@ -63,6 +70,11 @@ class GetProfileResponseEntity {
       menu: json['data']['menu'] != null
           ? List<MemberActionEntity>.from(
               json['data']['menu'].map((x) => MemberActionEntity.fromJson(x)))
+          : null,
+      widgets: json['data']['widgets'] != null &&
+              json['data']['widgets'].isNotEmpty
+          ? Map<String, WidgetModelEntity>.from(json['data']['widgets'].map(
+              (key, value) => MapEntry(key, WidgetModelEntity.fromJson(value))))
           : null,
     );
   }

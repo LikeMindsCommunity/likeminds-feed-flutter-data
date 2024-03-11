@@ -5,12 +5,14 @@ class EditProfileRequest {
   String? imageUrl;
   String userUniqueId;
   List<QuestionCommunityJoin>? questionCommunityJoin;
+  Map<String, dynamic>? metadata;
 
   EditProfileRequest._({
     this.name,
     this.imageUrl,
     required this.userUniqueId,
     this.questionCommunityJoin,
+    this.metadata,
   });
 
   Map<String, dynamic> toJson() => {
@@ -19,6 +21,7 @@ class EditProfileRequest {
         "uuid": userUniqueId,
         "question_answer":
             questionCommunityJoin?.map((e) => e.toJson()).toList(),
+        "metadata": metadata,
       };
 }
 
@@ -27,6 +30,7 @@ class EditProfileRequestBuilder {
   String? _imageUrl;
   String? _userUniqueId;
   List<QuestionCommunityJoin>? _questionCommunityJoin;
+  Map<String, dynamic>? _metadata;
 
   void name(String name) {
     _name = name;
@@ -45,12 +49,17 @@ class EditProfileRequestBuilder {
     _questionCommunityJoin = questionCommunityJoin;
   }
 
+  void metadata(Map<String, dynamic> metadata) {
+    _metadata = metadata;
+  }
+
   EditProfileRequest build() {
     return EditProfileRequest._(
       name: _name,
       imageUrl: _imageUrl,
       userUniqueId: _userUniqueId!,
       questionCommunityJoin: _questionCommunityJoin,
+      metadata: _metadata,
     );
   }
 }

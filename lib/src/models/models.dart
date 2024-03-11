@@ -123,3 +123,8 @@ export 'package:likeminds_feed/src/models/logger/clear_log_request.dart';
 export 'package:likeminds_feed/src/models/logger/get_logs_response.dart';
 
 export 'package:likeminds_feed/src/models/sdk/sdk_client_info_model.dart';
+
+export 'package:likeminds_feed/src/models/user/get_user_feed_meta_request.dart';
+export 'package:likeminds_feed/src/models/user/get_user_feed_meta_response.dart';
+export 'package:likeminds_feed/src/models/user/get_user_comment_request.dart';
+export 'package:likeminds_feed/src/models/user/get_user_comment_response.dart';

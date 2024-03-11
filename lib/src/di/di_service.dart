@@ -10,6 +10,7 @@ import 'package:likeminds_feed/src/repositories/logger_repository.dart';
 import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
 import 'package:likeminds_feed/src/repositories/activity.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
+import 'package:likeminds_feed/src/repositories/user_repository.dart';
 import 'package:likeminds_feed/src/repositories/widget_repository.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
@@ -24,6 +25,7 @@ import 'package:likeminds_feed/src/services/activity_service.dart';
 import 'package:likeminds_feed/src/services/notification_service.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:likeminds_feed/src/services/user_service.dart';
 import 'package:likeminds_feed/src/services/widgets_service.dart';
 
 /// Dependency Injection Service
@@ -100,6 +102,9 @@ class DIService {
     LoggerRepository loggerRepository =
         LoggerRepository(loggerService: loggerService);
 
+    UserService userService = UserService(apiClient: apiClient);
+    UserRepository userRepository = UserRepository(userService: userService);
+
     // Register all the dependencies in the getIt instance
     getIt.registerFactory<ApiClient>(() => apiClient,
         instanceName: kInstanceAPIClient);
@@ -147,6 +152,10 @@ class DIService {
       () => loggerRepository,
       instanceName: kInstanceLoggerRepository,
     );
+    getIt.registerFactory<UserRepository>(
+      () => userRepository,
+      instanceName: kInstanceUserRepository,
+    );
   }
 
   // Get the static instance of GetIt to get the dependencies
@@ -167,4 +176,5 @@ class DIService {
       'notification_feed_repository';
   static const String kInstanceWidgetRepository = 'widget_repository';
   static const String kInstanceLoggerRepository = 'logger_repository';
+  static const String kInstanceUserRepository = 'user_repository';
 }

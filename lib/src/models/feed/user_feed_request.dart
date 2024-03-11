@@ -1,9 +1,9 @@
-class GetUserFeedRequest {
+class GetUserPostRequest {
   final int page;
   final int pageSize;
   final String userId;
 
-  GetUserFeedRequest._({
+  GetUserPostRequest._({
     required this.page,
     required this.pageSize,
     required this.userId,
@@ -15,12 +15,12 @@ class GetUserFeedRequest {
       };
 }
 
-class GetUserFeedRequestBuilder {
+class GetUserPostRequestBuilder {
   int? _page;
   int? _pageSize;
   String? _userId;
 
-  GetUserFeedRequestBuilder();
+  GetUserPostRequestBuilder();
 
   void page(int page) {
     _page = page;
@@ -34,8 +34,8 @@ class GetUserFeedRequestBuilder {
     _userId = userId;
   }
 
-  GetUserFeedRequest build() {
-    return GetUserFeedRequest._(
+  GetUserPostRequest build() {
+    return GetUserPostRequest._(
       page: _page!,
       pageSize: _pageSize!,
       userId: _userId!,

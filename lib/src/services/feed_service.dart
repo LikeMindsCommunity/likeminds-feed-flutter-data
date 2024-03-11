@@ -159,18 +159,18 @@ class FeedService {
     }
   }
 
-  Future<GetUserFeedResponseEntity> getUserFeed(
-      GetUserFeedRequest request) async {
+  Future<GetUserPostResponseEntity> getUserCreatedPosts(
+      GetUserPostRequest request) async {
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints.getUserFeedEndPoint(request.userId),
+            apiClient.getEndpoints.getUserCreatedPosts(request.userId),
             queryParameters: request.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      final GetUserFeedResponseEntity responseEntity =
-          GetUserFeedResponseEntity.fromJson(response.data);
+      final GetUserPostResponseEntity responseEntity =
+          GetUserPostResponseEntity.fromJson(response.data);
       return responseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
@@ -179,7 +179,7 @@ class FeedService {
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
       }
-      final GetUserFeedResponseEntity response = GetUserFeedResponseEntity(
+      final GetUserPostResponseEntity response = GetUserPostResponseEntity(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );
@@ -187,7 +187,8 @@ class FeedService {
     }
   }
 
-  Future<GetSavedPostResponseEntity> getSavedPost(GetSavedPostRequest request) async {
+  Future<GetSavedPostResponseEntity> getSavedPost(
+      GetSavedPostRequest request) async {
     try {
       final response = await apiClient.client().get(
             apiClient.getEndpoints.getUserSavedPostEndPoint(request.uuid),

@@ -64,8 +64,16 @@ class EndPoints {
     return "$feedUrl/user/$uuid/save";
   }
 
-  String getUserFeedEndPoint(String userId) {
-    return "$feedUrl/user/$userId/post";
+  String getUserCreatedPosts(String uuid) {
+    return "$feedUrl/user/$uuid/post";
+  }
+
+  String getUserFeedMetaEndPoint(String uuid) {
+    return "$feedUrl/user/$uuid/meta";
+  }
+
+  String getUserCreatedCommentsEndPoint(String uuid) {
+    return "$feedUrl/user/$uuid/comment";
   }
 
   String getAddCommentEndPoint(String postId) {

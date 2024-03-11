@@ -19,6 +19,7 @@ class Comment {
   final Comment? parentComment;
   final String uuid;
   final String? tempId;
+  final String? postId;
 
   Comment({
     required this.id,
@@ -36,6 +37,7 @@ class Comment {
     required this.parentComment,
     required this.uuid,
     this.tempId,
+    this.postId,
   });
 
   factory Comment.fromEntity({required CommentEntity commentEntity}) {
@@ -61,6 +63,7 @@ class Comment {
           : null,
       uuid: commentEntity.uuid,
       tempId: commentEntity.tempId,
+      postId: commentEntity.postId,
     );
   }
 
@@ -81,6 +84,7 @@ class Comment {
       parentComment: parentComment?.toEntity(),
       uuid: uuid,
       tempId: tempId,
+      postId: postId,
     );
   }
 }
@@ -113,6 +117,8 @@ class CommentEntity {
   final String uuid;
   @JsonKey(name: 'temp_id')
   final String? tempId;
+  @JsonKey(name: 'post_id')
+  final String? postId;
 
   CommentEntity({
     required this.userId,
@@ -130,6 +136,7 @@ class CommentEntity {
     required this.parentComment,
     required this.uuid,
     this.tempId,
+    this.postId,
   });
 
   factory CommentEntity.fromJson(Map<String, dynamic> data) =>

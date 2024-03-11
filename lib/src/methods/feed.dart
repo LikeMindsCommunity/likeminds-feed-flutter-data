@@ -39,9 +39,10 @@ class FeedApi {
     return response;
   }
 
-  Future<GetUserFeedResponse> getUserFeed(GetUserFeedRequest request) async {
-    final GetUserFeedResponse response =
-        await feedRepository.getUserFeed(request);
+  Future<GetUserPostResponse> getUserCreatedPosts(
+      GetUserPostRequest request) async {
+    final GetUserPostResponse response =
+        await feedRepository.getUserCreatedPosts(request);
     return response;
   }
 

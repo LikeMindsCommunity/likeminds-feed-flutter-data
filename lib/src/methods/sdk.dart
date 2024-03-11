@@ -4,6 +4,7 @@ import 'package:likeminds_feed/src/methods/logger.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/moderation.dart';
 import 'package:likeminds_feed/src/methods/activity.dart';
+import 'package:likeminds_feed/src/methods/user.dart';
 import 'package:likeminds_feed/src/methods/widgets.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
@@ -18,6 +19,7 @@ import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
+import 'package:likeminds_feed/src/repositories/user_repository.dart';
 import 'package:likeminds_feed/src/repositories/widget_repository.dart';
 
 class SDKApplication {
@@ -112,6 +114,14 @@ class SDKApplication {
     return LoggerApi(
       loggerRepository: GetIt.instance.get<LoggerRepository>(
         instanceName: DIService.kInstanceLoggerRepository,
+      ),
+    );
+  }
+
+  UserApi getUserApi() {
+    return UserApi(
+      userRepository: GetIt.instance.get<UserRepository>(
+        instanceName: DIService.kInstanceUserRepository,
       ),
     );
   }

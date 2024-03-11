@@ -48,7 +48,9 @@ class User {
       isGuest: entity.isGuest,
       userUniqueId: entity.userUniqueId,
       organisationName: entity.organisationName,
-      sdkClientInfo: entity.sdkClientInfo,
+      sdkClientInfo: entity.sdkClientInfoEntity != null
+          ? SDKClientInfo.fromEntity(entity.sdkClientInfoEntity!)
+          : null,
       updatedAt: entity.updatedAt,
       isOwner: entity.isOwner,
       customTitle: entity.customTitle,
@@ -69,7 +71,7 @@ class User {
       isGuest: isGuest,
       userUniqueId: userUniqueId,
       organisationName: organisationName,
-      sdkClientInfo: sdkClientInfo,
+      sdkClientInfoEntity: sdkClientInfo?.toEntity(),
       updatedAt: updatedAt,
       isOwner: isOwner,
       customTitle: customTitle,
@@ -101,7 +103,7 @@ class UserEntity {
   final String? organisationName;
 
   @JsonKey(name: 'sdk_client_info')
-  final SDKClientInfo? sdkClientInfo;
+  final SDKClientInfoEntity? sdkClientInfoEntity;
 
   @JsonKey(name: 'updated_at')
   final int? updatedAt;
@@ -137,7 +139,7 @@ class UserEntity {
     required this.isGuest,
     required this.userUniqueId,
     this.organisationName,
-    this.sdkClientInfo,
+    this.sdkClientInfoEntity,
     this.updatedAt,
     this.isOwner,
     this.customTitle,

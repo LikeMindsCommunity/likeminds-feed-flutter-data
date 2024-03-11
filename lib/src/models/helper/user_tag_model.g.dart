@@ -14,9 +14,9 @@ UserTagEntity _$UserTagEntityFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int?,
       isGuest: json['is_guest'] as bool?,
       userUniqueId: (json['user_unique_id'] ?? json['uuid']) as String?,
-      sdkClientInfo: json['sdk_client_info'] == null
+      sdkClientInfoEntity: json['sdk_client_info'] == null
           ? null
-          : SDKClientInfo.fromJson(
+          : SDKClientInfoEntity.fromJson(
               json['sdk_client_info'] as Map<String, dynamic>),
     );
 
@@ -28,5 +28,5 @@ Map<String, dynamic> _$UserTagEntityToJson(UserTagEntity instance) =>
       'custom_title': instance.customTitle,
       'is_guest': instance.isGuest,
       'user_unique_id': instance.userUniqueId,
-      'sdk_client_info': instance.sdkClientInfo,
+      'sdk_client_info': instance.sdkClientInfoEntity?.toJson(),
     };

@@ -42,10 +42,11 @@ class FeedRepository {
     return GetTopicsResponse.fromEntity(responseEntity);
   }
 
-  Future<GetUserFeedResponse> getUserFeed(GetUserFeedRequest request) async {
-    final GetUserFeedResponseEntity responseEntity =
-        await feedService.getUserFeed(request);
-    return GetUserFeedResponse.fromEntity(entity: responseEntity);
+  Future<GetUserPostResponse> getUserCreatedPosts(
+      GetUserPostRequest request) async {
+    final GetUserPostResponseEntity responseEntity =
+        await feedService.getUserCreatedPosts(request);
+    return GetUserPostResponse.fromEntity(entity: responseEntity);
   }
 
   Future<GetSavedPostResponse> getSavedPosts(

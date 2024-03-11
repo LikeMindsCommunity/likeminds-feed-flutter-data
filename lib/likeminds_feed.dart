@@ -70,9 +70,24 @@ class LMFeedClient {
     return response;
   }
 
-  Future<GetUserFeedResponse> getUserFeed(GetUserFeedRequest request) async {
-    final GetUserFeedResponse response =
-        await _sdkApplication.getFeedApi().getUserFeed(request);
+  Future<GetUserFeedMetaResponse> getUserFeedMeta(
+      GetUserFeedMetaRequest request) async {
+    final GetUserFeedMetaResponse response =
+        await _sdkApplication.getUserApi().getUserFeedMeta(request);
+    return response;
+  }
+
+  Future<GetUserPostResponse> getUserCreatedPosts(
+      GetUserPostRequest request) async {
+    final GetUserPostResponse response =
+        await _sdkApplication.getFeedApi().getUserCreatedPosts(request);
+    return response;
+  }
+
+  Future<GetUserCommentsResponse> getUserCreatedComments(
+      GetUserCommentsRequest request) async {
+    final GetUserCommentsResponse response =
+        await _sdkApplication.getCommentApi().getUserCreatedComments(request);
     return response;
   }
 
