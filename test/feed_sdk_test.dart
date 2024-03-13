@@ -189,139 +189,139 @@ void main() {
       expect(response.success, true);
     });
 
-    // test('Testing Get Saved Post', () async {
-    //   GetSavedPostRequest request = (GetSavedPostRequestBuilder()
-    //         ..page(1)
-    //         ..pageSize(10)
-    //         ..uuid(prod ? testingProdBotID : testingBetaBotID))
-    //       .build();
-    //   GetSavedPostResponse response = await client.getSavedPost(request);
-    //   expect(response.success, true);
-    // });
+    test('Testing Get Saved Post', () async {
+      GetSavedPostRequest request = (GetSavedPostRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
+          .build();
+      GetSavedPostResponse response = await client.getSavedPost(request);
+      expect(response.success, true);
+    });
 
-    // test('Testing Edit Post', () async {
-    //   EditPostRequest request = (EditPostRequestBuilder()
-    //         ..postId(postId ?? "")
-    //         ..postText("Post text edited")
-    //         ..attachments([]))
-    //       .build();
-    //   EditPostResponse response = await client.editPost(request);
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Edit Post', () async {
+      EditPostRequest request = (EditPostRequestBuilder()
+            ..postId(postId ?? "")
+            ..postText("Post text edited")
+            ..attachments([]))
+          .build();
+      EditPostResponse response = await client.editPost(request);
+      expect(response, isNotNull);
+    });
 
-    // test('Testing Get Post Likes', () async {
-    //   GetPostLikesRequest request = (GetPostLikesRequestBuilder()
-    //         ..page(1)
-    //         ..pageSize(10)
-    //         ..postId(postId ?? ""))
-    //       .build();
-    //   GetPostLikesResponse response = await client.getPostLikes(request);
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Get Post Likes', () async {
+      GetPostLikesRequest request = (GetPostLikesRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..postId(postId ?? ""))
+          .build();
+      GetPostLikesResponse response = await client.getPostLikes(request);
+      expect(response, isNotNull);
+    });
 
-    // String? commentId;
+    String? commentId;
 
-    // test('Testing Add Comment', () async {
-    //   AddCommentRequest request = (AddCommentRequestBuilder()
-    //         ..postId(postId ?? "")
-    //         ..text("Comment text"))
-    //       .build();
-    //   AddCommentResponse response = await client.addComment(request);
-    //   if (response.success) {
-    //     commentId = response.reply!.id;
-    //   }
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Add Comment', () async {
+      AddCommentRequest request = (AddCommentRequestBuilder()
+            ..postId(postId ?? "")
+            ..text("Comment text"))
+          .build();
+      AddCommentResponse response = await client.addComment(request);
+      if (response.success) {
+        commentId = response.reply!.id;
+      }
+      expect(response, isNotNull);
+    });
 
-    // test('Testing Edit Comment', () async {
-    //   EditCommentRequest request = (EditCommentRequestBuilder()
-    //         ..postId(postId ?? "")
-    //         ..commentId(commentId ?? "")
-    //         ..text("Comment text edited"))
-    //       .build();
-    //   EditCommentResponse response = await client.editComment(request);
-    //   if (response.success) {
-    //     commentId = response.reply!.id;
-    //   }
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Edit Comment', () async {
+      EditCommentRequest request = (EditCommentRequestBuilder()
+            ..postId(postId ?? "")
+            ..commentId(commentId ?? "")
+            ..text("Comment text edited"))
+          .build();
+      EditCommentResponse response = await client.editComment(request);
+      if (response.success) {
+        commentId = response.reply!.id;
+      }
+      expect(response, isNotNull);
+    });
 
-    // test('Testing Get Comment', () async {
-    //   GetCommentRequest request = (GetCommentRequestBuilder()
-    //         ..postId(postId ?? "")
-    //         ..commentId(commentId ?? "")
-    //         ..page(1))
-    //       .build();
-    //   GetCommentResponse response = await client.getComment(request);
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Get Comment', () async {
+      GetCommentRequest request = (GetCommentRequestBuilder()
+            ..postId(postId ?? "")
+            ..commentId(commentId ?? "")
+            ..page(1))
+          .build();
+      GetCommentResponse response = await client.getComment(request);
+      expect(response, isNotNull);
+    });
 
-    // test('Testing Toggle Comment Like', () async {
-    //   ToggleLikeCommentRequest request = (ToggleLikeCommentRequestBuilder()
-    //         ..postId(postId ?? "")
-    //         ..commentId(commentId ?? ""))
-    //       .build();
-    //   ToggleLikeCommentResponse response = await client.likeComment(request);
+    test('Testing Toggle Comment Like', () async {
+      ToggleLikeCommentRequest request = (ToggleLikeCommentRequestBuilder()
+            ..postId(postId ?? "")
+            ..commentId(commentId ?? ""))
+          .build();
+      ToggleLikeCommentResponse response = await client.likeComment(request);
 
-    //   expect(response, isNotNull);
-    // });
+      expect(response, isNotNull);
+    });
 
-    // test('Testing Get Comment Likes', () async {
-    //   GetCommentLikesRequest request = (GetCommentLikesRequestBuilder()
-    //         ..commentId(commentId ?? "")
-    //         ..page(1)
-    //         ..pageSize(10)
-    //         ..postId(postId ?? ""))
-    //       .build();
-    //   GetCommentLikesResponse response = await client.getCommentLikes(request);
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Get Comment Likes', () async {
+      GetCommentLikesRequest request = (GetCommentLikesRequestBuilder()
+            ..commentId(commentId ?? "")
+            ..page(1)
+            ..pageSize(10)
+            ..postId(postId ?? ""))
+          .build();
+      GetCommentLikesResponse response = await client.getCommentLikes(request);
+      expect(response, isNotNull);
+    });
 
-    // String? replyId;
+    String? replyId;
 
-    // test('Testing Add Comment Reply', () async {
-    //   AddCommentReplyRequest request = (AddCommentReplyRequestBuilder()
-    //         ..commentId(commentId ?? "")
-    //         ..text("Comment Reply Request")
-    //         ..postId(postId ?? ""))
-    //       .build();
-    //   AddCommentReplyResponse response = await client.addCommentReply(request);
-    //   if (response.success) {
-    //     replyId = response.reply!.id;
-    //   }
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Add Comment Reply', () async {
+      AddCommentReplyRequest request = (AddCommentReplyRequestBuilder()
+            ..commentId(commentId ?? "")
+            ..text("Comment Reply Request")
+            ..postId(postId ?? ""))
+          .build();
+      AddCommentReplyResponse response = await client.addCommentReply(request);
+      if (response.success) {
+        replyId = response.reply!.id;
+      }
+      expect(response, isNotNull);
+    });
 
-    // test('Testing Edit Comment Reply', () async {
-    //   EditCommentReplyRequest request = (EditCommentReplyRequestBuilder()
-    //         ..commentId(commentId ?? "")
-    //         ..text("Comment Reply Edited")
-    //         ..postId(postId ?? "")
-    //         ..replyId(replyId ?? ""))
-    //       .build();
-    //   EditCommentReplyResponse response =
-    //       await client.editCommentReply(request);
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Edit Comment Reply', () async {
+      EditCommentReplyRequest request = (EditCommentReplyRequestBuilder()
+            ..commentId(commentId ?? "")
+            ..text("Comment Reply Edited")
+            ..postId(postId ?? "")
+            ..replyId(replyId ?? ""))
+          .build();
+      EditCommentReplyResponse response =
+          await client.editCommentReply(request);
+      expect(response, isNotNull);
+    });
 
-    // test('Testing Delete Comment', () async {
-    //   DeleteCommentRequest request = (DeleteCommentRequestBuilder()
-    //         ..commentId(commentId ?? "")
-    //         ..postId(postId ?? "")
-    //         ..reason("Reason for deletion"))
-    //       .build();
-    //   DeleteCommentResponse response = await client.deleteComment(request);
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Delete Comment', () async {
+      DeleteCommentRequest request = (DeleteCommentRequestBuilder()
+            ..commentId(commentId ?? "")
+            ..postId(postId ?? "")
+            ..reason("Reason for deletion"))
+          .build();
+      DeleteCommentResponse response = await client.deleteComment(request);
+      expect(response, isNotNull);
+    });
 
-    // test('Testing Delete Post', () async {
-    //   DeletePostRequest request = (DeletePostRequestBuilder()
-    //         ..deleteReason("Reason for deletion")
-    //         ..postId(postId ?? ""))
-    //       .build();
-    //   DeletePostResponse response = await client.deletePost(request);
-    //   expect(response, isNotNull);
-    // });
+    test('Testing Delete Post', () async {
+      DeletePostRequest request = (DeletePostRequestBuilder()
+            ..deleteReason("Reason for deletion")
+            ..postId(postId ?? ""))
+          .build();
+      DeletePostResponse response = await client.deletePost(request);
+      expect(response, isNotNull);
+    });
 
     test('Testing Search Post', () async {
       SearchPostRequest request = (SearchPostRequestBuilder()
@@ -361,8 +361,6 @@ void main() {
       GetPostLikesResponse response = await client.getPostLikes(request);
       expect(response.success, true);
     });
-
-    String? commentId;
 
     test('Testing Add Comment', () async {
       String commentText = "Test comment from SDK";
@@ -436,8 +434,6 @@ void main() {
 
       expect(response.success, true);
     });
-
-    String? replyId;
 
     test('Testing Add Comment Reply', () async {
       String replyText = "Test comment reply from SDK";
