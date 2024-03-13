@@ -24,8 +24,8 @@ class GetTopicsRequest {
         'page_size': pageSize,
         'search': search,
         'search_type': searchType,
-        'parent_ids': parentIds,
-        'order_by': orderBy,
+        'parent_ids': parentIds?.join(','),
+        'order_by': orderBy?.join(','),
       };
 }
 
