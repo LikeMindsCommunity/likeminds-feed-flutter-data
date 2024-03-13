@@ -22,9 +22,8 @@ class UserActivityEntityData {
   List<Comment>? replies;
   String? tempId;
   String text;
-  List<String>? topics;
+  List<String>? topicIds;
   int? updatedAt;
-  String? userId;
   String? uuid;
   bool? isRepost;
   bool? isRepostedByUser;
@@ -50,9 +49,8 @@ class UserActivityEntityData {
     this.replies,
     this.tempId,
     required this.text,
-    this.topics,
+    this.topicIds,
     this.updatedAt,
-    this.userId,
     this.uuid,
     this.isRepost,
     this.isRepostedByUser,
@@ -88,9 +86,8 @@ class UserActivityEntityData {
           .toList(),
       tempId: entity.tempId,
       text: entity.text,
-      topics: entity.topics,
+      topicIds: entity.topicIds,
       updatedAt: entity.updatedAt,
-      userId: entity.userId,
       uuid: entity.uuid,
       isRepost: entity.isRepost,
       isRepostedByUser: entity.isRepostedByUser,
@@ -119,9 +116,8 @@ class UserActivityEntityData {
       replies: replies?.map((e) => e.toEntity()).toList(),
       tempId: tempId,
       text: text,
-      topics: topics,
+      topicIds: topicIds,
       updatedAt: updatedAt,
-      userId: userId,
       uuid: uuid,
       isRepost: isRepost,
       isRepostedByUser: isRepostedByUser,
@@ -164,11 +160,9 @@ class UserActivityEntityDataEntity {
   @JsonKey(name: 'temp_id')
   String? tempId;
   String text;
-  List<String>? topics;
+  List<String>? topicIds;
   @JsonKey(name: 'updated_at')
   int? updatedAt;
-  @JsonKey(name: 'user_id')
-  String? userId;
   String? uuid;
   bool? isRepost;
   bool? isRepostedByUser;
@@ -194,9 +188,8 @@ class UserActivityEntityDataEntity {
     this.replies,
     this.tempId,
     required this.text,
-    this.topics,
+    this.topicIds,
     this.updatedAt,
-    this.userId,
     this.uuid,
     this.isRepost,
     this.isRepostedByUser,

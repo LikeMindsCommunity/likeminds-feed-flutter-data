@@ -1,20 +1,20 @@
 class GetFeedRequest {
   final int page;
   final int pageSize;
-  final List<String>? topics;
+  final List<String>? topicIds;
   final List<String>? widgetIds;
 
   GetFeedRequest._({
     required this.page,
     required this.pageSize,
-    this.topics,
+    this.topicIds,
     this.widgetIds,
   });
 
   Map<String, dynamic> toJson() => {
         'page': page,
         'page_size': pageSize,
-        'topic_ids': topics,
+        'topic_ids': topicIds,
         'widget_ids': widgetIds?.toString(),
       };
 }
@@ -22,7 +22,7 @@ class GetFeedRequest {
 class GetFeedRequestBuilder {
   int? _page;
   int? _pageSize;
-  List<String>? _topics;
+  List<String>? _topicIds;
   List<String>? _widgetIds;
 
   GetFeedRequestBuilder();
@@ -35,8 +35,8 @@ class GetFeedRequestBuilder {
     _pageSize = pageSize;
   }
 
-  void topics(List<String> topics) {
-    _topics = topics;
+  void topicIds(List<String> topicIds) {
+    _topicIds = topicIds;
   }
 
   void widgetIds(List<String> widgetIds) {
@@ -47,7 +47,7 @@ class GetFeedRequestBuilder {
     return GetFeedRequest._(
       page: _page!,
       pageSize: _pageSize!,
-      topics: _topics,
+      topicIds: _topicIds,
       widgetIds: _widgetIds,
     );
   }

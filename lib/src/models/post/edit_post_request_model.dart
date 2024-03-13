@@ -5,14 +5,14 @@ class EditPostRequest {
   final String postText;
   final String? heading;
   final List<Attachment>? attachments;
-  final List<String>? topics;
+  final List<String>? topicIds;
   final bool? isRepost;
 
   EditPostRequest._({
     required this.postId,
     required this.postText,
     required this.attachments,
-    this.topics,
+    this.topicIds,
     this.heading,
     this.isRepost = false,
   });
@@ -21,7 +21,7 @@ class EditPostRequest {
     return {
       'text': postText,
       'attachments': attachments?.map((e) => e.toEntity().toJson()).toList(),
-      'topic_ids': topics,
+      'topic_ids': topicIds,
       'is_repost': isRepost,
       'heading': heading,
     };
@@ -32,7 +32,7 @@ class EditPostRequestBuilder {
   String? _postId;
   String? _postText;
   List<Attachment>? _attachments;
-  List<String>? _topics;
+  List<String>? _topicIds;
   bool _isRepost = false;
   String? _heading;
 
@@ -50,8 +50,8 @@ class EditPostRequestBuilder {
     _attachments = attachments;
   }
 
-  void topics(List<String> topics) {
-    _topics = topics;
+  void topicIds(List<String> topicIds) {
+    _topicIds = topicIds;
   }
 
   void isRepost(bool isRepost) {
@@ -67,7 +67,7 @@ class EditPostRequestBuilder {
       postId: _postId!,
       postText: _postText!,
       attachments: _attachments!,
-      topics: _topics,
+      topicIds: _topicIds,
       isRepost: _isRepost,
       heading: _heading,
     );

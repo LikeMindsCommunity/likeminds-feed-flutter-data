@@ -7,7 +7,6 @@ class Comment {
   final String id;
   final bool isLiked;
   final bool isEdited;
-  final String userId;
   final String text;
   final int? level;
   final int likesCount;
@@ -24,7 +23,6 @@ class Comment {
     required this.id,
     required this.isLiked,
     required this.isEdited,
-    required this.userId,
     required this.text,
     this.level,
     required this.likesCount,
@@ -43,7 +41,6 @@ class Comment {
       id: commentEntity.id,
       isLiked: commentEntity.isLiked,
       isEdited: commentEntity.isEdited,
-      userId: commentEntity.userId,
       text: commentEntity.text,
       level: commentEntity.level,
       likesCount: commentEntity.likesCount,
@@ -66,7 +63,6 @@ class Comment {
 
   CommentEntity toEntity() {
     return CommentEntity(
-      userId: userId,
       text: text,
       level: level,
       likesCount: likesCount,
@@ -87,8 +83,6 @@ class Comment {
 
 @JsonSerializable(explicitToJson: true)
 class CommentEntity {
-  @JsonKey(name: 'user_id')
-  final String userId;
   final String text;
   final int? level;
   @JsonKey(name: 'likes_count')
@@ -115,7 +109,6 @@ class CommentEntity {
   final String? tempId;
 
   CommentEntity({
-    required this.userId,
     required this.text,
     this.level,
     required this.likesCount,

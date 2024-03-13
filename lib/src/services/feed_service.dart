@@ -165,7 +165,7 @@ class FeedService {
       GetUserFeedRequest request) async {
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints.getUserFeedEndPoint(request.userId),
+            apiClient.getEndpoints.getUserFeedEndPoint(request.uuid),
             queryParameters: request.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},

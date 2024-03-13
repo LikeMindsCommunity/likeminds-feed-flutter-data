@@ -1,7 +1,6 @@
 class ToggleLikeCommentRequest {
   final String postId;
   final String commentId;
-  // final int pageSize;
 
   ToggleLikeCommentRequest._({
     required this.postId,

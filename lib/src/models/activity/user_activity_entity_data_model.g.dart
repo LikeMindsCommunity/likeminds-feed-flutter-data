@@ -36,10 +36,9 @@ UserActivityEntityDataEntity _$UserActivityEntityDataEntityFromJson(
           .toList(),
       tempId: json['temp_id'] as String?,
       text: json['text'] as String,
-      topics:
+      topicIds:
           (json['topics'] as List<dynamic>?)?.map((e) => e as String).toList(),
       updatedAt: json['updated_at'] as int?,
-      userId: json['user_id'] as String?,
       uuid: json['uuid'] as String?,
       isRepost: json['is_repost'] as bool?,
       isRepostedByUser: json['is_reposted_by_user'] as bool?,
@@ -68,9 +67,8 @@ Map<String, dynamic> _$UserActivityEntityDataEntityToJson(
       'replies': instance.replies,
       'temp_id': instance.tempId,
       'text': instance.text,
-      'topics': instance.topics,
+      'topics': instance.topicIds,
       'updated_at': instance.updatedAt,
-      'user_id': instance.userId,
       'uuid': instance.uuid,
       'is_repost': instance.isRepost,
       'is_reposted_by_user': instance.isRepostedByUser,

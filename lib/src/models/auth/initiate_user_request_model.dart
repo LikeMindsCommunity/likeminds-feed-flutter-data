@@ -1,13 +1,13 @@
 class InitiateUserRequest {
   final String? userName;
-  final String? userId;
+  final String? uuid;
   final bool? isGuest;
   final String? imageUrl;
   final String? apiKey;
 
   InitiateUserRequest._({
     this.userName,
-    this.userId,
+    this.uuid,
     this.isGuest,
     this.imageUrl,
     this.apiKey,
@@ -15,7 +15,7 @@ class InitiateUserRequest {
 
   Map<String, dynamic> toJson() => {
         'user_name': userName,
-        'uuid': userId,
+        'uuid': uuid,
         'is_guest': isGuest,
         'image_url': imageUrl,
         'api_key': apiKey,
@@ -24,7 +24,7 @@ class InitiateUserRequest {
 
 class InitiateUserRequestBuilder {
   String? _userName;
-  String? _userId;
+  String? _uuid;
   bool? _isGuest;
   String? _imageUrl;
   String? _apiKey;
@@ -35,8 +35,8 @@ class InitiateUserRequestBuilder {
     _userName = userName;
   }
 
-  void userId(String userId) {
-    _userId = userId;
+  void uuid(String uuid) {
+    _uuid = uuid;
   }
 
   void isGuest(bool isGuest) {
@@ -56,7 +56,7 @@ class InitiateUserRequestBuilder {
       apiKey: _apiKey,
       imageUrl: _imageUrl,
       isGuest: _isGuest,
-      userId: _userId,
+      uuid: _uuid,
       userName: _userName,
     );
   }
