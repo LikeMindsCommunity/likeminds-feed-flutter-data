@@ -27,7 +27,7 @@ void main() {
   debugPrint("Initiating unit tests now...");
   group('Testing LMFeedClient SDK layer\n', () {
     LMFeedClient client = (LMFeedClientBuilder()
-          ..apiKey("6b51af13-ce28-444b-a571-53a3fb125444")
+          ..apiKey(prod ? testingProdBotID : testingBetaBotID)
           ..sdkCallback(testingCallback))
         .build();
 
@@ -183,7 +183,7 @@ void main() {
       GetSavedPostRequest request = (GetSavedPostRequestBuilder()
             ..page(1)
             ..pageSize(10)
-            ..uuid('anuj'))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       GetSavedPostResponse response = await client.getSavedPost(request);
       expect(response.success, true);
