@@ -163,7 +163,7 @@ class FeedService {
       GetUserPostRequest request) async {
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints.getUserCreatedPosts(request.userId),
+            apiClient.getEndpoints.getUserCreatedPosts(request.uuid),
             queryParameters: request.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},

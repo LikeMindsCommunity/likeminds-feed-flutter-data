@@ -9,9 +9,9 @@ class User {
   final String? imageUrl;
   final bool? isGuest;
   final bool? isDeleted;
-  final String userUniqueId;
+  final String uuid;
   final String? organisationName;
-  final SDKClientInfo? sdkClientInfo;
+  final SDKClientInfo sdkClientInfo;
   final int? updatedAt;
   final bool? isOwner;
   final String? customTitle;
@@ -26,9 +26,9 @@ class User {
     required this.name,
     required this.imageUrl,
     required this.isGuest,
-    required this.userUniqueId,
+    required this.uuid,
     this.organisationName,
-    this.sdkClientInfo,
+    required this.sdkClientInfo,
     this.updatedAt,
     this.isOwner,
     this.customTitle,
@@ -46,11 +46,9 @@ class User {
       name: entity.name,
       imageUrl: entity.imageUrl,
       isGuest: entity.isGuest,
-      userUniqueId: entity.userUniqueId,
+      uuid: entity.uuid,
       organisationName: entity.organisationName,
-      sdkClientInfo: entity.sdkClientInfoEntity != null
-          ? SDKClientInfo.fromEntity(entity.sdkClientInfoEntity!)
-          : null,
+      sdkClientInfo: SDKClientInfo.fromEntity(entity.sdkClientInfoEntity!),
       updatedAt: entity.updatedAt,
       isOwner: entity.isOwner,
       customTitle: entity.customTitle,
@@ -69,9 +67,9 @@ class User {
       name: name,
       imageUrl: imageUrl,
       isGuest: isGuest,
-      userUniqueId: userUniqueId,
+      uuid: uuid,
       organisationName: organisationName,
-      sdkClientInfoEntity: sdkClientInfo?.toEntity(),
+      sdkClientInfoEntity: sdkClientInfo.toEntity(),
       updatedAt: updatedAt,
       isOwner: isOwner,
       customTitle: customTitle,
@@ -96,8 +94,8 @@ class UserEntity {
   @JsonKey(name: 'is_guest')
   final bool? isGuest;
 
-  @JsonKey(name: 'user_unique_id')
-  final String userUniqueId;
+  @JsonKey(name: 'uuid')
+  final String uuid;
 
   @JsonKey(name: 'organisation_name')
   final String? organisationName;
@@ -137,7 +135,7 @@ class UserEntity {
     required this.name,
     this.imageUrl,
     required this.isGuest,
-    required this.userUniqueId,
+    required this.uuid,
     this.organisationName,
     this.sdkClientInfoEntity,
     this.updatedAt,

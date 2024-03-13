@@ -10,7 +10,7 @@ LikeEntity _$LikeEntityFromJson(Map<String, dynamic> json) => LikeEntity(
       id: json['_id'] as String,
       createdAt: json['created_at'] as int,
       updatedAt: json['updated_at'] as int,
-      userId: json['user_id'] as String,
+      uuid: json['uuid'] as String,
     );
 
 Map<String, dynamic> _$LikeEntityToJson(LikeEntity instance) =>
@@ -18,5 +18,5 @@ Map<String, dynamic> _$LikeEntityToJson(LikeEntity instance) =>
       '_id': instance.id,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
-      'user_id': instance.userId,
+      'uuid': instance.uuid,
     };

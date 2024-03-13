@@ -3,14 +3,14 @@ import 'package:likeminds_feed/src/models/access/question_community_join.dart';
 class EditProfileRequest {
   String? name;
   String? imageUrl;
-  String userUniqueId;
+  String uuid;
   List<QuestionCommunityJoin>? questionCommunityJoin;
   Map<String, dynamic>? metadata;
 
   EditProfileRequest._({
     this.name,
     this.imageUrl,
-    required this.userUniqueId,
+    required this.uuid,
     this.questionCommunityJoin,
     this.metadata,
   });
@@ -18,7 +18,7 @@ class EditProfileRequest {
   Map<String, dynamic> toJson() => {
         "name": name,
         "image_url": imageUrl,
-        "uuid": userUniqueId,
+        "uuid": uuid,
         "question_answer":
             questionCommunityJoin?.map((e) => e.toJson()).toList(),
         "metadata": metadata,
@@ -28,7 +28,7 @@ class EditProfileRequest {
 class EditProfileRequestBuilder {
   String? _name;
   String? _imageUrl;
-  String? _userUniqueId;
+  String? _uuid;
   List<QuestionCommunityJoin>? _questionCommunityJoin;
   Map<String, dynamic>? _metadata;
 
@@ -40,8 +40,8 @@ class EditProfileRequestBuilder {
     _imageUrl = imageUrl;
   }
 
-  void userUniqueId(String userUniqueId) {
-    _userUniqueId = userUniqueId;
+  void uuid(String uuid) {
+    _uuid = uuid;
   }
 
   void questionCommunityJoin(
@@ -57,7 +57,7 @@ class EditProfileRequestBuilder {
     return EditProfileRequest._(
       name: _name,
       imageUrl: _imageUrl,
-      userUniqueId: _userUniqueId!,
+      uuid: _uuid!,
       questionCommunityJoin: _questionCommunityJoin,
       metadata: _metadata,
     );
