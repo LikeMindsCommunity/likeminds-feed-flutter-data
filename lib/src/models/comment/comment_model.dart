@@ -60,6 +60,7 @@ class Comment {
           ? Comment.fromEntity(commentEntity: commentEntity.parentComment!)
           : null,
       uuid: commentEntity.uuid,
+      tempId: commentEntity.tempId,
     );
   }
 

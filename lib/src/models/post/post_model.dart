@@ -28,6 +28,7 @@ class Post {
   final bool? isDeleted;
   final String? heading;
   final List<String>? commentIds;
+  final String? tempId;
 
   Post({
     required this.id,
@@ -52,6 +53,7 @@ class Post {
     this.isDeleted,
     this.heading,
     this.commentIds,
+    this.tempId,
   });
 
   factory Post.fromEntity({required PostEntity postEntity}) {
@@ -83,6 +85,7 @@ class Post {
       isDeleted: postEntity.isDeleted,
       heading: postEntity.heading,
       commentIds: postEntity.commentIds,
+      tempId: postEntity.tempId,
     );
   }
 
@@ -110,6 +113,7 @@ class Post {
       isDeleted: isDeleted,
       heading: heading,
       commentIds: commentIds,
+      tempId: tempId,
     );
   }
 }
@@ -156,6 +160,8 @@ class PostEntity {
   final String? heading;
   @JsonKey(name: 'comment_ids')
   final List<String>? commentIds;
+  @JsonKey(name: 'temp_id')
+  final String? tempId;
 
   PostEntity({
     required this.id,
@@ -180,6 +186,7 @@ class PostEntity {
     this.isDeleted,
     this.heading,
     this.commentIds,
+    this.tempId,
   });
 
   factory PostEntity.fromJson(Map<String, dynamic> data) =>

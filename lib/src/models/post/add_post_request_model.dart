@@ -7,6 +7,7 @@ class AddPostRequest {
   final List<String>? topics;
   final bool? isRepost;
   final String? heading;
+  final String? tempId;
 
   AddPostRequest._({
     required this.text,
@@ -15,6 +16,7 @@ class AddPostRequest {
     this.topics,
     this.heading,
     this.isRepost,
+    this.tempId,
   });
 
   Map<String, dynamic> toJson() {
@@ -25,6 +27,7 @@ class AddPostRequest {
       'topic_ids': topics,
       'is_repost': isRepost,
       'heading': heading,
+      'temp_id': tempId,
     };
   }
 }
@@ -36,6 +39,7 @@ class AddPostRequestBuilder {
   List<String>? _topics;
   bool _isRepost = false;
   String? _heading;
+  String? _tempId;
 
   AddPostRequestBuilder();
 
@@ -63,6 +67,10 @@ class AddPostRequestBuilder {
     _heading = heading;
   }
 
+  void tempId(String tempId) {
+    _tempId = tempId;
+  }
+
   AddPostRequest build() {
     return AddPostRequest._(
       attachments: _attachments,
@@ -71,6 +79,7 @@ class AddPostRequestBuilder {
       topics: _topics,
       isRepost: _isRepost,
       heading: _heading,
+      tempId: _tempId,
     );
   }
 }
