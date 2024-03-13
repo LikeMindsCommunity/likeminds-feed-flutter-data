@@ -13,9 +13,9 @@ class SearchPostRequest {
   Map<String, dynamic> toJson() {
     return {
       'page': page,
-      'pageSize': pageSize,
+      'page_size': pageSize,
       'search': search,
-      'searchType': searchType,
+      'search_type': searchType,
     };
   }
 }
