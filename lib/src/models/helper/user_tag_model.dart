@@ -9,7 +9,7 @@ class UserTag {
   final String? customTitle;
   final int? id;
   final bool? isGuest;
-  final String? userUniqueId;
+  final String? uuid;
   final SDKClientInfo? sdkClientInfo;
 
   UserTag({
@@ -18,7 +18,7 @@ class UserTag {
     this.customTitle,
     this.id,
     this.isGuest,
-    this.userUniqueId,
+    this.uuid,
     this.sdkClientInfo,
   });
 
@@ -29,10 +29,8 @@ class UserTag {
       customTitle: entity.customTitle,
       id: entity.id,
       isGuest: entity.isGuest,
-      userUniqueId: entity.userUniqueId,
-      sdkClientInfo: entity.sdkClientInfoEntity != null
-          ? SDKClientInfo.fromEntity(entity.sdkClientInfoEntity!)
-          : null,
+      uuid: entity.uuid,
+      sdkClientInfo: SDKClientInfo.fromEntity(entity.sdkClientInfoEntity!),
     );
   }
 
@@ -43,7 +41,7 @@ class UserTag {
       customTitle: customTitle,
       id: id,
       isGuest: isGuest,
-      userUniqueId: userUniqueId,
+      uuid: uuid,
       sdkClientInfoEntity: sdkClientInfo?.toEntity(),
     );
   }
@@ -66,8 +64,8 @@ class UserTagEntity {
   @JsonKey(name: 'is_guest')
   final bool? isGuest;
 
-  @JsonKey(name: 'user_unique_id')
-  final String? userUniqueId;
+  @JsonKey(name: 'uuid')
+  final String? uuid;
 
   @JsonKey(name: 'sdk_client_info')
   final SDKClientInfoEntity? sdkClientInfoEntity;
@@ -78,7 +76,7 @@ class UserTagEntity {
     this.customTitle,
     this.id,
     this.isGuest,
-    this.userUniqueId,
+    this.uuid,
     this.sdkClientInfoEntity,
   });
 

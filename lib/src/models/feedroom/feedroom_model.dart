@@ -40,7 +40,7 @@ class FeedRoom {
   final int? onlineLinkEnableBefore;
   final String? onlineLinkType;
   final int participantsCount;
-  final int? memberId;
+  final String? uuid;
   final String? access;
   final User member;
   final List<dynamic>? cohorts;
@@ -83,7 +83,7 @@ class FeedRoom {
     this.onlineLinkEnableBefore,
     this.onlineLinkType,
     required this.participantsCount,
-    this.memberId,
+    this.uuid,
     this.access,
     required this.member,
     this.cohorts,
@@ -128,7 +128,7 @@ class FeedRoom {
       onlineLinkEnableBefore: entity.onlineLinkEnableBefore,
       onlineLinkType: entity.onlineLinkType,
       participantsCount: entity.participantsCount,
-      memberId: entity.memberId,
+      uuid: entity.uuid,
       access: entity.access,
       member: User.fromEntity(entity.member),
       cohorts: entity.cohorts,
@@ -174,7 +174,7 @@ class FeedRoom {
       onlineLinkEnableBefore: onlineLinkEnableBefore,
       onlineLinkType: onlineLinkType,
       participantsCount: participantsCount,
-      memberId: memberId,
+      uuid: uuid,
       access: access,
       member: member.toEntity(),
       cohorts: cohorts,
@@ -251,8 +251,8 @@ class FeedRoomEntity {
   final String? onlineLinkType;
   @JsonKey(name: 'participants_count')
   final int participantsCount;
-  @JsonKey(name: 'member_id')
-  final int? memberId;
+  @JsonKey(name: 'uuid')
+  final String? uuid;
   final String? access;
   final UserEntity member;
   final List<dynamic>? cohorts;
@@ -296,7 +296,7 @@ class FeedRoomEntity {
     this.onlineLinkEnableBefore,
     this.onlineLinkType,
     required this.participantsCount,
-    this.memberId,
+    this.uuid,
     this.access,
     required this.member,
     this.cohorts,

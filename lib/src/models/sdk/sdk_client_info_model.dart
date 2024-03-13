@@ -6,13 +6,13 @@ class SDKClientInfo {
   final int community;
   final int user;
   final String? widgetId;
-  final String userUniqueId;
+  final String uuid;
 
   SDKClientInfo({
     required this.community,
     required this.user,
     this.widgetId,
-    required this.userUniqueId,
+    required this.uuid,
   });
 
   factory SDKClientInfo.fromEntity(SDKClientInfoEntity entity) {
@@ -20,7 +20,7 @@ class SDKClientInfo {
       community: entity.community,
       user: entity.user,
       widgetId: entity.widgetId,
-      userUniqueId: entity.userUniqueId,
+      uuid: entity.uuid,
     );
   }
 
@@ -29,7 +29,7 @@ class SDKClientInfo {
       community: community,
       user: user,
       widgetId: widgetId,
-      userUniqueId: userUniqueId,
+      uuid: uuid,
     );
   }
 }
@@ -40,14 +40,14 @@ class SDKClientInfoEntity {
   final int user;
   @JsonKey(name: 'widget_id')
   final String? widgetId;
-  @JsonKey(name: 'user_unique_id')
-  final String userUniqueId;
+  @JsonKey(name: 'uuid')
+  final String uuid;
 
   SDKClientInfoEntity({
     required this.community,
     required this.user,
     this.widgetId,
-    required this.userUniqueId,
+    required this.uuid,
   });
 
   factory SDKClientInfoEntity.fromJson(Map<String, dynamic> json) =>

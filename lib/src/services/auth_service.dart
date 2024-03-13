@@ -47,7 +47,7 @@ class AuthService {
           );
           final user = initiateUserResponse.user!;
           final community = initiateUserResponse.community!;
-          apiClient.setUserId = user.id;
+          apiClient.setUuid = user.id;
           apiClient.setCommunityId = community.id;
           return initiateUserResponse;
           // Else, if API returned no app access

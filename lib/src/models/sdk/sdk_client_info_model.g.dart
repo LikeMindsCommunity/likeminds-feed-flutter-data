@@ -10,7 +10,7 @@ SDKClientInfoEntity _$SDKClientInfoFromJson(Map<String, dynamic> json) =>
     SDKClientInfoEntity(
       community: json['community'] as int,
       user: json['user'] as int,
-      userUniqueId: (json['user_unique_id'] ?? json['uuid']) as String,
+      uuid: json['uuid'] as String,
       widgetId: (json['widget_id'] ?? json['widgetId']) as String?,
     );
 
@@ -18,6 +18,6 @@ Map<String, dynamic> _$SDKClientInfoToJson(SDKClientInfoEntity instance) =>
     <String, dynamic>{
       'community': instance.community,
       'user': instance.user,
-      'user_unique_id': instance.userUniqueId,
+      'uuid': instance.uuid,
       'widget_id': instance.widgetId,
     };

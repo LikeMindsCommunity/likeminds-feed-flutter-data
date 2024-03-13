@@ -84,8 +84,8 @@ class HelperService {
     }
   }
 
-  void routeProfilePage(String userId) {
-    callback?.profileRouteCallback(lmUserId: userId);
+  void routeProfilePage(String uuid) {
+    callback?.profileRouteCallback(uuid: uuid);
   }
 
   void routeCompanyPage(String companyId) {

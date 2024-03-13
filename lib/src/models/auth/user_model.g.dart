@@ -11,7 +11,7 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       name: json['name'] as String,
       imageUrl: json['image_url'] as String?,
       isGuest: json['is_guest'] as bool?,
-      userUniqueId: json['user_unique_id'] as String,
+      uuid: json['uuid'] as String,
       organisationName: json['organisation_name'] as String?,
       sdkClientInfoEntity: json['sdk_client_info'] == null
           ? null
@@ -34,7 +34,7 @@ Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>
       'name': instance.name,
       'image_url': instance.imageUrl,
       'is_guest': instance.isGuest,
-      'user_unique_id': instance.userUniqueId,
+      'uuid': instance.uuid,
       'organisation_name': instance.organisationName,
       'sdk_client_info': instance.sdkClientInfoEntity,
       'updated_at': instance.updatedAt,

@@ -50,8 +50,8 @@ class EndPoints {
   String get getUnreadNotificationCountEndpoint =>
       "$KETTLE_HOST/feed/user/activity/unread_count";
 
-  String getUserActivityEndpoint(String userId) =>
-      "$KETTLE_HOST/feed/user/$userId/activity";
+  String getUserActivityEndpoint(String uuid) =>
+      "$KETTLE_HOST/feed/user/$uuid/activity";
 
   String markReadNotificationEndpoint(String notificationId) =>
       "$KETTLE_HOST/feed/user/activity/$notificationId/mark_read";

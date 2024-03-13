@@ -16,7 +16,7 @@ class ApiClient {
 
   String? accessToken;
   String? refreshToken;
-  int? userId;
+  int? uuid;
   int? communityId;
 
   ApiClient({
@@ -26,10 +26,10 @@ class ApiClient {
     endPoints = EndPoints.instance(isProduction);
   }
 
-  set setUserId(int? userId) => this.userId = userId;
+  set setUuid(int? uuid) => this.uuid = uuid;
   set setCommunityId(int? communityId) => this.communityId = communityId;
 
-  int? get getUserId => userId;
+  int? get getUuid => uuid;
   int? get getCommunityId => communityId;
   String? get getAccessToken => accessToken;
   String? get getRefreshToken => refreshToken;
@@ -45,7 +45,7 @@ class ApiClient {
   void clearTokens() {
     accessToken = null;
     refreshToken = null;
-    setUserId = null;
+    setUuid = null;
     setCommunityId = null;
   }
 

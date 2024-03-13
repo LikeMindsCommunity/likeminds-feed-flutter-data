@@ -1,12 +1,12 @@
 class GetUserPostRequest {
   final int page;
   final int pageSize;
-  final String userId;
+  final String uuid;
 
   GetUserPostRequest._({
     required this.page,
     required this.pageSize,
-    required this.userId,
+    required this.uuid,
   });
 
   Map<String, dynamic> toJson() => {
@@ -18,7 +18,7 @@ class GetUserPostRequest {
 class GetUserPostRequestBuilder {
   int? _page;
   int? _pageSize;
-  String? _userId;
+  String? _uuid;
 
   GetUserPostRequestBuilder();
 
@@ -30,15 +30,15 @@ class GetUserPostRequestBuilder {
     _pageSize = pageSize;
   }
 
-  void userId(String userId) {
-    _userId = userId;
+  void uuid(String uuid) {
+    _uuid = uuid;
   }
 
   GetUserPostRequest build() {
     return GetUserPostRequest._(
       page: _page!,
       pageSize: _pageSize!,
-      userId: _userId!,
+      uuid: _uuid!,
     );
   }
 }
