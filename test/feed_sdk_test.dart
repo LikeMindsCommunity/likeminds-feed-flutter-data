@@ -27,7 +27,7 @@ void main() {
   debugPrint("Initiating unit tests now...");
   group('Testing LMFeedClient SDK layer\n', () {
     LMFeedClient client = (LMFeedClientBuilder()
-          ..apiKey(prod ? testingProdBotID : testingBetaBotID)
+          ..apiKey(prod ? testingProdAPIKey : testingBetaAPIKey)
           ..sdkCallback(testingCallback))
         .build();
 
