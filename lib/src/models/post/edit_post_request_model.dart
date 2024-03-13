@@ -3,8 +3,9 @@ import 'package:likeminds_feed/likeminds_feed.dart';
 class EditPostRequest {
   final String postId;
   final String postText;
+  final String? heading;
   final List<Attachment>? attachments;
-  final List<Topic>? topics;
+  final List<String>? topics;
   final bool? isRepost;
 
   EditPostRequest._({
@@ -12,6 +13,7 @@ class EditPostRequest {
     required this.postText,
     required this.attachments,
     this.topics,
+    this.heading,
     this.isRepost = false,
   });
 
@@ -19,8 +21,9 @@ class EditPostRequest {
     return {
       'text': postText,
       'attachments': attachments?.map((e) => e.toEntity().toJson()).toList(),
-      'topic_ids': topics?.map((e) => e.id).toList(),
+      'topic_ids': topics,
       'is_repost': isRepost,
+      'heading': heading,
     };
   }
 }
@@ -29,8 +32,9 @@ class EditPostRequestBuilder {
   String? _postId;
   String? _postText;
   List<Attachment>? _attachments;
-  List<Topic>? _topics;
+  List<String>? _topics;
   bool _isRepost = false;
+  String? _heading;
 
   EditPostRequestBuilder();
 
@@ -46,12 +50,16 @@ class EditPostRequestBuilder {
     _attachments = attachments;
   }
 
-  void topics(List<Topic> topics) {
+  void topics(List<String> topics) {
     _topics = topics;
   }
 
   void isRepost(bool isRepost) {
     _isRepost = isRepost;
+  }
+
+  void heading(String heading) {
+    _heading = heading;
   }
 
   EditPostRequest build() {
@@ -61,6 +69,7 @@ class EditPostRequestBuilder {
       attachments: _attachments!,
       topics: _topics,
       isRepost: _isRepost,
+      heading: _heading,
     );
   }
 }

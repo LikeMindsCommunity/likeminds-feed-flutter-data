@@ -26,6 +26,8 @@ class Post {
   final bool isRepostedByUser;
   final int repostCount;
   final bool? isDeleted;
+  final String? heading;
+  final List<String>? commentIds;
 
   Post({
     required this.id,
@@ -48,6 +50,8 @@ class Post {
     required this.isRepostedByUser,
     required this.repostCount,
     this.isDeleted,
+    this.heading,
+    this.commentIds,
   });
 
   factory Post.fromEntity({required PostEntity postEntity}) {
@@ -77,6 +81,8 @@ class Post {
       isRepostedByUser: postEntity.isRepostedByUser,
       repostCount: postEntity.repostCount,
       isDeleted: postEntity.isDeleted,
+      heading: postEntity.heading,
+      commentIds: postEntity.commentIds,
     );
   }
 
@@ -102,6 +108,8 @@ class Post {
       isRepostedByUser: isRepostedByUser,
       repostCount: repostCount,
       isDeleted: isDeleted,
+      heading: heading,
+      commentIds: commentIds,
     );
   }
 }
@@ -145,28 +153,35 @@ class PostEntity {
   final int repostCount;
   @JsonKey(name: 'is_deleted')
   final bool? isDeleted;
+  final String? heading;
+  @JsonKey(name: 'comment_ids')
+  final List<String>? commentIds;
 
-  PostEntity(
-      {required this.id,
-      required this.text,
-      required this.attachments,
-      required this.communityId,
-      required this.isPinned,
-      required this.userId,
-      required this.likeCount,
-      required this.isSaved,
-      required this.menuItems,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.isLiked,
-      required this.commentCount,
-      required this.isEdited,
-      required this.topics,
-      this.replies,
-      required this.isRepost,
-      required this.isRepostedByUser,
-      required this.repostCount,
-      this.isDeleted});
+  PostEntity({
+    required this.id,
+    required this.text,
+    required this.attachments,
+    required this.communityId,
+    required this.isPinned,
+    required this.userId,
+    required this.likeCount,
+    required this.isSaved,
+    required this.menuItems,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.isLiked,
+    required this.commentCount,
+    required this.isEdited,
+    required this.topics,
+    this.replies,
+    required this.isRepost,
+    required this.isRepostedByUser,
+    required this.repostCount,
+    this.isDeleted,
+    this.heading,
+    this.commentIds,
+  });
+
   factory PostEntity.fromJson(Map<String, dynamic> data) =>
       _$PostEntityFromJson(data);
 

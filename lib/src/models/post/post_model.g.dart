@@ -35,6 +35,10 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
       isRepostedByUser: json['is_reposted_by_user'] as bool,
       repostCount: json['repost_count'] as int,
       isDeleted: json['is_deleted'] ?? false,
+      heading: json['heading'] as String?,
+      commentIds: (json['comment_ids'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
@@ -59,4 +63,6 @@ Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
       'is_reposted_by_user': instance.isRepostedByUser,
       'repost_count': instance.repostCount,
       'is_deleted': instance.isDeleted,
+      'heading': instance.heading,
+      'comment_ids': instance.commentIds,
     };

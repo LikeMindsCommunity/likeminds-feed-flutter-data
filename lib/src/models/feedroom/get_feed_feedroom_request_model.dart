@@ -1,10 +1,8 @@
-import 'package:likeminds_feed/likeminds_feed.dart';
-
 class GetFeedOfFeedRoomRequest {
   final int page;
   final int pageSize;
   final int feedroomId;
-  final List<Topic>? topics;
+  final List<String>? topics;
 
   GetFeedOfFeedRoomRequest._({
     required this.page,
@@ -17,7 +15,7 @@ class GetFeedOfFeedRoomRequest {
         'page': page,
         'pageSize': pageSize,
         'feedroom_id': feedroomId,
-        'topic_ids': topics?.map((e) => e.id).toList().toString(),
+        'topic_ids': topics,
       };
 }
 
@@ -25,7 +23,7 @@ class GetFeedOfFeedRoomRequestBuilder {
   int? _page;
   int? _pageSize;
   int? _feedroomId;
-  List<Topic>? _topics;
+  List<String>? _topics;
 
   void page(int page) {
     _page = page;
@@ -39,7 +37,7 @@ class GetFeedOfFeedRoomRequestBuilder {
     _pageSize = pageSize;
   }
 
-  void topics(List<Topic> topics) {
+  void topics(List<String> topics) {
     _topics = topics;
   }
 
