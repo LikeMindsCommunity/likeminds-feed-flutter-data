@@ -29,7 +29,7 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
       isLiked: json['is_liked'] as bool,
       commentCount: json['comments_count'] as int,
       isEdited: json['is_edited'] as bool,
-      topics:
+      topicIds:
           (json['topics'] as List<dynamic>?)?.map((e) => e as String).toList(),
       isRepost: json['is_repost'] as bool,
       isRepostedByUser: json['is_reposted_by_user'] as bool,
@@ -58,7 +58,7 @@ Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
       'menu_items': instance.menuItems.map((e) => e.toJson()).toList(),
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
-      'topics': instance.topics,
+      'topics': instance.topicIds,
       'replies': instance.replies?.map((e) => e.toJson()).toList(),
       'is_repost': instance.isRepost,
       'is_reposted_by_user': instance.isRepostedByUser,

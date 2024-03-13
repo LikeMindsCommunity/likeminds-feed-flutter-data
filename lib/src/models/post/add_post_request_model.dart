@@ -4,7 +4,7 @@ class AddPostRequest {
   final String text;
   final int? feedroomId;
   final List<Attachment>? attachments;
-  final List<String>? topics;
+  final List<String>? topicIds;
   final bool? isRepost;
   final String? heading;
   final String? tempId;
@@ -13,7 +13,7 @@ class AddPostRequest {
     required this.text,
     required this.attachments,
     this.feedroomId,
-    this.topics,
+    this.topicIds,
     this.heading,
     this.isRepost,
     this.tempId,
@@ -24,7 +24,7 @@ class AddPostRequest {
       'text': text,
       'attachments': attachments?.map((e) => e.toEntity().toJson()).toList(),
       'feedroom_id': feedroomId,
-      'topic_ids': topics,
+      'topic_ids': topicIds,
       'is_repost': isRepost,
       'heading': heading,
       'temp_id': tempId,
@@ -36,7 +36,7 @@ class AddPostRequestBuilder {
   String? _text;
   int? _feedroomId;
   List<Attachment>? _attachments;
-  List<String>? _topics;
+  List<String>? _topicIds;
   bool _isRepost = false;
   String? _heading;
   String? _tempId;
@@ -55,8 +55,8 @@ class AddPostRequestBuilder {
     _attachments = attachments;
   }
 
-  void topics(List<String> topics) {
-    _topics = topics;
+  void topicIds(List<String> topicIds) {
+    _topicIds = topicIds;
   }
 
   void isRepost(bool isRepost) {
@@ -76,7 +76,7 @@ class AddPostRequestBuilder {
       attachments: _attachments,
       text: _text!,
       feedroomId: _feedroomId,
-      topics: _topics,
+      topicIds: _topicIds,
       isRepost: _isRepost,
       heading: _heading,
       tempId: _tempId,

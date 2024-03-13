@@ -22,7 +22,7 @@ class UserActivityEntityData {
   List<Comment>? replies;
   String? tempId;
   String text;
-  List<String>? topics;
+  List<String>? topicIds;
   int? updatedAt;
   String? uuid;
   bool? isRepost;
@@ -49,7 +49,7 @@ class UserActivityEntityData {
     this.replies,
     this.tempId,
     required this.text,
-    this.topics,
+    this.topicIds,
     this.updatedAt,
     this.uuid,
     this.isRepost,
@@ -86,7 +86,7 @@ class UserActivityEntityData {
           .toList(),
       tempId: entity.tempId,
       text: entity.text,
-      topics: entity.topics,
+      topicIds: entity.topicIds,
       updatedAt: entity.updatedAt,
       uuid: entity.uuid,
       isRepost: entity.isRepost,
@@ -116,7 +116,7 @@ class UserActivityEntityData {
       replies: replies?.map((e) => e.toEntity()).toList(),
       tempId: tempId,
       text: text,
-      topics: topics,
+      topicIds: topicIds,
       updatedAt: updatedAt,
       uuid: uuid,
       isRepost: isRepost,
@@ -160,7 +160,7 @@ class UserActivityEntityDataEntity {
   @JsonKey(name: 'temp_id')
   String? tempId;
   String text;
-  List<String>? topics;
+  List<String>? topicIds;
   @JsonKey(name: 'updated_at')
   int? updatedAt;
   String? uuid;
@@ -188,7 +188,7 @@ class UserActivityEntityDataEntity {
     this.replies,
     this.tempId,
     required this.text,
-    this.topics,
+    this.topicIds,
     this.updatedAt,
     this.uuid,
     this.isRepost,

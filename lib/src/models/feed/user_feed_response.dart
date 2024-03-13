@@ -95,7 +95,7 @@ GetUserFeedResponseEntity _$GetUserFeedResponseEntityFromJson(
         (k, e) => MapEntry(k, PostEntity.fromJson(e as Map<String, dynamic>)),
       ),
       filteredCommentsEntity:
-          (json['data']['filtered_comments'] as Map<String, dynamic>).map(
+          (json['data']['filtered_comments'] as Map<String, dynamic>?)?.map(
         (k, e) =>
             MapEntry(k, CommentEntity.fromJson(e as Map<String, dynamic>)),
       ),

@@ -20,7 +20,7 @@ class Post {
   final DateTime createdAt;
   final DateTime updatedAt;
   final bool isEdited;
-  final List<String>? topics;
+  final List<String>? topicIds;
   final List<Comment>? replies;
   final bool isRepost;
   final bool isRepostedByUser;
@@ -45,7 +45,7 @@ class Post {
     required this.isLiked,
     required this.commentCount,
     required this.isEdited,
-    required this.topics,
+    required this.topicIds,
     this.replies,
     required this.isRepost,
     required this.isRepostedByUser,
@@ -73,7 +73,7 @@ class Post {
       menuItems: postEntity.menuItems
           .map((e) => PopupMenuItemModel.fromEntity(entity: e))
           .toList(),
-      topics: postEntity.topics,
+      topicIds: postEntity.topicIds,
       createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt),
       replies: postEntity.replies
@@ -105,7 +105,7 @@ class Post {
       menuItems: menuItems.map((e) => e.toEntity()).toList(),
       createdAt: createdAt.millisecondsSinceEpoch.toInt(),
       updatedAt: updatedAt.millisecondsSinceEpoch.toInt(),
-      topics: topics,
+      topicIds: topicIds,
       replies: replies?.map((e) => e.toEntity()).toList(),
       isRepost: isRepost,
       isRepostedByUser: isRepostedByUser,
@@ -146,7 +146,7 @@ class PostEntity {
   final int createdAt;
   @JsonKey(name: 'updated_at')
   final int updatedAt;
-  final List<String>? topics;
+  final List<String>? topicIds;
   @JsonKey(name: "replies")
   final List<CommentEntity>? replies;
   @JsonKey(name: 'is_repost')
@@ -178,7 +178,7 @@ class PostEntity {
     required this.isLiked,
     required this.commentCount,
     required this.isEdited,
-    required this.topics,
+    required this.topicIds,
     this.replies,
     required this.isRepost,
     required this.isRepostedByUser,
