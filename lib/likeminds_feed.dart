@@ -277,6 +277,75 @@ class LMFeedClient {
         await _sdkApplication.getLoggerApi().pushLogs(request: request);
     return response;
   }
+
+  Future<LMResponse<void>> insertOrUpdateLoggedInUser(User user) async {
+    return _sdkApplication.getPersistenceApi().insertOrUpdateUser(user);
+  }
+
+  LMResponse<User> getLoggedInUser() {
+    return _sdkApplication.getPersistenceApi().getUserDB();
+  }
+
+  Future<LMResponse<void>> deleteLoggedInUser() async {
+    return _sdkApplication.getPersistenceApi().deleteUserDB();
+  }
+
+  Future<LMResponse<void>> insertOrUpdateCache(LMCache cache) async {
+    return _sdkApplication
+        .getPersistenceApi()
+        .insertOrUpdateValueInCache(cache);
+  }
+
+  Future<LMResponse<void>> deleteCache(String key) async {
+    return _sdkApplication.getPersistenceApi().deleteCache(key);
+  }
+
+  LMResponse<LMCache> getCache(String key) {
+    return _sdkApplication.getPersistenceApi().getCache(key);
+  }
+
+  Future<LMResponse<void>> clearCache() async {
+    return _sdkApplication.getPersistenceApi().clearCache();
+  }
+
+  Future<LMResponse<void>> insertOrUpdateCommunityConfigurationsDB(
+      List<CommunityConfigurations> communityConfigurations) async {
+    return await _sdkApplication
+        .getPersistenceApi()
+        .insertOrUpdateCommunityConfigurationDB(communityConfigurations);
+  }
+
+  LMResponse<CommunityConfigurations> getCommunityConfigurationsDB(
+      String type) {
+    return _sdkApplication
+        .getPersistenceApi()
+        .getCommunityConfigurationDB(type);
+  }
+
+  Future<LMResponse<void>> deleteCommunityConfigurationsDB(String type) async {
+    return _sdkApplication
+        .getPersistenceApi()
+        .deleteCommunityConfigurationDB(type);
+  }
+
+  Future<LMResponse<void>> clearCommunityConfigurationsDB() async {
+    return _sdkApplication.getPersistenceApi().clearCommunityConfigurationDB();
+  }
+
+  Future<LMResponse<void>> insertOrUpdateLoggedInMemberState(
+      MemberStateResponse memberStateResponse) async {
+    return await _sdkApplication
+        .getPersistenceApi()
+        .insertOrUpdateMemberState(memberStateResponse);
+  }
+
+  LMResponse<MemberStateResponse> getLoggedInMemberState() {
+    return _sdkApplication.getPersistenceApi().getMemberState();
+  }
+
+  Future<LMResponse<void>> deleteLoggedInMemberState() async {
+    return await _sdkApplication.getPersistenceApi().deleteMemberState();
+  }
 }
 
 class LMFeedClientBuilder {

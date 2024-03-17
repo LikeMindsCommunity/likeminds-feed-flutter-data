@@ -4,6 +4,7 @@ import 'package:likeminds_feed/src/methods/logger.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/moderation.dart';
 import 'package:likeminds_feed/src/methods/activity.dart';
+import 'package:likeminds_feed/src/methods/persistence.dart';
 import 'package:likeminds_feed/src/methods/widgets.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
@@ -13,6 +14,7 @@ import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/logger_repository.dart';
 import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
 import 'package:likeminds_feed/src/repositories/activity.dart';
+import 'package:likeminds_feed/src/repositories/persistence_repository.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
 import 'package:likeminds_feed/src/repositories/feed_repository.dart';
 
@@ -79,6 +81,14 @@ class SDKApplication {
     return HelperApi(
       helperRepository: GetIt.instance.get<HelperRepository>(
         instanceName: DIService.kInstanceHelperRepository,
+      ),
+    );
+  }
+
+  PersistenceApi getPersistenceApi() {
+    return PersistenceApi(
+      persistenceRepository: GetIt.instance.get<PersistenceRepository>(
+        instanceName: DIService.kInstancePersistenceRepository,
       ),
     );
   }
