@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'activity_entity_data_model.dart';
 
-
 part 'notification_feed_item_model.g.dart';
 
 class NotificationFeedItem {
@@ -75,7 +74,6 @@ class NotificationFeedItem {
 
 @JsonSerializable()
 class NotificationFeedItemEntity {
-  
   final String id;
   final int action;
   final List<String> actionBy;

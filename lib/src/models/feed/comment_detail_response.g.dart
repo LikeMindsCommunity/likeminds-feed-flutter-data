@@ -23,6 +23,8 @@ Map<String, dynamic> _$GetCommentResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'comment': instance.postReplies?.toJson(),
-      'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
+      'data': {
+        'comment': instance.postReplies?.toJson(),
+        'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
+      }
     };

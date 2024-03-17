@@ -28,11 +28,11 @@ class GetTopicsResponse {
     );
   }
 
-  GetTopicsResponseEntity toEntity(GetTopicsResponse response) {
+  GetTopicsResponseEntity toEntity() {
     return GetTopicsResponseEntity(
-      success: response.success,
-      errorMessage: response.errorMessage,
-      topics: response.topics?.map((e) => e.toEntity()).toList(),
+      success: success,
+      errorMessage: errorMessage,
+      topics: topics?.map((e) => e.toEntity()).toList(),
     );
   }
 }
@@ -77,10 +77,12 @@ class GetTopicsResponseEntity {
     return {
       'success': success,
       'error_message': errorMessage,
-      'topics': topics?.map((e) => e.toJson()).toList(),
-      'widgets': widgets,
-      'child_topics': childTopics
-          ?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()))),
+      'data': {
+        'topics': topics?.map((e) => e.toJson()).toList(),
+        'widgets': widgets,
+        'child_topics': childTopics
+            ?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()))),
+      }
     };
   }
 }

@@ -23,4 +23,7 @@ Map<String, dynamic> _$EditCommentResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
+      'data': {
+        'comment': instance.reply?.toEntity().toJson(),
+      },
     };

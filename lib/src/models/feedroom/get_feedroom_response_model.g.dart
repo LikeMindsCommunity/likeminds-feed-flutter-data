@@ -25,8 +25,10 @@ Map<String, dynamic> _$GetFeedRoomResponseEntityToJson(
         GetFeedRoomResponseEntity instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'chatroom': instance.chatroom,
-      'participant_count': instance.participantCount,
       'error_message': instance.errorMessage,
-      'chatrooms': instance.chatrooms,
+      'data': {
+        'chatroom': instance.chatroom?.toJson(),
+        'participant_count': instance.participantCount,
+        'chatrooms': instance.chatrooms?.map((e) => e.toJson()).toList(),
+      }
     };

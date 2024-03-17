@@ -121,3 +121,7 @@ export 'package:likeminds_feed/src/models/logger/clear_log_request.dart';
 export 'package:likeminds_feed/src/models/logger/get_logs_response.dart';
 
 export 'package:likeminds_feed/src/models/sdk/sdk_client_info_model.dart';
+
+export 'package:likeminds_feed/src/models/cache/cache.dart';
+
+export 'package:likeminds_feed/src/models/response.dart';

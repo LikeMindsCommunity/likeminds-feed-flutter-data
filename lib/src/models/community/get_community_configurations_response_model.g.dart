@@ -24,5 +24,8 @@ Map<String, dynamic> _$GetCommunityConfigurationsResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'community_configurations': instance.communityConfigurations,
+      'data': {
+        'community_configurations':
+            instance.communityConfigurations?.map((e) => e.toJson()).toList(),
+      }
     };

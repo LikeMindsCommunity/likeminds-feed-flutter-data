@@ -40,7 +40,13 @@ Map<String, dynamic> _$GetPostResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'post': instance.post?.toJson(),
-      'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
-      'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+      'data': {
+        'post': instance.post?.toJson(),
+        'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
+        'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+        'widgets':
+            instance.widgets?.map((k, e) => MapEntry(k, e.toEntity().toJson())),
+        'reposted_posts':
+            instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
+      }
     };

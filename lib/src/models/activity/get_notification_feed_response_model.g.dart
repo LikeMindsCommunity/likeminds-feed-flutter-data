@@ -49,7 +49,13 @@ Map<String, dynamic> _$GetNotificationFeedResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'items': instance.items,
-      'users': instance.users,
-      'topics': instance.topics,
+      'data': {
+        'items': instance.items?.map((e) => e.toJson()).toList(),
+        'users':
+            instance.users?.map((key, value) => MapEntry(key, value.toJson())),
+        'topics':
+            instance.topics?.map((key, value) => MapEntry(key, value.toJson())),
+        'widgets': instance.widgets
+            ?.map((key, value) => MapEntry(key, value.toJson())),
+      }
     };

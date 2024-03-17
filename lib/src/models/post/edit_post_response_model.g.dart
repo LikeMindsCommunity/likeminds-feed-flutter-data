@@ -49,7 +49,14 @@ Map<String, dynamic> _$EditPostResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'post': instance.post?.toEntity().toJson(),
-      'users': instance.users,
-      'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+      'data': {
+        'post': instance.post?.toEntity().toJson(),
+        'users': instance.users
+            ?.map((key, value) => MapEntry(key, value.toEntity().toJson())),
+        'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+        'widgets':
+            instance.widgets?.map((k, e) => MapEntry(k, e.toEntity().toJson())),
+        'reposted_posts':
+            instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
+      }
     };

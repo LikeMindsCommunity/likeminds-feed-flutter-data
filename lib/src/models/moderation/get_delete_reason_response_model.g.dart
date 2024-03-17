@@ -21,5 +21,7 @@ Map<String, dynamic> _$GetDeleteReasonResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'report_tags': instance.reportTags,
+      'data': {
+        'report_tags': instance.reportTags?.map((e) => e.toJson()).toList(),
+      }
     };
