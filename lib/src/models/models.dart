@@ -32,6 +32,8 @@ export 'package:likeminds_feed/src/models/helper/og_tags_model.dart';
 
 export 'package:likeminds_feed/src/models/feed/universal_feed_request.dart';
 export 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
+export 'package:likeminds_feed/src/models/feed/get_saved_post_request.dart';
+export 'package:likeminds_feed/src/models/feed/get_saved_post_response.dart';
 export 'package:likeminds_feed/src/models/post/post_model.dart';
 
 export 'package:likeminds_feed/src/models/post/attachment_model.dart';
@@ -129,3 +131,8 @@ export 'package:likeminds_feed/src/models/sdk/sdk_client_info_model.dart';
 export 'package:likeminds_feed/src/models/cache/cache.dart';
 
 export 'package:likeminds_feed/src/models/response.dart';
+
+export 'package:likeminds_feed/src/models/user/get_user_feed_meta_request.dart';
+export 'package:likeminds_feed/src/models/user/get_user_feed_meta_response.dart';
+export 'package:likeminds_feed/src/models/user/get_user_comment_request.dart';
+export 'package:likeminds_feed/src/models/user/get_user_comment_response.dart';

@@ -30,7 +30,7 @@ class UserTag {
       id: entity.id,
       isGuest: entity.isGuest,
       uuid: entity.uuid,
-      sdkClientInfo: entity.sdkClientInfo,
+      sdkClientInfo: SDKClientInfo.fromEntity(entity.sdkClientInfoEntity!),
     );
   }
 
@@ -42,7 +42,7 @@ class UserTag {
       id: id,
       isGuest: isGuest,
       uuid: uuid,
-      sdkClientInfo: sdkClientInfo,
+      sdkClientInfoEntity: sdkClientInfo?.toEntity(),
     );
   }
 
@@ -68,7 +68,7 @@ class UserTagEntity {
   final String? uuid;
 
   @JsonKey(name: 'sdk_client_info')
-  final SDKClientInfo? sdkClientInfo;
+  final SDKClientInfoEntity? sdkClientInfoEntity;
 
   UserTagEntity({
     this.name,
@@ -77,7 +77,7 @@ class UserTagEntity {
     this.id,
     this.isGuest,
     this.uuid,
-    this.sdkClientInfo,
+    this.sdkClientInfoEntity,
   });
 
   factory UserTagEntity.fromJson(Map<String, dynamic> json) =>

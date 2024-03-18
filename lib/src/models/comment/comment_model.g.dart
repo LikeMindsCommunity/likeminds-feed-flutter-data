@@ -30,6 +30,7 @@ CommentEntity _$CommentEntityFromJson(Map<String, dynamic> json) =>
       id: json['_id'],
       isEdited: json['is_edited'],
       isLiked: json['is_liked'],
+      postId: json['post_id'],
     );
 
 Map<String, dynamic> _$CommentEntityToJson(CommentEntity instance) =>
@@ -48,4 +49,5 @@ Map<String, dynamic> _$CommentEntityToJson(CommentEntity instance) =>
       '_id': instance.id,
       'is_edited': instance.isEdited,
       'is_liked': instance.isLiked,
+      'post_id': instance.postId,
     };

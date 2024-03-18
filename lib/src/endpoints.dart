@@ -62,8 +62,20 @@ class EndPoints {
     return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";
   }
 
-  String getUserFeedEndPoint(String uuid) {
+  String getUserSavedPostEndPoint(String uuid) {
+    return "$feedUrl/user/$uuid/save";
+  }
+
+  String getUserCreatedPosts(String uuid) {
     return "$feedUrl/user/$uuid/post";
+  }
+
+  String getUserFeedMetaEndPoint(String uuid) {
+    return "$feedUrl/user/$uuid/meta";
+  }
+
+  String getUserCreatedCommentsEndPoint(String uuid) {
+    return "$feedUrl/user/$uuid/comment";
   }
 
   String getAddCommentEndPoint(String postId) {
