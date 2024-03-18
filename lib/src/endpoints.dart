@@ -50,6 +50,8 @@ class EndPoints {
   String get getUnreadNotificationCountEndpoint =>
       "$KETTLE_HOST/feed/user/activity/unread_count";
 
+  String get getUserTopicsEndpoint => "$KETTLE_HOST/feed/user/topics";
+
   String getUserActivityEndpoint(String uuid) =>
       "$KETTLE_HOST/feed/user/$uuid/activity";
 
@@ -91,5 +93,9 @@ class EndPoints {
   String editCommentReplyEndPoint(
       String commentId, String postId, String replyId) {
     return "$feedUrl/post/$postId/comment/$replyId";
+  }
+
+  String updateUserTopicsEndpoint(String uuid) {
+    return "$KETTLE_HOST/feed/user/$uuid/topics";
   }
 }

@@ -44,4 +44,18 @@ class FeedApi {
         await feedRepository.getUserFeed(request);
     return response;
   }
+
+  Future<UpdateUserTopicsResponse> updateUserTopics(
+      UpdateUserTopicsRequest request) async {
+    final UpdateUserTopicsResponse response =
+        await feedRepository.updateUserTopics(request);
+    return response;
+  }
+
+  Future<GetUserTopicsResponse> getUserTopics(
+      GetUserTopicsRequest request) async {
+    final GetUserTopicsResponse response =
+        await feedRepository.getUserTopics(request);
+    return response;
+  }
 }

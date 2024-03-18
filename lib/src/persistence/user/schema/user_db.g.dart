@@ -57,6 +57,7 @@ class LMSDKClientInfoRO extends _LMSDKClientInfoRO
   }
 }
 
+// ignore_for_file: type=lint
 class LMUserRO extends _LMUserRO
     with RealmEntity, RealmObjectBase, RealmObject {
   LMUserRO(
@@ -77,7 +78,7 @@ class LMUserRO extends _LMUserRO
     int? communityId,
     int? createdAt,
   }) {
-    RealmObjectBase.set(this, 'id', id);
+    RealmObjectBase.set(this, '_id', id);
     RealmObjectBase.set(this, 'name', name);
     RealmObjectBase.set(this, 'image_url', imageUrl);
     RealmObjectBase.set(this, 'is_guest', isGuest);
@@ -98,7 +99,7 @@ class LMUserRO extends _LMUserRO
   LMUserRO._();
 
   @override
-  int get id => RealmObjectBase.get<int>(this, 'id') as int;
+  int get id => RealmObjectBase.get<int>(this, '_id') as int;
   @override
   set id(int value) => throw RealmUnsupportedSetError();
 
@@ -197,7 +198,7 @@ class LMUserRO extends _LMUserRO
   static SchemaObject _initSchema() {
     RealmObjectBase.registerFactory(LMUserRO._);
     return const SchemaObject(ObjectType.realmObject, LMUserRO, 'LMUserRO', [
-      SchemaProperty('id', RealmPropertyType.int),
+      SchemaProperty('id', RealmPropertyType.int, mapTo: '_id'),
       SchemaProperty('name', RealmPropertyType.string),
       SchemaProperty('imageUrl', RealmPropertyType.string,
           mapTo: 'image_url', optional: true),
@@ -230,6 +231,7 @@ class LMUserRO extends _LMUserRO
   }
 }
 
+// ignore_for_file: type=lint
 class LMMemberRightRO extends _LMMemberRightRO
     with RealmEntity, RealmObjectBase, EmbeddedObject {
   LMMemberRightRO(
@@ -238,7 +240,7 @@ class LMMemberRightRO extends _LMMemberRightRO
     int state,
     String title,
   ) {
-    RealmObjectBase.set(this, 'id', id);
+    RealmObjectBase.set(this, '_id', id);
     RealmObjectBase.set(this, 'is_selected', isSelected);
     RealmObjectBase.set(this, 'state', state);
     RealmObjectBase.set(this, 'title', title);
@@ -247,7 +249,7 @@ class LMMemberRightRO extends _LMMemberRightRO
   LMMemberRightRO._();
 
   @override
-  int get id => RealmObjectBase.get<int>(this, 'id') as int;
+  int get id => RealmObjectBase.get<int>(this, '_id') as int;
   @override
   set id(int value) => throw RealmUnsupportedSetError();
 
@@ -280,7 +282,7 @@ class LMMemberRightRO extends _LMMemberRightRO
     RealmObjectBase.registerFactory(LMMemberRightRO._);
     return const SchemaObject(
         ObjectType.embeddedObject, LMMemberRightRO, 'LMMemberRightRO', [
-      SchemaProperty('id', RealmPropertyType.int),
+      SchemaProperty('id', RealmPropertyType.int, mapTo: '_id'),
       SchemaProperty('isSelected', RealmPropertyType.bool,
           mapTo: 'is_selected'),
       SchemaProperty('state', RealmPropertyType.int),
@@ -289,15 +291,18 @@ class LMMemberRightRO extends _LMMemberRightRO
   }
 }
 
+// ignore_for_file: type=lint
 class LMMemberStateRO extends _LMMemberStateRO
     with RealmEntity, RealmObjectBase, RealmObject {
   LMMemberStateRO(
     bool editRequired,
+    String uuid,
     int state, {
     LMUserRO? member,
     Iterable<LMMemberRightRO> memberRights = const [],
   }) {
     RealmObjectBase.set(this, 'edit_required', editRequired);
+    RealmObjectBase.set(this, 'uuid', uuid);
     RealmObjectBase.set(this, 'member', member);
     RealmObjectBase.set(this, 'state', state);
     RealmObjectBase.set<RealmList<LMMemberRightRO>>(
@@ -311,6 +316,11 @@ class LMMemberStateRO extends _LMMemberStateRO
       RealmObjectBase.get<bool>(this, 'edit_required') as bool;
   @override
   set editRequired(bool value) => throw RealmUnsupportedSetError();
+
+  @override
+  String get uuid => RealmObjectBase.get<String>(this, 'uuid') as String;
+  @override
+  set uuid(String value) => throw RealmUnsupportedSetError();
 
   @override
   LMUserRO? get member =>
@@ -347,6 +357,7 @@ class LMMemberStateRO extends _LMMemberStateRO
         ObjectType.realmObject, LMMemberStateRO, 'LMMemberStateRO', [
       SchemaProperty('editRequired', RealmPropertyType.bool,
           mapTo: 'edit_required'),
+      SchemaProperty('uuid', RealmPropertyType.string, primaryKey: true),
       SchemaProperty('member', RealmPropertyType.object,
           optional: true, linkTarget: 'LMUserRO'),
       SchemaProperty('memberRights', RealmPropertyType.object,

@@ -73,6 +73,10 @@ export 'package:likeminds_feed/src/models/moderation/delete_reason_model.dart';
 export 'package:likeminds_feed/src/models/feed/get_topics_request.dart';
 export 'package:likeminds_feed/src/models/feed/get_topics_response.dart';
 export 'package:likeminds_feed/src/models/feed/topic_model.dart';
+export 'package:likeminds_feed/src/models/feed/get_user_topics_request.dart';
+export 'package:likeminds_feed/src/models/feed/get_user_topics_response.dart';
+export 'package:likeminds_feed/src/models/feed/update_user_topics_request.dart';
+export 'package:likeminds_feed/src/models/feed/update_user_topics_response.dart';
 
 export 'package:likeminds_feed/src/models/feed/comment_detail_request.dart';
 export 'package:likeminds_feed/src/models/feed/comment_detail_response.dart';

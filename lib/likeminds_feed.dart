@@ -266,6 +266,20 @@ class LMFeedClient {
     return response;
   }
 
+  Future<UpdateUserTopicsResponse> updateUserTopics(
+      UpdateUserTopicsRequest request) async {
+    final UpdateUserTopicsResponse response =
+        await _sdkApplication.getFeedApi().updateUserTopics(request);
+    return response;
+  }
+
+  Future<GetUserTopicsResponse> getUserTopics(
+      GetUserTopicsRequest request) async {
+    final GetUserTopicsResponse response =
+        await _sdkApplication.getFeedApi().getUserTopics(request);
+    return response;
+  }
+
   Future<GetWidgetResponse> getWidgets(GetWidgetRequest request) async {
     final GetWidgetResponse response =
         await _sdkApplication.getWidgetApi().getWidgets(request);

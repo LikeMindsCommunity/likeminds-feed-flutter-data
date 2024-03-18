@@ -64,6 +64,7 @@ class LMUserInterface {
     }
     return LMMemberStateRO(
       memberState.editRequired!,
+      memberState.member!.uuid,
       memberState.state!,
       member: fromUser(memberState.member!),
       memberRights:

@@ -188,4 +188,61 @@ class FeedService {
       return response;
     }
   }
+
+  Future<GetUserTopicsResponseEntity> getUserTopics(
+      GetUserTopicsRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getUserTopicsEndpoint,
+            queryParameters: request.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      final GetUserTopicsResponseEntity responseEntity =
+          GetUserTopicsResponseEntity.fromJson(response.data);
+      return responseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      final GetUserTopicsResponseEntity response = GetUserTopicsResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+      return response;
+    }
+  }
+
+  Future<UpdateUserTopicsResponseEntity> updateUserTopics(
+      UpdateUserTopicsRequest request) async {
+    try {
+      final response = await apiClient.client().patch(
+            apiClient.getEndpoints.updateUserTopicsEndpoint(request.uuid),
+            data: request.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      final UpdateUserTopicsResponseEntity responseEntity =
+          UpdateUserTopicsResponseEntity.fromJson(response.data);
+      return responseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      final UpdateUserTopicsResponseEntity response =
+          UpdateUserTopicsResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+      return response;
+    }
+  }
 }

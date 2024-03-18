@@ -1,19 +1,19 @@
 class LMCache {
   final String key;
-  final Map<String, dynamic> value;
+  final dynamic value;
 
   LMCache._({required this.key, required this.value});
 }
 
 class LMCacheBuilder {
   String? _key;
-  Map<String, dynamic>? _value;
+  dynamic _value;
 
   void key(String key) {
     _key = key;
   }
 
-  void value(Map<String, dynamic> value) {
+  void value(dynamic value) {
     _value = value;
   }
 
