@@ -157,6 +157,13 @@ class LMFeedClient {
     return await _sdkApplication.getPostApi().postReport(postReportRequest);
   }
 
+  Future<SearchPostResponse> searchPosts(
+      SearchPostRequest searchPostRequest) async {
+    final SearchPostResponse searchPostResponse =
+        await _sdkApplication.getPostApi().searchPosts(searchPostRequest);
+    return searchPostResponse;
+  }
+
   Future<DeleteCommentResponse> deleteComment(
       DeleteCommentRequest deleteCommentRequest) async {
     return await _sdkApplication

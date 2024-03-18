@@ -44,4 +44,9 @@ class PostApi {
       PostReportRequest postReportRequest) async {
     return await postRepository.postReport(postReportRequest);
   }
+
+  Future<SearchPostResponse> searchPosts(
+      SearchPostRequest searchPostRequest) async {
+    return await postRepository.searchPosts(searchPostRequest);
+  }
 }

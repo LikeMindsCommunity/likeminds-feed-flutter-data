@@ -47,6 +47,8 @@ class EndPoints {
 
   String get loggerEndpoint => "$KETTLE_HOST/logs";
 
+  String get searchPostEndpoint => "$KETTLE_HOST/search/post";
+
   String get getUnreadNotificationCountEndpoint =>
       "$KETTLE_HOST/feed/user/activity/unread_count";
 
