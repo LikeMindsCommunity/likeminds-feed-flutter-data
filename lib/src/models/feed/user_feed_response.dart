@@ -114,7 +114,6 @@ Map<String, dynamic> _$GetUserPostResponseEntityToJson(
         'reposted_posts':
             instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
         'filtered_comments': instance.filteredCommentsEntity,
-        'widgets':
-            instance.widgets?.map((k, e) => MapEntry(k, e.toEntity().toJson())),
+        'widgets': instance.widgets?.map((k, e) => MapEntry(k, e.toJson())),
       }
     };
