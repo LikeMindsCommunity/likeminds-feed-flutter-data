@@ -57,7 +57,6 @@ class LMSDKClientInfoRO extends _LMSDKClientInfoRO
   }
 }
 
-// ignore_for_file: type=lint
 class LMUserRO extends _LMUserRO
     with RealmEntity, RealmObjectBase, RealmObject {
   LMUserRO(
@@ -231,7 +230,6 @@ class LMUserRO extends _LMUserRO
   }
 }
 
-// ignore_for_file: type=lint
 class LMMemberRightRO extends _LMMemberRightRO
     with RealmEntity, RealmObjectBase, EmbeddedObject {
   LMMemberRightRO(
@@ -291,7 +289,6 @@ class LMMemberRightRO extends _LMMemberRightRO
   }
 }
 
-// ignore_for_file: type=lint
 class LMMemberStateRO extends _LMMemberStateRO
     with RealmEntity, RealmObjectBase, RealmObject {
   LMMemberStateRO(

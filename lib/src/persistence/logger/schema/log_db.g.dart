@@ -75,7 +75,6 @@ class LMLogDBModel extends _LMLogDBModel
   }
 }
 
-// ignore_for_file: type=lint
 class LMSDKMetaDBModel extends _LMSDKMetaDBModel
     with RealmEntity, RealmObjectBase, RealmObject {
   LMSDKMetaDBModel({
@@ -132,7 +131,6 @@ class LMSDKMetaDBModel extends _LMSDKMetaDBModel
   }
 }
 
-// ignore_for_file: type=lint
 class LMStackTraceDBModel extends _LMStackTraceDBModel
     with RealmEntity, RealmObjectBase, RealmObject {
   LMStackTraceDBModel(
