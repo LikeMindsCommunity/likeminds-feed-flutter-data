@@ -6,7 +6,7 @@ class GetUserTopicsRequest {
   });
 
   Map<String, dynamic> toJson() => {
-        'uuids': uuids.join(','),
+        'uuids': "[${uuids.map((e) => '"$e"').join(',')}]",
       };
 }
 

@@ -9,7 +9,7 @@ class UpdateUserTopicsRequest{
   });
 
   Map<String, dynamic> toJson() => {
-        'topics_id': topicsId,
+        'topic_ids': topicsId,
         'uuid': uuid,
       };
 }
