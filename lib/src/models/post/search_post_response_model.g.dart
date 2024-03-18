@@ -35,9 +35,11 @@ Map<String, dynamic> _$SearchPostResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'posts': instance.posts,
-      'reposted_posts': instance.repostedPosts,
-      'topics': instance.topics,
-      'users': instance.users,
-      'widgets': instance.widgets,
+      'data': {
+        'posts': instance.posts,
+        'reposted_posts': instance.repostedPosts,
+        'topics': instance.topics,
+        'users': instance.users,
+        'widgets': instance.widgets,
+      }
     };
