@@ -104,7 +104,7 @@ class NotificationFeedService implements INotificationFeedService {
       final response = await apiClient.client().get(
             apiClient.getEndpoints.getUserActivityEndpoint(request.uuid),
             queryParameters: request.toJson(),
-             options: Options(
+            options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );

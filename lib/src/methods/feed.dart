@@ -39,9 +39,30 @@ class FeedApi {
     return response;
   }
 
-  Future<GetUserFeedResponse> getUserFeed(GetUserFeedRequest request) async {
-    final GetUserFeedResponse response =
-        await feedRepository.getUserFeed(request);
+  Future<GetUserPostResponse> getUserCreatedPosts(
+      GetUserPostRequest request) async {
+    final GetUserPostResponse response =
+        await feedRepository.getUserCreatedPosts(request);
+    return response;
+  }
+
+  Future<GetSavedPostResponse> getSavedPost(GetSavedPostRequest request) async {
+    final GetSavedPostResponse response =
+        await feedRepository.getSavedPosts(request);
+    return response;
+  }
+
+  Future<UpdateUserTopicsResponse> updateUserTopics(
+      UpdateUserTopicsRequest request) async {
+    final UpdateUserTopicsResponse response =
+        await feedRepository.updateUserTopics(request);
+    return response;
+  }
+
+  Future<GetUserTopicsResponse> getUserTopics(
+      GetUserTopicsRequest request) async {
+    final GetUserTopicsResponse response =
+        await feedRepository.getUserTopics(request);
     return response;
   }
 }

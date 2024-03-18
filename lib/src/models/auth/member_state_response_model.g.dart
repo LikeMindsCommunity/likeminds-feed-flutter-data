@@ -27,9 +27,11 @@ Map<String, dynamic> _$MemberStateResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'created_at': instance.createdAt,
-      'edit_required': instance.editRequired,
-      'member': instance.member?.toJson(),
-      'state': instance.state,
-      'member_rights': instance.memberRights?.map((e) => e.toJson()).toList(),
+      'data': {
+        'created_at': instance.createdAt,
+        'edit_required': instance.editRequired,
+        'member': instance.member?.toJson(),
+        'state': instance.state,
+        'member_rights': instance.memberRights?.map((e) => e.toJson()).toList(),
+      }
     };

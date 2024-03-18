@@ -14,8 +14,8 @@ class GetFeedRequest {
   Map<String, dynamic> toJson() => {
         'page': page,
         'page_size': pageSize,
-        'topic_ids': topicIds,
-        'widget_ids': widgetIds?.toString(),
+        'topic_ids': topicIds?.join(','),
+        'widget_ids': widgetIds?.join(','),
       };
 }
 

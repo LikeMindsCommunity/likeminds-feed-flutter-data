@@ -1,5 +1,4 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/repositories/access_repository.dart';
 import 'package:likeminds_feed/src/repositories/auth_repository.dart';
 import 'package:likeminds_feed/src/repositories/comment_repository.dart';
@@ -9,7 +8,9 @@ import 'package:likeminds_feed/src/repositories/helper_repository.dart';
 import 'package:likeminds_feed/src/repositories/logger_repository.dart';
 import 'package:likeminds_feed/src/repositories/moderation_repository.dart';
 import 'package:likeminds_feed/src/repositories/activity.dart';
+import 'package:likeminds_feed/src/repositories/persistence_repository.dart';
 import 'package:likeminds_feed/src/repositories/post_repository.dart';
+import 'package:likeminds_feed/src/repositories/user_repository.dart';
 import 'package:likeminds_feed/src/repositories/widget_repository.dart';
 import 'package:likeminds_feed/src/services/access_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
@@ -22,8 +23,10 @@ import 'package:likeminds_feed/src/services/logger_service.dart';
 import 'package:likeminds_feed/src/services/moderation_service.dart';
 import 'package:likeminds_feed/src/services/activity_service.dart';
 import 'package:likeminds_feed/src/services/notification_service.dart';
+import 'package:likeminds_feed/src/services/persistence_service.dart';
 import 'package:likeminds_feed/src/services/post_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:likeminds_feed/src/services/user_service.dart';
 import 'package:likeminds_feed/src/services/widgets_service.dart';
 
 /// Dependency Injection Service
@@ -100,6 +103,13 @@ class DIService {
     LoggerRepository loggerRepository =
         LoggerRepository(loggerService: loggerService);
 
+    PersistenceService persistenceService = PersistenceService();
+    PersistenceRepository persistenceRepository =
+        PersistenceRepository(persistenceService: persistenceService);
+
+    UserService userService = UserService(apiClient: apiClient);
+    UserRepository userRepository = UserRepository(userService: userService);
+
     // Register all the dependencies in the getIt instance
     getIt.registerFactory<ApiClient>(() => apiClient,
         instanceName: kInstanceAPIClient);
@@ -147,6 +157,13 @@ class DIService {
       () => loggerRepository,
       instanceName: kInstanceLoggerRepository,
     );
+    getIt.registerFactory<PersistenceRepository>(() => persistenceRepository,
+        instanceName: kInstancePersistenceRepository);
+
+    getIt.registerFactory<UserRepository>(
+      () => userRepository,
+      instanceName: kInstanceUserRepository,
+    );
   }
 
   // Get the static instance of GetIt to get the dependencies
@@ -162,9 +179,11 @@ class DIService {
   static const String kInstancePostRepository = 'post_repository';
   static const String kInstanceMediaRepository = 'media_repository';
   static const String kInstanceHelperRepository = 'helper_repository';
+  static const String kInstancePersistenceRepository = 'persistence_repository';
   static const String kInstanceModerationRepository = 'moderation_repository';
   static const String kInstanceNotificationFeedRepository =
       'notification_feed_repository';
   static const String kInstanceWidgetRepository = 'widget_repository';
   static const String kInstanceLoggerRepository = 'logger_repository';
+  static const String kInstanceUserRepository = 'user_repository';
 }

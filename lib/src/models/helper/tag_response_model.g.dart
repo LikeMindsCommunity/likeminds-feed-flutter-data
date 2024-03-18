@@ -25,6 +25,8 @@ Map<String, dynamic> _$GetTaggingListResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'group_tags': instance.groupTags,
-      'community_members': instance.members,
+      'data': {
+        'group_tags': instance.groupTags?.map((e) => e.toJson()).toList(),
+        'community_members': instance.members?.map((e) => e.toJson()).toList(),
+      }
     };

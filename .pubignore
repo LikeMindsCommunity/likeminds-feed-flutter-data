@@ -5,3 +5,4 @@ pubspec.lock
 .env.dev
 .env.prod
 test/.env.test
+.fvm

@@ -50,6 +50,8 @@ class EndPoints {
   String get getUnreadNotificationCountEndpoint =>
       "$KETTLE_HOST/feed/user/activity/unread_count";
 
+  String get getUserTopicsEndpoint => "$KETTLE_HOST/feed/user/topics";
+
   String getUserActivityEndpoint(String uuid) =>
       "$KETTLE_HOST/feed/user/$uuid/activity";
 
@@ -60,8 +62,20 @@ class EndPoints {
     return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";
   }
 
-  String getUserFeedEndPoint(String uuid) {
+  String getUserSavedPostEndPoint(String uuid) {
+    return "$feedUrl/user/$uuid/save";
+  }
+
+  String getUserCreatedPosts(String uuid) {
     return "$feedUrl/user/$uuid/post";
+  }
+
+  String getUserFeedMetaEndPoint(String uuid) {
+    return "$feedUrl/user/$uuid/meta";
+  }
+
+  String getUserCreatedCommentsEndPoint(String uuid) {
+    return "$feedUrl/user/$uuid/comment";
   }
 
   String getAddCommentEndPoint(String postId) {
@@ -91,5 +105,9 @@ class EndPoints {
   String editCommentReplyEndPoint(
       String commentId, String postId, String replyId) {
     return "$feedUrl/post/$postId/comment/$replyId";
+  }
+
+  String updateUserTopicsEndpoint(String uuid) {
+    return "$KETTLE_HOST/feed/user/$uuid/topics";
   }
 }

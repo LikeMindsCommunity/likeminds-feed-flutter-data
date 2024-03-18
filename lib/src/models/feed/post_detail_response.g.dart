@@ -37,7 +37,15 @@ PostDetailResponseEntity _$PostDetailResponseEntityFromJson(
 Map<String, dynamic> _$PostDetailResponseEntityToJson(
         PostDetailResponseEntity instance) =>
     <String, dynamic>{
-      'post': instance.postReplies?.toJson(),
-      'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
-      'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+      'success': instance.success,
+      'error_message': instance.errorMessage,
+      'data': {
+        'post': instance.postReplies?.toJson(),
+        'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
+        'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+        'widgets':
+            instance.widgets?.map((k, e) => MapEntry(k, e.toEntity().toJson())),
+        'reposted_posts':
+            instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
+      }
     };

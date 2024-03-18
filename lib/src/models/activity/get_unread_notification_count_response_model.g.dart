@@ -20,5 +20,7 @@ Map<String, dynamic> _$GetUnreadNotificationCountResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'errorMessage': instance.errorMessage,
-      'count': instance.count,
+      'data': {
+        'count': instance.count,
+      }
     };

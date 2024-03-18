@@ -13,8 +13,10 @@ UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       isGuest: json['is_guest'] as bool?,
       uuid: json['uuid'] as String,
       organisationName: json['organisation_name'] as String?,
-      sdkClientInfo: SDKClientInfo.fromJson(
-          json['sdk_client_info'] as Map<String, dynamic>),
+      sdkClientInfoEntity: json['sdk_client_info'] == null
+          ? null
+          : SDKClientInfoEntity.fromJson(
+              json['sdk_client_info'] as Map<String, dynamic>),
       updatedAt: json['updated_at'] as int?,
       isOwner: json['is_owner'] as bool?,
       customTitle: json['custom_title'] as String?,
@@ -34,7 +36,7 @@ Map<String, dynamic> _$UserEntityToJson(UserEntity instance) =>
       'is_guest': instance.isGuest,
       'uuid': instance.uuid,
       'organisation_name': instance.organisationName,
-      'sdk_client_info': instance.sdkClientInfo,
+      'sdk_client_info': instance.sdkClientInfoEntity,
       'updated_at': instance.updatedAt,
       'is_owner': instance.isOwner,
       'custom_title': instance.customTitle,

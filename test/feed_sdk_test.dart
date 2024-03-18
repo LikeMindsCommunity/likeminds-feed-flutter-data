@@ -81,12 +81,12 @@ void main() {
     });
 
     test('Testing Get Feed Room', () async {
-      GetUserFeedRequest request = (GetUserFeedRequestBuilder()
+      GetUserPostRequest request = (GetUserPostRequestBuilder()
             ..page(1)
             ..pageSize(10)
             ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
-      GetUserFeedResponse? response = await client.getUserFeed(request);
+      GetUserPostResponse? response = await client.getUserCreatedPosts(request);
       expect(response.success, true);
     });
 
@@ -173,6 +173,26 @@ void main() {
       SavePostRequest request =
           (SavePostRequestBuilder()..postId(postId ?? "")).build();
       SavePostResponse response = await client.savePost(request);
+      expect(response.success, true);
+    });
+
+    test('Testing Get Saved Post', () async {
+      GetSavedPostRequest request = (GetSavedPostRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..uuid('anuj'))
+          .build();
+      GetSavedPostResponse response = await client.getSavedPost(request);
+      expect(response.success, true);
+    });
+
+    test('Testing Get Saved Post', () async {
+      GetSavedPostRequest request = (GetSavedPostRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..uuid('anuj'))
+          .build();
+      GetSavedPostResponse response = await client.getSavedPost(request);
       expect(response.success, true);
     });
 

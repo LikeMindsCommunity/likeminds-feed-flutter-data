@@ -36,9 +36,15 @@ Map<String, dynamic> _$GetUserActivityResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'activities': instance.activities,
-      'users': instance.users,
-      'topics': instance.topics,
-      'widgets': instance.widgets,
-      'reposted_posts': instance.repostedPosts,
+      'data': {
+        'activities': instance.activities?.map((e) => e.toJson()).toList(),
+        'users':
+            instance.users?.map((key, value) => MapEntry(key, value.toJson())),
+        'topics':
+            instance.topics?.map((key, value) => MapEntry(key, value.toJson())),
+        'widgets': instance.widgets
+            ?.map((key, value) => MapEntry(key, value.toJson())),
+        'reposted_posts': instance.repostedPosts
+            ?.map((key, value) => MapEntry(key, value.toJson())),
+      }
     };

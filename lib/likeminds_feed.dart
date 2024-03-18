@@ -70,9 +70,30 @@ class LMFeedClient {
     return response;
   }
 
-  Future<GetUserFeedResponse> getUserFeed(GetUserFeedRequest request) async {
-    final GetUserFeedResponse response =
-        await _sdkApplication.getFeedApi().getUserFeed(request);
+  Future<GetUserFeedMetaResponse> getUserFeedMeta(
+      GetUserFeedMetaRequest request) async {
+    final GetUserFeedMetaResponse response =
+        await _sdkApplication.getUserApi().getUserFeedMeta(request);
+    return response;
+  }
+
+  Future<GetUserPostResponse> getUserCreatedPosts(
+      GetUserPostRequest request) async {
+    final GetUserPostResponse response =
+        await _sdkApplication.getFeedApi().getUserCreatedPosts(request);
+    return response;
+  }
+
+  Future<GetUserCommentsResponse> getUserCreatedComments(
+      GetUserCommentsRequest request) async {
+    final GetUserCommentsResponse response =
+        await _sdkApplication.getCommentApi().getUserCreatedComments(request);
+    return response;
+  }
+
+  Future<GetSavedPostResponse> getSavedPost(GetSavedPostRequest request) async {
+    final GetSavedPostResponse response =
+        await _sdkApplication.getFeedApi().getSavedPost(request);
     return response;
   }
 
@@ -266,6 +287,20 @@ class LMFeedClient {
     return response;
   }
 
+  Future<UpdateUserTopicsResponse> updateUserTopics(
+      UpdateUserTopicsRequest request) async {
+    final UpdateUserTopicsResponse response =
+        await _sdkApplication.getFeedApi().updateUserTopics(request);
+    return response;
+  }
+
+  Future<GetUserTopicsResponse> getUserTopics(
+      GetUserTopicsRequest request) async {
+    final GetUserTopicsResponse response =
+        await _sdkApplication.getFeedApi().getUserTopics(request);
+    return response;
+  }
+
   Future<GetWidgetResponse> getWidgets(GetWidgetRequest request) async {
     final GetWidgetResponse response =
         await _sdkApplication.getWidgetApi().getWidgets(request);
@@ -276,6 +311,75 @@ class LMFeedClient {
     final PushLogResponse response =
         await _sdkApplication.getLoggerApi().pushLogs(request: request);
     return response;
+  }
+
+  Future<LMResponse<void>> insertOrUpdateLoggedInUser(User user) async {
+    return _sdkApplication.getPersistenceApi().insertOrUpdateUser(user);
+  }
+
+  LMResponse<User> getLoggedInUser() {
+    return _sdkApplication.getPersistenceApi().getUserDB();
+  }
+
+  Future<LMResponse<void>> deleteLoggedInUser() async {
+    return _sdkApplication.getPersistenceApi().deleteUserDB();
+  }
+
+  Future<LMResponse<void>> insertOrUpdateCache(LMCache cache) async {
+    return _sdkApplication
+        .getPersistenceApi()
+        .insertOrUpdateValueInCache(cache);
+  }
+
+  Future<LMResponse<void>> deleteCache(String key) async {
+    return _sdkApplication.getPersistenceApi().deleteCache(key);
+  }
+
+  LMResponse<LMCache> getCache(String key) {
+    return _sdkApplication.getPersistenceApi().getCache(key);
+  }
+
+  Future<LMResponse<void>> clearCache() async {
+    return _sdkApplication.getPersistenceApi().clearCache();
+  }
+
+  Future<LMResponse<void>> insertOrUpdateCommunityConfigurationsDB(
+      List<CommunityConfigurations> communityConfigurations) async {
+    return await _sdkApplication
+        .getPersistenceApi()
+        .insertOrUpdateCommunityConfigurationDB(communityConfigurations);
+  }
+
+  LMResponse<CommunityConfigurations> getCommunityConfigurationsDB(
+      String type) {
+    return _sdkApplication
+        .getPersistenceApi()
+        .getCommunityConfigurationDB(type);
+  }
+
+  Future<LMResponse<void>> deleteCommunityConfigurationsDB(String type) async {
+    return _sdkApplication
+        .getPersistenceApi()
+        .deleteCommunityConfigurationDB(type);
+  }
+
+  Future<LMResponse<void>> clearCommunityConfigurationsDB() async {
+    return _sdkApplication.getPersistenceApi().clearCommunityConfigurationDB();
+  }
+
+  Future<LMResponse<void>> insertOrUpdateLoggedInMemberState(
+      MemberStateResponse memberStateResponse) async {
+    return await _sdkApplication
+        .getPersistenceApi()
+        .insertOrUpdateMemberState(memberStateResponse);
+  }
+
+  LMResponse<MemberStateResponse> getLoggedInMemberState() {
+    return _sdkApplication.getPersistenceApi().getMemberState();
+  }
+
+  Future<LMResponse<void>> deleteLoggedInMemberState() async {
+    return await _sdkApplication.getPersistenceApi().deleteMemberState();
   }
 }
 

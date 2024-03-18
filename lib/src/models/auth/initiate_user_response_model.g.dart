@@ -31,11 +31,13 @@ Map<String, dynamic> _$InitiateUserResponseEntityToJson(
         InitiateUserResponseEntity instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'app_access': instance.appAccess,
-      'user': instance.user?.toJson(),
-      'community': instance.community?.toJson(),
-      'logout_response': instance.logoutResponse,
-      'access_token': instance.accessToken,
-      'refresh_token': instance.refreshToken,
+      'data': {
+        'app_access': instance.appAccess,
+        'user': instance.user?.toJson(),
+        'community': instance.community?.toJson(),
+        'logout_response': instance.logoutResponse?.toJson(),
+        'access_token': instance.accessToken,
+        'refresh_token': instance.refreshToken,
+      },
       'error_message': instance.errorMessage,
     };
