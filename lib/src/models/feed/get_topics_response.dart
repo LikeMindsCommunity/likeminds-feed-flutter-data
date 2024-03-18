@@ -4,7 +4,7 @@ class GetTopicsResponse {
   final bool success;
   final String? errorMessage;
   final List<Topic>? topics;
-  final Map<String, dynamic>? widgets;
+  final Map<String, WidgetModel>? widgets;
   final Map<String, List<Topic>>? childTopics;
 
   GetTopicsResponse({
@@ -24,7 +24,8 @@ class GetTopicsResponse {
             key,
             value.map((e) => Topic.fromEntity(e)).toList(),
           )),
-      widgets: entity.widgets,
+      widgets: entity.widgets
+          ?.map((key, value) => MapEntry(key, WidgetModel.fromEntity(value))),
     );
   }
 
@@ -33,6 +34,11 @@ class GetTopicsResponse {
       success: success,
       errorMessage: errorMessage,
       topics: topics?.map((e) => e.toEntity()).toList(),
+      widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
+      childTopics: childTopics?.map((key, value) => MapEntry(
+            key,
+            value.map((e) => e.toEntity()).toList(),
+          )),
     );
   }
 }
@@ -41,7 +47,7 @@ class GetTopicsResponseEntity {
   final bool success;
   final String? errorMessage;
   final List<TopicEntity>? topics;
-  final Map<String, dynamic>? widgets;
+  final Map<String, WidgetModelEntity>? widgets;
   final Map<String, List<TopicEntity>>? childTopics;
 
   GetTopicsResponseEntity({
@@ -61,7 +67,8 @@ class GetTopicsResponseEntity {
               .map((e) => TopicEntity.fromJson(e))
               .toList()
           : null,
-      widgets: json['data']['widgets'],
+      widgets: (json['data']['widgets'] as Map<String, dynamic>?)?.map(
+          (key, value) => MapEntry(key, WidgetModelEntity.fromJson(value))),
       childTopics: json['data']['child_topics'] != null
           ? (json['data']['child_topics'] as Map<String, dynamic>).map(
               (key, value) => MapEntry(
@@ -79,7 +86,7 @@ class GetTopicsResponseEntity {
       'error_message': errorMessage,
       'data': {
         'topics': topics?.map((e) => e.toJson()).toList(),
-        'widgets': widgets,
+        'widgets': widgets?.map((key, value) => MapEntry(key, value.toJson())),
         'child_topics': childTopics
             ?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()))),
       }

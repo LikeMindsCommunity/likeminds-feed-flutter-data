@@ -36,10 +36,12 @@ Map<String, dynamic> _$GetSavedPostResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'posts': instance.posts,
-      'reposted_post': instance.repostedPosts,
-      'topics': instance.topics,
-      'widgets': instance.widgets,
-      'users': instance.users,
-      'total_count': instance.totalCount,
+      "data": {
+        'posts': instance.posts,
+        'reposted_post': instance.repostedPosts,
+        'topics': instance.topics,
+        'widgets': instance.widgets,
+        'users': instance.users,
+        'total_count': instance.totalCount,
+      }
     };
