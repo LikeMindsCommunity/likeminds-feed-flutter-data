@@ -28,6 +28,12 @@ SearchPostResponseEntity _$SearchPostResponseEntityFromJson(
         (k, e) =>
             MapEntry(k, WidgetModelEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      userTopics: (json['data']?['user_topics'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+          k,
+          (e as List<dynamic>).map((e) => e.toString()).toList(),
+        ),
+      ),
     );
 
 Map<String, dynamic> _$SearchPostResponseEntityToJson(
@@ -41,5 +47,6 @@ Map<String, dynamic> _$SearchPostResponseEntityToJson(
         'topics': instance.topics,
         'users': instance.users,
         'widgets': instance.widgets,
+        'user_topics': instance.userTopics,
       }
     };

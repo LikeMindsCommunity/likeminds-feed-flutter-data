@@ -29,6 +29,14 @@ GetSavedPostResponseEntity _$GetSavedPostResponseEntityFromJson(
         (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
       ),
       totalCount: json['data']?['total_count'] as int?,
+      filteredComments:
+          (json['data']?['filtered_comments'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, CommentEntity.fromJson(e as Map<String, dynamic>)),
+      ),
+      userTopics: (json['data']?['user_topics'] as Map<String, dynamic>?)?.map(
+          (k, e) => MapEntry(
+              k, (e as List<dynamic>).map((e) => e.toString()).toList())),
     );
 
 Map<String, dynamic> _$GetSavedPostResponseEntityToJson(
@@ -43,5 +51,8 @@ Map<String, dynamic> _$GetSavedPostResponseEntityToJson(
         'widgets': instance.widgets,
         'users': instance.users,
         'total_count': instance.totalCount,
+        'filtered_comments': instance.filteredComments
+            ?.map((key, value) => MapEntry(key, value.toJson())),
+        'user_topics': instance.userTopics,
       }
     };

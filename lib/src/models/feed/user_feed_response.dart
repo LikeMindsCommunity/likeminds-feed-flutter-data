@@ -9,6 +9,7 @@ class GetUserPostResponse {
   final Map<String, WidgetModel>? widgets;
   final Map<String, Post>? repostedPosts;
   final Map<String, Comment>? filteredComments;
+  final Map<String, List<String>>? userTopics;
 
   GetUserPostResponse({
     required this.success,
@@ -19,6 +20,7 @@ class GetUserPostResponse {
     this.widgets,
     this.repostedPosts,
     this.filteredComments,
+    this.userTopics,
   });
 
   factory GetUserPostResponse.fromEntity(
@@ -43,6 +45,23 @@ class GetUserPostResponse {
       ),
       filteredComments: entity.filteredCommentsEntity?.map((key, value) =>
           MapEntry(key, Comment.fromEntity(commentEntity: value))),
+      userTopics: entity.userTopics,
+    );
+  }
+
+  GetUserPostResponseEntity toEntity() {
+    return GetUserPostResponseEntity(
+      success: success,
+      errorMessage: errorMessage,
+      posts: posts?.map((e) => e.toEntity()).toList(),
+      users: users?.map((key, value) => MapEntry(key, value.toEntity())),
+      topics: topics?.map((key, value) => MapEntry(key, value.toEntity())),
+      widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
+      repostedPosts:
+          repostedPosts?.map((key, value) => MapEntry(key, value.toEntity())),
+      filteredCommentsEntity: filteredComments
+          ?.map((key, value) => MapEntry(key, value.toEntity())),
+      userTopics: userTopics,
     );
   }
 }
@@ -56,6 +75,7 @@ class GetUserPostResponseEntity {
   final Map<String, WidgetModelEntity>? widgets;
   final Map<String, PostEntity>? repostedPosts;
   final Map<String, CommentEntity>? filteredCommentsEntity;
+  final Map<String, List<String>>? userTopics;
 
   GetUserPostResponseEntity({
     required this.success,
@@ -66,6 +86,7 @@ class GetUserPostResponseEntity {
     this.widgets,
     this.repostedPosts,
     this.filteredCommentsEntity,
+    this.userTopics,
   });
   factory GetUserPostResponseEntity.fromJson(Map<String, dynamic> data) =>
       _$GetUserPostResponseEntityFromJson(data);
@@ -100,6 +121,12 @@ GetUserPostResponseEntity _$GetUserPostResponseEntityFromJson(
         (k, e) =>
             MapEntry(k, CommentEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      userTopics: (json['data']['user_topics'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+          k,
+          (e as List<dynamic>).map((e) => e.toString()).toList(),
+        ),
+      ),
     );
 
 Map<String, dynamic> _$GetUserPostResponseEntityToJson(
@@ -115,5 +142,6 @@ Map<String, dynamic> _$GetUserPostResponseEntityToJson(
             instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
         'filtered_comments': instance.filteredCommentsEntity,
         'widgets': instance.widgets?.map((k, e) => MapEntry(k, e.toJson())),
+        'user_topics': instance.userTopics,
       }
     };

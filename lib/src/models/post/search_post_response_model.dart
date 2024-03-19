@@ -10,6 +10,7 @@ class SearchPostResponse {
   final Map<String, Topic>? topics;
   final Map<String, User>? users;
   final Map<String, WidgetModel>? widgets;
+  final Map<String, List<String>>? userTopics;
 
   SearchPostResponse({
     required this.success,
@@ -19,6 +20,7 @@ class SearchPostResponse {
     this.topics,
     this.users,
     this.widgets,
+    this.userTopics,
   });
 
   factory SearchPostResponse.fromEntity(SearchPostResponseEntity entity) {
@@ -34,6 +36,7 @@ class SearchPostResponse {
           ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
       widgets: entity.widgets
           ?.map((key, value) => MapEntry(key, WidgetModel.fromEntity(value))),
+      userTopics: entity.userTopics,
     );
   }
 
@@ -47,6 +50,7 @@ class SearchPostResponse {
       topics: topics?.map((key, value) => MapEntry(key, value.toEntity())),
       users: users?.map((key, value) => MapEntry(key, value.toEntity())),
       widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
+      userTopics: userTopics,
     );
   }
 }
@@ -62,6 +66,8 @@ class SearchPostResponseEntity {
   final Map<String, TopicEntity>? topics;
   final Map<String, UserEntity>? users;
   final Map<String, WidgetModelEntity>? widgets;
+  @JsonKey(name: 'user_topics')
+  final Map<String, List<String>>? userTopics;
 
   SearchPostResponseEntity({
     required this.success,
@@ -70,6 +76,7 @@ class SearchPostResponseEntity {
     this.repostedPosts,
     this.topics,
     this.users,
+    this.userTopics,
     this.widgets,
   });
 
