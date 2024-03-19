@@ -24,6 +24,8 @@ GetUserFeedMetaResponseEntity _$GetUserFeedMetaResponseEntityFromJson(
         (k, e) =>
             MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
       ),
+      topics: (json['data']['topics'] as Map<String, dynamic>?)?.map((k, e) =>
+          MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>))),
     );
 
 Map<String, dynamic> _$GetUserFeedMetaResponseEntityToJson(
@@ -34,8 +36,12 @@ Map<String, dynamic> _$GetUserFeedMetaResponseEntityToJson(
       'data': {
         'comments_count': instance.commentsCount,
         'posts_count': instance.postsCount,
-        'users': instance.users,
-        'widgets': instance.widgets,
+        'users':
+            instance.users?.map((key, value) => MapEntry(key, value.toJson())),
+        'widgets': instance.widgets
+            ?.map((key, value) => MapEntry(key, value.toJson())),
         'user_topics': instance.userTopics,
+        'topics':
+            instance.topics?.map((key, value) => MapEntry(key, value.toJson())),
       }
     };

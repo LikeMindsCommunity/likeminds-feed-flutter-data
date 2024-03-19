@@ -11,6 +11,7 @@ class GetUserFeedMetaResponse {
   final Map<String, User>? users;
   final Map<String, WidgetModel>? widgets;
   final Map<String, List<String>>? userTopics;
+  final Map<String, Topic>? topics;
 
   GetUserFeedMetaResponse({
     required this.success,
@@ -20,6 +21,7 @@ class GetUserFeedMetaResponse {
     this.users,
     this.widgets,
     this.userTopics,
+    this.topics,
   });
 
   factory GetUserFeedMetaResponse.fromEntity(
@@ -35,6 +37,9 @@ class GetUserFeedMetaResponse {
       widgets: entity.widgets?.map((key, value) {
         return MapEntry(key, WidgetModel.fromEntity(value));
       }),
+      topics: entity.topics?.map(
+        (key, value) => MapEntry(key, Topic.fromEntity(value)),
+      ),
     );
   }
 
@@ -47,6 +52,9 @@ class GetUserFeedMetaResponse {
       userTopics: userTopics,
       users: users?.map((key, value) => MapEntry(key, value.toEntity())),
       widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
+      topics: topics?.map(
+        (key, value) => MapEntry(key, value.toEntity()),
+      ),
     );
   }
 }
@@ -64,6 +72,8 @@ class GetUserFeedMetaResponseEntity {
   final Map<String, WidgetModelEntity>? widgets;
   @JsonKey(name: 'user_topics')
   final Map<String, List<String>>? userTopics;
+  @JsonKey(name: 'topics')
+  final Map<String, TopicEntity>? topics;
 
   GetUserFeedMetaResponseEntity({
     required this.success,
@@ -73,6 +83,7 @@ class GetUserFeedMetaResponseEntity {
     this.users,
     this.userTopics,
     this.widgets,
+    this.topics,
   });
 
   factory GetUserFeedMetaResponseEntity.fromJson(Map<String, dynamic> json) =>
