@@ -11,6 +11,7 @@ class AddPostResponse {
   final Map<String, Topic>? topics;
   final Map<String, WidgetModel>? widgets;
   final Map<String, Post>? repostedPosts;
+  final Map<String, List<String>>? userTopics;
 
   AddPostResponse({
     required this.success,
@@ -20,6 +21,7 @@ class AddPostResponse {
     required this.topics,
     required this.widgets,
     required this.repostedPosts,
+    this.userTopics,
   });
 
   factory AddPostResponse.fromEntity({required AddPostResponseEntity entity}) {
@@ -41,6 +43,30 @@ class AddPostResponse {
           Post.fromEntity(postEntity: value),
         ),
       ),
+      userTopics: entity.userTopics,
+    );
+  }
+
+  AddPostResponseEntity toEntity() {
+    return AddPostResponseEntity(
+      success: success,
+      errorMessage: errorMessage,
+      post: post,
+      users: user,
+      topics: topics?.map(
+        (key, value) => MapEntry(
+          key,
+          value.toEntity(),
+        ),
+      ),
+      widgets: widgets,
+      repostedPosts: repostedPosts?.map(
+        (key, value) => MapEntry(
+          key,
+          value.toEntity(),
+        ),
+      ),
+      userTopics: userTopics,
     );
   }
 }
@@ -54,6 +80,8 @@ class AddPostResponseEntity {
   final Map<String, WidgetModel>? widgets;
   @JsonKey(name: 'reposted_posts')
   final Map<String, PostEntity>? repostedPosts;
+  @JsonKey(name: 'user_topics')
+  final Map<String, List<String>>? userTopics;
 
   @JsonKey(name: 'error_message')
   final String? errorMessage;
@@ -66,6 +94,7 @@ class AddPostResponseEntity {
     this.topics,
     this.widgets,
     this.repostedPosts,
+    this.userTopics,
   });
 
   factory AddPostResponseEntity.fromJson(Map<String, dynamic> data) =>
