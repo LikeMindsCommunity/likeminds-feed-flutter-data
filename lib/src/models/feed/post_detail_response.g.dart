@@ -22,8 +22,8 @@ PostDetailResponseEntity _$PostDetailResponseEntityFromJson(
     widgets: json['data'] != null &&
             json['data']['widgets'] != null &&
             json['data']['widgets'].isNotEmpty
-        ? ((json['data']['widgets'] as Map<String, dynamic>?)?.map((k, e) =>
-            MapEntry(k, WidgetModel.fromEntity(WidgetModelEntity.fromJson(e)))))
+        ? ((json['data']['widgets'] as Map<String, dynamic>?)
+            ?.map((k, e) => MapEntry(k, WidgetModelEntity.fromJson(e))))
         : null,
     repostedPosts: json['data'] != null &&
             json['data']['reposted_posts'] != null &&
@@ -31,6 +31,12 @@ PostDetailResponseEntity _$PostDetailResponseEntityFromJson(
         ? ((json['data']['reposted_posts'] as Map<String, dynamic>?)
             ?.map((k, e) => MapEntry(k, PostEntity.fromJson(e))))
         : null,
+    userTopics: (json['data']['user_topics'] as Map<String, dynamic>?)?.map(
+      (key, value) => MapEntry(
+        key,
+        (value as List<dynamic>).map((e) => e.toString()).toList(),
+      ),
+    ),
   );
 }
 
@@ -43,9 +49,9 @@ Map<String, dynamic> _$PostDetailResponseEntityToJson(
         'post': instance.postReplies?.toJson(),
         'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
         'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
-        'widgets':
-            instance.widgets?.map((k, e) => MapEntry(k, e.toEntity().toJson())),
+        'widgets': instance.widgets?.map((k, e) => MapEntry(k, e.toJson())),
         'reposted_posts':
             instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
+        'user_topics': instance.userTopics,
       }
     };

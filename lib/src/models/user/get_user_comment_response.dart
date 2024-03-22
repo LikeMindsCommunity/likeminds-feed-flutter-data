@@ -8,6 +8,9 @@ class GetUserCommentsResponse {
   final List<Comment>? comments;
   final Map<String, User>? users;
   final Map<String, Post>? posts;
+  final Map<String, Topic>? topics;
+  final Map<String, WidgetModel>? widgets;
+  final Map<String, List<String>>? userTopics;
 
   GetUserCommentsResponse({
     required this.success,
@@ -15,6 +18,9 @@ class GetUserCommentsResponse {
     this.comments,
     this.users,
     this.posts,
+    this.topics,
+    this.widgets,
+    this.userTopics,
   });
 
   factory GetUserCommentsResponse.fromEntity(
@@ -29,6 +35,11 @@ class GetUserCommentsResponse {
           ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
       posts: entity.posts?.map(
           (key, value) => MapEntry(key, Post.fromEntity(postEntity: value))),
+      topics: entity.topics
+          ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))),
+      widgets: entity.widgets
+          ?.map((key, value) => MapEntry(key, WidgetModel.fromEntity(value))),
+      userTopics: entity.userTopics,
     );
   }
 
@@ -39,6 +50,9 @@ class GetUserCommentsResponse {
       comments: comments?.map((e) => e.toEntity()).toList(),
       users: users?.map((key, value) => MapEntry(key, value.toEntity())),
       posts: posts?.map((key, value) => MapEntry(key, value.toEntity())),
+      topics: topics?.map((key, value) => MapEntry(key, value.toEntity())),
+      widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
+      userTopics: userTopics,
     );
   }
 }
@@ -51,6 +65,10 @@ class GetUserCommentsResponseEntity {
   final List<CommentEntity>? comments;
   final Map<String, UserEntity>? users;
   final Map<String, PostEntity>? posts;
+  final Map<String, TopicEntity>? topics;
+  final Map<String, WidgetModelEntity>? widgets;
+  @JsonKey(name: 'user_topics')
+  final Map<String, List<String>>? userTopics;
 
   GetUserCommentsResponseEntity({
     required this.success,
@@ -58,6 +76,9 @@ class GetUserCommentsResponseEntity {
     this.comments,
     this.users,
     this.posts,
+    this.topics,
+    this.widgets,
+    this.userTopics,
   });
 
   factory GetUserCommentsResponseEntity.fromJson(Map<String, dynamic> json) =>

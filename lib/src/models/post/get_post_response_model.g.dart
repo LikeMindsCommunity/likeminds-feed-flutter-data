@@ -33,6 +33,9 @@ GetPostResponseEntity _$GetPostResponseEntityFromJson(
           ? ((json['data']['reposted_posts'] as Map<String, dynamic>?)
               ?.map((k, e) => MapEntry(k, PostEntity.fromJson(e))))
           : null,
+      userTopics: (json['user_topics'] as Map<String, dynamic>?)?.map(
+          (key, value) => MapEntry(
+              key, (value as List<dynamic>).map((e) => e.toString()).toList())),
     );
 
 Map<String, dynamic> _$GetPostResponseEntityToJson(
@@ -48,5 +51,6 @@ Map<String, dynamic> _$GetPostResponseEntityToJson(
             instance.widgets?.map((k, e) => MapEntry(k, e.toEntity().toJson())),
         'reposted_posts':
             instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
+        'user_topics': instance.userTopics,
       }
     };

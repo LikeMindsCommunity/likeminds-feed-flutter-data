@@ -66,9 +66,10 @@ class LMUserInterface {
       memberState.editRequired!,
       memberState.member!.uuid,
       memberState.state!,
-      member: fromUser(memberState.member!),
+      member: memberState.member != null ? fromUser(memberState.member!) : null,
       memberRights:
-          memberState.memberRights!.map((e) => fromMemberRight(e)).toList(),
+          memberState.memberRights?.map((e) => fromMemberRight(e)).toList() ??
+              [],
     );
   }
 
@@ -84,8 +85,10 @@ class LMUserInterface {
   static MemberStateResponse toMemberState(LMMemberStateRO memberStateDBModel) {
     return MemberStateResponse(
       success: true,
-      editRequired: false,
-      member: LMUserInterface.toUser(memberStateDBModel.member!),
+      editRequired: memberStateDBModel.editRequired,
+      member: memberStateDBModel.member != null
+          ? LMUserInterface.toUser(memberStateDBModel.member!)
+          : null,
       memberRights: memberStateDBModel.memberRights
           .map((e) => LMUserInterface.toMemberRight(e))
           .toList(),
