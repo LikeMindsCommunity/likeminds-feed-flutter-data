@@ -5,8 +5,7 @@ import 'package:likeminds_feed/src/persistence/cache/schema/cache_db.dart';
 
 class CacheInterface {
   static LMCache toCache(CacheRO cache) {
-    Map<String, dynamic> value =
-        jsonDecode(cache.value) as Map<String, dynamic>;
+    dynamic value = jsonDecode(cache.value);
 
     return (LMCacheBuilder()
           ..key(cache.key)
