@@ -115,3 +115,7 @@ Fixed model issues
 # 1.7.1
 
 Migrating to Flutter v3.10.6
+
+# 1.8.0
+
+Added topic categorisation, search in post, user saved post
