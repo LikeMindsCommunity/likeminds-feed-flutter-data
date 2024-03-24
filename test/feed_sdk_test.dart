@@ -79,7 +79,7 @@ void main() {
             ..page(1)
             ..pageSize(10))
           .build();
-      GetFeedResponse? response = await client.getFeed(request);
+      GetFeedResponse response = await client.getUniversalFeed(request);
       expect(response.success, true);
     });
 
