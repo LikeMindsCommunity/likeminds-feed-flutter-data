@@ -1,13 +1,13 @@
 class Answer {
   final String answer;
-  final int memberId;
+  final String uuid;
   final int questionId;
   final int communityId;
   final String? imageUrl;
 
   Answer({
     required this.answer,
-    required this.memberId,
+    required this.uuid,
     required this.questionId,
     required this.communityId,
     this.imageUrl,
@@ -16,7 +16,7 @@ class Answer {
   toJson() {
     return {
       'answer': answer,
-      'member_id': memberId,
+      'uuid': uuid,
       'question_id': questionId,
       'community_id': communityId,
       'image_url': imageUrl,
@@ -26,7 +26,7 @@ class Answer {
   factory Answer.fromEntity(AnswerEntity entity) {
     return Answer(
       answer: entity.answer,
-      memberId: entity.memberId,
+      uuid: entity.uuid,
       questionId: entity.questionId,
       communityId: entity.communityId,
       imageUrl: entity.imageUrl,
@@ -36,14 +36,14 @@ class Answer {
 
 class AnswerEntity {
   final String answer;
-  final int memberId;
+  final String uuid;
   final int questionId;
   final int communityId;
   final String? imageUrl;
 
   AnswerEntity({
     required this.answer,
-    required this.memberId,
+    required this.uuid,
     required this.questionId,
     required this.communityId,
     this.imageUrl,
@@ -52,7 +52,7 @@ class AnswerEntity {
   factory AnswerEntity.fromJson(Map<String, dynamic> json) {
     return AnswerEntity(
       answer: json['answer'],
-      memberId: json['member_id'],
+      uuid: json['uuid'],
       questionId: json['question_id'],
       communityId: json['community_id'],
       imageUrl: json['image_url'],

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:likeminds_feed/src/models/models.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'post_detail_response.g.dart';
@@ -11,6 +10,7 @@ class PostDetailResponse {
   final Map<String, Topic>? topics;
   final Map<String, WidgetModel>? widgets;
   final Map<String, Post>? repostedPosts;
+  final Map<String, List<String>>? userTopics;
 
   PostDetailResponse({
     this.post,
@@ -20,7 +20,9 @@ class PostDetailResponse {
     this.topics,
     this.widgets,
     this.repostedPosts,
+    this.userTopics,
   });
+
   factory PostDetailResponse.fromEntity(PostDetailResponseEntity entity) {
     return PostDetailResponse(
       success: entity.success,
@@ -32,9 +34,32 @@ class PostDetailResponse {
           ?.map((key, value) => MapEntry(key, User.fromEntity(value))),
       topics: entity.topics
           ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))),
-      widgets: entity.widgets,
+      widgets: entity.widgets
+          ?.map((key, value) => MapEntry(key, WidgetModel.fromEntity(value))),
       repostedPosts: entity.repostedPosts?.map(
           (key, value) => MapEntry(key, Post.fromEntity(postEntity: value))),
+      userTopics: entity.userTopics,
+    );
+  }
+
+  PostDetailResponseEntity toEntity() {
+    return PostDetailResponseEntity(
+      success: success,
+      errorMessage: errorMessage,
+      postReplies: post?.toEntity(),
+      users: users?.map((key, value) {
+        return MapEntry(key, value.toEntity());
+      }),
+      topics: topics?.map(
+        (key, value) => MapEntry(
+          key,
+          value.toEntity(),
+        ),
+      ),
+      widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
+      repostedPosts:
+          repostedPosts?.map((key, value) => MapEntry(key, value.toEntity())),
+      userTopics: userTopics,
     );
   }
 }
@@ -47,9 +72,11 @@ class PostDetailResponseEntity {
   final PostEntity? postReplies;
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
-  final Map<String, WidgetModel>? widgets;
+  final Map<String, WidgetModelEntity>? widgets;
   @JsonKey(name: 'reposted_post')
   final Map<String, PostEntity>? repostedPosts;
+  @JsonKey(name: 'user_topics')
+  final Map<String, List<String>>? userTopics;
 
   PostDetailResponseEntity({
     required this.success,
@@ -59,6 +86,7 @@ class PostDetailResponseEntity {
     this.topics,
     this.widgets,
     this.repostedPosts,
+    this.userTopics,
   });
   factory PostDetailResponseEntity.fromJson(Map<String, dynamic> data) =>
       _$PostDetailResponseEntityFromJson(data);

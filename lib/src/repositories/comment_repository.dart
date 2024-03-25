@@ -61,4 +61,11 @@ class CommentRepository {
         await commentService.editCommentReply(request);
     return EditCommentReplyResponse.fromEntity(responseEntity);
   }
+
+  Future<GetUserCommentsResponse> getUserCreatedComments(
+      GetUserCommentsRequest request) async {
+    final GetUserCommentsResponseEntity responseEntity =
+        await commentService.getUserCreatedComments(request);
+    return GetUserCommentsResponse.fromEntity(responseEntity);
+  }
 }

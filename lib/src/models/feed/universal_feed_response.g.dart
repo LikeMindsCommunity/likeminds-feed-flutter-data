@@ -28,12 +28,31 @@ GetFeedResponseEntity _$GetFeedResponseEntityFromJson(
           (json['data']['reposted_posts'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, PostEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      filteredCommentsEntity:
+          (json['data']['filtered_comments'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, CommentEntity.fromJson(e as Map<String, dynamic>)),
+      ),
+      usersTopics: (json['data']['user_topics'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
+      ),
     );
 
 Map<String, dynamic> _$GetFeedResponseEntityToJson(
         GetFeedResponseEntity instance) =>
     <String, dynamic>{
-      'posts': instance.posts?.map((e) => e.toJson()).toList(),
-      'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
-      'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+      'success': instance.success,
+      'error_message': instance.errorMessage,
+      'data': {
+        'posts': instance.posts?.map((e) => e.toJson()).toList(),
+        'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
+        'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+        'widgets': instance.widgets?.map((k, e) => MapEntry(k, e.toJson())),
+        'reposted_posts':
+            instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
+        'filtered_comments': instance.filteredCommentsEntity
+            ?.map((k, e) => MapEntry(k, e.toJson())),
+        'user_topics': instance.usersTopics?.map((k, e) => MapEntry(k, e)),
+      },
     };

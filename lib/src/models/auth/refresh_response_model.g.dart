@@ -20,6 +20,8 @@ Map<String, dynamic> _$RefreshResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'access_token': instance.accessToken,
-      'refresh_token': instance.refreshToken,
+      'data': {
+        'access_token': instance.accessToken,
+        'refresh_token': instance.refreshToken,
+      }
     };

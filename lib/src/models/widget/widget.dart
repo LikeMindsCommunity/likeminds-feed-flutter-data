@@ -75,4 +75,16 @@ class WidgetModelEntity {
       updatedAt: json['updated_at'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      '_lm_meta': lmMeta,
+      'created_at': createdAt,
+      'metadata': metadata,
+      'parent_entity_id': parentEntityId,
+      'parent_entity_type': parentEntityType,
+      'updated_at': updatedAt,
+    };
+  }
 }

@@ -7,7 +7,6 @@ class Comment {
   final String id;
   final bool isLiked;
   final bool isEdited;
-  final String userId;
   final String text;
   final int? level;
   final int likesCount;
@@ -19,12 +18,12 @@ class Comment {
   final Comment? parentComment;
   final String uuid;
   final String? tempId;
+  final String? postId;
 
   Comment({
     required this.id,
     required this.isLiked,
     required this.isEdited,
-    required this.userId,
     required this.text,
     this.level,
     required this.likesCount,
@@ -36,6 +35,7 @@ class Comment {
     required this.parentComment,
     required this.uuid,
     this.tempId,
+    this.postId,
   });
 
   factory Comment.fromEntity({required CommentEntity commentEntity}) {
@@ -43,7 +43,6 @@ class Comment {
       id: commentEntity.id,
       isLiked: commentEntity.isLiked,
       isEdited: commentEntity.isEdited,
-      userId: commentEntity.userId,
       text: commentEntity.text,
       level: commentEntity.level,
       likesCount: commentEntity.likesCount,
@@ -60,12 +59,13 @@ class Comment {
           ? Comment.fromEntity(commentEntity: commentEntity.parentComment!)
           : null,
       uuid: commentEntity.uuid,
+      tempId: commentEntity.tempId,
+      postId: commentEntity.postId,
     );
   }
 
   CommentEntity toEntity() {
     return CommentEntity(
-      userId: userId,
       text: text,
       level: level,
       likesCount: likesCount,
@@ -80,14 +80,13 @@ class Comment {
       parentComment: parentComment?.toEntity(),
       uuid: uuid,
       tempId: tempId,
+      postId: postId,
     );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class CommentEntity {
-  @JsonKey(name: 'user_id')
-  final String userId;
   final String text;
   final int? level;
   @JsonKey(name: 'likes_count')
@@ -112,9 +111,10 @@ class CommentEntity {
   final String uuid;
   @JsonKey(name: 'temp_id')
   final String? tempId;
+  @JsonKey(name: 'post_id')
+  final String? postId;
 
   CommentEntity({
-    required this.userId,
     required this.text,
     this.level,
     required this.likesCount,
@@ -129,6 +129,7 @@ class CommentEntity {
     required this.parentComment,
     required this.uuid,
     this.tempId,
+    this.postId,
   });
 
   factory CommentEntity.fromJson(Map<String, dynamic> data) =>

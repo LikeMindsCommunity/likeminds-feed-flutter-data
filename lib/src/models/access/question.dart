@@ -9,7 +9,7 @@ class Question {
   final bool? isCompulsory;
   final bool? isHidden;
   final String? communityId;
-  final String? memberId;
+  final String? uuid;
   final bool? directoryFields;
   final String? imageUrl;
   final bool? canAddOtherOptions;
@@ -30,7 +30,7 @@ class Question {
     this.isCompulsory,
     this.isHidden,
     this.communityId,
-    this.memberId,
+    this.uuid,
     this.directoryFields,
     this.imageUrl,
     this.canAddOtherOptions,
@@ -52,7 +52,7 @@ class Question {
         'is_compulsory': isCompulsory,
         'is_hidden': isHidden,
         'community_id': communityId,
-        'member_id': memberId,
+        'uuid': uuid,
         'directory_fields': directoryFields,
         'image_url': imageUrl,
         'can_add_options': canAddOtherOptions,
@@ -75,7 +75,7 @@ class Question {
       isCompulsory: entity.isCompulsory,
       isHidden: entity.isHidden,
       communityId: entity.communityId,
-      memberId: entity.memberId,
+      uuid: entity.uuid,
       directoryFields: entity.directoryFields,
       imageUrl: entity.imageUrl,
       canAddOtherOptions: entity.canAddOtherOptions,
@@ -99,7 +99,7 @@ class QuestionEntity {
   final bool? isCompulsory;
   final bool? isHidden;
   final String? communityId;
-  final String? memberId;
+  final String? uuid;
   final bool? directoryFields;
   final String? imageUrl;
   final bool? canAddOtherOptions;
@@ -120,7 +120,7 @@ class QuestionEntity {
     this.isCompulsory,
     this.isHidden,
     this.communityId,
-    this.memberId,
+    this.uuid,
     this.directoryFields,
     this.imageUrl,
     this.canAddOtherOptions,
@@ -143,7 +143,7 @@ class QuestionEntity {
       isCompulsory: json['is_compulsory'],
       isHidden: json['is_hidden'],
       communityId: json['community_id'],
-      memberId: json['member_id'],
+      uuid: json['uuid'],
       directoryFields: json['directory_fields'],
       imageUrl: json['image_url'],
       canAddOtherOptions: json['can_add_options'],

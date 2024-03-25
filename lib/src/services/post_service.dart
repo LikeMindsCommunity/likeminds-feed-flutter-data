@@ -24,6 +24,9 @@ abstract class IPostService {
 
   Future<PostReportResponseEntity> postReport(
       PostReportRequest postReportRequest);
+
+  Future<SearchPostResponseEntity> searchPosts(
+      SearchPostRequest searchPostRequest);
 }
 
 class PostService extends IPostService {
@@ -311,6 +314,37 @@ class PostService extends IPostService {
         errorMessage = e.response!.data['error_message'];
       }
       return PostReportResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
+
+  @override
+  Future<SearchPostResponseEntity> searchPosts(
+      SearchPostRequest searchPostRequest) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.searchPostEndpoint,
+            queryParameters: searchPostRequest.toJson(),
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      debugPrint("Response from search post: ${response.data}");
+      SearchPostResponseEntity searchPostResponseEntity =
+          SearchPostResponseEntity.fromJson(response.data);
+      return searchPostResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return SearchPostResponseEntity(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );

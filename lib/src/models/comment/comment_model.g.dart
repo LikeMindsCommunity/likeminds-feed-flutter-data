@@ -8,7 +8,6 @@ part of 'comment_model.dart';
 
 CommentEntity _$CommentEntityFromJson(Map<String, dynamic> json) =>
     CommentEntity(
-      userId: json['user_id'] as String,
       text: json['text'] as String,
       level: json['level'] as int?,
       likesCount: json['likes_count'] as int,
@@ -31,11 +30,11 @@ CommentEntity _$CommentEntityFromJson(Map<String, dynamic> json) =>
       id: json['_id'],
       isEdited: json['is_edited'],
       isLiked: json['is_liked'],
+      postId: json['post_id'],
     );
 
 Map<String, dynamic> _$CommentEntityToJson(CommentEntity instance) =>
     <String, dynamic>{
-      'user_id': instance.userId,
       'text': instance.text,
       'level': instance.level,
       'likes_count': instance.likesCount,
@@ -50,4 +49,5 @@ Map<String, dynamic> _$CommentEntityToJson(CommentEntity instance) =>
       '_id': instance.id,
       'is_edited': instance.isEdited,
       'is_liked': instance.isLiked,
+      'post_id': instance.postId,
     };

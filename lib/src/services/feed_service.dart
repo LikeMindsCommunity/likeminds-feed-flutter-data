@@ -8,8 +8,6 @@ class FeedService {
 
   FeedService({required this.apiClient});
 
-  // final String authHost = "https://betaauth.likeminds.community/feed/";
-
   Future<PostDetailResponseEntity> getPost(
       PostDetailRequest postDetailRequest) async {
     try {
@@ -161,18 +159,18 @@ class FeedService {
     }
   }
 
-  Future<GetUserFeedResponseEntity> getUserFeed(
-      GetUserFeedRequest request) async {
+  Future<GetUserPostResponseEntity> getUserCreatedPosts(
+      GetUserPostRequest request) async {
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints.getUserFeedEndPoint(request.userId),
+            apiClient.getEndpoints.getUserCreatedPosts(request.uuid),
             queryParameters: request.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
           );
-      final GetUserFeedResponseEntity responseEntity =
-          GetUserFeedResponseEntity.fromJson(response.data);
+      final GetUserPostResponseEntity responseEntity =
+          GetUserPostResponseEntity.fromJson(response.data);
       return responseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
@@ -181,7 +179,90 @@ class FeedService {
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
       }
-      final GetUserFeedResponseEntity response = GetUserFeedResponseEntity(
+      final GetUserPostResponseEntity response = GetUserPostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+      return response;
+    }
+  }
+
+  Future<GetSavedPostResponseEntity> getSavedPost(
+      GetSavedPostRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getUserSavedPostEndPoint(request.uuid),
+            queryParameters: request.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      return GetSavedPostResponseEntity.fromJson(response.data);
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      final GetSavedPostResponseEntity response = GetSavedPostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+      return response;
+    }
+  }
+
+  Future<GetUserTopicsResponseEntity> getUserTopics(
+      GetUserTopicsRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getUserTopicsEndpoint,
+            queryParameters: request.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      final GetUserTopicsResponseEntity responseEntity =
+          GetUserTopicsResponseEntity.fromJson(response.data);
+      return responseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      final GetUserTopicsResponseEntity response = GetUserTopicsResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+      return response;
+    }
+  }
+
+  Future<UpdateUserTopicsResponseEntity> updateUserTopics(
+      UpdateUserTopicsRequest request) async {
+    try {
+      final response = await apiClient.client().patch(
+            apiClient.getEndpoints.updateUserTopicsEndpoint(request.uuid),
+            data: request.toJson(),
+            options: Options(
+              headers: {'Authorization': '${apiClient.accessToken}'},
+            ),
+          );
+      final UpdateUserTopicsResponseEntity responseEntity =
+          UpdateUserTopicsResponseEntity.fromJson(response.data);
+      return responseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      final UpdateUserTopicsResponseEntity response =
+          UpdateUserTopicsResponseEntity(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );

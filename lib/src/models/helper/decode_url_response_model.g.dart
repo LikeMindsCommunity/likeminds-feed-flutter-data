@@ -22,5 +22,7 @@ Map<String, dynamic> _$DecodeUrlResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'og_tags': instance.ogTags,
+      'data': {
+        'og_tags': instance.ogTags?.toJson(),
+      }
     };

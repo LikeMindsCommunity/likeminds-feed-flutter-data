@@ -11,7 +11,7 @@ class Post {
   final List<Attachment>? attachments;
   final int communityId;
   final bool isPinned;
-  final String userId;
+  final String uuid;
   int likeCount;
   int commentCount;
   bool isSaved;
@@ -20,12 +20,15 @@ class Post {
   final DateTime createdAt;
   final DateTime updatedAt;
   final bool isEdited;
-  final List<String>? topics;
+  final List<String>? topicIds;
   final List<Comment>? replies;
   final bool isRepost;
   final bool isRepostedByUser;
   final int repostCount;
   final bool? isDeleted;
+  final String? heading;
+  final List<String>? commentIds;
+  final String? tempId;
 
   Post({
     required this.id,
@@ -33,7 +36,7 @@ class Post {
     required this.attachments,
     required this.communityId,
     required this.isPinned,
-    required this.userId,
+    required this.uuid,
     required this.likeCount,
     required this.isSaved,
     required this.menuItems,
@@ -42,12 +45,15 @@ class Post {
     required this.isLiked,
     required this.commentCount,
     required this.isEdited,
-    required this.topics,
+    required this.topicIds,
     this.replies,
     required this.isRepost,
     required this.isRepostedByUser,
     required this.repostCount,
     this.isDeleted,
+    this.heading,
+    this.commentIds,
+    this.tempId,
   });
 
   factory Post.fromEntity({required PostEntity postEntity}) {
@@ -59,7 +65,7 @@ class Post {
           postEntity.attachments?.map((e) => Attachment.fromEntity(e)).toList(),
       communityId: postEntity.communityId,
       isPinned: postEntity.isPinned,
-      userId: postEntity.userId,
+      uuid: postEntity.uuid,
       likeCount: postEntity.likeCount,
       commentCount: postEntity.commentCount,
       isSaved: postEntity.isSaved,
@@ -67,7 +73,7 @@ class Post {
       menuItems: postEntity.menuItems
           .map((e) => PopupMenuItemModel.fromEntity(entity: e))
           .toList(),
-      topics: postEntity.topics,
+      topicIds: postEntity.topicIds,
       createdAt: DateTime.fromMillisecondsSinceEpoch(postEntity.createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(postEntity.updatedAt),
       replies: postEntity.replies
@@ -77,6 +83,9 @@ class Post {
       isRepostedByUser: postEntity.isRepostedByUser,
       repostCount: postEntity.repostCount,
       isDeleted: postEntity.isDeleted,
+      heading: postEntity.heading,
+      commentIds: postEntity.commentIds,
+      tempId: postEntity.tempId,
     );
   }
 
@@ -88,7 +97,7 @@ class Post {
       attachments: attachments?.map((e) => e.toEntity()).toList(),
       communityId: communityId,
       isPinned: isPinned,
-      userId: userId,
+      uuid: uuid,
       likeCount: likeCount,
       isSaved: isSaved,
       isLiked: isLiked,
@@ -96,12 +105,15 @@ class Post {
       menuItems: menuItems.map((e) => e.toEntity()).toList(),
       createdAt: createdAt.millisecondsSinceEpoch.toInt(),
       updatedAt: updatedAt.millisecondsSinceEpoch.toInt(),
-      topics: topics,
+      topicIds: topicIds,
       replies: replies?.map((e) => e.toEntity()).toList(),
       isRepost: isRepost,
       isRepostedByUser: isRepostedByUser,
       repostCount: repostCount,
       isDeleted: isDeleted,
+      heading: heading,
+      commentIds: commentIds,
+      tempId: tempId,
     );
   }
 }
@@ -122,8 +134,8 @@ class PostEntity {
   final bool isEdited;
   @JsonKey(name: 'comments_count')
   final int commentCount;
-  @JsonKey(name: 'user_id')
-  final String userId;
+  @JsonKey(name: 'uuid')
+  final String uuid;
   @JsonKey(name: 'likes_count')
   final int likeCount;
   @JsonKey(name: 'is_saved')
@@ -134,7 +146,7 @@ class PostEntity {
   final int createdAt;
   @JsonKey(name: 'updated_at')
   final int updatedAt;
-  final List<String>? topics;
+  final List<String>? topicIds;
   @JsonKey(name: "replies")
   final List<CommentEntity>? replies;
   @JsonKey(name: 'is_repost')
@@ -145,28 +157,38 @@ class PostEntity {
   final int repostCount;
   @JsonKey(name: 'is_deleted')
   final bool? isDeleted;
+  final String? heading;
+  @JsonKey(name: 'comment_ids')
+  final List<String>? commentIds;
+  @JsonKey(name: 'temp_id')
+  final String? tempId;
 
-  PostEntity(
-      {required this.id,
-      required this.text,
-      required this.attachments,
-      required this.communityId,
-      required this.isPinned,
-      required this.userId,
-      required this.likeCount,
-      required this.isSaved,
-      required this.menuItems,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.isLiked,
-      required this.commentCount,
-      required this.isEdited,
-      required this.topics,
-      this.replies,
-      required this.isRepost,
-      required this.isRepostedByUser,
-      required this.repostCount,
-      this.isDeleted});
+  PostEntity({
+    required this.id,
+    required this.text,
+    required this.attachments,
+    required this.communityId,
+    required this.isPinned,
+    required this.uuid,
+    required this.likeCount,
+    required this.isSaved,
+    required this.menuItems,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.isLiked,
+    required this.commentCount,
+    required this.isEdited,
+    required this.topicIds,
+    this.replies,
+    required this.isRepost,
+    required this.isRepostedByUser,
+    required this.repostCount,
+    this.isDeleted,
+    this.heading,
+    this.commentIds,
+    this.tempId,
+  });
+
   factory PostEntity.fromJson(Map<String, dynamic> data) =>
       _$PostEntityFromJson(data);
 

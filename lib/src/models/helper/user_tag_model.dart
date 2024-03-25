@@ -9,7 +9,7 @@ class UserTag {
   final String? customTitle;
   final int? id;
   final bool? isGuest;
-  final String? userUniqueId;
+  final String? uuid;
   final SDKClientInfo? sdkClientInfo;
 
   UserTag({
@@ -18,7 +18,7 @@ class UserTag {
     this.customTitle,
     this.id,
     this.isGuest,
-    this.userUniqueId,
+    this.uuid,
     this.sdkClientInfo,
   });
 
@@ -29,8 +29,8 @@ class UserTag {
       customTitle: entity.customTitle,
       id: entity.id,
       isGuest: entity.isGuest,
-      userUniqueId: entity.userUniqueId,
-      sdkClientInfo: entity.sdkClientInfo,
+      uuid: entity.uuid,
+      sdkClientInfo: SDKClientInfo.fromEntity(entity.sdkClientInfoEntity!),
     );
   }
 
@@ -41,8 +41,8 @@ class UserTag {
       customTitle: customTitle,
       id: id,
       isGuest: isGuest,
-      userUniqueId: userUniqueId,
-      sdkClientInfo: sdkClientInfo,
+      uuid: uuid,
+      sdkClientInfoEntity: sdkClientInfo?.toEntity(),
     );
   }
 
@@ -64,11 +64,11 @@ class UserTagEntity {
   @JsonKey(name: 'is_guest')
   final bool? isGuest;
 
-  @JsonKey(name: 'user_unique_id')
-  final String? userUniqueId;
+  @JsonKey(name: 'uuid')
+  final String? uuid;
 
   @JsonKey(name: 'sdk_client_info')
-  final SDKClientInfo? sdkClientInfo;
+  final SDKClientInfoEntity? sdkClientInfoEntity;
 
   UserTagEntity({
     this.name,
@@ -76,8 +76,8 @@ class UserTagEntity {
     this.customTitle,
     this.id,
     this.isGuest,
-    this.userUniqueId,
-    this.sdkClientInfo,
+    this.uuid,
+    this.sdkClientInfoEntity,
   });
 
   factory UserTagEntity.fromJson(Map<String, dynamic> json) =>

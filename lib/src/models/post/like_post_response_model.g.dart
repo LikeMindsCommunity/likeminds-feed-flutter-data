@@ -19,5 +19,7 @@ Map<String, dynamic> _$LikePostResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'likes': instance.likes,
+      'data': {
+        'likes': instance.likes,
+      }
     };

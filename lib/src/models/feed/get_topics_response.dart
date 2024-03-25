@@ -4,11 +4,15 @@ class GetTopicsResponse {
   final bool success;
   final String? errorMessage;
   final List<Topic>? topics;
+  final Map<String, WidgetModel>? widgets;
+  final Map<String, List<Topic>>? childTopics;
 
   GetTopicsResponse({
     required this.success,
     this.errorMessage,
     this.topics,
+    this.widgets,
+    this.childTopics,
   });
 
   factory GetTopicsResponse.fromEntity(GetTopicsResponseEntity entity) {
@@ -16,14 +20,25 @@ class GetTopicsResponse {
       success: entity.success,
       errorMessage: entity.errorMessage,
       topics: entity.topics?.map((e) => Topic.fromEntity(e)).toList(),
+      childTopics: entity.childTopics?.map((key, value) => MapEntry(
+            key,
+            value.map((e) => Topic.fromEntity(e)).toList(),
+          )),
+      widgets: entity.widgets
+          ?.map((key, value) => MapEntry(key, WidgetModel.fromEntity(value))),
     );
   }
 
-  GetTopicsResponseEntity toEntity(GetTopicsResponse response) {
+  GetTopicsResponseEntity toEntity() {
     return GetTopicsResponseEntity(
-      success: response.success,
-      errorMessage: response.errorMessage,
-      topics: response.topics?.map((e) => e.toEntity()).toList(),
+      success: success,
+      errorMessage: errorMessage,
+      topics: topics?.map((e) => e.toEntity()).toList(),
+      widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
+      childTopics: childTopics?.map((key, value) => MapEntry(
+            key,
+            value.map((e) => e.toEntity()).toList(),
+          )),
     );
   }
 }
@@ -32,11 +47,15 @@ class GetTopicsResponseEntity {
   final bool success;
   final String? errorMessage;
   final List<TopicEntity>? topics;
+  final Map<String, WidgetModelEntity>? widgets;
+  final Map<String, List<TopicEntity>>? childTopics;
 
   GetTopicsResponseEntity({
     required this.success,
     this.errorMessage,
     this.topics,
+    this.widgets,
+    this.childTopics,
   });
 
   factory GetTopicsResponseEntity.fromJson(Map<String, dynamic> json) {
@@ -48,6 +67,16 @@ class GetTopicsResponseEntity {
               .map((e) => TopicEntity.fromJson(e))
               .toList()
           : null,
+      widgets: (json['data']['widgets'] as Map<String, dynamic>?)?.map(
+          (key, value) => MapEntry(key, WidgetModelEntity.fromJson(value))),
+      childTopics: json['data']['child_topics'] != null
+          ? (json['data']['child_topics'] as Map<String, dynamic>).map(
+              (key, value) => MapEntry(
+                key,
+                (value as List).map((e) => TopicEntity.fromJson(e)).toList(),
+              ),
+            )
+          : null,
     );
   }
 
@@ -55,7 +84,12 @@ class GetTopicsResponseEntity {
     return {
       'success': success,
       'error_message': errorMessage,
-      'topics': topics?.map((e) => e.toJson()).toList(),
+      'data': {
+        'topics': topics?.map((e) => e.toJson()).toList(),
+        'widgets': widgets?.map((key, value) => MapEntry(key, value.toJson())),
+        'child_topics': childTopics
+            ?.map((key, value) => MapEntry(key, value.map((e) => e.toJson()))),
+      }
     };
   }
 }

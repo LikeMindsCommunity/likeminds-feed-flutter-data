@@ -1,23 +1,23 @@
 class GetProfileRequest {
-  String userUniqueId;
+  String uuid;
 
-  GetProfileRequest._({required this.userUniqueId});
+  GetProfileRequest._({required this.uuid});
 
   Map<String, dynamic> toJson() => {
-        "uuid": userUniqueId,
+        "uuid": uuid,
       };
 }
 
 class GetProfileRequestBuilder {
-  String? _userUniqueId;
+  String? _uuid;
 
-  void userUniqueId(String userUniqueId) {
-    _userUniqueId = userUniqueId;
+  void uuid(String uuid) {
+    _uuid = uuid;
   }
 
   GetProfileRequest build() {
     return GetProfileRequest._(
-      userUniqueId: _userUniqueId!,
+      uuid: _uuid!,
     );
   }
 }

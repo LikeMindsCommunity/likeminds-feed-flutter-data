@@ -62,4 +62,11 @@ class PostRepository {
         await postService.postReport(postReportRequest);
     return PostReportResponse.fromEntity(postReportResponseEntity);
   }
+
+  Future<SearchPostResponse> searchPosts(
+      SearchPostRequest searchPostRequest) async {
+    SearchPostResponseEntity searchPostResponseEntity =
+        await postService.searchPosts(searchPostRequest);
+    return SearchPostResponse.fromEntity(searchPostResponseEntity);
+  }
 }

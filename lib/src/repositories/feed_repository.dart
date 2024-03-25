@@ -42,9 +42,31 @@ class FeedRepository {
     return GetTopicsResponse.fromEntity(responseEntity);
   }
 
-  Future<GetUserFeedResponse> getUserFeed(GetUserFeedRequest request) async {
-    final GetUserFeedResponseEntity responseEntity =
-        await feedService.getUserFeed(request);
-    return GetUserFeedResponse.fromEntity(entity: responseEntity);
+  Future<GetUserPostResponse> getUserCreatedPosts(
+      GetUserPostRequest request) async {
+    final GetUserPostResponseEntity responseEntity =
+        await feedService.getUserCreatedPosts(request);
+    return GetUserPostResponse.fromEntity(entity: responseEntity);
+  }
+
+  Future<GetSavedPostResponse> getSavedPosts(
+      GetSavedPostRequest request) async {
+    final GetSavedPostResponseEntity responseEntity =
+        await feedService.getSavedPost(request);
+    return GetSavedPostResponse.fromEntity(responseEntity);
+  }
+
+  Future<UpdateUserTopicsResponse> updateUserTopics(
+      UpdateUserTopicsRequest request) async {
+    final UpdateUserTopicsResponseEntity responseEntity =
+        await feedService.updateUserTopics(request);
+    return UpdateUserTopicsResponse.fromEntity(responseEntity);
+  }
+
+  Future<GetUserTopicsResponse> getUserTopics(
+      GetUserTopicsRequest request) async {
+    final GetUserTopicsResponseEntity responseEntity =
+        await feedService.getUserTopics(request);
+    return GetUserTopicsResponse.fromEntity(responseEntity);
   }
 }

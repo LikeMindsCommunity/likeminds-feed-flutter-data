@@ -29,7 +29,11 @@ Map<String, dynamic> _$GetFeedOfFeedRoomResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'posts': instance.posts,
-      'users': instance.users,
-      'topics': instance.topics,
+      'data': {
+        'posts': instance.posts?.map((e) => e.toJson()).toList(),
+        'users':
+            instance.users.map((key, value) => MapEntry(key, value.toJson())),
+        'topics':
+            instance.topics.map((key, value) => MapEntry(key, value.toJson())),
+      }
     };

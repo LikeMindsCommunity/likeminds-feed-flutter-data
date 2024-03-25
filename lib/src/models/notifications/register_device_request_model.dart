@@ -1,25 +1,25 @@
 class RegisterDeviceRequest {
   final String token;
   final String deviceId;
-  final int memberId;
+  final String uuid;
 
   RegisterDeviceRequest._({
     required this.token,
     required this.deviceId,
-    required this.memberId,
+    required this.uuid,
   });
 
   Map<String, dynamic> toJson() => {
         'token': token,
         'deviceId': deviceId,
-        'memberId': memberId,
+        'uuid': uuid,
       };
 }
 
 class RegisterDeviceRequestBuilder {
   String? _token;
   String? _deviceId;
-  int? _memberId;
+  String? _uuid;
 
   RegisterDeviceRequestBuilder();
 
@@ -31,15 +31,15 @@ class RegisterDeviceRequestBuilder {
     _deviceId = deviceId;
   }
 
-  void memberId(int memberId) {
-    _memberId = memberId;
+  void uuid(String uuid) {
+    _uuid = uuid;
   }
 
   RegisterDeviceRequest build() {
     return RegisterDeviceRequest._(
       token: _token!,
       deviceId: _deviceId!,
-      memberId: _memberId!,
+      uuid: _uuid!,
     );
   }
 }

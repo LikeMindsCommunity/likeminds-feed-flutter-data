@@ -25,6 +25,10 @@ GetUserActivityResponseEntity _$GetUserActivityResponseEntityFromJson(
         (k, e) =>
             MapEntry(k, WidgetModelEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      repostedPosts:
+          (json['data']['reposted_posts'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, PostEntity.fromJson(e as Map<String, dynamic>)),
+      ),
     );
 
 Map<String, dynamic> _$GetUserActivityResponseEntityToJson(
@@ -32,8 +36,15 @@ Map<String, dynamic> _$GetUserActivityResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'activities': instance.activities,
-      'users': instance.users,
-      'topics': instance.topics,
-      'widgets': instance.widgets,
+      'data': {
+        'activities': instance.activities?.map((e) => e.toJson()).toList(),
+        'users':
+            instance.users?.map((key, value) => MapEntry(key, value.toJson())),
+        'topics':
+            instance.topics?.map((key, value) => MapEntry(key, value.toJson())),
+        'widgets': instance.widgets
+            ?.map((key, value) => MapEntry(key, value.toJson())),
+        'reposted_posts': instance.repostedPosts
+            ?.map((key, value) => MapEntry(key, value.toJson())),
+      }
     };

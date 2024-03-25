@@ -26,6 +26,9 @@ EditPostResponseEntity _$EditPostResponseEntityFromJson(
       topics: (json['data']['topics'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      userTopics: (json['data']['user_topics'] as Map<String, dynamic>?)?.map(
+          (k, e) => MapEntry(
+              k, (e as List<dynamic>).map((e) => e as String).toList())),
       widgets: json['data'] != null &&
               json['data']['widgets'] != null &&
               json['data']['widgets'].isNotEmpty
@@ -49,7 +52,15 @@ Map<String, dynamic> _$EditPostResponseEntityToJson(
     <String, dynamic>{
       'success': instance.success,
       'error_message': instance.errorMessage,
-      'post': instance.post?.toEntity().toJson(),
-      'users': instance.users,
-      'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+      'data': {
+        'post': instance.post?.toEntity().toJson(),
+        'users': instance.users
+            ?.map((key, value) => MapEntry(key, value.toEntity().toJson())),
+        'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
+        'widgets':
+            instance.widgets?.map((k, e) => MapEntry(k, e.toEntity().toJson())),
+        'reposted_posts':
+            instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
+        'user_topics': instance.userTopics?.map((k, e) => MapEntry(k, e)),
+      }
     };

@@ -2,6 +2,8 @@
 /// To run tests, run the following command in the terminal:
 /// flutter test --dart-define=DEBUG=true
 
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
@@ -31,18 +33,24 @@ void main() {
 
     test('Testing Initiate User', () async {
       InitiateUserRequest request = (InitiateUserRequestBuilder()
-            ..userId(prod ? testingProdBotID : testingBetaBotID))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       InitiateUserResponse response = await client.initiateUser(request);
       expect(response.success, true);
+
+      expect(response.user!.sdkClientInfo.uuid,
+          prod ? testingProdBotID : testingBetaBotID);
     });
 
     test('Testing Get Profile', () async {
       GetProfileRequest request = (GetProfileRequestBuilder()
-            ..userUniqueId(prod ? testingProdBotID : testingBetaBotID))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       GetProfileResponse response = await client.getProfile(request);
       expect(response.success, true);
+
+      expect(response.member!.sdkClientInfo.uuid,
+          prod ? testingProdBotID : testingBetaBotID);
     });
 
     test('Testing Edit Profile', () async {
@@ -51,16 +59,19 @@ void main() {
       EditProfileRequest request = (EditProfileRequestBuilder()
             ..name(prod ? testingProdBotID : testingBetaBotID)
             ..imageUrl(currentTimeStamp)
-            ..userUniqueId(prod ? testingProdBotID : testingBetaBotID))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       EditProfileResponse response = await client.editProfile(request);
+      debugPrint("Edit Profile Response: ${response.success}");
       expect(response.success, true);
     });
 
     test('Testing the community configurations APi', () async {
       GetCommunityConfigurationsResponse response =
           await client.getCommunityConfigurations();
-      expect(response, isNotNull);
+      expect(response.success, true);
+
+      expect(response.communityConfigurations, isNotNull);
     });
 
     test('Testing Get Universal Feed', () async {
@@ -68,24 +79,18 @@ void main() {
             ..page(1)
             ..pageSize(10))
           .build();
-      GetFeedResponse? response = await client.getFeed(request);
-      expect(response, isNotNull);
+      GetFeedResponse response = await client.getUniversalFeed(request);
+      expect(response.success, true);
     });
 
     test('Testing Get Feed Room', () async {
-      GetUserFeedRequest request = (GetUserFeedRequestBuilder()
+      GetUserPostRequest request = (GetUserPostRequestBuilder()
             ..page(1)
             ..pageSize(10)
-            ..userId(prod ? testingProdBotID : testingBetaBotID))
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
-      GetUserFeedResponse? response = await client.getUserFeed(request);
-      expect(response, isNotNull);
-      debugPrint('-----------------------------------');
-      debugPrint('${response.success}');
-      debugPrint('${response.posts}');
-      debugPrint('${response.topics}');
-      debugPrint('${response.users}');
-      debugPrint('-----------------------------------');
+      GetUserPostResponse? response = await client.getUserCreatedPosts(request);
+      expect(response.success, true);
     });
 
     test('Testing Get Notification Feed', () async {
@@ -95,13 +100,14 @@ void main() {
           .build();
       GetNotificationFeedResponse? response =
           await client.getNotificationFeed(request);
-      expect(response, isNotNull);
+      expect(response.success, true);
     });
 
     test('Testing Get Unread Count for Notification Feed', () async {
       GetUnreadNotificationCountResponse? response =
           await client.getUnreadNotificationCount();
-      expect(response, isNotNull);
+
+      expect(response.success, true);
     });
 
     test('Testing Get User Activity', () async {
@@ -111,20 +117,31 @@ void main() {
             ..uuid(prod ? testingProdBotID : testingBetaBotID))
           .build();
       GetUserActivityResponse? response = await client.getUserActivity(request);
-      expect(response, isNotNull);
+
+      expect(response.success, true);
     });
 
     test('Testing Add Post', () async {
+      String postText = "Test post from SDK";
+
+      String tempId = "-${DateTime.now().millisecondsSinceEpoch.toString()}";
+
       AddPostRequest request = (AddPostRequestBuilder()
             ..attachments([])
             ..feedroomId(72200)
-            ..text('Test post from SDK'))
+            ..tempId(tempId)
+            ..text(postText))
           .build();
       AddPostResponse response = await client.addPost(request);
       if (response.success) {
         postId = response.post!.id;
       }
-      expect(response, isNotNull);
+
+      expect(response.success, true);
+
+      expect(response.post!.text, postText);
+
+      expect(response.post!.tempId, tempId);
     });
 
     test('Testing Get Post', () async {
@@ -134,28 +151,52 @@ void main() {
             ..postId(postId ?? ""))
           .build();
       GetPostResponse response = await client.getPost(request);
-      expect(response, isNotNull);
+      expect(response.success, true);
+
+      expect(response.post!.id, postId);
     });
 
     test('Testing Like Post', () async {
       LikePostRequest request =
           (LikePostRequestBuilder()..postId(postId ?? "")).build();
       LikePostResponse response = await client.likePost(request);
-      expect(response, isNotNull);
+
+      expect(response.success, true);
     });
 
     test('Testing Pin Post', () async {
       PinPostRequest request =
           (PinPostRequestBuilder()..postId(postId ?? "")).build();
       PinPostResponse response = await client.pinPost(request);
-      expect(response, isNotNull);
+
+      expect(response.success, true);
     });
 
     test('Testing Save Post', () async {
       SavePostRequest request =
           (SavePostRequestBuilder()..postId(postId ?? "")).build();
       SavePostResponse response = await client.savePost(request);
-      expect(response, isNotNull);
+      expect(response.success, true);
+    });
+
+    test('Testing Get Saved Post', () async {
+      GetSavedPostRequest request = (GetSavedPostRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
+          .build();
+      GetSavedPostResponse response = await client.getSavedPost(request);
+      expect(response.success, true);
+    });
+
+    test('Testing Get Saved Post', () async {
+      GetSavedPostRequest request = (GetSavedPostRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..uuid(prod ? testingProdBotID : testingBetaBotID))
+          .build();
+      GetSavedPostResponse response = await client.getSavedPost(request);
+      expect(response.success, true);
     });
 
     test('Testing Edit Post', () async {
@@ -282,13 +323,198 @@ void main() {
       expect(response, isNotNull);
     });
 
+    test('Testing Search Post', () async {
+      SearchPostRequest request = (SearchPostRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..search("test")
+            ..searchType("text"))
+          .build();
+      final response = await client.searchPosts(request);
+
+      log("Search Post Response: ${response.posts?.length}");
+      expect(response.success, true);
+    });
+
+    test('Testing Edit Post', () async {
+      String postEditedText = "Post text edited";
+
+      EditPostRequest request = (EditPostRequestBuilder()
+            ..postId(postId ?? "")
+            ..postText(postEditedText)
+            ..attachments([]))
+          .build();
+      EditPostResponse response = await client.editPost(request);
+      expect(response.success, true);
+
+      expect(response.post!.text, postEditedText);
+
+      expect(response.post!.id, postId);
+    });
+
+    test('Testing Get Post Likes', () async {
+      GetPostLikesRequest request = (GetPostLikesRequestBuilder()
+            ..page(1)
+            ..pageSize(10)
+            ..postId(postId ?? ""))
+          .build();
+      GetPostLikesResponse response = await client.getPostLikes(request);
+      expect(response.success, true);
+    });
+
+    test('Testing Add Comment', () async {
+      String commentText = "Test comment from SDK";
+
+      String tempId = "-${DateTime.now().millisecondsSinceEpoch.toString()}";
+
+      AddCommentRequest request = (AddCommentRequestBuilder()
+            ..postId(postId ?? "")
+            ..text(commentText)
+            ..tempId(tempId))
+          .build();
+      AddCommentResponse response = await client.addComment(request);
+      if (response.success) {
+        commentId = response.reply!.id;
+      }
+      expect(response.success, true);
+
+      expect(response.reply!.text, commentText);
+
+      expect(response.reply!.tempId, tempId);
+    });
+
+    test('Testing Edit Comment', () async {
+      EditCommentRequest request = (EditCommentRequestBuilder()
+            ..postId(postId ?? "")
+            ..commentId(commentId ?? "")
+            ..text("Comment text edited"))
+          .build();
+      EditCommentResponse response = await client.editComment(request);
+      if (response.success) {
+        commentId = response.reply!.id;
+      }
+      expect(response.success, true);
+
+      expect(response.reply!.id, commentId);
+
+      expect(response.reply!.text, "Comment text edited");
+    });
+
+    test('Testing Get Comment', () async {
+      GetCommentRequest request = (GetCommentRequestBuilder()
+            ..postId(postId ?? "")
+            ..commentId(commentId ?? "")
+            ..page(1))
+          .build();
+      GetCommentResponse response = await client.getComment(request);
+
+      expect(response.success, true);
+
+      expect(response.postReplies!.id, commentId);
+    });
+
+    test('Testing Toggle Comment Like', () async {
+      ToggleLikeCommentRequest request = (ToggleLikeCommentRequestBuilder()
+            ..postId(postId ?? "")
+            ..commentId(commentId ?? ""))
+          .build();
+      ToggleLikeCommentResponse response = await client.likeComment(request);
+
+      expect(response.success, true);
+    });
+
+    test('Testing Get Comment Likes', () async {
+      GetCommentLikesRequest request = (GetCommentLikesRequestBuilder()
+            ..commentId(commentId ?? "")
+            ..page(1)
+            ..pageSize(10)
+            ..postId(postId ?? ""))
+          .build();
+      GetCommentLikesResponse response = await client.getCommentLikes(request);
+
+      expect(response.success, true);
+    });
+
+    test('Testing Add Comment Reply', () async {
+      String replyText = "Test comment reply from SDK";
+
+      String tempId = "-${DateTime.now().millisecondsSinceEpoch.toString()}";
+
+      AddCommentReplyRequest request = (AddCommentReplyRequestBuilder()
+            ..commentId(commentId ?? "")
+            ..text(replyText)
+            ..tempId(tempId)
+            ..postId(postId ?? ""))
+          .build();
+      AddCommentReplyResponse response = await client.addCommentReply(request);
+
+      if (response.success) {
+        replyId = response.reply!.id;
+      }
+
+      expect(response.success, true);
+
+      expect(response.reply!.text, replyText);
+
+      expect(response.reply!.tempId, tempId);
+
+      expect(response.reply!.parentComment!.id, commentId);
+    });
+
+    test('Testing Edit Comment Reply', () async {
+      String replyText = "Comment Reply Edited";
+
+      EditCommentReplyRequest request = (EditCommentReplyRequestBuilder()
+            ..commentId(commentId ?? "")
+            ..text(replyText)
+            ..postId(postId ?? "")
+            ..replyId(replyId ?? ""))
+          .build();
+      EditCommentReplyResponse response =
+          await client.editCommentReply(request);
+
+      expect(response.success, true);
+
+      expect(response.reply!.text, replyText);
+
+      expect(response.reply!.parentComment!.id, commentId);
+    });
+
+    test('Testing Delete Comment', () async {
+      DeleteCommentRequest request = (DeleteCommentRequestBuilder()
+            ..commentId(commentId ?? "")
+            ..postId(postId ?? "")
+            ..reason("Reason for deletion"))
+          .build();
+      DeleteCommentResponse response = await client.deleteComment(request);
+
+      expect(response.success, true);
+    });
+
+    test('Testing Delete Post', () async {
+      DeletePostRequest request = (DeletePostRequestBuilder()
+            ..deleteReason("Reason for deletion")
+            ..postId(postId ?? ""))
+          .build();
+      DeletePostResponse response = await client.deletePost(request);
+      expect(response.success, true);
+    });
+
     // logout call without LMSDKCallback
     test('Testing Logout without LMSDKCallback', () async {
+      String deviceId = "deviceId";
+
+      String refreshToken = "refreshToken";
+
       LogoutRequest request = (LogoutRequestBuilder()
-            ..deviceId("deviceId")
-            ..refreshToken("refreshToken"))
+            ..deviceId(deviceId)
+            ..refreshToken(refreshToken))
           .build();
       expect(request, isNotNull);
+
+      expect(request.deviceId, deviceId);
+
+      expect(request.refreshToken, refreshToken);
     });
   });
 }

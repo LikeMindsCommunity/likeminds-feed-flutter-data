@@ -60,4 +60,11 @@ class CommentApi {
         await commentRepository.editCommentReply(request);
     return response;
   }
+
+  Future<GetUserCommentsResponse> getUserCreatedComments(
+      GetUserCommentsRequest request) async {
+    final GetUserCommentsResponse response =
+        await commentRepository.getUserCreatedComments(request);
+    return response;
+  }
 }

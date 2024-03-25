@@ -20,8 +20,8 @@ class HelperRepository {
     return DecodeUrlResponse.fromEntity(response);
   }
 
-  void routeProfilePage(String userId) {
-    helperService.routeProfilePage(userId);
+  void routeProfilePage(String uuid) {
+    helperService.routeProfilePage(uuid);
   }
 
   void routeCompanyPage(String companyId) {

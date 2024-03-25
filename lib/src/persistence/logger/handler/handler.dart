@@ -7,57 +7,38 @@ import 'package:realm/realm.dart';
 // related to Error Logging
 // Accepts a [realm] instance as parameter
 class LogDBHandler {
-  Realm? realm;
   Configuration config;
 
   LogDBHandler({required this.config});
 
-  // checks if realm is closed
-  // if closed, then opens a new realm instance
-  void checkIfRealmClosed() {
-    if (realm == null || realm!.isClosed) {
-      openLoggerRealm();
-    }
-  }
-
-  // Opens a realm instance with all the neccessary schemas
-  void openLoggerRealm() {
-    realm = Realm(config);
-  }
-
-  // Closes the realm instance
-  void closeLoggerRealm() {
-    realm?.close();
-  }
-
   // Accepts [InsertLogRequest] object as parameter
   // Creates a LMLogDBModel object and inserts it in the DB
   void insertLog(InsertLogRequest request) {
-    checkIfRealmClosed();
+    Realm realm = Realm(config);
     LMStackTraceDBModel stackTraceRO = LMStackTraceDBModel(
         request.stackTrace.exception, request.stackTrace.stack);
     LMSDKMetaDBModel sdkMetaRO = LMSDKMetaDBModel(
         sampleAppVersion: request.sdkMeta?.sampleAppVersion ?? '',
         uiVersion: request.sdkMeta?.uiVersion ?? '',
         middlewareVersion: request.sdkMeta?.middlewareVersion ?? '');
-    realm!.write(() {
-      realm!.add(LMLogDBModel(
+    realm.write(() {
+      realm.add(LMLogDBModel(
         request.timestamp,
         request.severity,
         stackTrace: stackTraceRO,
         sdkMeta: sdkMetaRO,
       ));
     });
-    closeLoggerRealm();
+    realm.close();
   }
 
   // Returns a list of LMLogDBModel objects
   // which are older than the timestamp passed as parameter
   GetLogResponse getLogs(int timestamp) {
-    checkIfRealmClosed();
+    Realm realm = Realm(config);
     //RealmResults<LMLogDBModel> realmResults = realm!.all<LMLogDBModel>();
     RealmResults<LMLogDBModel> queryResults =
-        realm!.query<LMLogDBModel>('timestamp <= $timestamp');
+        realm.query<LMLogDBModel>('timestamp <= $timestamp');
 
     // Converting LMLogDBModel to LMLog while
     // Mapping LMLog list with Device Details
@@ -82,20 +63,21 @@ class LogDBHandler {
 
       return lmLogBuilder;
     }).toList();
-    closeLoggerRealm();
+    realm.close();
 
     return (GetLogResponseBuilder()..lmLogsBuilder(lmLogBuilderList)).build();
   }
 
   // Deletes the logs passed as parameter
   void clearLogs(ClearLogRequest request) async {
-    checkIfRealmClosed();
+    Realm realm = Realm(config);
     RealmResults<LMLogDBModel> queryResults =
-        realm!.query<LMLogDBModel>('timestamp <= ${request.timestamp}');
+        realm.query<LMLogDBModel>('timestamp <= ${request.timestamp}');
 
-    realm!.write(() {
-      realm!.deleteMany(queryResults);
+    realm.write(() {
+      realm.deleteMany(queryResults);
     });
-    closeLoggerRealm();
+
+    realm.close();
   }
 }
