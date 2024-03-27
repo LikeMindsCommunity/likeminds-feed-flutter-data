@@ -20,11 +20,6 @@ class HelperService {
     try {
       final response = await apiClient.client().get(
         apiClient.getEndpoints.tagsEndpoint,
-        options: Options(
-          headers: {
-            'x-api-key': apiClient.getApiKey,
-          },
-        ),
         queryParameters: {
           'feedroom_id': request.feedroomId,
           'page': request.page,

@@ -23,11 +23,10 @@ class LMFeedClient {
   // Private constructor
   // User Builder class to get an instance of LMFeedClient
   LMFeedClient._({
-    required String apiKey,
     LMSDKCallback? sdkCallback,
     InitiateLoggerRequest? initiateLoggerRequest,
   }) {
-    DIService.instance.init(apiKey, _prod, sdkCallback);
+    DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
     if (initiateLoggerRequest != null) {
@@ -620,7 +619,6 @@ class LMFeedClientBuilder {
     }
     debugPrint("SDK Initiation point reached");
     return LMFeedClient._(
-      apiKey: _apiKey!,
       sdkCallback: _sdkCallback,
       initiateLoggerRequest: _initiateLoggerRequest,
     );

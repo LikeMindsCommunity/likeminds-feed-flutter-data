@@ -13,11 +13,6 @@ class LoggerService {
     try {
       final response = await apiClient.client().post(
             apiClient.getEndpoints.loggerEndpoint,
-            options: Options(
-              headers: {
-                'x-api-key': apiClient.getApiKey,
-              },
-            ),
             data: request.toJson(),
           );
       if (response.data['success'] == true) {
