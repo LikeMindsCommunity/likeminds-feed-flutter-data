@@ -40,11 +40,12 @@ class LMFeedClient {
   // Initiation APIs
   // Use these to login user, and fetch essential permissions
 
-  /// initiateUser is used to initiate a user session
-  /// [InitiateUserRequest] is used to pass the required parameters
-  /// [InitiateUserResponse] is returned as a Future
-  Future<InitiateUserResponse> initiateUser(InitiateUserRequest request) async {
-    return await _sdkApplication.getAuthApi().initiateUser(request);
+  /// validateUser is used to validate a user session
+  /// [ValidateUserRequest] is used to pass the required parameters
+  /// [ValidateUserResponse] is returned as a Future
+  Future<ValidateUserResponse> validateUser(
+      ValidateUserRequest validateUserRequest) async {
+    return await _sdkApplication.getAuthApi().validateUser(validateUserRequest);
   }
 
   /// refreshUser is used to refresh a user session

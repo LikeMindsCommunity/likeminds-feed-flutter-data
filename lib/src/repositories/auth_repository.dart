@@ -7,10 +7,10 @@ class AuthRepository {
 
   AuthRepository({required this.authService});
 
-  Future<InitiateUserResponse> initiateUser(
-      InitiateUserRequest initiateUserRequest) async {
-    return InitiateUserResponse.fromEntity(
-      await authService.initiateUser(initiateUserRequest),
+  Future<ValidateUserResponse> validateUser(
+      ValidateUserRequest validateUserRequest) async {
+    return ValidateUserResponse.fromEntity(
+      await authService.validateUser(validateUserRequest),
     );
   }
 
