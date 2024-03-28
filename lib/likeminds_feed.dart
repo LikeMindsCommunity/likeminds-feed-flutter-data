@@ -5,7 +5,6 @@ export 'src/methods/methods.dart';
 export 'src/models/models.dart';
 export 'src/persistence/logger/logger.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
@@ -597,13 +596,8 @@ class LMFeedClient {
 }
 
 class LMFeedClientBuilder {
-  String? _apiKey;
   LMSDKCallback? _sdkCallback;
   InitiateLoggerRequest? _initiateLoggerRequest;
-
-  void apiKey(String apiKey) {
-    _apiKey = apiKey;
-  }
 
   void sdkCallback(LMSDKCallback? sdkCallback) {
     _sdkCallback = sdkCallback;
@@ -614,10 +608,6 @@ class LMFeedClientBuilder {
   }
 
   LMFeedClient build() {
-    if (_apiKey == null) {
-      throw Exception("API Key is not provided");
-    }
-    debugPrint("SDK Initiation point reached");
     return LMFeedClient._(
       sdkCallback: _sdkCallback,
       initiateLoggerRequest: _initiateLoggerRequest,

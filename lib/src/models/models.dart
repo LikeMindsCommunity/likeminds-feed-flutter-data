@@ -1,5 +1,3 @@
-export 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
-export 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
 export 'package:likeminds_feed/src/models/auth/refresh_request_model.dart';
 export 'package:likeminds_feed/src/models/auth/refresh_response_model.dart';
 export 'package:likeminds_feed/src/models/auth/user_model.dart';
