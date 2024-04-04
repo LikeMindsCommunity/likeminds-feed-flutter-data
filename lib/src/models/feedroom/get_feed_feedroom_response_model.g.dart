@@ -22,6 +22,23 @@ GetFeedOfFeedRoomResponseEntity _$GetFeedOfFeedRoomResponseEntityFromJson(
                 MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
           ) ??
           {},
+      widgets: (json['data']['widgets'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, WidgetModelEntity.fromJson(e as Map<String, dynamic>)),
+      ),
+      repostedPosts:
+          (json['data']['reposted_posts'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, PostEntity.fromJson(e as Map<String, dynamic>)),
+      ),
+      filteredCommentsEntity:
+          (json['data']['filtered_comments'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, CommentEntity.fromJson(e as Map<String, dynamic>)),
+      ),
+      usersTopics: (json['data']['user_topics'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
+      ),
     );
 
 Map<String, dynamic> _$GetFeedOfFeedRoomResponseEntityToJson(
@@ -35,5 +52,11 @@ Map<String, dynamic> _$GetFeedOfFeedRoomResponseEntityToJson(
             instance.users.map((key, value) => MapEntry(key, value.toJson())),
         'topics':
             instance.topics.map((key, value) => MapEntry(key, value.toJson())),
+        'widgets': instance.widgets?.map((k, e) => MapEntry(k, e.toJson())),
+        'reposted_posts':
+            instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
+        'filtered_comments': instance.filteredCommentsEntity
+            ?.map((k, e) => MapEntry(k, e.toJson())),
+        'user_topics': instance.usersTopics?.map((k, e) => MapEntry(k, e)),
       }
     };
