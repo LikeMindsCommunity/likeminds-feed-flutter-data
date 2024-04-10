@@ -5,7 +5,6 @@ export 'src/methods/methods.dart';
 export 'src/models/models.dart';
 export 'src/persistence/logger/logger.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
@@ -23,11 +22,10 @@ class LMFeedClient {
   // Private constructor
   // User Builder class to get an instance of LMFeedClient
   LMFeedClient._({
-    required String apiKey,
     LMSDKCallback? sdkCallback,
     InitiateLoggerRequest? initiateLoggerRequest,
   }) {
-    DIService.instance.init(apiKey, _prod, sdkCallback);
+    DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
     if (initiateLoggerRequest != null) {
@@ -40,11 +38,12 @@ class LMFeedClient {
   // Initiation APIs
   // Use these to login user, and fetch essential permissions
 
-  /// initiateUser is used to initiate a user session
-  /// [InitiateUserRequest] is used to pass the required parameters
-  /// [InitiateUserResponse] is returned as a Future
-  Future<InitiateUserResponse> initiateUser(InitiateUserRequest request) async {
-    return await _sdkApplication.getAuthApi().initiateUser(request);
+  /// validateUser is used to validate a user session
+  /// [ValidateUserRequest] is used to pass the required parameters
+  /// [ValidateUserResponse] is returned as a Future
+  Future<ValidateUserResponse> validateUser(
+      ValidateUserRequest validateUserRequest) async {
+    return await _sdkApplication.getAuthApi().validateUser(validateUserRequest);
   }
 
   /// refreshUser is used to refresh a user session
@@ -597,13 +596,8 @@ class LMFeedClient {
 }
 
 class LMFeedClientBuilder {
-  String? _apiKey;
   LMSDKCallback? _sdkCallback;
   InitiateLoggerRequest? _initiateLoggerRequest;
-
-  void apiKey(String apiKey) {
-    _apiKey = apiKey;
-  }
 
   void sdkCallback(LMSDKCallback? sdkCallback) {
     _sdkCallback = sdkCallback;
@@ -614,12 +608,7 @@ class LMFeedClientBuilder {
   }
 
   LMFeedClient build() {
-    if (_apiKey == null) {
-      throw Exception("API Key is not provided");
-    }
-    debugPrint("SDK Initiation point reached");
     return LMFeedClient._(
-      apiKey: _apiKey!,
       sdkCallback: _sdkCallback,
       initiateLoggerRequest: _initiateLoggerRequest,
     );

@@ -11,13 +11,13 @@ class AuthApi {
     required this.authRepository,
   });
 
-  /// Initiate a user
-  /// Initiates a user, and logs in
-  /// Returns [InitiateUserResponse]
-  /// Takes [InitiateUserRequest] as input
-  Future<InitiateUserResponse> initiateUser(
-      InitiateUserRequest initiateUserRequest) async {
-    return await authRepository.initiateUser(initiateUserRequest);
+  /// Validate a user
+  /// Validates a user
+  /// Returns [ValidateUserResponse]
+  /// Takes [ValidateUserRequest] as input
+  Future<ValidateUserResponse> validateUser(
+      ValidateUserRequest validateUserRequest) async {
+    return await authRepository.validateUser(validateUserRequest);
   }
 
   /// Refresh a user

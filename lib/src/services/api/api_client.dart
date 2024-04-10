@@ -10,7 +10,6 @@ import 'package:likeminds_feed/src/services/api/log_interceptor.dart';
 /// Also acts as the token manager class
 /// to manage access and refresh tokens
 class ApiClient {
-  final String apiKey;
   final bool isProduction;
   late final EndPoints endPoints;
 
@@ -20,7 +19,6 @@ class ApiClient {
   int? communityId;
 
   ApiClient({
-    required this.apiKey,
     required this.isProduction,
   }) {
     endPoints = EndPoints.instance(isProduction);
@@ -33,7 +31,6 @@ class ApiClient {
   int? get getCommunityId => communityId;
   String? get getAccessToken => accessToken;
   String? get getRefreshToken => refreshToken;
-  String get getApiKey => apiKey;
   bool get getIsProduction => isProduction;
   EndPoints get getEndpoints => endPoints;
 
