@@ -49,4 +49,19 @@ class PostApi {
       SearchPostRequest searchPostRequest) async {
     return await postRepository.searchPosts(searchPostRequest);
   }
+
+  Future<LMResponse<void>> submitPollVote(
+      SubmitPollVoteRequest submitPollVoteRequest) async {
+    return await postRepository.submitPollVote(submitPollVoteRequest);
+  }
+
+  Future<LMResponse<AddPollOptionResponse>> addPollOption(
+      AddPollOptionRequest addPollOptionRequest) async {
+    return await postRepository.addPollOption(addPollOptionRequest);
+  }
+
+  Future<LMResponse<GetVotesResponse>> getPollVotes(
+      GetPollVotesRequest getVotesRequest) async {
+    return await postRepository.getPollVotes(getVotesRequest);
+  }
 }

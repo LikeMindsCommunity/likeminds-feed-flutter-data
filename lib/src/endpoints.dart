@@ -112,4 +112,16 @@ class EndPoints {
   String updateUserTopicsEndpoint(String uuid) {
     return "$KETTLE_HOST/feed/user/$uuid/topics";
   }
+
+  String getSubmitPollVoteEndPoint(String pollId) {
+    return "$KETTLE_HOST/poll/$pollId/vote";
+  }
+
+  String getAddPollOptionEndPoint(String pollId) {
+    return "$KETTLE_HOST/poll/$pollId";
+  }
+
+  String getPollVotesEndPoint(String pollId) {
+    return "$KETTLE_HOST/poll/$pollId/vote";
+  }
 }

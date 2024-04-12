@@ -11,10 +11,8 @@ EditCommentResponseEntity _$EditCommentResponseEntityFromJson(
     EditCommentResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      reply: Comment.fromEntity(
-        commentEntity: CommentEntity.fromJson(
-          json['data']['comment'] ?? {},
-        ),
+      reply: CommentEntity.fromJson(
+        json['data']['comment'] ?? {},
       ),
     );
 
@@ -24,6 +22,6 @@ Map<String, dynamic> _$EditCommentResponseEntityToJson(
       'success': instance.success,
       'error_message': instance.errorMessage,
       'data': {
-        'comment': instance.reply?.toEntity().toJson(),
+        'comment': instance.reply?.toJson(),
       },
     };

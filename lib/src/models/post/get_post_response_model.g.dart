@@ -23,9 +23,8 @@ GetPostResponseEntity _$GetPostResponseEntityFromJson(
       widgets: json['data'] != null &&
               json['data']['widgets'] != null &&
               json['data']['widgets'].isNotEmpty
-          ? ((json['data']['widgets'] as Map<String, dynamic>?)?.map((k, e) =>
-              MapEntry(
-                  k, WidgetModel.fromEntity(WidgetModelEntity.fromJson(e)))))
+          ? ((json['data']['widgets'] as Map<String, dynamic>?)
+              ?.map((k, e) => MapEntry(k, WidgetModelEntity.fromJson(e))))
           : null,
       repostedPosts: json['data'] != null &&
               json['data']['reposted_posts'] != null &&
@@ -47,8 +46,7 @@ Map<String, dynamic> _$GetPostResponseEntityToJson(
         'post': instance.post?.toJson(),
         'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
         'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
-        'widgets':
-            instance.widgets?.map((k, e) => MapEntry(k, e.toEntity().toJson())),
+        'widgets': instance.widgets?.map((k, e) => MapEntry(k, e.toJson())),
         'reposted_posts':
             instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
         'user_topics': instance.userTopics,

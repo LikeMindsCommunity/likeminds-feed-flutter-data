@@ -69,4 +69,38 @@ class PostRepository {
         await postService.searchPosts(searchPostRequest);
     return SearchPostResponse.fromEntity(searchPostResponseEntity);
   }
+
+  Future<LMResponse<void>> submitPollVote(
+      SubmitPollVoteRequest submitPollVoteRequest) async {
+    return await postService.submitPollVote(submitPollVoteRequest);
+  }
+
+  Future<LMResponse<AddPollOptionResponse>> addPollOption(
+      AddPollOptionRequest addPollOptionRequest) async {
+    final addPollOptionResponseEntity =
+        await postService.addPollOption(addPollOptionRequest);
+    return LMResponse(
+      success: addPollOptionResponseEntity.success,
+      errorMessage: addPollOptionResponseEntity.errorMessage,
+      data: addPollOptionResponseEntity.data != null
+          ? AddPollOptionResponse.fromEntity(
+              addPollOptionResponseEntity.data!,
+            )
+          : null,
+    );
+  }
+
+  Future<LMResponse<GetVotesResponse>> getPollVotes(
+      GetPollVotesRequest request) async {
+    final getVotesResponseEntity = await postService.getPollVotes(request);
+    return LMResponse(
+      success: getVotesResponseEntity.success,
+      errorMessage: getVotesResponseEntity.errorMessage,
+      data: getVotesResponseEntity.data != null
+          ? GetVotesResponse.fromEntity(
+              getVotesResponseEntity.data!,
+            )
+          : null,
+    );
+  }
 }

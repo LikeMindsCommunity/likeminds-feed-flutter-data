@@ -78,7 +78,9 @@ class GetSavedPostResponseEntity {
   final Map<String, UserEntity>? users;
   @JsonKey(name: 'total_count')
   final int? totalCount;
+  @JsonKey(name: 'filtered_comments')
   final Map<String, CommentEntity>? filteredComments;
+  @JsonKey(name: 'user_topics')
   final Map<String, List<String>>? userTopics;
 
   GetSavedPostResponseEntity({

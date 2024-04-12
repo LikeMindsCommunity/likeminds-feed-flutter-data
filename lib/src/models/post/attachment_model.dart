@@ -45,6 +45,9 @@ class AttachmentEntity {
   Map<String, dynamic> toJson() => _$AttachmentEntityToJson(this);
 }
 
+// enum PollMultiSelectState { exactly, atMax, atLeast }
+// enum PollType { instant, deferred }
+
 class AttachmentMeta {
   final String? url;
   final String? format;
@@ -57,6 +60,14 @@ class AttachmentMeta {
   final double? aspectRatio;
   final Map<String, dynamic>? meta;
   final String? entityId;
+  final String? pollQuestion;
+  final int? expiryTime;
+  final List<String>? pollOptions;
+  final String? multiSelectState;
+  final String? pollType;
+  final int? multiSelectNo;
+  final bool? isAnonymous;
+  final bool? allowAddOption;
 
   AttachmentMeta({
     this.url,
@@ -70,6 +81,14 @@ class AttachmentMeta {
     this.height,
     this.meta,
     this.entityId,
+    this.pollQuestion,
+    this.expiryTime,
+    this.pollOptions,
+    this.multiSelectState,
+    this.pollType,
+    this.multiSelectNo,
+    this.isAnonymous,
+    this.allowAddOption,
   });
 
   factory AttachmentMeta.fromEntity(AttachmentMetaEntity entity) {
@@ -85,6 +104,14 @@ class AttachmentMeta {
       meta: entity.meta,
       ogTags: entity.ogTags != null ? OgTags.fromEntity(entity.ogTags!) : null,
       entityId: entity.entityId,
+      pollQuestion: entity.pollQuestion,
+      expiryTime: entity.expiryTime,
+      pollOptions: entity.pollOptions,
+      multiSelectState: entity.multiSelectState,
+      pollType: entity.pollType,
+      multiSelectNo: entity.multiSelectNo,
+      isAnonymous: entity.isAnonymous,
+      allowAddOption: entity.allowAddOption,
     );
   }
 
@@ -101,6 +128,14 @@ class AttachmentMeta {
       meta: meta,
       ogTags: ogTags?.toEntity(),
       entityId: entityId,
+      pollQuestion: pollQuestion,
+      expiryTime: expiryTime,
+      pollOptions: pollOptions,
+      multiSelectState: multiSelectState,
+      pollType: pollType,
+      multiSelectNo: multiSelectNo,
+      isAnonymous: isAnonymous,
+      allowAddOption: allowAddOption,
     );
   }
 }
@@ -122,6 +157,22 @@ class AttachmentMetaEntity {
   final Map<String, dynamic>? meta;
   @JsonKey(name: 'entity_id')
   final String? entityId;
+  @JsonKey(name: 'title')
+  final String? pollQuestion;
+  @JsonKey(name: 'expiry_time')
+  final int? expiryTime;
+  @JsonKey(name: 'options')
+  final List<String>? pollOptions;
+  @JsonKey(name: 'multi_select_state')
+  final String? multiSelectState;
+  @JsonKey(name: 'poll_type')
+  final String? pollType;
+  @JsonKey(name: 'multi_select_no')
+  final int? multiSelectNo;
+  @JsonKey(name: 'is_anonymous')
+  final bool? isAnonymous;
+  @JsonKey(name: 'allow_add_option')
+  final bool? allowAddOption;
 
   AttachmentMetaEntity({
     this.url,
@@ -135,6 +186,14 @@ class AttachmentMetaEntity {
     this.height,
     this.meta,
     this.entityId,
+    this.pollQuestion,
+    this.expiryTime,
+    this.pollOptions,
+    this.multiSelectState,
+    this.pollType,
+    this.multiSelectNo,
+    this.isAnonymous,
+    this.allowAddOption,
   });
 
   factory AttachmentMetaEntity.fromJson(

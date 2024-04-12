@@ -11,16 +11,11 @@ EditPostResponseEntity _$EditPostResponseEntityFromJson(
     EditPostResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      post: Post.fromEntity(
-        postEntity:
-            PostEntity.fromJson(json['data']['post'] as Map<String, dynamic>),
-      ),
+      post: PostEntity.fromJson(json['data']['post'] as Map<String, dynamic>),
       users: (json['data']['users'] as Map<String, dynamic>).map(
         (key, value) => MapEntry(
           key,
-          User.fromEntity(
-            UserEntity.fromJson(value),
-          ),
+          UserEntity.fromJson(value),
         ),
       ),
       topics: (json['data']['topics'] as Map<String, dynamic>).map(
@@ -32,9 +27,8 @@ EditPostResponseEntity _$EditPostResponseEntityFromJson(
       widgets: json['data'] != null &&
               json['data']['widgets'] != null &&
               json['data']['widgets'].isNotEmpty
-          ? ((json['data']['widgets'] as Map<String, dynamic>?)?.map((k, e) =>
-              MapEntry(
-                  k, WidgetModel.fromEntity(WidgetModelEntity.fromJson(e)))))
+          ? ((json['data']['widgets'] as Map<String, dynamic>?)
+              ?.map((k, e) => MapEntry(k, e)))
           : null,
       repostedPosts:
           json['data'] != null && json['data']['reposted_posts'] != null
@@ -53,12 +47,11 @@ Map<String, dynamic> _$EditPostResponseEntityToJson(
       'success': instance.success,
       'error_message': instance.errorMessage,
       'data': {
-        'post': instance.post?.toEntity().toJson(),
-        'users': instance.users
-            ?.map((key, value) => MapEntry(key, value.toEntity().toJson())),
+        'post': instance.post?.toJson(),
+        'users':
+            instance.users?.map((key, value) => MapEntry(key, value.toJson())),
         'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
-        'widgets':
-            instance.widgets?.map((k, e) => MapEntry(k, e.toEntity().toJson())),
+        'widgets': instance.widgets?.map((k, e) => MapEntry(k, e.toJson())),
         'reposted_posts':
             instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
         'user_topics': instance.userTopics?.map((k, e) => MapEntry(k, e)),

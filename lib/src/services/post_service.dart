@@ -27,6 +27,13 @@ abstract class IPostService {
 
   Future<SearchPostResponseEntity> searchPosts(
       SearchPostRequest searchPostRequest);
+  Future<LMResponse<void>> submitPollVote(
+      SubmitPollVoteRequest submitPollVoteRequest);
+
+  Future<LMResponse<AddPollOptionResponseEntity>> addPollOption(
+      AddPollOptionRequest addPollOptionRequest);
+  Future<LMResponse<GetVotesResponseEntity>?> getPollVotes(
+      GetPollVotesRequest getVotesRequest);
 }
 
 class PostService extends IPostService {
@@ -347,6 +354,85 @@ class PostService extends IPostService {
       return SearchPostResponseEntity(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
+
+  @override
+  Future<LMResponse<void>> submitPollVote(
+      SubmitPollVoteRequest submitPollVoteRequest) async {
+    try {
+      final response = await apiClient.client().put(
+            apiClient.endPoints
+                .getSubmitPollVoteEndPoint(submitPollVoteRequest.pollId),
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+            data: submitPollVoteRequest.toJson(),
+          );
+      debugPrint("Response from submit poll vote: ${response.data}");
+      return LMResponse<void>(
+        success: response.data['success'] ?? false,
+        errorMessage: response.data['error_message'],
+      );
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      return LMResponse<void>(
+        success: false,
+        errorMessage: e.message ?? "An error occurred",
+      );
+    }
+  }
+
+  @override
+  Future<LMResponse<AddPollOptionResponseEntity>> addPollOption(
+      AddPollOptionRequest addPollOptionRequest) async {
+    try {
+      final response = await apiClient.client().put(
+            apiClient.endPoints
+                .getAddPollOptionEndPoint(addPollOptionRequest.pollId),
+            data: addPollOptionRequest.toJson(),
+          );
+      debugPrint("Response from add poll option: ${response.data}");
+      return LMResponse<AddPollOptionResponseEntity>(
+        success: response.data['success'] ?? false,
+        errorMessage: response.data['error_message'],
+        data: AddPollOptionResponseEntity.fromJson(response.data['data']),
+      );
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      return LMResponse<AddPollOptionResponseEntity>(
+        success: false,
+        errorMessage: e.message ?? "An error occurred",
+      );
+    }
+  }
+
+  @override
+  Future<LMResponse<GetVotesResponseEntity>> getPollVotes(
+      GetPollVotesRequest getVotesRequest) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.endPoints.getPollVotesEndPoint(getVotesRequest.pollId),
+          );
+      debugPrint("Response from get poll votes: ${response.data}");
+      return LMResponse<GetVotesResponseEntity>(
+        success: response.data['success'] ?? false,
+        errorMessage: response.data['error_message'],
+        data: response.data['data'] != null
+            ? GetVotesResponseEntity.fromJson(response.data['data'])
+            : null,
+      );
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedLogger.instance.handleException(e, stacktrace);
+      return LMResponse<GetVotesResponseEntity>(
+        success: false,
+        errorMessage: e.message ?? "An error occurred",
       );
     }
   }
