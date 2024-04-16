@@ -13,7 +13,8 @@ class FeedService {
     try {
       final response = await apiClient.client().get(
             apiClient.getEndpoints.getPostEndPoint(
-                postDetailRequest.postId, postDetailRequest.page),
+                postDetailRequest.postId, postDetailRequest.page,
+                pageSize: postDetailRequest.pageSize),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),

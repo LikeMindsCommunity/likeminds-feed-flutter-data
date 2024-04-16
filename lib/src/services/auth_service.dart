@@ -13,55 +13,46 @@ class AuthService {
 
   AuthService({required this.apiClient});
 
-  /// Initiate user
-  /// Initiates a SDK user, and logs in the user if app access is granted
-  /// Also updates tokens and sets user id and community id
-  /// Returns [InitiateUserResponseEntity] if success
-  /// Takes [InitiateUserRequest] as input
-  /// Throws [DioException] if error
-  Future<InitiateUserResponseEntity> initiateUser(
-    InitiateUserRequest initiateUserRequest,
-  ) async {
+  Future<ValidateUserResponseEntity> validateUser(
+      ValidateUserRequest request) async {
     try {
-      final response = await apiClient.client().post(
+      final response = await apiClient.client().get(
             apiClient.getEndpoints.authEndpoint,
-            data: initiateUserRequest.toJson(),
+            data: request.toJson(),
             options: Options(
               headers: {
-                'x-api-key': apiClient.getApiKey,
+                'Authorization': request.accessToken,
               },
             ),
           );
 
-      InitiateUserResponseEntity initiateUserResponse =
-          InitiateUserResponseEntity.fromJson(response.data);
+      ValidateUserResponseEntity validateUserResponse =
+          ValidateUserResponseEntity.fromJson(response.data);
 
       // Checking if API returned success
-      if (initiateUserResponse.success) {
+      if (validateUserResponse.success) {
         // Checking if API returned app access
-        if (initiateUserResponse.appAccess!) {
+        if (validateUserResponse.appAccess!) {
           // If API returned app access, then set tokens and return response
           apiClient.initTokens(
-            initiateUserResponse.accessToken!,
-            initiateUserResponse.refreshToken!,
+            request.accessToken,
+            request.refreshToken,
           );
-          final user = initiateUserResponse.user!;
-          final community = initiateUserResponse.community!;
+          final user = validateUserResponse.user!;
+          final community = validateUserResponse.community!;
           apiClient.setUuid = user.id;
           apiClient.setCommunityId = community.id;
-          return initiateUserResponse;
+          return validateUserResponse;
           // Else, if API returned no app access
         } else {
           // If API returned no app access, then logout and return response
           final response = await logout(null);
-          return InitiateUserResponseEntity(
-            success: false,
-            logoutResponse: response,
-          );
+
+          return validateUserResponse;
         }
         // Else, if API returned error message
       } else {
-        return initiateUserResponse;
+        return validateUserResponse;
       }
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
@@ -70,7 +61,7 @@ class AuthService {
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
       }
-      return InitiateUserResponseEntity(
+      return ValidateUserResponseEntity(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );

@@ -14,11 +14,6 @@ class AccessService {
     try {
       final response = await apiClient.client().get(
             apiClient.getEndpoints.memberStateEndpoint,
-            options: Options(
-              headers: {
-                'x-api-key': apiClient.getApiKey,
-              },
-            ),
           );
 
       final memberStateResponseEntity =
