@@ -119,3 +119,11 @@ Migrating to Flutter v3.10.6
 # 1.8.0
 
 Added topic categorisation, search in post, user saved post
+
+# 1.8.1
+
+Updated FeedRoom response
+
+# 1.8.2
+
+Added API Security, Fixed Post Detail page size issue
