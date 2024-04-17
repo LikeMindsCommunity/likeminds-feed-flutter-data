@@ -60,8 +60,9 @@ class EndPoints {
   String markReadNotificationEndpoint(String notificationId) =>
       "$KETTLE_HOST/feed/user/activity/$notificationId/mark_read";
 
-  String getPostEndPoint(String postId, int page) {
-    return "$feedUrl/post/$postId?page=$page&page_size=$pageLimit";
+  String getPostEndPoint(String postId, int page, {int? pageSize}) {
+    int size = pageSize ?? pageLimit;
+    return "$feedUrl/post/$postId?page=$page&page_size=$size";
   }
 
   String getUserSavedPostEndPoint(String uuid) {
