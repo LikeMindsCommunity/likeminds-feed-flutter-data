@@ -24,9 +24,7 @@ EditPostResponseEntity _$EditPostResponseEntityFromJson(
       userTopics: (json['data']['user_topics'] as Map<String, dynamic>?)?.map(
           (k, e) => MapEntry(
               k, (e as List<dynamic>).map((e) => e as String).toList())),
-      widgets: json['data'] != null &&
-              json['data']['widgets'] != null &&
-              json['data']['widgets'].isNotEmpty
+      widgets: json['data'] != null && json['data']['widgets'] != null
           ? ((json['data']['widgets'] as Map<String, dynamic>?)
               ?.map((k, e) => MapEntry(k, e)))
           : null,

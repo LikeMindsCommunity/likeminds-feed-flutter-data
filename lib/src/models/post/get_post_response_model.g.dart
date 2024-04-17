@@ -20,18 +20,15 @@ GetPostResponseEntity _$GetPostResponseEntityFromJson(
       topics: (json['data']['topics'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
-      widgets: json['data'] != null &&
-              json['data']['widgets'] != null &&
-              json['data']['widgets'].isNotEmpty
+      widgets: json['data'] != null && json['data']['widgets'] != null
           ? ((json['data']['widgets'] as Map<String, dynamic>?)
               ?.map((k, e) => MapEntry(k, WidgetModelEntity.fromJson(e))))
           : null,
-      repostedPosts: json['data'] != null &&
-              json['data']['reposted_posts'] != null &&
-              json['data']['reposted_posts'].isNotEmpty
-          ? ((json['data']['reposted_posts'] as Map<String, dynamic>?)
-              ?.map((k, e) => MapEntry(k, PostEntity.fromJson(e))))
-          : null,
+      repostedPosts:
+          json['data'] != null && json['data']['reposted_posts'] != null
+              ? ((json['data']['reposted_posts'] as Map<String, dynamic>?)
+                  ?.map((k, e) => MapEntry(k, PostEntity.fromJson(e))))
+              : null,
       userTopics: (json['user_topics'] as Map<String, dynamic>?)?.map(
           (key, value) => MapEntry(
               key, (value as List<dynamic>).map((e) => e.toString()).toList())),

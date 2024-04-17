@@ -21,9 +21,7 @@ AddPostResponseEntity _$AddPostResponseEntityFromJson(
       topics: (json['data']['topics'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
-      widgets: json['data'] != null &&
-              json['data']['widgets'] != null &&
-              json['data']['widgets'].isNotEmpty
+      widgets: json['data'] != null && json['data']['widgets'] != null
           ? ((json['data']['widgets'] as Map<String, dynamic>?)
               ?.map((k, e) => MapEntry(k, WidgetModelEntity.fromJson(e))))
           : null,
