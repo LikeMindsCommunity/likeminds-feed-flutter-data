@@ -127,3 +127,7 @@ Updated FeedRoom response
 # 1.8.2
 
 Added API Security, Fixed Post Detail page size issue
+
+# 1.8.3
+
+Added callbacks for accessToken and refreshToken updation
