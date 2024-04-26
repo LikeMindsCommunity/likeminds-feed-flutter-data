@@ -13,6 +13,11 @@ class AuthService {
 
   AuthService({required this.apiClient});
 
+  Future<LMResponse<void>> updateTokens(UpdateTokenRequest request) async {
+    apiClient.initTokens(request.accessToken, request.refreshToken);
+    return LMResponse(success: true);
+  }
+
   Future<ValidateUserResponseEntity> validateUser(
       ValidateUserRequest request) async {
     try {
