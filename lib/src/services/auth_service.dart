@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/methods/persistence.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 /// Auth service to talk to our backend.
@@ -125,6 +126,15 @@ class AuthService {
           LogoutResponseEntity.fromJson(response.data);
       request.callback?.logoutCallback();
       apiClient.clearTokens();
+
+      PersistenceApi persistenceApi =
+          SDKApplication.instance.getPersistenceApi();
+
+      persistenceApi.clearCache();
+      persistenceApi.clearCommunityConfigurationDB();
+      persistenceApi.deleteUserDB();
+      persistenceApi.deleteMemberState();
+
       return logoutResponse;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
