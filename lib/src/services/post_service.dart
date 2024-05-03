@@ -418,6 +418,7 @@ class PostService extends IPostService {
     try {
       final response = await apiClient.client().get(
             apiClient.endPoints.getPollVotesEndPoint(getVotesRequest.pollId),
+            queryParameters: getVotesRequest.toJson(),
           );
       debugPrint("Response from get poll votes: ${response.data}");
       return LMResponse<GetVotesResponseEntity>(

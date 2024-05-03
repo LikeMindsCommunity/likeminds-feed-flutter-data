@@ -26,7 +26,7 @@ EditPostResponseEntity _$EditPostResponseEntityFromJson(
               k, (e as List<dynamic>).map((e) => e as String).toList())),
       widgets: json['data'] != null && json['data']['widgets'] != null
           ? ((json['data']['widgets'] as Map<String, dynamic>?)
-              ?.map((k, e) => MapEntry(k, e)))
+              ?.map((k, e) => MapEntry(k, WidgetModelEntity.fromJson(e))))
           : null,
       repostedPosts:
           json['data'] != null && json['data']['reposted_posts'] != null

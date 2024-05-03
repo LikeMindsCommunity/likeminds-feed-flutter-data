@@ -39,9 +39,9 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
       pollQuestion: json['title'] as String?,
       expiryTime: json['expiry_time'] as int?,
       pollOptions: json['options'] as List<String>?,
-      multiSelectState: json['multi_select_state'] as String?,
+      multiSelectState: json['multiple_select_state'] as String?,
       pollType: json['poll_type'] as String?,
-      multiSelectNo: json['multi_select_no'] as int?,
+      multiSelectNo: json['multiple_select_number'] as int?,
       isAnonymous: json['is_anonymous'] as bool?,
       allowAddOption: json['allow_add_option'] as bool?,
     );
@@ -60,9 +60,9 @@ Map<String, dynamic> _$AttachmentMetaEntityToJson(
         'title': instance.pollQuestion,
         'expiry_time': instance.expiryTime,
         'options': instance.pollOptions,
-        'multi_select_state': instance.multiSelectState,
+        'multiple_select_state': instance.multiSelectState,
         'poll_type': instance.pollType,
-        'multi_select_no': instance.multiSelectNo,
+        'multiple_select_number': instance.multiSelectNo,
         'is_anonymous': instance.isAnonymous,
         'allow_add_option': instance.allowAddOption,
       };
