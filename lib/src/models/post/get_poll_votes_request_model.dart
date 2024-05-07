@@ -1,15 +1,21 @@
 class GetPollVotesRequest {
   String pollId;
   List<String> votes;
+  final int? page;
+  final int? pageSize;
 
   GetPollVotesRequest._({
     required this.pollId,
     required this.votes,
+    this.page,
+    this.pageSize,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'votes': votes,
+      'page': page,
+      'page_size': pageSize,
     };
   }
 }
@@ -17,6 +23,8 @@ class GetPollVotesRequest {
 class GetPollVotesRequestBuilder {
   String? _pollId;
   List<String>? _votes;
+  int? _page;
+  int? _pageSize;
 
   GetPollVotesRequestBuilder();
 
@@ -35,6 +43,8 @@ class GetPollVotesRequestBuilder {
     return GetPollVotesRequest._(
       pollId: _pollId!,
       votes: _votes!,
+      page: _page,
+      pageSize: _pageSize,
     );
   }
 }
