@@ -131,3 +131,6 @@ Added API Security, Fixed Post Detail page size issue
 # 1.8.3
 
 Added callbacks for accessToken and refreshToken updation
+
+# 1.9.0
+Added support for polls
