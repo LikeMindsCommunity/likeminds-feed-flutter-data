@@ -14,7 +14,7 @@ import 'src/models/models.dart';
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
 
-const String feedSDKVersion = "1.8.3";
+const String feedSDKVersion = "1.9.0";
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
@@ -285,6 +285,34 @@ class LMFeedClient {
     final SearchPostResponse searchPostResponse =
         await _sdkApplication.getPostApi().searchPosts(searchPostRequest);
     return searchPostResponse;
+  }
+
+  /// submitPollVote is used to submit a poll vote
+  /// [SubmitPollVoteRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+  Future<LMResponse<void>> submitPollVote(
+      SubmitPollVoteRequest submitPollVoteRequest) async {
+    return await _sdkApplication
+        .getPostApi()
+        .submitPollVote(submitPollVoteRequest);
+  }
+
+  /// addPollOption is used to add a poll option
+  /// [AddPollOptionRequest] is used to pass the required parameters
+  /// [LMResponse<AddPollOptionResponse>] is returned as a Future
+  Future<LMResponse<AddPollOptionResponse>> addPollOption(
+      AddPollOptionRequest addPollOptionRequest) async {
+    return await _sdkApplication
+        .getPostApi()
+        .addPollOption(addPollOptionRequest);
+  }
+
+  /// getPollVotes is used to fetch the votes of a poll
+  /// [GetPollVotesRequest] is used to pass the required parameters
+  /// [LMResponse<GetVotesResponse>] is returned as a Future
+  Future<LMResponse<GetPollVotesResponse>> getPollVotes(
+      GetPollVotesRequest getVotesRequest) async {
+    return await _sdkApplication.getPostApi().getPollVotes(getVotesRequest);
   }
 
   // ------------------------------------------

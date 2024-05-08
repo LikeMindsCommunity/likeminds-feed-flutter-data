@@ -71,8 +71,7 @@ class GetProfileResponseEntity {
           ? List<MemberActionEntity>.from(
               json['data']['menu'].map((x) => MemberActionEntity.fromJson(x)))
           : null,
-      widgets: json['data']['widgets'] != null &&
-              json['data']['widgets'].isNotEmpty
+      widgets: json['data']['widgets'] != null
           ? Map<String, WidgetModelEntity>.from(json['data']['widgets'].map(
               (key, value) => MapEntry(key, WidgetModelEntity.fromJson(value))))
           : null,

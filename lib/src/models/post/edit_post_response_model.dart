@@ -28,8 +28,15 @@ class EditPostResponse {
     return EditPostResponse(
       success: entity.success,
       errorMessage: entity.errorMessage,
-      post: entity.post,
-      user: entity.users,
+      post: entity.post != null
+          ? Post.fromEntity(postEntity: entity.post!)
+          : null,
+      user: entity.users?.map(
+        (key, value) => MapEntry(
+          key,
+          User.fromEntity(value),
+        ),
+      ),
       topics: entity.topics?.map(
         (key, value) => MapEntry(
           key,
@@ -37,7 +44,12 @@ class EditPostResponse {
         ),
       ),
       userTopics: entity.userTopics,
-      widgets: entity.widgets,
+      widgets: entity.widgets?.map(
+        (key, value) => MapEntry(
+          key,
+          WidgetModel.fromEntity(value),
+        ),
+      ),
       repostedPosts: entity.repostedPosts?.map(
         (key, value) => MapEntry(
           key,
@@ -51,8 +63,13 @@ class EditPostResponse {
     return EditPostResponseEntity(
       success: success,
       errorMessage: errorMessage,
-      post: post,
-      users: user,
+      post: post?.toEntity(),
+      users: user?.map(
+        (key, value) => MapEntry(
+          key,
+          value.toEntity(),
+        ),
+      ),
       topics: topics?.map(
         (key, value) => MapEntry(
           key,
@@ -60,7 +77,12 @@ class EditPostResponse {
         ),
       ),
       userTopics: userTopics,
-      widgets: widgets,
+      widgets: widgets?.map(
+        (key, value) => MapEntry(
+          key,
+          value.toEntity(),
+        ),
+      ),
       repostedPosts: repostedPosts?.map(
         (key, value) => MapEntry(
           key,
@@ -76,10 +98,10 @@ class EditPostResponseEntity {
   final bool success;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
-  final Post? post;
-  final Map<String, User>? users;
+  final PostEntity? post;
+  final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
-  final Map<String, WidgetModel>? widgets;
+  final Map<String, WidgetModelEntity>? widgets;
   @JsonKey(name: 'reposted_posts')
   final Map<String, PostEntity>? repostedPosts;
   @JsonKey(name: 'user_topics')

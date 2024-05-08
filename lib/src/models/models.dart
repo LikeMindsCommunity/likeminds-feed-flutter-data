@@ -37,6 +37,11 @@ export 'package:likeminds_feed/src/models/feed/get_saved_post_request.dart';
 export 'package:likeminds_feed/src/models/feed/get_saved_post_response.dart';
 export 'package:likeminds_feed/src/models/post/post_model.dart';
 
+export 'package:likeminds_feed/src/models/post/get_poll_votes_request_model.dart';
+export 'package:likeminds_feed/src/models/post/get_poll_votes_response_model.dart';
+export 'package:likeminds_feed/src/models/post/add_poll_option_request_model.dart';
+export 'package:likeminds_feed/src/models/post/add_poll_option_response_model.dart';
+export 'package:likeminds_feed/src/models/post/submit_poll_vote_request_model.dart';
 export 'package:likeminds_feed/src/models/post/search_post_request_model.dart';
 export 'package:likeminds_feed/src/models/post/search_post_response_model.dart';
 export 'package:likeminds_feed/src/models/post/attachment_model.dart';

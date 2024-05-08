@@ -11,27 +11,19 @@ AddPostResponseEntity _$AddPostResponseEntityFromJson(
     AddPostResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      post: Post.fromEntity(
-        postEntity:
-            PostEntity.fromJson(json['data']['post'] as Map<String, dynamic>),
-      ),
+      post: PostEntity.fromJson(json['data']['post'] as Map<String, dynamic>),
       users: (json['data']['users'] as Map<String, dynamic>).map(
         (key, value) => MapEntry(
           key,
-          User.fromEntity(
-            UserEntity.fromJson(value),
-          ),
+          UserEntity.fromJson(value),
         ),
       ),
       topics: (json['data']['topics'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
-      widgets: json['data'] != null &&
-              json['data']['widgets'] != null &&
-              json['data']['widgets'].isNotEmpty
-          ? ((json['data']['widgets'] as Map<String, dynamic>?)?.map((k, e) =>
-              MapEntry(
-                  k, WidgetModel.fromEntity(WidgetModelEntity.fromJson(e)))))
+      widgets: json['data'] != null && json['data']['widgets'] != null
+          ? ((json['data']['widgets'] as Map<String, dynamic>?)
+              ?.map((k, e) => MapEntry(k, WidgetModelEntity.fromJson(e))))
           : null,
       userTopics: (json['data']['user_topics'] as Map<String, dynamic>?)?.map(
           (k, e) => MapEntry(
@@ -53,15 +45,15 @@ Map<String, dynamic> _$AddPostResponseEntityToJson(
       'success': instance.success,
       'error_message': instance.errorMessage,
       'data': {
-        'post': instance.post?.toEntity().toJson(),
-        'users': instance.users
-            ?.map((key, value) => MapEntry(key, value.toEntity().toJson())),
+        'post': instance.post?.toJson(),
+        'users':
+            instance.users?.map((key, value) => MapEntry(key, value.toJson())),
         'reposted_posts': instance.repostedPosts
             ?.map((key, value) => MapEntry(key, value.toJson())),
         'topics':
             instance.topics?.map((key, value) => MapEntry(key, value.toJson())),
         'widgets': instance.widgets
-            ?.map((key, value) => MapEntry(key, value.toEntity().toJson())),
+            ?.map((key, value) => MapEntry(key, value.toJson())),
         'user_topics': instance.userTopics,
       }
     };
