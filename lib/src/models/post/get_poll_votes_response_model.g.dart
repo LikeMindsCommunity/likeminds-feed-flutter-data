@@ -6,9 +6,9 @@ part of 'get_poll_votes_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetVotesResponseEntity _$GetVotesResponseEntityFromJson(
+GetPollVotesResponseEntity _$GetVotesResponseEntityFromJson(
         Map<String, dynamic> json) =>
-    GetVotesResponseEntity(
+    GetPollVotesResponseEntity(
       topics: (json['topics'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
@@ -29,7 +29,7 @@ GetVotesResponseEntity _$GetVotesResponseEntityFromJson(
     );
 
 Map<String, dynamic> _$GetVotesResponseEntityToJson(
-        GetVotesResponseEntity instance) =>
+        GetPollVotesResponseEntity instance) =>
     <String, dynamic>{
       'topics': instance.topics,
       'user_topics': instance.userTopics,

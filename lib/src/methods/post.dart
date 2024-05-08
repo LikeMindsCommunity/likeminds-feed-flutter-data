@@ -60,7 +60,7 @@ class PostApi {
     return await postRepository.addPollOption(addPollOptionRequest);
   }
 
-  Future<LMResponse<GetVotesResponse>> getPollVotes(
+  Future<LMResponse<GetPollVotesResponse>> getPollVotes(
       GetPollVotesRequest getVotesRequest) async {
     return await postRepository.getPollVotes(getVotesRequest);
   }

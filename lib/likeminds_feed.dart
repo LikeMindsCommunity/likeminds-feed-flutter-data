@@ -310,7 +310,7 @@ class LMFeedClient {
   /// getPollVotes is used to fetch the votes of a poll
   /// [GetPollVotesRequest] is used to pass the required parameters
   /// [LMResponse<GetVotesResponse>] is returned as a Future
-  Future<LMResponse<GetVotesResponse>> getPollVotes(
+  Future<LMResponse<GetPollVotesResponse>> getPollVotes(
       GetPollVotesRequest getVotesRequest) async {
     return await _sdkApplication.getPostApi().getPollVotes(getVotesRequest);
   }

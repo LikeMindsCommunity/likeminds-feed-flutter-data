@@ -2,14 +2,14 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 part 'get_poll_votes_response_model.g.dart';
 
-class GetVotesResponse {
+class GetPollVotesResponse {
   final Map<String, Topic> topics;
   final Map<String, List<String>>? userTopics;
   final Map<String, User> users;
   final Map<String, WidgetModel> widgets;
   final List<Vote> votes;
 
-  GetVotesResponse({
+  GetPollVotesResponse({
     required this.topics,
     required this.userTopics,
     required this.users,
@@ -17,8 +17,8 @@ class GetVotesResponse {
     required this.votes,
   });
 
-  GetVotesResponseEntity toEntity() {
-    return GetVotesResponseEntity(
+  GetPollVotesResponseEntity toEntity() {
+    return GetPollVotesResponseEntity(
       topics: topics.map((key, value) => MapEntry(key, value.toEntity())),
       userTopics: userTopics,
       users: users.map((key, value) => MapEntry(key, value.toEntity())),
@@ -27,8 +27,8 @@ class GetVotesResponse {
     );
   }
 
-  factory GetVotesResponse.fromEntity(GetVotesResponseEntity entity) {
-    return GetVotesResponse(
+  factory GetPollVotesResponse.fromEntity(GetPollVotesResponseEntity entity) {
+    return GetPollVotesResponse(
       topics: entity.topics
           .map((key, value) => MapEntry(key, Topic.fromEntity(value))),
       userTopics: entity.userTopics,
@@ -66,7 +66,7 @@ class Vote {
 }
 
 @JsonSerializable()
-class GetVotesResponseEntity {
+class GetPollVotesResponseEntity {
   final Map<String, TopicEntity> topics;
   @JsonKey(name: 'user_topics')
   final Map<String, List<String>>? userTopics;
@@ -74,7 +74,7 @@ class GetVotesResponseEntity {
   final Map<String, WidgetModelEntity> widgets;
   final List<VoteEntity> votes;
 
-  GetVotesResponseEntity({
+  GetPollVotesResponseEntity({
     required this.topics,
     required this.userTopics,
     required this.users,
@@ -82,7 +82,7 @@ class GetVotesResponseEntity {
     required this.votes,
   });
 
-  factory GetVotesResponseEntity.fromJson(Map<String, dynamic> data) =>
+  factory GetPollVotesResponseEntity.fromJson(Map<String, dynamic> data) =>
       _$GetVotesResponseEntityFromJson(data);
 
   Map<String, dynamic> toJson() => _$GetVotesResponseEntityToJson(this);

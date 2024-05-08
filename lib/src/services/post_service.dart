@@ -32,7 +32,7 @@ abstract class IPostService {
 
   Future<LMResponse<AddPollOptionResponseEntity>> addPollOption(
       AddPollOptionRequest addPollOptionRequest);
-  Future<LMResponse<GetVotesResponseEntity>?> getPollVotes(
+  Future<LMResponse<GetPollVotesResponseEntity>?> getPollVotes(
       GetPollVotesRequest getVotesRequest);
 }
 
@@ -413,7 +413,7 @@ class PostService extends IPostService {
   }
 
   @override
-  Future<LMResponse<GetVotesResponseEntity>> getPollVotes(
+  Future<LMResponse<GetPollVotesResponseEntity>> getPollVotes(
       GetPollVotesRequest getVotesRequest) async {
     try {
       final response = await apiClient.client().get(
@@ -421,17 +421,17 @@ class PostService extends IPostService {
             queryParameters: getVotesRequest.toJson(),
           );
       debugPrint("Response from get poll votes: ${response.data}");
-      return LMResponse<GetVotesResponseEntity>(
+      return LMResponse<GetPollVotesResponseEntity>(
         success: response.data['success'] ?? false,
         errorMessage: response.data['error_message'],
         data: response.data['data'] != null
-            ? GetVotesResponseEntity.fromJson(response.data['data'])
+            ? GetPollVotesResponseEntity.fromJson(response.data['data'])
             : null,
       );
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
       LMFeedLogger.instance.handleException(e, stacktrace);
-      return LMResponse<GetVotesResponseEntity>(
+      return LMResponse<GetPollVotesResponseEntity>(
         success: false,
         errorMessage: e.message ?? "An error occurred",
       );
