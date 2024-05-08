@@ -40,7 +40,9 @@ class GetPostResponse {
           Topic.fromEntity(value),
         ),
       ),
-      widgets: entity.widgets,
+      widgets: entity.widgets?.map((key, value) {
+        return MapEntry(key, WidgetModel.fromEntity(value));
+      }),
       repostedPosts: entity.repostedPosts?.map(
           (key, value) => MapEntry(key, Post.fromEntity(postEntity: value))),
       userTopics: entity.userTopics,
@@ -61,7 +63,7 @@ class GetPostResponse {
           value.toEntity(),
         ),
       ),
-      widgets: widgets,
+      widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
       repostedPosts:
           repostedPosts?.map((key, value) => MapEntry(key, value.toEntity())),
       userTopics: userTopics,
@@ -77,7 +79,7 @@ class GetPostResponseEntity {
   final PostEntity? post;
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
-  final Map<String, WidgetModel>? widgets;
+  final Map<String, WidgetModelEntity>? widgets;
   @JsonKey(name: 'reposted_post')
   final Map<String, PostEntity>? repostedPosts;
   @JsonKey(name: 'user_topics')

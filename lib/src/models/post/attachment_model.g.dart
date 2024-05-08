@@ -36,6 +36,14 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
           ? null
           : OgTagsEntity.fromJson(json['og_tags'] as Map<String, dynamic>),
       entityId: json['entity_id'] as String?,
+      pollQuestion: json['title'] as String?,
+      expiryTime: json['expiry_time'] as int?,
+      pollOptions: json['options'] as List<String>?,
+      multiSelectState: json['multiple_select_state'] as String?,
+      pollType: json['poll_type'] as String?,
+      multiSelectNo: json['multiple_select_number'] as int?,
+      isAnonymous: json['is_anonymous'] as bool?,
+      allowAddOption: json['allow_add_option'] as bool?,
     );
 
 Map<String, dynamic> _$AttachmentMetaEntityToJson(
@@ -49,6 +57,14 @@ Map<String, dynamic> _$AttachmentMetaEntityToJson(
         'page_count': instance.pageCount,
         'og_tags': instance.ogTags,
         'entity_id': instance.entityId,
+        'title': instance.pollQuestion,
+        'expiry_time': instance.expiryTime,
+        'options': instance.pollOptions,
+        'multiple_select_state': instance.multiSelectState,
+        'poll_type': instance.pollType,
+        'multiple_select_number': instance.multiSelectNo,
+        'is_anonymous': instance.isAnonymous,
+        'allow_add_option': instance.allowAddOption,
       };
   return attachmentMeta;
 }

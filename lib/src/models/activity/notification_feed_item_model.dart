@@ -41,7 +41,8 @@ class NotificationFeedItem {
       action: entity.action,
       actionBy: entity.actionBy,
       actionOn: entity.actionOn,
-      activityEntityData: entity.activityEntityData,
+      activityEntityData:
+          ActivityEntityData.fromEntity(entity.activityEntityData),
       activityText: entity.activityText,
       createdAt: entity.createdAt,
       cta: entity.cta,
@@ -59,7 +60,7 @@ class NotificationFeedItem {
       action: action,
       actionBy: actionBy,
       actionOn: actionOn,
-      activityEntityData: activityEntityData,
+      activityEntityData: activityEntityData.toEntity(),
       activityText: activityText,
       createdAt: createdAt,
       cta: cta,
@@ -74,18 +75,29 @@ class NotificationFeedItem {
 
 @JsonSerializable()
 class NotificationFeedItemEntity {
+  @JsonKey(name: '_id')
   final String id;
   final int action;
+  @JsonKey(name: 'action_by')
   final List<String> actionBy;
+  @JsonKey(name: 'action_on')
   final String actionOn;
-  final ActivityEntityData activityEntityData;
+  @JsonKey(name: 'activity_entity_data')
+  final ActivityEntityDataEntity activityEntityData;
+  @JsonKey(name: 'activity_text')
   final String activityText;
   final String? cta;
+  @JsonKey(name: 'created_at')
   final int createdAt;
+  @JsonKey(name: 'entity_id')
   final String entityId;
+  @JsonKey(name: 'entity_owner_id')
   final String? entityOwnerId;
+  @JsonKey(name: 'entity_type')
   final int entityType;
+  @JsonKey(name: 'is_read')
   final bool isRead;
+  @JsonKey(name: 'updated_at')
   final int updatedAt;
 
   NotificationFeedItemEntity({

@@ -1,3 +1,4 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 
 class ActivityEntityData {
@@ -39,7 +40,7 @@ class ActivityEntityData {
     required this.uuid,
   });
 
-  static ActivityEntityData fromEntity(ActivityEntityDataEntity entity) {
+  factory ActivityEntityData.fromEntity(ActivityEntityDataEntity entity) {
     return ActivityEntityData(
       id: entity.id,
       attachments: entity.attachments,
@@ -86,6 +87,7 @@ class ActivityEntityData {
   }
 }
 
+@JsonSerializable()
 class ActivityEntityDataEntity {
   final String id;
   final List<Attachment>? attachments;

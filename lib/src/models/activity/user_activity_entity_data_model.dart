@@ -160,13 +160,18 @@ class UserActivityEntityDataEntity {
   @JsonKey(name: 'temp_id')
   String? tempId;
   String text;
+  @JsonKey(name: 'topics')
   List<String>? topicIds;
   @JsonKey(name: 'updated_at')
   int? updatedAt;
   String? uuid;
+  @JsonKey(name: 'is_repost')
   bool? isRepost;
+  @JsonKey(name: 'is_reposted_by_user')
   bool? isRepostedByUser;
+  @JsonKey(name: 'repost_count')
   int? repostCount;
+  @JsonKey(name: 'is_deleted')
   bool? isDeleted;
 
   UserActivityEntityDataEntity({

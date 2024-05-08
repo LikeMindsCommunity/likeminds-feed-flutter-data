@@ -26,7 +26,9 @@ class AddCommentResponse {
     return AddCommentResponse(
       success: entity.success,
       errorMessage: entity.errorMessage,
-      reply: entity.reply,
+      reply: entity.reply != null
+          ? Comment.fromEntity(commentEntity: entity.reply!)
+          : null,
       topics: entity.topics
           ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))),
       widgets: entity.widgets
@@ -43,7 +45,7 @@ class AddCommentResponseEntity {
   final bool success;
   @JsonKey(name: 'error_message')
   final String? errorMessage;
-  final Comment? reply;
+  final CommentEntity? reply;
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
   final Map<String, WidgetModelEntity>? widgets;

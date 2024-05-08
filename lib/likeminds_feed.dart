@@ -287,6 +287,34 @@ class LMFeedClient {
     return searchPostResponse;
   }
 
+  /// submitPollVote is used to submit a poll vote
+  /// [SubmitPollVoteRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+  Future<LMResponse<void>> submitPollVote(
+      SubmitPollVoteRequest submitPollVoteRequest) async {
+    return await _sdkApplication
+        .getPostApi()
+        .submitPollVote(submitPollVoteRequest);
+  }
+
+  /// addPollOption is used to add a poll option
+  /// [AddPollOptionRequest] is used to pass the required parameters
+  /// [LMResponse<AddPollOptionResponse>] is returned as a Future
+  Future<LMResponse<AddPollOptionResponse>> addPollOption(
+      AddPollOptionRequest addPollOptionRequest) async {
+    return await _sdkApplication
+        .getPostApi()
+        .addPollOption(addPollOptionRequest);
+  }
+
+  /// getPollVotes is used to fetch the votes of a poll
+  /// [GetPollVotesRequest] is used to pass the required parameters
+  /// [LMResponse<GetVotesResponse>] is returned as a Future
+  Future<LMResponse<GetPollVotesResponse>> getPollVotes(
+      GetPollVotesRequest getVotesRequest) async {
+    return await _sdkApplication.getPostApi().getPollVotes(getVotesRequest);
+  }
+
   // ------------------------------------------
   // Comment APIs
   // Use these to fetch, add, delete, edit comments, and more
