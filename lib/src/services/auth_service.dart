@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/methods/persistence.dart';
-import 'package:likeminds_feed/src/persistence/persistence.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 /// Auth service to talk to our backend.
@@ -16,8 +15,72 @@ class AuthService {
   AuthService({required this.apiClient});
 
   Future<LMResponse<void>> updateTokens(UpdateTokenRequest request) async {
-    apiClient.initTokens(request.accessToken, request.refreshToken);
+    apiClient.updateTokens(request.accessToken, request.refreshToken);
     return LMResponse(success: true);
+  }
+
+  /// Initiate user
+  /// Initiates a SDK user, and logs in the user if app access is granted
+  /// Also updates tokens and sets user id and community id
+  /// Returns [InitiateUserResponseEntity] if success
+  /// Takes [InitiateUserRequest] as input
+  /// Throws [DioException] if error
+  Future<InitiateUserResponseEntity> initiateUser(
+    InitiateUserRequest initiateUserRequest,
+  ) async {
+    try {
+      final response = await apiClient.client().post(
+            apiClient.getEndpoints.authEndpoint,
+            data: initiateUserRequest.toJson(),
+            options: Options(
+              headers: {
+                'x-api-key': initiateUserRequest.apiKey,
+              },
+            ),
+          );
+
+      InitiateUserResponseEntity initiateUserResponse =
+          InitiateUserResponseEntity.fromJson(response.data);
+
+      // Checking if API returned success
+      if (initiateUserResponse.success) {
+        // Checking if API returned app access
+        if (initiateUserResponse.appAccess!) {
+          // If API returned app access, then set tokens and return response
+          apiClient.updateTokens(
+            initiateUserResponse.accessToken!,
+            initiateUserResponse.refreshToken!,
+          );
+          final user = initiateUserResponse.user!;
+          final community = initiateUserResponse.community!;
+          apiClient.setUuid = user.id;
+          apiClient.setCommunityId = community.id;
+          return initiateUserResponse;
+          // Else, if API returned no app access
+        } else {
+          // If API returned no app access, then logout and return response
+          final response = await logout(null);
+          return InitiateUserResponseEntity(
+            success: false,
+            logoutResponse: response,
+          );
+        }
+        // Else, if API returned error message
+      } else {
+        return initiateUserResponse;
+      }
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return InitiateUserResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
   }
 
   Future<ValidateUserResponseEntity> validateUser(
@@ -41,7 +104,7 @@ class AuthService {
         // Checking if API returned app access
         if (validateUserResponse.appAccess!) {
           // If API returned app access, then set tokens and return response
-          apiClient.initTokens(
+          apiClient.updateTokens(
             request.accessToken,
             request.refreshToken,
           );
@@ -78,9 +141,10 @@ class AuthService {
   /// Refresh user
   /// Refreshes a SDK user, and updates tokens
   /// Returns [RefreshResponseEntity] if success
-  /// Takes [RefreshRequest] as input
+  /// Takes [RefreshAccessTokenRequest] as input
   /// Throws [DioException] if error
-  Future<RefreshResponseEntity> refresh(RefreshRequest request) async {
+  Future<RefreshResponseEntity> refreshAccessToken(
+      RefreshAccessTokenRequest request) async {
     Dio dio = Dio();
     try {
       final response = await dio.post(

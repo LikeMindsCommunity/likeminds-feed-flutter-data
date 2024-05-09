@@ -14,9 +14,10 @@ class AuthRepository {
     );
   }
 
-  Future<RefreshResponse> refreshUser(RefreshRequest refreshRequest) async {
-    return RefreshResponse.fromEntity(
-      entity: await authService.refresh(refreshRequest),
+  Future<RefreshAccessTokenResponse> refreshUser(
+      RefreshAccessTokenRequest refreshRequest) async {
+    return RefreshAccessTokenResponse.fromEntity(
+      entity: await authService.refreshAccessToken(refreshRequest),
     );
   }
 

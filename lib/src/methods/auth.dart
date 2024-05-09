@@ -22,9 +22,10 @@ class AuthApi {
 
   /// Refresh a user
   /// Refreshes a user, and logs in
-  /// Returns [RefreshResponse]
-  /// Takes [RefreshRequest] as input
-  Future<RefreshResponse> refreshUser(RefreshRequest refreshRequest) async {
+  /// Returns [RefreshAccessTokenResponse]
+  /// Takes [RefreshAccessTokenRequest] as input
+  Future<RefreshAccessTokenResponse> refreshUser(
+      RefreshAccessTokenRequest refreshRequest) async {
     return await authRepository.refreshUser(refreshRequest);
   }
 

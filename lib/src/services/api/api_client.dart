@@ -34,7 +34,7 @@ class ApiClient {
   bool get getIsProduction => isProduction;
   EndPoints get getEndpoints => endPoints;
 
-  void initTokens(String accessToken, String refreshToken) {
+  void updateTokens(String accessToken, String refreshToken) {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
   }

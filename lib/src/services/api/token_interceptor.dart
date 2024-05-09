@@ -1,12 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 import 'package:likeminds_feed/src/services/auth_service.dart';
 
 class TokenInterceptor extends Interceptor {
+  LMSDKCallback? callback;
+
   final ApiClient apiClient;
-  TokenInterceptor({required this.apiClient});
+  TokenInterceptor({required this.apiClient}) {
+    callback =
+        DIService.getIt.isRegistered<LMSDKCallback>(instanceName: "LMCallback")
+            ? DIService.getIt.get<LMSDKCallback>(instanceName: "LMCallback")
+            : null;
+  }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
@@ -20,9 +28,9 @@ class TokenInterceptor extends Interceptor {
       } else if (response.data["error_message"] == "Invalid RTM!") {
         debugPrint("Authenticated request failed RTM in response");
         UpdateTokenRequest? request =
-            await LMFeedClient.updateRefreshToken?.call();
+            await callback?.onRefreshTokenExpired.call();
         if (request != null) {
-          apiClient.initTokens(request.accessToken, request.refreshToken);
+          apiClient.updateTokens(request.accessToken, request.refreshToken);
         }
         return super.onResponse(response, handler);
       }
@@ -45,9 +53,9 @@ class TokenInterceptor extends Interceptor {
       } else if (err.response?.data["error_message"] == "Invalid RTM!") {
         debugPrint("Authenticated request failed in onError");
         UpdateTokenRequest? request =
-            await LMFeedClient.updateRefreshToken?.call();
+            await callback?.onRefreshTokenExpired.call();
         if (request != null) {
-          apiClient.initTokens(request.accessToken, request.refreshToken);
+          apiClient.updateTokens(request.accessToken, request.refreshToken);
         }
         final newRes = await _retry(dio, err.requestOptions);
         handler.resolve(newRes);
@@ -61,23 +69,24 @@ class TokenInterceptor extends Interceptor {
   Future<void> refreshToken() async {
     debugPrint("Refreshing token");
     final refreshToken = apiClient.getRefreshToken;
-    final response = await AuthService(apiClient: apiClient).refresh(
+    final response = await AuthService(apiClient: apiClient).refreshAccessToken(
         (RefreshRequestBuilder()..refreshToken(refreshToken!)).build());
 
     if (response.success) {
-      apiClient.initTokens(
+      apiClient.updateTokens(
         response.accessToken!,
         response.refreshToken!,
       );
-      LMFeedClient.updateAccessTokenCallBack?.call(
+      callback?.onAccessTokenExpired.call(
         response.accessToken!,
+        response.refreshToken!,
       );
     } else if (response.errorMessage == "Invalid RTM!") {
       debugPrint("Invalid RTM in refreshToken");
       UpdateTokenRequest? request =
-          await LMFeedClient.updateRefreshToken?.call();
+          await callback?.onRefreshTokenExpired.call();
       if (request != null) {
-        apiClient.initTokens(request.accessToken, request.refreshToken);
+        apiClient.updateTokens(request.accessToken, request.refreshToken);
       }
     }
   }
