@@ -3,12 +3,12 @@ library likeminds_feed;
 export 'src/methods/sdk.dart';
 export 'src/methods/methods.dart';
 export 'src/models/models.dart';
-export 'src/persistence/logger/logger.dart';
+export 'src/persistence/persistence.dart';
 
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
-import 'package:likeminds_feed/src/persistence/logger/logger.dart';
+import 'package:likeminds_feed/src/persistence/persistence.dart';
 import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
@@ -41,8 +41,8 @@ class LMFeedClient {
     _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
     if (initiateLoggerRequest != null) {
-      LMFeedLogger.instance
-          .initialise(initiateLoggerRequest: initiateLoggerRequest);
+      LMFeedPersistence.instance
+          .initialiseLogger(initiateLoggerRequest: initiateLoggerRequest);
     }
     if (updateAccessTokenCallBack != null) {
       updateAccessTokenCallBack = updateAccessTokenCallBack;

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/persistence/persistence.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class IPostService {
@@ -55,7 +56,7 @@ class PostService extends IPostService {
       return addPostResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -88,7 +89,7 @@ class PostService extends IPostService {
       return getPostResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -119,7 +120,7 @@ class PostService extends IPostService {
       return deletePostResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -157,7 +158,7 @@ class PostService extends IPostService {
       return likePostResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -191,7 +192,7 @@ class PostService extends IPostService {
       return getPostLikesResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -219,7 +220,7 @@ class PostService extends IPostService {
       return pinPostResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -248,7 +249,7 @@ class PostService extends IPostService {
       return savePostResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -278,7 +279,7 @@ class PostService extends IPostService {
       return editPostResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -308,7 +309,7 @@ class PostService extends IPostService {
       return postReportResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -339,7 +340,7 @@ class PostService extends IPostService {
       return searchPostResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
