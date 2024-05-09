@@ -636,15 +636,6 @@ class LMFeedClientBuilder {
     _initiateLoggerRequest = initiateLoggerRequest;
   }
 
-  void updateAccessTokenCallback(Function(String) accessToken) {
-    _updateAccessToken = accessToken;
-  }
-
-  void updateRefreshTokenCallback(
-      Future<UpdateTokenRequest> Function() refreshToken) {
-    _updateRefreshToken = refreshToken;
-  }
-
   LMFeedClient build() {
     return LMFeedClient._(
       sdkCallback: _sdkCallback,
