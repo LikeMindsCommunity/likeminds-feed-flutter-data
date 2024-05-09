@@ -7,6 +7,8 @@ export 'package:likeminds_feed/src/models/auth/member_state_response_model.dart'
 export 'package:likeminds_feed/src/models/auth/validate_user_request.model.dart';
 export 'package:likeminds_feed/src/models/auth/validate_user_response_model.dart';
 export 'package:likeminds_feed/src/models/auth/update_token_request.dart';
+export 'package:likeminds_feed/src/models/auth/initiate_user_request_model.dart';
+export 'package:likeminds_feed/src/models/auth/initiate_user_response_model.dart';
 
 export 'package:likeminds_feed/src/models/access/answer.dart';
 export 'package:likeminds_feed/src/models/access/edit_profile_request.dart';
