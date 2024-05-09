@@ -19,14 +19,15 @@ class TokenInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
     if (response.statusCode == 401) {
-      if (response.data["error_message"] == "Invalid LTM!") {
+      if (!response.requestOptions.path.contains("user/refresh")) {
         debugPrint("Authenticated request failed LTM in response");
 
         await refreshToken();
         // final newRes = await _retry(response.requestOptions);
         return super.onResponse(response, handler);
-      } else if (response.data["error_message"] == "Invalid RTM!") {
+      } else {
         debugPrint("Authenticated request failed RTM in response");
+        apiClient.clearTokens();
         UpdateTokenRequest? request =
             await callback?.onRefreshTokenExpired.call();
         if (request != null) {
@@ -45,12 +46,13 @@ class TokenInterceptor extends Interceptor {
       DioException err, ErrorInterceptorHandler handler) async {
     Dio dio = Dio();
     if (err.response?.statusCode == 401) {
-      if (err.response?.data["error_message"] == "Invalid LTM!") {
+      if (!err.response!.requestOptions.path.contains("user/refresh")) {
         debugPrint("Authenticated request failed in onError");
         await refreshToken();
         final newRes = await _retry(dio, err.requestOptions);
         handler.resolve(newRes);
-      } else if (err.response?.data["error_message"] == "Invalid RTM!") {
+      } else {
+        apiClient.clearTokens();
         debugPrint("Authenticated request failed in onError");
         UpdateTokenRequest? request =
             await callback?.onRefreshTokenExpired.call();
@@ -73,15 +75,17 @@ class TokenInterceptor extends Interceptor {
         (RefreshRequestBuilder()..refreshToken(refreshToken!)).build());
 
     if (response.success) {
+      final newAccessToken = response.accessToken;
+      final newRefreshToken = response.refreshToken;
       apiClient.updateTokens(
-        response.accessToken!,
-        response.refreshToken!,
+        newAccessToken!,
+        newRefreshToken!,
       );
       callback?.onAccessTokenExpired.call(
-        response.accessToken!,
-        response.refreshToken!,
+        newAccessToken,
+        newRefreshToken,
       );
-    } else if (response.errorMessage == "Invalid RTM!") {
+    } else if (response.success == false) {
       debugPrint("Invalid RTM in refreshToken");
       UpdateTokenRequest? request =
           await callback?.onRefreshTokenExpired.call();
