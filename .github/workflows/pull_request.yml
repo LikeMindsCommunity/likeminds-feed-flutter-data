@@ -25,11 +25,15 @@ jobs:
         with:
           name: lint-results
           path: lint-results.txt
-      
-      - name : Tests
+          
+      - name: Install realm
+        if: always()
+        run: dart run realm install
+
+      - name: Tests
         if: always()
         run: flutter test --dart-define=DEBUG=true
-      
+
       - name: Dry run for pub.dev
         if: always()
         run: flutter pub publish --dry-run

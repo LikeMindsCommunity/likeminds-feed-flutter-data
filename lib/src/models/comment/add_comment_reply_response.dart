@@ -50,6 +50,7 @@ class AddCommentReplyResponseEntity {
   final Map<String, UserEntity>? users;
   final Map<String, TopicEntity>? topics;
   final Map<String, WidgetModelEntity>? widgets;
+  @JsonKey(name: 'user_topics')
   final Map<String, List<String>>? userTopics;
 
   AddCommentReplyResponseEntity({

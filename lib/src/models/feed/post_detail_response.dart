@@ -67,6 +67,7 @@ class PostDetailResponse {
 @JsonSerializable(explicitToJson: true)
 class PostDetailResponseEntity {
   final bool success;
+  @JsonKey(name: 'error_message')
   final String? errorMessage;
   @JsonKey(name: 'post')
   final PostEntity? postReplies;

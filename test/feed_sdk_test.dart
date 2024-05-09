@@ -30,7 +30,8 @@
 //           ..apiKey(prod ? testingProdAPIKey : testingBetaAPIKey)
 //           ..sdkCallback(testingCallback))
 //         .build();
-
+//     String? pollId;
+//     String? optionId;
 //     test('Testing Initiate User', () async {
 //       InitiateUserRequest request = (InitiateUserRequestBuilder()
 //             ..uuid(prod ? testingProdBotID : testingBetaBotID))
@@ -125,16 +126,27 @@
 //       String postText = "Test post from SDK";
 
 //       String tempId = "-${DateTime.now().millisecondsSinceEpoch.toString()}";
-
+//       Attachment attachment = Attachment(
+//         attachmentType: 6,
+//         attachmentMeta: AttachmentMeta(
+//           pollQuestion: "Poll Question",
+//           allowAddOption: true,
+//           pollType: "instant",
+//           pollOptions: ["Option 1", "Option 2"],
+//           expiryTime: DateTime.now().millisecondsSinceEpoch + 1000000,
+//         ),
+//       );
 //       AddPostRequest request = (AddPostRequestBuilder()
-//             ..attachments([])
-//             ..feedroomId(72200)
+//             ..attachments([attachment])
+//             // ..feedroomId(72200)
 //             ..tempId(tempId)
 //             ..text(postText))
 //           .build();
 //       AddPostResponse response = await client.addPost(request);
 //       if (response.success) {
 //         postId = response.post!.id;
+//         pollId = response.post!.attachments![0].attachmentMeta.entityId!;
+//         optionId = response.widgets![pollId]!.lmMeta!['options'][0]['_id'];
 //       }
 
 //       expect(response.success, true);
@@ -314,25 +326,51 @@
 //       expect(response, isNotNull);
 //     });
 
-//     test('Testing Delete Post', () async {
-//       DeletePostRequest request = (DeletePostRequestBuilder()
-//             ..deleteReason("Reason for deletion")
-//             ..postId(postId ?? ""))
-//           .build();
-//       DeletePostResponse response = await client.deletePost(request);
-//       expect(response, isNotNull);
-//     });
-
 //     test('Testing Search Post', () async {
 //       SearchPostRequest request = (SearchPostRequestBuilder()
 //             ..page(1)
 //             ..pageSize(10)
-//             ..search("test")
+//             ..search("post for test")
 //             ..searchType("text"))
 //           .build();
 //       final response = await client.searchPosts(request);
 
 //       log("Search Post Response: ${response.posts?.length}");
+//       expect(response.success, true);
+//     });
+
+//     test('Testing Submit Poll Vote', () async {
+//       debugPrint("Poll ID: $pollId");
+//       debugPrint("Option ID: $optionId");
+//       SubmitPollVoteRequest request = (SubmitPollVoteRequestBuilder()
+//             ..pollId(pollId ?? "")
+//             ..votes([optionId ?? ""]))
+//           .build();
+//       LMResponse<void> response = await client.submitPollVote(request);
+//       debugPrint("Submit Poll Vote Response: ${response.success}");
+//       expect(response.success, true);
+//     });
+
+//     test('Testing Add Poll Option', () async {
+//       AddPollOptionRequest request = (AddPollOptionRequestBuilder()
+//             ..pollId(pollId ?? "")
+//             ..text("Option 3"))
+//           .build();
+//       LMResponse<AddPollOptionResponse> response =
+//           await client.addPollOption(request);
+//       debugPrint(
+//           "Add Poll Option Response: ${response.data?.widget?.lmMeta?["options"]}");
+//       expect(response.success, true);
+//     });
+
+//     test('Testing Get Poll Votes', () async {
+//       GetPollVotesRequest request = (GetPollVotesRequestBuilder()
+//             ..pollId(pollId ?? "")
+//             ..votes([optionId ?? ""]))
+//           .build();
+//       LMResponse<GetVotesResponse> response =
+//           await client.getPollVotes(request);
+//       debugPrint("Get Poll Votes Response: ${response.data?.votes}");
 //       expect(response.success, true);
 //     });
 

@@ -15,9 +15,7 @@ class GetWidgetResponse {
     return GetWidgetResponse(
       success: json['success'],
       errorMessage: json['error_message'],
-      widgets: json['data'] != null &&
-              json['data']['widgets'] != null &&
-              json['data']['widgets'].isNotEmpty
+      widgets: json['data'] != null && json['data']['widgets'] != null
           ? (json['data']['widgets']
                   ?.map((e) =>
                       WidgetModel.fromEntity(WidgetModelEntity.fromJson(e)))
