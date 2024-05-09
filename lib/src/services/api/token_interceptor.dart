@@ -17,6 +17,32 @@ class TokenInterceptor extends Interceptor {
   }
 
   @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) async {
+    if (response.statusCode == 401) {
+      if (!response.requestOptions.path.contains("user/refresh")) {
+        debugPrint("Authenticated request failed LTM in response");
+
+        await refreshToken();
+        // final newRes = await _retry(response.requestOptions);
+        return super.onResponse(response, handler);
+      } else {
+        debugPrint("Authenticated request failed RTM in response");
+        apiClient.clearTokens();
+        UpdateTokenRequest? request =
+            await callback?.onRefreshTokenExpired.call();
+        if (request != null) {
+          print("ye wala calll karwa do plzzzzzzzzzz");
+          apiClient.updateTokens(request.accessToken, request.refreshToken);
+        }
+        return super.onResponse(response, handler);
+      }
+    } else {
+      debugPrint("Authenticated request completed pew pew");
+      return super.onResponse(response, handler);
+    }
+  }
+
+  @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
     Dio dio = Dio();
