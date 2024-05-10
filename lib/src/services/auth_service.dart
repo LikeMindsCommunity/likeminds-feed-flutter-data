@@ -147,14 +147,16 @@ class AuthService {
       RefreshAccessTokenRequest request) async {
     Dio dio = Dio();
     try {
-      final response = await dio.post(
-        apiClient.getEndpoints.authRefreshEndpoint,
-        options: Options(
-          headers: {
-            'Authorization': request.refreshToken,
-          },
-        ),
-      );
+      final response =
+          await apiClient.client().post(apiClient.getEndpoints.authRefreshEndpoint,
+              options: Options(
+                headers: {
+                  'Authorization': request.refreshToken,
+                },
+              ),
+              data: {
+            "token_expiry_beta": 1,
+          });
       RefreshResponseEntity refreshResponse =
           RefreshResponseEntity.fromJson(response.data);
 

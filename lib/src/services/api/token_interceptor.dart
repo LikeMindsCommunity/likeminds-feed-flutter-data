@@ -31,7 +31,6 @@ class TokenInterceptor extends Interceptor {
         UpdateTokenRequest? request =
             await callback?.onRefreshTokenExpired.call();
         if (request != null) {
-          print("ye wala calll karwa do plzzzzzzzzzz");
           apiClient.updateTokens(request.accessToken, request.refreshToken);
         }
         return super.onResponse(response, handler);
@@ -45,12 +44,11 @@ class TokenInterceptor extends Interceptor {
   @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
-    Dio dio = Dio();
     if (err.response?.statusCode == 401) {
       if (!err.response!.requestOptions.path.contains("user/refresh")) {
         debugPrint("Authenticated request failed in onError");
         await refreshToken();
-        final newRes = await _retry(dio, err.requestOptions);
+        final newRes = await _retry(apiClient.client(), err.requestOptions);
         handler.resolve(newRes);
       } else {
         apiClient.clearTokens();
@@ -60,8 +58,15 @@ class TokenInterceptor extends Interceptor {
         if (request != null) {
           apiClient.updateTokens(request.accessToken, request.refreshToken);
         }
-        final newRes = await _retry(dio, err.requestOptions);
-        handler.resolve(newRes);
+        // final newRes = await _retry(apiClient.client(), err.requestOptions);
+        // handler.resolve(newRes);
+        handler.resolve(Response(requestOptions: err.requestOptions, data: {
+          "success": true,
+          "data": {
+            "access_token": request!.accessToken,
+            "refresh_token": request.refreshToken
+          }
+        }));
       }
     } else {
       debugPrint("Authenticated request failed except LTM");
@@ -92,6 +97,7 @@ class TokenInterceptor extends Interceptor {
           await callback?.onRefreshTokenExpired.call();
       if (request != null) {
         apiClient.updateTokens(request.accessToken, request.refreshToken);
+        return;
       }
     }
   }
