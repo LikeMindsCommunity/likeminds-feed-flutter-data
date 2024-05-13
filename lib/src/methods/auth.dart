@@ -11,6 +11,15 @@ class AuthApi {
     required this.authRepository,
   });
 
+  /// Initiate a user
+  /// Initiates a user
+  /// Returns [InitiateUserResponse]
+  /// Takes [InitiateUserRequest] as input
+  Future<InitiateUserResponse> initiateUser(
+      InitiateUserRequest initiateUserRequest) async {
+    return await authRepository.initiateUser(initiateUserRequest);
+  }
+
   /// Validate a user
   /// Validates a user
   /// Returns [ValidateUserResponse]
@@ -22,9 +31,10 @@ class AuthApi {
 
   /// Refresh a user
   /// Refreshes a user, and logs in
-  /// Returns [RefreshResponse]
-  /// Takes [RefreshRequest] as input
-  Future<RefreshResponse> refreshUser(RefreshRequest refreshRequest) async {
+  /// Returns [RefreshAccessTokenResponse]
+  /// Takes [RefreshAccessTokenRequest] as input
+  Future<RefreshAccessTokenResponse> refreshUser(
+      RefreshAccessTokenRequest refreshRequest) async {
     return await authRepository.refreshUser(refreshRequest);
   }
 

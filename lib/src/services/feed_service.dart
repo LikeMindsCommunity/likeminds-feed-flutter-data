@@ -22,7 +22,7 @@ class FeedService {
       return PostDetailResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -33,7 +33,7 @@ class FeedService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       return PostDetailResponseEntity(
           success: false, errorMessage: "An error occurred");
     }
@@ -52,7 +52,7 @@ class FeedService {
       return GetFeedResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -86,7 +86,7 @@ class FeedService {
       return responseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -115,7 +115,7 @@ class FeedService {
       return GetFeedOfFeedRoomResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -146,7 +146,7 @@ class FeedService {
       return responseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -175,7 +175,7 @@ class FeedService {
       return responseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -201,7 +201,7 @@ class FeedService {
       return GetSavedPostResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -229,7 +229,7 @@ class FeedService {
       return responseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -257,7 +257,7 @@ class FeedService {
       return responseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

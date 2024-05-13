@@ -22,7 +22,7 @@ class AccessService {
       return memberStateResponseEntity;
     } on DioException catch (e, stacktrace) {
       debugPrint("Error from get member state access: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -48,7 +48,7 @@ class AccessService {
       return communityProfile;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -76,7 +76,7 @@ class AccessService {
       return communityProfile;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -87,7 +87,7 @@ class AccessService {
       );
     } on Exception catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       return EditProfileResponseEntity(
           success: false, errorMessage: e.toString());
     }

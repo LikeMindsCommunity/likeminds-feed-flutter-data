@@ -134,3 +134,6 @@ Added callbacks for accessToken and refreshToken updation
 
 # 1.9.0
 Added support for polls
+
+# 1.10.0
+Added api key security

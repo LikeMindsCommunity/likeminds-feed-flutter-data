@@ -3,58 +3,48 @@ library likeminds_feed;
 export 'src/methods/sdk.dart';
 export 'src/methods/methods.dart';
 export 'src/models/models.dart';
-export 'src/persistence/logger/logger.dart';
+export 'src/persistence/persistence.dart';
 
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
-import 'package:likeminds_feed/src/persistence/logger/logger.dart';
+import 'package:likeminds_feed/src/persistence/persistence.dart';
 import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
 
-const String feedSDKVersion = "1.9.0";
+const String feedSDKVersion = "1.10.0";
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
-
-  /// Callback for updating the accessToken
-  /// on token expiry
-  static Function(String)? updateAccessTokenCallBack;
-
-  /// Called when refreshToken expires
-  /// Returns a Future of [UpdateTokenRequest]
-  /// which contains new accessToken and refreshToken
-  /// This is used to update the tokens in the SDK
-  static Future<UpdateTokenRequest> Function()? updateRefreshToken;
 
   // Private constructor
   // User Builder class to get an instance of LMFeedClient
   LMFeedClient._({
     LMSDKCallback? sdkCallback,
     InitiateLoggerRequest? initiateLoggerRequest,
-    Function(String)? updateAccessTokenCallBack,
-    Future<UpdateTokenRequest> Function()? updateTokens,
   }) {
     DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
     if (initiateLoggerRequest != null) {
-      LMFeedLogger.instance
-          .initialise(initiateLoggerRequest: initiateLoggerRequest);
-    }
-    if (updateAccessTokenCallBack != null) {
-      updateAccessTokenCallBack = updateAccessTokenCallBack;
-    }
-    if (updateTokens != null) {
-      updateRefreshToken = updateTokens;
+      LMFeedPersistence.instance
+          .initialiseLogger(initiateLoggerRequest: initiateLoggerRequest);
     }
   }
 
   // ------------------------------------------
   // Initiation APIs
   // Use these to login user, and fetch essential permissions
+
+  /// initiateUser is used to initiate a user session
+  /// [InitiateUserRequest] is used to pass the required parameters
+  /// [InitiateUserResponse] is returned as a Future
+  Future<InitiateUserResponse> initiateUser(
+      InitiateUserRequest initiateUserRequest) async {
+    return await _sdkApplication.getAuthApi().initiateUser(initiateUserRequest);
+  }
 
   /// validateUser is used to validate a user session
   /// [ValidateUserRequest] is used to pass the required parameters
@@ -65,9 +55,10 @@ class LMFeedClient {
   }
 
   /// refreshUser is used to refresh a user session
-  /// [RefreshRequest] is used to pass the required parameters
-  /// [RefreshResponse] is returned as a Future
-  Future<RefreshResponse> refreshUser(RefreshRequest refreshRequest) async {
+  /// [RefreshAccessTokenRequest] is used to pass the required parameters
+  /// [RefreshAccessTokenResponse] is returned as a Future
+  Future<RefreshAccessTokenResponse> refreshUser(
+      RefreshAccessTokenRequest refreshRequest) async {
     return await _sdkApplication.getAuthApi().refreshUser(refreshRequest);
   }
 
@@ -644,8 +635,6 @@ class LMFeedClient {
 class LMFeedClientBuilder {
   LMSDKCallback? _sdkCallback;
   InitiateLoggerRequest? _initiateLoggerRequest;
-  static Function(String)? _updateAccessToken;
-  static Future<UpdateTokenRequest> Function()? _updateRefreshToken;
 
   void sdkCallback(LMSDKCallback? sdkCallback) {
     _sdkCallback = sdkCallback;
@@ -655,21 +644,10 @@ class LMFeedClientBuilder {
     _initiateLoggerRequest = initiateLoggerRequest;
   }
 
-  void updateAccessTokenCallback(Function(String) accessToken) {
-    _updateAccessToken = accessToken;
-  }
-
-  void updateRefreshTokenCallback(
-      Future<UpdateTokenRequest> Function() refreshToken) {
-    _updateRefreshToken = refreshToken;
-  }
-
   LMFeedClient build() {
     return LMFeedClient._(
       sdkCallback: _sdkCallback,
       initiateLoggerRequest: _initiateLoggerRequest,
-      updateAccessTokenCallBack: _updateAccessToken,
-      updateTokens: _updateRefreshToken,
     );
   }
 }

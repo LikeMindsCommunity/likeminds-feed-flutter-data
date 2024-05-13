@@ -31,7 +31,7 @@ class WidgetsService extends IWidgetsService {
       return getWidgetResponse;
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];

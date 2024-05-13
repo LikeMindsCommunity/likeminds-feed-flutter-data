@@ -30,7 +30,7 @@ class UserService implements IUserService {
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
       String? errorMessage;
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
       }

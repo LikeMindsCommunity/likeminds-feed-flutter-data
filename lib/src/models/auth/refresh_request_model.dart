@@ -1,7 +1,7 @@
-class RefreshRequest {
+class RefreshAccessTokenRequest {
   final String refreshToken;
 
-  RefreshRequest._({
+  RefreshAccessTokenRequest._({
     required this.refreshToken,
   });
 
@@ -19,8 +19,8 @@ class RefreshRequestBuilder {
     _refreshToken = refreshToken;
   }
 
-  RefreshRequest build() {
-    return RefreshRequest._(
+  RefreshAccessTokenRequest build() {
+    return RefreshAccessTokenRequest._(
       refreshToken: _refreshToken!,
     );
   }

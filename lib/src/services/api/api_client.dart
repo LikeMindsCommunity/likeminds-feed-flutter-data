@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/constants/string_constants.dart';
 import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/environment/env.dart';
 import 'package:likeminds_feed/src/services/api/token_interceptor.dart';
@@ -34,9 +36,18 @@ class ApiClient {
   bool get getIsProduction => isProduction;
   EndPoints get getEndpoints => endPoints;
 
-  void initTokens(String accessToken, String refreshToken) {
+  Future<void> updateTokens(String accessToken, String refreshToken) async {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
+    final localPref = LMFeedPersistence.instance;
+    await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
+          ..key(kAccessToken)
+          ..value(accessToken))
+        .build());
+    await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
+          ..key(kRefreshToken)
+          ..value(refreshToken))
+        .build());
   }
 
   void clearTokens() {
