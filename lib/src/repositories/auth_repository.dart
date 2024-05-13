@@ -7,6 +7,13 @@ class AuthRepository {
 
   AuthRepository({required this.authService});
 
+  Future<InitiateUserResponse> initiateUser(
+      InitiateUserRequest initiateUserRequest) async {
+    return InitiateUserResponse.fromEntity(
+      await authService.initiateUser(initiateUserRequest),
+    );
+  }
+
   Future<ValidateUserResponse> validateUser(
       ValidateUserRequest validateUserRequest) async {
     return ValidateUserResponse.fromEntity(
@@ -14,9 +21,10 @@ class AuthRepository {
     );
   }
 
-  Future<RefreshResponse> refreshUser(RefreshRequest refreshRequest) async {
-    return RefreshResponse.fromEntity(
-      entity: await authService.refresh(refreshRequest),
+  Future<RefreshAccessTokenResponse> refreshUser(
+      RefreshAccessTokenRequest refreshRequest) async {
+    return RefreshAccessTokenResponse.fromEntity(
+      entity: await authService.refreshAccessToken(refreshRequest),
     );
   }
 

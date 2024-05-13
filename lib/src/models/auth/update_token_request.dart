@@ -1,8 +1,8 @@
-class UpdateTokenRequest {
+class LMAuthToken {
   final String accessToken;
   final String refreshToken;
 
-  UpdateTokenRequest._({required this.accessToken, required this.refreshToken});
+  LMAuthToken._({required this.accessToken, required this.refreshToken});
 
   Map<String, dynamic> toJson() {
     return {
@@ -12,7 +12,7 @@ class UpdateTokenRequest {
   }
 }
 
-class UpdateTokenRequestBuilder {
+class LMAuthTokenBuilder {
   String? _accessToken;
   String? _refreshToken;
 
@@ -24,8 +24,8 @@ class UpdateTokenRequestBuilder {
     _refreshToken = refreshToken;
   }
 
-  UpdateTokenRequest build() {
-    return UpdateTokenRequest._(
+  LMAuthToken build() {
+    return LMAuthToken._(
       accessToken: _accessToken!,
       refreshToken: _refreshToken!,
     );

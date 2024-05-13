@@ -11,8 +11,8 @@ RefreshResponseEntity _$RefreshResponseEntityFromJson(
     RefreshResponseEntity(
       success: json['success'] as bool,
       errorMessage: json['error_message'] as String?,
-      accessToken: json['data']['access_token'] as String?,
-      refreshToken: json['data']['refresh_token'] as String?,
+      accessToken: json['data']?['access_token'] as String?,
+      refreshToken: json['data']?['refresh_token'] as String?,
     );
 
 Map<String, dynamic> _$RefreshResponseEntityToJson(
