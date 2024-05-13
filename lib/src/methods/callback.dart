@@ -9,5 +9,5 @@ abstract class LMSDKCallback {
 
   void onAccessTokenExpiredAndRefreshed(
       String accessToken, String refreshToken);
-  Future<UpdateTokenRequest> onRefreshTokenExpired();
+  Future<LMAuthToken> onRefreshTokenExpired();
 }
