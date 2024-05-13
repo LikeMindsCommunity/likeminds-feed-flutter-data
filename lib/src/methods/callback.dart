@@ -7,6 +7,7 @@ abstract class LMSDKCallback {
   void profileRouteCallback({required String uuid}) {}
   void routeToCompanyCallback({required String companyId}) {}
 
-  void onAccessTokenExpired(String accessToken, String refreshToken);
+  void onAccessTokenExpiredAndRefreshed(
+      String accessToken, String refreshToken);
   Future<UpdateTokenRequest> onRefreshTokenExpired();
 }

@@ -18,27 +18,8 @@ class TokenInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
-    if (response.statusCode == 401) {
-      if (!response.requestOptions.path.contains("user/refresh")) {
-        debugPrint("Authenticated request failed LTM in response");
-
-        await refreshToken();
-        // final newRes = await _retry(response.requestOptions);
-        return super.onResponse(response, handler);
-      } else {
-        debugPrint("Authenticated request failed RTM in response");
-        apiClient.clearTokens();
-        UpdateTokenRequest? request =
-            await callback?.onRefreshTokenExpired.call();
-        if (request != null) {
-          apiClient.updateTokens(request.accessToken, request.refreshToken);
-        }
-        return super.onResponse(response, handler);
-      }
-    } else {
-      debugPrint("Authenticated request completed pew pew");
-      return super.onResponse(response, handler);
-    }
+    debugPrint("Authenticated request completed pew pew");
+    return super.onResponse(response, handler);
   }
 
   @override
@@ -57,16 +38,16 @@ class TokenInterceptor extends Interceptor {
             await callback?.onRefreshTokenExpired.call();
         if (request != null) {
           apiClient.updateTokens(request.accessToken, request.refreshToken);
+          handler.resolve(Response(requestOptions: err.requestOptions, data: {
+            "success": true,
+            "data": {
+              "access_token": request.accessToken,
+              "refresh_token": request.refreshToken
+            }
+          }));
+        } else {
+          handler.reject(err);
         }
-        // final newRes = await _retry(apiClient.client(), err.requestOptions);
-        // handler.resolve(newRes);
-        handler.resolve(Response(requestOptions: err.requestOptions, data: {
-          "success": true,
-          "data": {
-            "access_token": request!.accessToken,
-            "refresh_token": request.refreshToken
-          }
-        }));
       }
     } else {
       debugPrint("Authenticated request failed except LTM");
@@ -79,7 +60,6 @@ class TokenInterceptor extends Interceptor {
     final refreshToken = apiClient.getRefreshToken;
     final response = await AuthService(apiClient: apiClient).refreshAccessToken(
         (RefreshRequestBuilder()..refreshToken(refreshToken!)).build());
-
     if (response.success) {
       final newAccessToken = response.accessToken;
       final newRefreshToken = response.refreshToken;
@@ -87,7 +67,8 @@ class TokenInterceptor extends Interceptor {
         newAccessToken!,
         newRefreshToken!,
       );
-      callback?.onAccessTokenExpired.call(
+      // TODO: Store new tokens in local storage
+      callback?.onAccessTokenExpiredAndRefreshed.call(
         newAccessToken,
         newRefreshToken,
       );

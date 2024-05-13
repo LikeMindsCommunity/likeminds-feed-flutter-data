@@ -14,8 +14,9 @@ class LMUserDBHandler {
   // CRUD operation for User Model
   // Insert [User] data into local DB
   Future<LMResponse<void>> insertOrUpdateUser(User user) async {
-    Realm realm = Realm(config);
+   
     try {
+       Realm realm =await Realm.open(config);
       LMUserRO userDBModel = LMUserInterface.fromUser(user);
 
       await realm.writeAsync(() {
@@ -26,7 +27,7 @@ class LMUserDBHandler {
 
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
-      realm.close();
+      // realm.close();
       return LMResponse<void>(
         errorMessage: e.toString(),
         success: false,
