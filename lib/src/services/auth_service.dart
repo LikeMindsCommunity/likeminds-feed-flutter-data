@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/constants/string_constants.dart';
-import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/persistence.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
@@ -53,7 +52,6 @@ class AuthService {
             initiateUserResponse.accessToken!,
             initiateUserResponse.refreshToken!,
           );
-          //TODO save tokens in cache and save user (done) + community data in DB
           final localPref = LMFeedPersistence.instance;
           await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
                 ..key(kApiKey)
@@ -62,7 +60,6 @@ class AuthService {
           await localPref.deleteUserDB();
           await localPref
               .insertOrUpdateUser(User.fromEntity(initiateUserResponse.user!));
-          //TODO can be removed - done
           return initiateUserResponse;
           // Else, if API returned no app access
         } else {
@@ -116,13 +113,10 @@ class AuthService {
             request.accessToken,
             request.refreshToken,
           );
-          //TODO save tokens in cache and save user + community data in DB
           final localPref = LMFeedPersistence.instance;
           await localPref.deleteUserDB();
           await localPref
               .insertOrUpdateUser(User.fromEntity(validateUserResponse.user!));
-          //TODO can be removed - done
-
           return validateUserResponse;
           // Else, if API returned no app access
         } else {

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/persistence/persistence.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 class AccessService {

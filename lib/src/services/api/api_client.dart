@@ -3,7 +3,6 @@ import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/constants/string_constants.dart';
-import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/endpoints.dart';
 import 'package:likeminds_feed/src/environment/env.dart';
 import 'package:likeminds_feed/src/services/api/token_interceptor.dart';

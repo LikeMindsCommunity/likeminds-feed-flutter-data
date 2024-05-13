@@ -34,11 +34,8 @@ class TokenInterceptor extends Interceptor {
       } else {
         apiClient.clearTokens();
         debugPrint("Authenticated request failed in onError");
-        //TODO change it to LMAuthToken: done
         LMAuthToken? request = await callback?.onRefreshTokenExpired.call();
         if (request != null) {
-          // TODO: can be removed :done
-          // apiClient.updateTokens(request.accessToken, request.refreshToken);
           handler.resolve(Response(requestOptions: err.requestOptions, data: {
             "success": true,
             "data": {
@@ -64,7 +61,6 @@ class TokenInterceptor extends Interceptor {
     if (response.success) {
       final newAccessToken = response.accessToken;
       final newRefreshToken = response.refreshToken;
-      // TODO: Store new tokens in local storage - done
       await apiClient.updateTokens(
         newAccessToken!,
         newRefreshToken!,
