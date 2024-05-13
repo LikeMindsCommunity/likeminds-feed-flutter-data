@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/persistence/persistence.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
 abstract class IPostService {
@@ -380,7 +379,7 @@ class PostService extends IPostService {
       );
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       return LMResponse<void>(
         success: false,
         errorMessage: e.message ?? "An error occurred",
@@ -405,7 +404,7 @@ class PostService extends IPostService {
       );
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       return LMResponse<AddPollOptionResponseEntity>(
         success: false,
         errorMessage: e.message ?? "An error occurred",
@@ -431,7 +430,7 @@ class PostService extends IPostService {
       );
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedLogger.instance.handleException(e, stacktrace);
+      LMFeedPersistence.instance.handleException(e, stacktrace);
       return LMResponse<GetPollVotesResponseEntity>(
         success: false,
         errorMessage: e.message ?? "An error occurred",
