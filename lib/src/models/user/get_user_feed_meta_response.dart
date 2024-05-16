@@ -8,6 +8,7 @@ class GetUserFeedMetaResponse {
   final String? errorMessage;
   final int? commentsCount;
   final int? postsCount;
+  final int? pendingPostCount;
   final Map<String, User>? users;
   final Map<String, WidgetModel>? widgets;
   final Map<String, List<String>>? userTopics;
@@ -22,6 +23,7 @@ class GetUserFeedMetaResponse {
     this.widgets,
     this.userTopics,
     this.topics,
+    this.pendingPostCount,
   });
 
   factory GetUserFeedMetaResponse.fromEntity(
@@ -29,6 +31,7 @@ class GetUserFeedMetaResponse {
     return GetUserFeedMetaResponse(
       success: entity.success,
       errorMessage: entity.errorMessage,
+      pendingPostCount: entity.pendingPostCount,
       commentsCount: entity.commentsCount,
       postsCount: entity.postsCount,
       userTopics: entity.userTopics,
@@ -48,6 +51,7 @@ class GetUserFeedMetaResponse {
       success: success,
       errorMessage: errorMessage,
       commentsCount: commentsCount,
+      pendingPostCount: pendingPostCount,
       postsCount: postsCount,
       userTopics: userTopics,
       users: users?.map((key, value) => MapEntry(key, value.toEntity())),
@@ -68,6 +72,8 @@ class GetUserFeedMetaResponseEntity {
   final int? commentsCount;
   @JsonKey(name: 'posts_count')
   final int? postsCount;
+  @JsonKey(name: 'pending_post_count')
+  final int? pendingPostCount;
   final Map<String, UserEntity>? users;
   final Map<String, WidgetModelEntity>? widgets;
   @JsonKey(name: 'user_topics')
@@ -84,6 +90,7 @@ class GetUserFeedMetaResponseEntity {
     this.userTopics,
     this.widgets,
     this.topics,
+    this.pendingPostCount,
   });
 
   factory GetUserFeedMetaResponseEntity.fromJson(Map<String, dynamic> json) =>

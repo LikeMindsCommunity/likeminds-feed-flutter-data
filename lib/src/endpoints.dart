@@ -125,4 +125,12 @@ class EndPoints {
   String getPollVotesEndPoint(String pollId) {
     return "$KETTLE_HOST/poll/$pollId/vote";
   }
+
+  String getPendingPostsEndpoint(String uuid) {
+    return "$feedUrl/user/$uuid/post/pending";
+  }
+
+  String getPendingPostEndpoint(String postId) {
+    return "$feedUrl/post/pending/$postId";
+  }
 }
