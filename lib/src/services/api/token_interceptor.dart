@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/constants/string_constants.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 import 'package:likeminds_feed/src/services/auth_service.dart';
@@ -55,9 +56,16 @@ class TokenInterceptor extends Interceptor {
 
   Future<void> refreshToken() async {
     debugPrint("Refreshing token");
-    final refreshToken = apiClient.getRefreshToken;
+    LMResponse refreshTokenResponse =
+        LMFeedPersistence.instance.getCache(kRefreshToken);
+    if (!refreshTokenResponse.success ||
+        refreshTokenResponse.data == null ||
+        refreshTokenResponse.data!.value == null) {
+      throw Exception("Refresh token not found.");
+    }
+    String refreshToken = refreshTokenResponse.data!.value;
     final response = await AuthService(apiClient: apiClient).refreshAccessToken(
-        (RefreshRequestBuilder()..refreshToken(refreshToken!)).build());
+        (RefreshRequestBuilder()..refreshToken(refreshToken)).build());
     if (response.success) {
       final newAccessToken = response.accessToken;
       final newRefreshToken = response.refreshToken;
