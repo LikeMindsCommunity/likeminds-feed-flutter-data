@@ -56,8 +56,8 @@ class TokenInterceptor extends Interceptor {
 
   Future<void> refreshToken() async {
     debugPrint("Refreshing token");
-    final localPref = LMFeedPersistence.instance;
-    LMResponse refreshTokenResponse = localPref.getCache(kRefreshToken);
+    LMResponse refreshTokenResponse =
+        LMFeedPersistence.instance.getCache(kRefreshToken);
     if (!refreshTokenResponse.success ||
         refreshTokenResponse.data == null ||
         refreshTokenResponse.data!.value == null) {
