@@ -1,21 +1,31 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/persistence/web/user/handler/handler.dart';
 
 LMFeedPersistence getPersistenceService() => LMFeedPersistenceWeb();
 
 class LMFeedPersistenceWeb implements LMFeedPersistence {
+  late LMUserDBHandlerHive userDBHandlerHive;
+
+  LMFeedPersistenceWeb() {
+    userDBHandlerHive = LMUserDBHandlerHive(
+      userBoxName: 'userBox',
+      memberStateBoxName: 'memberStateBox',
+    );
+  }
+
   @override
   Future<LMResponse<void>> insertOrUpdateUser(User user) {
-    throw UnimplementedError();
+    return userDBHandlerHive.insertOrUpdateUser(user);
   }
 
   @override
   LMResponse<User> getUserDB() {
-    throw UnimplementedError();
+    return userDBHandlerHive.getUser();
   }
 
   @override
   Future<LMResponse<void>> deleteUserDB() {
-    throw UnimplementedError();
+    return userDBHandlerHive.deleteUser();
   }
 
   @override
