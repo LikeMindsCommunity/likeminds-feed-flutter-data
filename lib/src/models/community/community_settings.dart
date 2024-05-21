@@ -4,7 +4,7 @@ part 'community_settings.g.dart';
 
 class CommunitySettings {
   final bool enabled;
-  final int enabledBy;
+  final int? enabledBy;
   final String settingSubTitle;
   final String settingTitle;
   final String settingType;
@@ -42,7 +42,7 @@ class CommunitySettings {
 class CommunitySettingsEntity {
   final bool enabled;
   @JsonKey(name: 'enabled_by')
-  final int enabledBy;
+  final int? enabledBy;
 
   @JsonKey(name: 'setting_sub_title')
   final String settingSubTitle;

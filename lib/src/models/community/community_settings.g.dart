@@ -10,7 +10,7 @@ CommunitySettingsEntity _$CommunitySettingsEntityFromJson(
         Map<String, dynamic> json) =>
     CommunitySettingsEntity(
       enabled: json['enabled'] as bool,
-      enabledBy: json['enabled_by'] as int,
+      enabledBy: json['enabled_by'] as int?,
       settingSubTitle: json['setting_sub_title'] as String,
       settingTitle: json['setting_title'] as String,
       settingType: json['setting_type'] as String,
