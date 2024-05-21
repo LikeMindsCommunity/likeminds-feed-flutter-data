@@ -36,6 +36,14 @@ class GetPollVotesRequestBuilder {
     _votes = votes;
   }
 
+  void page(int page) {
+    _page = page;
+  }
+
+  void pageSize(int pageSize) {
+    _pageSize = pageSize;
+  }
+
   GetPollVotesRequest build() {
     if (_pollId == null) throw Exception('pollId is required');
     if (_votes == null) throw Exception('votes is required');
