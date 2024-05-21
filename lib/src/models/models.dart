@@ -41,6 +41,7 @@ export 'package:likeminds_feed/src/models/access/question_answer.dart';
 export 'package:likeminds_feed/src/models/access/question_community_join.dart';
 
 export 'package:likeminds_feed/src/models/community/community_model.dart';
+export 'package:likeminds_feed/src/models/community/community_settings.dart';
 export 'package:likeminds_feed/src/models/community/community_settings_rights_model.dart';
 export 'package:likeminds_feed/src/models/community/community_configurations_model.dart';
 export 'package:likeminds_feed/src/models/community/get_community_configurations_response_model.dart';

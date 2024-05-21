@@ -3,46 +3,129 @@ import 'package:likeminds_feed/src/models/models.dart';
 
 part 'community_model.g.dart';
 
+/// {@template community_data}
+/// Contains all details related to a community within the application.
+/// The [id] and [name] parameters are required.
+/// All other parameters are optional.
 class Community {
+  /// The unique identifier of the community.
   final int id;
+
+  /// The name of the community.
   final String name;
+
+  /// The URL of the community's image, if available.
   final String? imageUrl;
+
+  /// The purpose or mission statement of the community, if available.
   final String? purpose;
+
+  /// A brief description or about section of the community, if available.
   final String? about;
+
+  /// The number of members in the community, if available.
   final int? membersCount;
+
+  /// Indicates whether the current user is a member of the community.
   final bool? isMember;
+
+  /// The number of membership requests pending approval, if available.
   final int? pendingMembersCount;
+
+  /// The number of pending chat rooms awaiting action, if available.
   final int? pendingChatRoomCount;
+
+  /// The number of open reports within the community, if available.
   final int? openReportsCount;
+
+  /// The number of unseen chat rooms, if available.
   final int? chatroomUnseen;
+
+  /// The timestamp of the last update to the community, if available.
   final int? updatedAt;
+
+  /// Indicates whether the current user is an admin of the community.
   final bool? isAdmin;
+
+  /// The current state of the community.
   final int? state;
+
+  /// The current state of the member within the community.
   final int? memberState;
+
+  /// The identifier of the user who created the community, if available.
   final String? createdBy;
+
+  /// The identifier of the user who manages the community, if available.
   final String? managedBy;
+
+  /// The date the community was created, if available.
   final String? date;
+
+  /// The type of community.
   final int? type;
+
+  /// The subtype of the community, if available.
   final int? subType;
+
+  /// The click state of the community, if available.
   final int? clickState;
+
+  /// The number of chat rooms in the community, if available.
   final int? chatroomCount;
+
+  /// A list of actions available to the user within the community.
   final List<dynamic>? actions;
+
+  /// A list of new chat room users, if available.
   final List<User>? newChatRoomUsers;
+
+  /// A list of chat room users, if available.
   final List<User>? chatRoomUsers;
+
+  /// A list of member right states within the community.
   final List<int>? memberRightStates;
+
+  /// The order time for the community, if available.
   final int? orderTime;
+
+  /// A list of menu items available in the community.
   final List<String>? menu;
+
+  /// Details of the leave community action, if available.
   final dynamic leaveCommunity;
+
+  /// Indicates whether the community is a paid community.
   final bool? isPaid;
+
+  /// Indicates whether membership approval is automatic.
   final bool? autoApproval;
+
+  /// The grace period for the community, if available.
   final int? gracePeriod;
+
+  /// Indicates whether the community is discoverable.
   final bool? isDiscoverable;
+
+  /// The URL of the community's website, if available.
   final String? websiteUrl;
+
+  /// Indicates whether referrals are enabled for the community.
   final bool? referralEnabled;
+
+  /// A list of community setting rights, if available.
   final List<CommunitySettingsRights>? communitySettingRights;
+
+  /// The plan of the community within the LikeMinds ecosystem.
   final String? likeMindsPlan;
+
+  /// Indicates whether the community is a freemium community.
   final bool? isFreemiumCommunity;
 
+  /// A list of settings related to the community.
+  final List<CommunitySettings>? communitySettings;
+
+  /// {@macro community_data}
   Community({
     required this.id,
     required this.name,
@@ -82,6 +165,7 @@ class Community {
     this.communitySettingRights,
     this.likeMindsPlan,
     this.isFreemiumCommunity,
+    this.communitySettings,
   });
 
   factory Community.fromEntity(CommunityEntity entity) {
@@ -128,6 +212,9 @@ class Community {
           .toList(),
       likeMindsPlan: entity.likeMindsPlan,
       isFreemiumCommunity: entity.isFreemiumCommunity,
+      communitySettings: entity.communitySettings
+          ?.map((e) => CommunitySettings.fromEntity(e))
+          .toList(),
     );
   }
 
@@ -156,14 +243,9 @@ class Community {
       clickState: clickState,
       chatroomCount: chatroomCount,
       actions: actions,
-      newChatRoomUsers: newChatRoomUsers
-          ?.map((User e) => e.toEntity())
-          .cast<UserEntity>()
-          .toList(),
-      chatRoomUsers: chatRoomUsers
-          ?.map((User e) => e.toEntity())
-          .cast<UserEntity>()
-          .toList(),
+      newChatRoomUsers:
+          newChatRoomUsers?.map((User e) => e.toEntity()).toList(),
+      chatRoomUsers: chatRoomUsers?.map((User e) => e.toEntity()).toList(),
       memberRightStates: memberRightStates,
       orderTime: orderTime,
       menu: menu,
@@ -174,12 +256,11 @@ class Community {
       isDiscoverable: isDiscoverable,
       websiteUrl: websiteUrl,
       referralEnabled: referralEnabled,
-      communitySettingRights: communitySettingRights
-          ?.map((e) => e.toEntity())
-          .cast<CommunitySettingsRightsEntity>()
-          .toList(),
+      communitySettingRights:
+          communitySettingRights?.map((e) => e.toEntity()).toList(),
       likeMindsPlan: likeMindsPlan,
       isFreemiumCommunity: isFreemiumCommunity,
+      communitySettings: communitySettings?.map((e) => e.toEntity()).toList(),
     );
   }
 }
@@ -277,6 +358,9 @@ class CommunityEntity {
   @JsonKey(name: 'community_setting_rights')
   final List<CommunitySettingsRightsEntity>? communitySettingRights;
 
+  @JsonKey(name: 'community_settings')
+  final List<CommunitySettingsEntity>? communitySettings;
+
   @JsonKey(name: 'like_minds_plan')
   final String? likeMindsPlan;
 
@@ -322,6 +406,7 @@ class CommunityEntity {
     this.communitySettingRights,
     this.likeMindsPlan,
     this.isFreemiumCommunity,
+    this.communitySettings,
   });
 
   factory CommunityEntity.fromJson(Map<String, dynamic> json) =>
