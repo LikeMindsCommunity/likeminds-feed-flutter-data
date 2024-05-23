@@ -14,8 +14,10 @@ GetAllPendingPostsResponseEntity _$GetAllPendingPostsResponseEntityFromJson(
           .toList(),
       totalCount: json['total_count'] as int? ?? 0,
       users: (json['users'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
-      ),
+            (k, e) =>
+                MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
+          ) ??
+          {},
       topics: (json['topics'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),

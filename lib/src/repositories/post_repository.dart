@@ -40,7 +40,8 @@ class PostRepository {
       success: getAllPendingPostsResponseEntity.success,
       errorMessage: getAllPendingPostsResponseEntity.errorMessage,
       data: getAllPendingPostsResponseEntity.data != null
-          ? getAllPendingPostsResponseEntity.data!.toResponse()
+          ? GetAllPendingPostsResponse.fromEntity(
+              getAllPendingPostsResponseEntity.data!)
           : null,
     );
   }

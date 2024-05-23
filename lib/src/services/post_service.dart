@@ -119,7 +119,9 @@ class PostService extends IPostService {
       if (response.data['success'] == true) {
         return LMResponse(
           success: true,
-          data: GetPendingPostResponseEntity.fromJson(response.data),
+          data: response.data['data'] == null
+              ? null
+              : GetPendingPostResponseEntity.fromJson(response.data['data']),
         );
       } else {
         return LMResponse(
@@ -416,7 +418,9 @@ class PostService extends IPostService {
       if (response.data['success'] == true) {
         return LMResponse(
           success: true,
-          data: EditPendingPostResponseEntity.fromJson(response.data),
+          data: response.data['data'] == null
+              ? null
+              : EditPendingPostResponseEntity.fromJson(response.data['data']),
         );
       } else {
         return LMResponse(
