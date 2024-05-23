@@ -14,9 +14,26 @@ class PostApi {
     return await postRepository.getPost(getPostRequest);
   }
 
+  Future<LMResponse<GetPendingPostResponse>> getPendingPost(
+      GetPendingPostRequest getPostRequest) async {
+    return await postRepository.getPendingPost(getPostRequest);
+  }
+
+  Future<LMResponse<GetAllPendingPostsResponse>> getAllPendingPosts(
+      GetAllPendingPostsRequest getAllPendingPostsRequest) async {
+    return await postRepository.getAllPendingPosts(getAllPendingPostsRequest);
+  }
+
   Future<DeletePostResponse> deletePost(
       DeletePostRequest deletePostRequest) async {
     return await postRepository.deletePost(deletePostRequest);
+  }
+
+  Future<LMResponse<void>> deletePendingPost(
+      DeletePendingPostRequest deletePostRequest) async {
+    LMResponse<void> deletePostResponseEntity =
+        await postRepository.deletePendingPost(deletePostRequest);
+    return deletePostResponseEntity;
   }
 
   Future<LikePostResponse> likePost(LikePostRequest likePostRequest) async {
@@ -38,6 +55,11 @@ class PostApi {
 
   Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
     return await postRepository.editPost(editPostRequest);
+  }
+
+  Future<LMResponse<EditPendingPostResponse>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest) async {
+    return await postRepository.editPendingPost(editPendingPostRequest);
   }
 
   Future<PostReportResponse> postReport(

@@ -211,6 +211,23 @@ class LMFeedClient {
     return await _sdkApplication.getPostApi().getPost(request);
   }
 
+  /// getPendingPost is used to fetch a pending post
+  /// [GetPendingPostRequest] is used to pass the required parameters
+  /// [GetPendingPostResponse] is returned as a Future
+  /// [LMResponse<GetPendingPostResponse>] is returned as a Future
+  Future<LMResponse<GetPendingPostResponse>> getPendingPost(
+      GetPendingPostRequest request) async {
+    return await _sdkApplication.getPostApi().getPendingPost(request);
+  }
+
+  // getAllPendingPost is used to fetch all pending posts
+  // [GetAllPendingPostRequest] is used to pass the required parameters
+  // [GetAllPendingPostResponse] is returned as a Future
+  Future<LMResponse<GetAllPendingPostsResponse>> getAllPendingPosts(
+      GetAllPendingPostsRequest request) async {
+    return await _sdkApplication.getPostApi().getAllPendingPosts(request);
+  }
+
   /// addPost is used to add a post
   /// [AddPostRequest] is used to pass the required parameters
   /// [AddPostResponse] is returned as a Future
@@ -223,6 +240,14 @@ class LMFeedClient {
   /// [DeletePostResponse] is returned as a Future
   Future<DeletePostResponse> deletePost(DeletePostRequest request) async {
     return await _sdkApplication.getPostApi().deletePost(request);
+  }
+
+  /// deletePendingPost is used to delete a post
+  /// [DeletePendingPostRequest] is used to pass the required parameters
+  /// [LMResponse] is returned as a Future
+  Future<LMResponse<void>> deletePendingPost(
+      DeletePendingPostRequest request) async {
+    return await _sdkApplication.getPostApi().deletePendingPost(request);
   }
 
   /// getPostLikes is used to fetch the likes of a post
@@ -254,10 +279,20 @@ class LMFeedClient {
   }
 
   /// editPost is used to edit a post
-  /// [EditPostRequest] is used to pass the required parameters
+  /// [EditPendingPostRequest] is used to pass the required parameters
   /// [EditPostResponse] is returned as a Future
   Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
     return await _sdkApplication.getPostApi().editPost(editPostRequest);
+  }
+
+  /// editPendingPost is used to edit a pending post
+  /// [EditPendingPostRequest] is used to pass the required parameters
+  /// [EditPendingPostResponse] is returned as a Future
+  Future<LMResponse<EditPendingPostResponse>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest) async {
+    return await _sdkApplication
+        .getPostApi()
+        .editPendingPost(editPendingPostRequest);
   }
 
   /// postReport is used to report a post

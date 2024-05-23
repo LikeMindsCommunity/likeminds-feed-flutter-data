@@ -40,6 +40,8 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
           ?.map((e) => e as String)
           .toList(),
       tempId: json['temp_id'] as String?,
+      isPendingPost: json['is_pending_post'] as bool? ?? false,
+      postStatus: json['post_status'] as String? ?? '',
     );
 
 Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
@@ -67,4 +69,6 @@ Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
       'heading': instance.heading,
       'comment_ids': instance.commentIds,
       'temp_id': instance.tempId,
+      'is_pending_post': instance.isPendingPost,
+      'post_status': instance.postStatus,
     };
