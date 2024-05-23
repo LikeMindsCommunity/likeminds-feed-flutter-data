@@ -285,6 +285,16 @@ class LMFeedClient {
     return await _sdkApplication.getPostApi().editPost(editPostRequest);
   }
 
+  /// editPendingPost is used to edit a pending post
+  /// [EditPendingPostRequest] is used to pass the required parameters
+  /// [EditPendingPostResponse] is returned as a Future
+  Future<LMResponse<EditPendingPostResponse>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest) async {
+    return await _sdkApplication
+        .getPostApi()
+        .editPendingPost(editPendingPostRequest);
+  }
+
   /// postReport is used to report a post
   /// [PostReportRequest] is used to pass the required parameters
   /// [PostReportResponse] is returned as a Future

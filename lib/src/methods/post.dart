@@ -57,6 +57,11 @@ class PostApi {
     return await postRepository.editPost(editPostRequest);
   }
 
+  Future<LMResponse<EditPendingPostResponse>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest) async {
+    return await postRepository.editPendingPost(editPendingPostRequest);
+  }
+
   Future<PostReportResponse> postReport(
       PostReportRequest postReportRequest) async {
     return await postRepository.postReport(postReportRequest);

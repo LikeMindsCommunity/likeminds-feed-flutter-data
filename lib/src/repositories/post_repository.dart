@@ -90,6 +90,18 @@ class PostRepository {
     return EditPostResponse.fromEntity(editPostResponseEntity);
   }
 
+  Future<LMResponse<EditPendingPostResponse>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest) async {
+    LMResponse<EditPendingPostResponseEntity> response =
+        await postService.editPendingPost(editPendingPostRequest);
+    return LMResponse(
+        success: response.success,
+        errorMessage: response.errorMessage,
+        data: response.data != null
+            ? EditPendingPostResponse.fromEntity(response.data!)
+            : null);
+  }
+
   Future<PostReportResponse> postReport(
       PostReportRequest postReportRequest) async {
     PostReportResponseEntity postReportResponseEntity =
