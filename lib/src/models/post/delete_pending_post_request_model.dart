@@ -35,6 +35,10 @@ class DeletePendingPostRequestBuilder {
   }
 
   DeletePendingPostRequest build() {
+    if (_postId == null || _deleteReason == null) {
+      throw Exception("postId and deleteReason must not be null");
+    }
+
     return DeletePendingPostRequest._(
       postId: _postId!,
       deleteReason: _deleteReason!,

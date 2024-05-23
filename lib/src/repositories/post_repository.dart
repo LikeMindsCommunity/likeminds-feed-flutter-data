@@ -140,6 +140,7 @@ class PostRepository {
   Future<LMResponse<GetPollVotesResponse>> getPollVotes(
       GetPollVotesRequest request) async {
     final getVotesResponseEntity = await postService.getPollVotes(request);
+
     return LMResponse(
       success: getVotesResponseEntity.success,
       errorMessage: getVotesResponseEntity.errorMessage,

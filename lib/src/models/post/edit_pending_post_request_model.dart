@@ -1,6 +1,6 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
 
-class EditPostRequest {
+class EditPendingPostRequest {
   final String postId;
   final String postText;
   final String? heading;
@@ -8,7 +8,7 @@ class EditPostRequest {
   final List<String>? topicIds;
   final bool? isRepost;
 
-  EditPostRequest._({
+  EditPendingPostRequest._({
     required this.postId,
     required this.postText,
     required this.attachments,
@@ -28,7 +28,7 @@ class EditPostRequest {
   }
 }
 
-class EditPostRequestBuilder {
+class EditPendingPostRequestBuilder {
   String? _postId;
   String? _postText;
   List<Attachment>? _attachments;
@@ -36,7 +36,7 @@ class EditPostRequestBuilder {
   bool _isRepost = false;
   String? _heading;
 
-  EditPostRequestBuilder();
+  EditPendingPostRequestBuilder();
 
   void postId(String postId) {
     _postId = postId;
@@ -62,8 +62,12 @@ class EditPostRequestBuilder {
     _heading = heading;
   }
 
-  EditPostRequest build() {
-    return EditPostRequest._(
+  EditPendingPostRequest build() {
+    assert(_postId != null, 'postId must not be null');
+    assert(_postText != null, 'postText must not be null');
+    assert(_attachments != null, 'attachments must not be null');
+
+    return EditPendingPostRequest._(
       postId: _postId!,
       postText: _postText!,
       attachments: _attachments!,

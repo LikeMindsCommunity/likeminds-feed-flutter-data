@@ -12,9 +12,8 @@ class FeedService {
       PostDetailRequest postDetailRequest) async {
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints.getPostEndPoint(
-                postDetailRequest.postId, postDetailRequest.page,
-                pageSize: postDetailRequest.pageSize),
+            apiClient.getEndpoints.getPostEndPoint(postDetailRequest.postId),
+            queryParameters: postDetailRequest.toJson(),
             options: Options(
               headers: {'Authorization': '${apiClient.accessToken}'},
             ),
