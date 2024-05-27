@@ -126,7 +126,7 @@ class LMFeedPersistenceMobile implements LMFeedPersistence {
   @override
   void handleException(Exception exception, StackTrace stackTrace,
       {Severity errorSeverity = Severity.ERROR}) {
-    LMFeedPersistence.instance.handleException(exception, stackTrace);
+    LMFeedLogger.instance.handleException(exception, stackTrace);
   }
 
   @override
