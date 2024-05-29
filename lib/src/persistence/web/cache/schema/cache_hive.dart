@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 
+part 'cache_hive.g.dart';
+
 @HiveType(typeId: 10) // Replace 1 with a unique ID for your model
 class CacheHive extends HiveObject {
   @override

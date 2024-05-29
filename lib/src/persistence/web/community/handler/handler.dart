@@ -11,6 +11,8 @@ class LMCommunityConfigurationDBHandlerHive {
 
   Future<LMResponse<void>> init() async {
     try {
+      Hive.registerAdapter(LMCommunityConfigurationHiveAdapter());
+
       communityConfigBox = await Hive.openBox<LMCommunityConfigurationHive>(
           communityConfigBoxName);
 

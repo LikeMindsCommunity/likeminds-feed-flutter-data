@@ -19,13 +19,23 @@ class LMUserDBHandlerHive {
   });
 
   Future<LMResponse> init() async {
-    userBox = await Hive.openBox<LMUserHive>(userBoxName);
-    memberStateBox = await Hive.openBox<LMMemberStateHive>(memberStateBoxName);
+    try {
+      Hive.registerAdapter(LMMemberRightHiveAdapter());
+      Hive.registerAdapter(LMMemberStateHiveAdapter());
+      Hive.registerAdapter(LMSDKClientInfoHiveAdapter());
+      Hive.registerAdapter(LMUserHiveAdapter());
 
-    if (userBox.isOpen && memberStateBox.isOpen) {
-      return LMResponse(success: true);
-    } else {
-      return LMResponse(success: false, errorMessage: "Failed to open box");
+      userBox = await Hive.openBox<LMUserHive>(userBoxName);
+      memberStateBox =
+          await Hive.openBox<LMMemberStateHive>(memberStateBoxName);
+
+      if (userBox.isOpen && memberStateBox.isOpen) {
+        return LMResponse(success: true);
+      } else {
+        return LMResponse(success: false, errorMessage: "Failed to open box");
+      }
+    } on Exception catch (e) {
+      return LMResponse(success: false, errorMessage: e.toString());
     }
   }
 
@@ -33,10 +43,8 @@ class LMUserDBHandlerHive {
   // Insert [User] data into local DB
   Future<LMResponse<void>> insertOrUpdateUser(User user) async {
     try {
-      final userBox = await Hive.openBox<LMUserHive>(userBoxName);
       final userHiveModel = LMUserInterfaceWeb.fromUser(user);
       await userBox.put(userHiveModel.uuid, userHiveModel);
-      await userBox.close();
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
       return LMResponse<void>(
@@ -49,9 +57,7 @@ class LMUserDBHandlerHive {
   // Delete [User] data from local DB
   Future<LMResponse<void>> deleteUser() async {
     try {
-      final userBox = await Hive.openBox<LMUserHive>(userBoxName);
       await userBox.clear();
-      await userBox.close();
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
       return LMResponse<void>(
@@ -64,14 +70,12 @@ class LMUserDBHandlerHive {
   // Get [User] data from local DB
   LMResponse<User> getUser() {
     try {
-      final userBox = Hive.box<LMUserHive>(userBoxName);
       final userHiveModels = userBox.values.toList();
 
       if (userHiveModels.isEmpty) {
         return LMResponse(success: false, errorMessage: "User not found");
       }
       final user = LMUserInterfaceWeb.toUser(userHiveModels.first);
-      userBox.close();
       return LMResponse(success: true, data: user);
     } on Exception catch (e) {
       return LMResponse(success: false, errorMessage: e.toString());
@@ -82,7 +86,6 @@ class LMUserDBHandlerHive {
   // Get [MemberStateResponse] data from local DB
   LMResponse<MemberStateResponse> getMemberState() {
     try {
-      final memberStateBox = Hive.box<LMMemberStateHive>(memberStateBoxName);
       final memberStateHiveModels = memberStateBox.values.toList();
 
       if (memberStateHiveModels.isEmpty) {
@@ -91,7 +94,6 @@ class LMUserDBHandlerHive {
       }
       final memberStateResponse =
           LMUserInterfaceWeb.toMemberState(memberStateHiveModels.first);
-      memberStateBox.close();
       return LMResponse(success: true, data: memberStateResponse);
     } on Exception catch (e) {
       return LMResponse(success: false, errorMessage: e.toString());
@@ -102,12 +104,9 @@ class LMUserDBHandlerHive {
   Future<LMResponse<void>> insertOrUpdateMemberState(
       MemberStateResponse memberStateResponse) async {
     try {
-      final memberStateBox =
-          await Hive.openBox<LMMemberStateHive>(memberStateBoxName);
       final memberStateHiveModel =
           LMUserInterfaceWeb.fromMemberState(memberStateResponse);
       await memberStateBox.put(memberStateHiveModel.uuid, memberStateHiveModel);
-      await memberStateBox.close();
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
       return LMResponse<void>(
@@ -120,10 +119,7 @@ class LMUserDBHandlerHive {
   // Delete [MemberStateResponse] data from local DB
   Future<LMResponse<void>> deleteMemberState() async {
     try {
-      final memberStateBox =
-          await Hive.openBox<LMMemberStateHive>(memberStateBoxName);
       await memberStateBox.clear();
-      await memberStateBox.close();
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
       return LMResponse<void>(

@@ -29,13 +29,15 @@ class LMFeedClient {
     Hive.init(null);
     DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
-
-    LMFeedPersistence.instance.init();
     // ignore: prefer_initializing_formals
     if (initiateLoggerRequest != null) {
       LMFeedPersistence.instance
           .initialiseLogger(initiateLoggerRequest: initiateLoggerRequest);
     }
+  }
+
+  Future<LMResponse<void>> init() async {
+    return await LMFeedPersistence.instance.init();
   }
 
   // ------------------------------------------

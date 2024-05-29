@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 
+part 'user_hive.g.dart';
+
 @HiveType(typeId: 31)
 class LMSDKClientInfoHive extends HiveObject {
   @HiveField(0)

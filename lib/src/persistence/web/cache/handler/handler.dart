@@ -12,6 +12,7 @@ class LMCacheDBHandlerHive {
 
   Future<LMResponse<void>> init() async {
     try {
+      Hive.registerAdapter(CacheHiveAdapter());
       cacheBox = await Hive.openBox<CacheHive>(cacheBoxName);
 
       if (cacheBox.isOpen) {
@@ -26,10 +27,8 @@ class LMCacheDBHandlerHive {
 
   Future<LMResponse<void>> insertOrUpdateValueInCache(LMCache cache) async {
     try {
-      final cacheBox = await Hive.openBox<CacheHive>(cacheBoxName);
       final cacheHiveModel = CacheInterfaceWeb.fromCache(cache);
       await cacheBox.put(cacheHiveModel.key, cacheHiveModel);
-      await cacheBox.close();
       return LMResponse(success: true);
     } on Exception catch (e) {
       return LMResponse(success: false, errorMessage: e.toString());
@@ -38,9 +37,7 @@ class LMCacheDBHandlerHive {
 
   Future<LMResponse<void>> deleteValueFromCache(String key) async {
     try {
-      final cacheBox = await Hive.openBox<CacheHive>(cacheBoxName);
       await cacheBox.delete(key);
-      await cacheBox.close();
       return LMResponse(success: true);
     } on Exception catch (e) {
       return LMResponse(success: false, errorMessage: e.toString());
@@ -49,7 +46,6 @@ class LMCacheDBHandlerHive {
 
   LMResponse<LMCache> getValueFromCache(String key) {
     try {
-      final cacheBox = Hive.box<CacheHive>(cacheBoxName);
       final cacheHiveModel = cacheBox.get(key);
 
       if (cacheHiveModel == null) {
@@ -57,7 +53,6 @@ class LMCacheDBHandlerHive {
       }
 
       final cache = CacheInterfaceWeb.toCache(cacheHiveModel);
-      cacheBox.close();
       return LMResponse(success: true, data: cache);
     } on Exception catch (e) {
       return LMResponse(success: false, errorMessage: e.toString());
@@ -66,9 +61,7 @@ class LMCacheDBHandlerHive {
 
   Future<LMResponse<void>> clearCache() async {
     try {
-      final cacheBox = await Hive.openBox<CacheHive>(cacheBoxName);
       await cacheBox.clear();
-      await cacheBox.close();
       return LMResponse(success: true);
     } on Exception catch (e) {
       return LMResponse(success: false, errorMessage: e.toString());
