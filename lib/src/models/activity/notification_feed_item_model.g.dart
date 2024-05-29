@@ -11,11 +11,12 @@ NotificationFeedItemEntity _$NotificationFeedItemEntityFromJson(
     NotificationFeedItemEntity(
       id: json['_id'] as String,
       action: json['action'] as int,
-      actionBy: (json['action_by'] as List<dynamic>)
-          .map(
-            (e) => e.toString(),
-          )
-          .toList(),
+      actionBy: (json['action_by'] as List<dynamic>?)
+              ?.map(
+                (e) => e.toString(),
+              )
+              .toList() ??
+          [],
       actionOn: json['action_on'] as String,
       activityEntityData: json['activity_entity_data'] == null
           ? null
