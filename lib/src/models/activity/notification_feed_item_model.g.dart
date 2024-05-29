@@ -17,9 +17,9 @@ NotificationFeedItemEntity _$NotificationFeedItemEntityFromJson(
           )
           .toList(),
       actionOn: json['action_on'] as String,
-      activityEntityData: ActivityEntityDataEntity.fromJson(
-        json['activity_entity_data'],
-      ),
+      activityEntityData: json['activity_entity_data'] == null
+          ? null
+          : ActivityEntityDataEntity.fromJson(json['activity_entity_data']),
       activityText: json['activity_text'] as String,
       createdAt: json['created_at'] as int,
       cta: json['cta'] as String?,
