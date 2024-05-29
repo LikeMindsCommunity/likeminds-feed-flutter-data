@@ -60,9 +60,8 @@ class EndPoints {
   String markReadNotificationEndpoint(String notificationId) =>
       "$KETTLE_HOST/feed/user/activity/$notificationId/mark_read";
 
-  String getPostEndPoint(String postId, int page, {int? pageSize}) {
-    int size = pageSize ?? pageLimit;
-    return "$feedUrl/post/$postId?page=$page&page_size=$size";
+  String getPostEndPoint(String postId) {
+    return "$feedUrl/post/$postId";
   }
 
   String getUserSavedPostEndPoint(String uuid) {
@@ -124,5 +123,13 @@ class EndPoints {
 
   String getPollVotesEndPoint(String pollId) {
     return "$KETTLE_HOST/poll/$pollId/vote";
+  }
+
+  String getPendingPostsEndpoint(String uuid) {
+    return "$feedUrl/user/$uuid/post/pending";
+  }
+
+  String getPendingPostEndpoint(String postId) {
+    return "$feedUrl/post/pending/$postId";
   }
 }

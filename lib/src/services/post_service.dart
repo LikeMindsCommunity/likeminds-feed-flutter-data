@@ -8,6 +8,9 @@ abstract class IPostService {
 
   Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest);
 
+  Future<LMResponse<GetAllPendingPostsResponseEntity>> getAllPendingPosts(
+      GetAllPendingPostsRequest getAllPendingPostsRequest);
+
   Future<GetPostLikesResponseEntity> getPostLikes(
       GetPostLikesRequest getPostLikesRequest);
 
@@ -21,6 +24,9 @@ abstract class IPostService {
   Future<SavePostResponseEntity> savePost(SavePostRequest savePostRequest);
 
   Future<EditPostResponseEntity> editPost(EditPostRequest editPostRequest);
+
+  Future<LMResponse<EditPendingPostResponseEntity>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest);
 
   Future<PostReportResponseEntity> postReport(
       PostReportRequest postReportRequest);
@@ -78,17 +84,10 @@ class PostService extends IPostService {
   Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest) async {
     try {
       final response = await apiClient.client().get(
-            "${apiClient.getEndpoints.addPostEndpoint}/${getPostRequest.postId}",
-            queryParameters: {
-              'page': getPostRequest.page,
-              'page_size': getPostRequest.pageSize,
-            },
-            options: Options(
-              headers: {
-                'Authorization': '${apiClient.accessToken}',
-              },
-            ),
+            apiClient.endPoints.getPostEndPoint(getPostRequest.postId),
+            queryParameters: getPostRequest.toJson(),
           );
+
       debugPrint("Response from get post: ${response.data}");
       GetPostResponseEntity getPostResponseEntity =
           GetPostResponseEntity.fromJson(response.data);
@@ -101,6 +100,71 @@ class PostService extends IPostService {
         errorMessage = e.response!.data['error_message'];
       }
       return GetPostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
+
+  Future<LMResponse<GetPendingPostResponseEntity>> getPendingPost(
+      GetPendingPostRequest getPendingPostRequest) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.endPoints
+                .getPendingPostEndpoint(getPendingPostRequest.postId),
+          );
+
+      if (response.data['success'] == true) {
+        return LMResponse(
+          success: true,
+          data: response.data['data'] == null
+              ? null
+              : GetPendingPostResponseEntity.fromJson(response.data['data']),
+        );
+      } else {
+        return LMResponse(
+          success: false,
+          errorMessage: response.data['error_message'],
+        );
+      }
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LMResponse(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
+
+  @override
+  Future<LMResponse<GetAllPendingPostsResponseEntity>> getAllPendingPosts(
+      GetAllPendingPostsRequest getAllPendingPostsRequest) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.endPoints
+                .getPendingPostsEndpoint(getAllPendingPostsRequest.uuid),
+            queryParameters: getAllPendingPostsRequest.toJson(),
+          );
+
+      LMResponse<GetAllPendingPostsResponseEntity>
+          getAllPendingPostsResponseEntity =
+          LMResponse<GetAllPendingPostsResponseEntity>.fromJson(response.data,
+              GetAllPendingPostsResponseEntity.fromJson(response.data['data']));
+
+      return getAllPendingPostsResponseEntity;
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LMResponse(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );
@@ -132,6 +196,43 @@ class PostService extends IPostService {
         errorMessage = e.response!.data['error_message'];
       }
       return DeletePostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
+
+  Future<LMResponse<void>> deletePendingPost(
+      DeletePendingPostRequest deletePendingPostRequest) async {
+    try {
+      final response = await apiClient.client().delete(
+            apiClient.endPoints
+                .getPendingPostEndpoint(deletePendingPostRequest.postId),
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+
+      if (response.data['success'] == true) {
+        return LMResponse(
+          success: true,
+        );
+      } else {
+        return LMResponse(
+          success: false,
+          errorMessage: response.data['error_message'],
+        );
+      }
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LMResponse(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );
@@ -291,6 +392,48 @@ class PostService extends IPostService {
         errorMessage = e.response!.data['error_message'];
       }
       return EditPostResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
+
+  @override
+  Future<LMResponse<EditPendingPostResponseEntity>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest) async {
+    try {
+      final response = await apiClient.client().put(
+            apiClient.endPoints
+                .getPendingPostEndpoint(editPendingPostRequest.postId),
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+            data: editPendingPostRequest.toJson(),
+          );
+
+      if (response.data['success'] == true) {
+        return LMResponse(
+          success: true,
+          data: response.data['data'] == null
+              ? null
+              : EditPendingPostResponseEntity.fromJson(response.data['data']),
+        );
+      } else {
+        return LMResponse(
+          success: false,
+          errorMessage: response.data['error_message'],
+        );
+      }
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LMResponse(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );

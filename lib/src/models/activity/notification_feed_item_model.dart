@@ -9,7 +9,7 @@ class NotificationFeedItem {
   final int action;
   final List<String> actionBy;
   final String actionOn;
-  final ActivityEntityData activityEntityData;
+  final ActivityEntityData? activityEntityData;
   final String activityText;
   final String? cta;
   final int createdAt;
@@ -24,7 +24,7 @@ class NotificationFeedItem {
     required this.action,
     required this.actionBy,
     required this.actionOn,
-    required this.activityEntityData,
+    this.activityEntityData,
     required this.activityText,
     this.cta,
     required this.createdAt,
@@ -41,8 +41,9 @@ class NotificationFeedItem {
       action: entity.action,
       actionBy: entity.actionBy,
       actionOn: entity.actionOn,
-      activityEntityData:
-          ActivityEntityData.fromEntity(entity.activityEntityData),
+      activityEntityData: entity.activityEntityData == null
+          ? null
+          : ActivityEntityData.fromEntity(entity.activityEntityData!),
       activityText: entity.activityText,
       createdAt: entity.createdAt,
       cta: entity.cta,
@@ -60,7 +61,7 @@ class NotificationFeedItem {
       action: action,
       actionBy: actionBy,
       actionOn: actionOn,
-      activityEntityData: activityEntityData.toEntity(),
+      activityEntityData: activityEntityData?.toEntity(),
       activityText: activityText,
       createdAt: createdAt,
       cta: cta,
@@ -83,7 +84,7 @@ class NotificationFeedItemEntity {
   @JsonKey(name: 'action_on')
   final String actionOn;
   @JsonKey(name: 'activity_entity_data')
-  final ActivityEntityDataEntity activityEntityData;
+  final ActivityEntityDataEntity? activityEntityData;
   @JsonKey(name: 'activity_text')
   final String activityText;
   final String? cta;
@@ -105,7 +106,7 @@ class NotificationFeedItemEntity {
     required this.action,
     required this.actionBy,
     required this.actionOn,
-    required this.activityEntityData,
+    this.activityEntityData,
     required this.activityText,
     this.cta,
     required this.createdAt,

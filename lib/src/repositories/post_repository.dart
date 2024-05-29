@@ -18,11 +18,46 @@ class PostRepository {
     return GetPostResponse.fromEntity(entity: getPostResponseEntity);
   }
 
+  Future<LMResponse<GetPendingPostResponse>> getPendingPost(
+      GetPendingPostRequest getPendingPostRequest) async {
+    final getPendingPostResponseEntity =
+        await postService.getPendingPost(getPendingPostRequest);
+    return LMResponse(
+      success: getPendingPostResponseEntity.success,
+      errorMessage: getPendingPostResponseEntity.errorMessage,
+      data: getPendingPostResponseEntity.data != null
+          ? GetPendingPostResponse.fromEntity(
+              entity: getPendingPostResponseEntity.data!)
+          : null,
+    );
+  }
+
+  Future<LMResponse<GetAllPendingPostsResponse>> getAllPendingPosts(
+      GetAllPendingPostsRequest getAllPendingPostsRequest) async {
+    final getAllPendingPostsResponseEntity =
+        await postService.getAllPendingPosts(getAllPendingPostsRequest);
+    return LMResponse(
+      success: getAllPendingPostsResponseEntity.success,
+      errorMessage: getAllPendingPostsResponseEntity.errorMessage,
+      data: getAllPendingPostsResponseEntity.data != null
+          ? GetAllPendingPostsResponse.fromEntity(
+              getAllPendingPostsResponseEntity.data!)
+          : null,
+    );
+  }
+
   Future<DeletePostResponse> deletePost(
       DeletePostRequest deletePostRequest) async {
     DeletePostResponseEntity deletePostResponseEntity =
         await postService.deletePost(deletePostRequest);
     return DeletePostResponse.fromEntity(deletePostResponseEntity);
+  }
+
+  Future<LMResponse<void>> deletePendingPost(
+      DeletePendingPostRequest deletePostRequest) async {
+    LMResponse<void> deletePostResponseEntity =
+        await postService.deletePendingPost(deletePostRequest);
+    return deletePostResponseEntity;
   }
 
   Future<LikePostResponse> likePost(LikePostRequest likePostRequest) async {
@@ -54,6 +89,18 @@ class PostRepository {
     EditPostResponseEntity editPostResponseEntity =
         await postService.editPost(editPostRequest);
     return EditPostResponse.fromEntity(editPostResponseEntity);
+  }
+
+  Future<LMResponse<EditPendingPostResponse>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest) async {
+    LMResponse<EditPendingPostResponseEntity> response =
+        await postService.editPendingPost(editPendingPostRequest);
+    return LMResponse(
+        success: response.success,
+        errorMessage: response.errorMessage,
+        data: response.data != null
+            ? EditPendingPostResponse.fromEntity(response.data!)
+            : null);
   }
 
   Future<PostReportResponse> postReport(
@@ -93,6 +140,7 @@ class PostRepository {
   Future<LMResponse<GetPollVotesResponse>> getPollVotes(
       GetPollVotesRequest request) async {
     final getVotesResponseEntity = await postService.getPollVotes(request);
+
     return LMResponse(
       success: getVotesResponseEntity.success,
       errorMessage: getVotesResponseEntity.errorMessage,

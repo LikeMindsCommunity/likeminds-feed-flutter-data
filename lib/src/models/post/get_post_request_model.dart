@@ -8,6 +8,14 @@ class GetPostRequest {
     required this.page,
     required this.pageSize,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'post_id': postId,
+      'page': page,
+      'page_size': pageSize,
+    };
+  }
 }
 
 class GetPostRequestBuilder {
