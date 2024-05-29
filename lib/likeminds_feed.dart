@@ -15,7 +15,7 @@ import 'src/models/models.dart';
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
 
-const String feedSDKVersion = "1.10.0";
+const String feedSDKVersion = "1.10.2";
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
@@ -287,6 +287,16 @@ class LMFeedClient {
   /// [EditPostResponse] is returned as a Future
   Future<EditPostResponse> editPost(EditPostRequest editPostRequest) async {
     return await _sdkApplication.getPostApi().editPost(editPostRequest);
+  }
+
+  /// editPendingPost is used to edit a pending post
+  /// [EditPendingPostRequest] is used to pass the required parameters
+  /// [EditPendingPostResponse] is returned as a Future
+  Future<LMResponse<EditPendingPostResponse>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest) async {
+    return await _sdkApplication
+        .getPostApi()
+        .editPendingPost(editPendingPostRequest);
   }
 
   /// postReport is used to report a post

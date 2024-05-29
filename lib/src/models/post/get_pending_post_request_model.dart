@@ -14,6 +14,8 @@ class GetPendingPostRequestBuilder {
   }
 
   GetPendingPostRequest build() {
+    assert(_postId != null, 'postId must be set before calling build()');
+
     return GetPendingPostRequest._(
       postId: _postId!,
     );

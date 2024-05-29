@@ -44,6 +44,8 @@ UserActivityEntityDataEntity _$UserActivityEntityDataEntityFromJson(
       isRepostedByUser: json['is_reposted_by_user'] as bool?,
       repostCount: json['repost_count'] as int?,
       isDeleted: json['is_deleted'] as bool?,
+      isPendingPost: json['is_pending_post'] as bool?,
+      postStatus: json['post_status'] as String?,
     );
 
 Map<String, dynamic> _$UserActivityEntityDataEntityToJson(
@@ -74,4 +76,6 @@ Map<String, dynamic> _$UserActivityEntityDataEntityToJson(
       'is_reposted_by_user': instance.isRepostedByUser,
       'repost_count': instance.repostCount,
       'is_deleted': instance.isDeleted,
+      'is_pending_post': instance.isPendingPost,
+      'post_status': instance.postStatus,
     };

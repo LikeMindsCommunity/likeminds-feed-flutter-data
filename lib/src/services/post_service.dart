@@ -84,12 +84,10 @@ class PostService extends IPostService {
   Future<GetPostResponseEntity> getPost(GetPostRequest getPostRequest) async {
     try {
       final response = await apiClient.client().get(
-        "${apiClient.getEndpoints.addPostEndpoint}/${getPostRequest.postId}",
-        queryParameters: {
-          'page': getPostRequest.page,
-          'page_size': getPostRequest.pageSize,
-        },
-      );
+            apiClient.endPoints.getPostEndPoint(getPostRequest.postId),
+            queryParameters: getPostRequest.toJson(),
+          );
+
       debugPrint("Response from get post: ${response.data}");
       GetPostResponseEntity getPostResponseEntity =
           GetPostResponseEntity.fromJson(response.data);
@@ -119,7 +117,9 @@ class PostService extends IPostService {
       if (response.data['success'] == true) {
         return LMResponse(
           success: true,
-          data: GetPendingPostResponseEntity.fromJson(response.data),
+          data: response.data['data'] == null
+              ? null
+              : GetPendingPostResponseEntity.fromJson(response.data['data']),
         );
       } else {
         return LMResponse(
@@ -416,7 +416,9 @@ class PostService extends IPostService {
       if (response.data['success'] == true) {
         return LMResponse(
           success: true,
-          data: EditPendingPostResponseEntity.fromJson(response.data),
+          data: response.data['data'] == null
+              ? null
+              : EditPendingPostResponseEntity.fromJson(response.data['data']),
         );
       } else {
         return LMResponse(

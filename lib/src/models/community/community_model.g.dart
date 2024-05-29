@@ -56,6 +56,10 @@ CommunityEntity _$CommunityEntityFromJson(Map<String, dynamic> json) =>
           .toList(),
       likeMindsPlan: json['like_minds_plan'] as String?,
       isFreemiumCommunity: json['is_freemium_community'] as bool?,
+      communitySettings: (json['community_settings'] as List<dynamic>?)
+          ?.map((e) =>
+              CommunitySettingsEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$CommunityEntityToJson(CommunityEntity instance) =>
@@ -95,7 +99,10 @@ Map<String, dynamic> _$CommunityEntityToJson(CommunityEntity instance) =>
       'is_discoverable': instance.isDiscoverable,
       'website_url': instance.websiteUrl,
       'referral_enabled': instance.referralEnabled,
-      'community_setting_rights': instance.communitySettingRights,
+      'community_setting_rights':
+          instance.communitySettingRights?.map((e) => e.toJson()).toList(),
       'like_minds_plan': instance.likeMindsPlan,
       'is_freemium_community': instance.isFreemiumCommunity,
+      'community_settings':
+          instance.communitySettings?.map((e) => e.toJson()).toList(),
     };

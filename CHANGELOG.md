@@ -137,3 +137,9 @@ Added support for polls
 
 # 1.10.0
 Added api key security
+
+# 1.10.1
+Fixed invalid LTM in case of app killed after token get expired.
+
+# 1.10.2
+Added pagination support in poll vote

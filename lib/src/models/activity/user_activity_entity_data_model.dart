@@ -29,6 +29,8 @@ class UserActivityEntityData {
   bool? isRepostedByUser;
   int? repostCount;
   bool? isDeleted;
+  bool? isPendingPost;
+  String? postStatus;
 
   UserActivityEntityData({
     required this.id,
@@ -56,6 +58,8 @@ class UserActivityEntityData {
     this.isRepostedByUser,
     this.repostCount,
     this.isDeleted,
+    this.isPendingPost,
+    this.postStatus,
   });
 
   factory UserActivityEntityData.fromEntity(
@@ -93,6 +97,8 @@ class UserActivityEntityData {
       isRepostedByUser: entity.isRepostedByUser,
       repostCount: entity.repostCount,
       isDeleted: entity.isDeleted,
+      isPendingPost: entity.isPendingPost,
+      postStatus: entity.postStatus,
     );
   }
 
@@ -123,6 +129,8 @@ class UserActivityEntityData {
       isRepostedByUser: isRepostedByUser,
       repostCount: repostCount,
       isDeleted: isDeleted,
+      isPendingPost: isPendingPost,
+      postStatus: postStatus,
     );
   }
 }
@@ -173,6 +181,10 @@ class UserActivityEntityDataEntity {
   int? repostCount;
   @JsonKey(name: 'is_deleted')
   bool? isDeleted;
+  @JsonKey(name: 'is_pending_post')
+  bool? isPendingPost;
+  @JsonKey(name: 'post_status')
+  String? postStatus;
 
   UserActivityEntityDataEntity({
     required this.id,
@@ -200,6 +212,8 @@ class UserActivityEntityDataEntity {
     this.isRepostedByUser,
     this.repostCount,
     this.isDeleted,
+    this.isPendingPost,
+    this.postStatus,
   });
 
   factory UserActivityEntityDataEntity.fromJson(Map<String, dynamic> json) =>

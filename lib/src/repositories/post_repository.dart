@@ -40,7 +40,8 @@ class PostRepository {
       success: getAllPendingPostsResponseEntity.success,
       errorMessage: getAllPendingPostsResponseEntity.errorMessage,
       data: getAllPendingPostsResponseEntity.data != null
-          ? getAllPendingPostsResponseEntity.data!.toResponse()
+          ? GetAllPendingPostsResponse.fromEntity(
+              getAllPendingPostsResponseEntity.data!)
           : null,
     );
   }
@@ -90,6 +91,18 @@ class PostRepository {
     return EditPostResponse.fromEntity(editPostResponseEntity);
   }
 
+  Future<LMResponse<EditPendingPostResponse>> editPendingPost(
+      EditPendingPostRequest editPendingPostRequest) async {
+    LMResponse<EditPendingPostResponseEntity> response =
+        await postService.editPendingPost(editPendingPostRequest);
+    return LMResponse(
+        success: response.success,
+        errorMessage: response.errorMessage,
+        data: response.data != null
+            ? EditPendingPostResponse.fromEntity(response.data!)
+            : null);
+  }
+
   Future<PostReportResponse> postReport(
       PostReportRequest postReportRequest) async {
     PostReportResponseEntity postReportResponseEntity =
@@ -127,6 +140,7 @@ class PostRepository {
   Future<LMResponse<GetPollVotesResponse>> getPollVotes(
       GetPollVotesRequest request) async {
     final getVotesResponseEntity = await postService.getPollVotes(request);
+
     return LMResponse(
       success: getVotesResponseEntity.success,
       errorMessage: getVotesResponseEntity.errorMessage,

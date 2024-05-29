@@ -26,7 +26,7 @@ GetUserFeedMetaResponseEntity _$GetUserFeedMetaResponseEntityFromJson(
       ),
       topics: (json['data']['topics'] as Map<String, dynamic>?)?.map((k, e) =>
           MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>))),
-      pendingPostCount: (json['data']?['pending_post_count'] as int?) ?? 0,
+      pendingPostCount: (json['data']?['pending_posts_count'] as int?) ?? 0,
     );
 
 Map<String, dynamic> _$GetUserFeedMetaResponseEntityToJson(

@@ -38,6 +38,11 @@ class GetAllPendingPostsRequestBuilder {
   }
 
   GetAllPendingPostsRequest build() {
+    assert(_page != null, 'Page must be set before building the request.');
+    assert(_pageSize != null,
+        'Page size must be set before building the request.');
+    assert(_uuid != null, 'UUID must be set before building the request.');
+
     return GetAllPendingPostsRequest._(
       page: _page!,
       pageSize: _pageSize!,

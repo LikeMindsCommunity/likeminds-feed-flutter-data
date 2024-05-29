@@ -23,6 +23,44 @@ class GetAllPendingPostsResponse {
     required this.userTopics,
     required this.filteredComments,
   });
+
+  GetAllPendingPostsResponseEntity toEntity() {
+    return GetAllPendingPostsResponseEntity(
+      posts: posts.map((post) => post.toEntity()).toList(),
+      totalCount: totalCount,
+      users: users.map((key, value) => MapEntry(key, value.toEntity())),
+      topics: topics.map((key, value) => MapEntry(key, value.toEntity())),
+      widgets: widgets.map((key, value) => MapEntry(key, value.toEntity())),
+      repostedPosts:
+          repostedPosts.map((key, value) => MapEntry(key, value.toEntity())),
+      usersTopics: userTopics,
+      filteredCommentsEntity:
+          filteredComments.map((key, value) => MapEntry(key, value.toEntity())),
+    );
+  }
+
+  GetAllPendingPostsResponse.fromEntity(GetAllPendingPostsResponseEntity entity)
+      : posts = entity.posts
+                ?.map((postEntity) => Post.fromEntity(postEntity: postEntity))
+                .toList() ??
+            [],
+        totalCount = entity.totalCount ?? 0,
+        users = entity.users
+                ?.map((key, value) => MapEntry(key, User.fromEntity(value))) ??
+            {},
+        topics = entity.topics
+                ?.map((key, value) => MapEntry(key, Topic.fromEntity(value))) ??
+            {},
+        widgets = entity.widgets?.map(
+                (key, value) => MapEntry(key, WidgetModel.fromEntity(value))) ??
+            {},
+        repostedPosts = entity.repostedPosts?.map((key, value) =>
+                MapEntry(key, Post.fromEntity(postEntity: value))) ??
+            {},
+        userTopics = entity.usersTopics ?? {},
+        filteredComments = entity.filteredCommentsEntity?.map((key, value) =>
+                MapEntry(key, Comment.fromEntity(commentEntity: value))) ??
+            {};
 }
 
 @JsonSerializable()
@@ -57,27 +95,4 @@ class GetAllPendingPostsResponseEntity {
 
   Map<String, dynamic> toJson() =>
       _$GetAllPendingPostsResponseEntityToJson(this);
-
-  GetAllPendingPostsResponse toResponse() {
-    return GetAllPendingPostsResponse(
-      posts: posts?.map((e) => Post.fromEntity(postEntity: e)).toList() ?? [],
-      totalCount: totalCount ?? 0,
-      users:
-          users?.map((key, value) => MapEntry(key, User.fromEntity(value))) ??
-              {},
-      topics:
-          topics?.map((key, value) => MapEntry(key, Topic.fromEntity(value))) ??
-              {},
-      widgets: widgets?.map(
-              (key, value) => MapEntry(key, WidgetModel.fromEntity(value))) ??
-          {},
-      repostedPosts: repostedPosts?.map((key, value) =>
-              MapEntry(key, Post.fromEntity(postEntity: value))) ??
-          {},
-      userTopics: usersTopics ?? {},
-      filteredComments: filteredCommentsEntity?.map((key, value) =>
-              MapEntry(key, Comment.fromEntity(commentEntity: value))) ??
-          {},
-    );
-  }
 }

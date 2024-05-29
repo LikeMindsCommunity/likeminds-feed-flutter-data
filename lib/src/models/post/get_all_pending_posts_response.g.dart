@@ -12,9 +12,12 @@ GetAllPendingPostsResponseEntity _$GetAllPendingPostsResponseEntityFromJson(
       posts: (json['posts'] as List<dynamic>?)
           ?.map((e) => PostEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
+      totalCount: json['total_count'] as int? ?? 0,
       users: (json['users'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
-      ),
+            (k, e) =>
+                MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
+          ) ??
+          {},
       topics: (json['topics'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
@@ -42,6 +45,7 @@ Map<String, dynamic> _$GetAllPendingPostsResponseEntityToJson(
       'users': instance.users?.map((k, e) => MapEntry(k, e.toJson())),
       'topics': instance.topics?.map((k, e) => MapEntry(k, e.toJson())),
       'widgets': instance.widgets?.map((k, e) => MapEntry(k, e.toJson())),
+      'total_count': instance.totalCount,
       'reposted_posts':
           instance.repostedPosts?.map((k, e) => MapEntry(k, e.toJson())),
       'filtered_comments': instance.filteredCommentsEntity
