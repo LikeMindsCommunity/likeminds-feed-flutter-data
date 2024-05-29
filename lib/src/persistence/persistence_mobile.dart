@@ -36,6 +36,11 @@ class LMFeedPersistenceMobile implements LMFeedPersistence {
   }
 
   @override
+  Future<LMResponse<void>> init() async {
+    return LMResponse(success: true);
+  }
+
+  @override
   Future<LMResponse<void>> insertOrUpdateUser(User user) async {
     return await userDBHandler!.insertOrUpdateUser(user);
   }

@@ -1,9 +1,11 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/persistence_imp.dart'
-    if (dart.library.js) 'package:likeminds_feed/src/persistence/persistence_web.dart'
-    if (dart.library.io) 'package:likeminds_feed/src/persistence/persistence_mobile.dart';
+    if (dart.library.io) 'package:likeminds_feed/src/persistence/persistence_mobile.dart'
+    if (dart.library.html) 'package:likeminds_feed/src/persistence/persistence_web.dart';
 
 abstract class LMFeedPersistence {
+  Future<LMResponse<void>> init();
+
   Future<LMResponse<void>> insertOrUpdateUser(User user);
   LMResponse<User> getUserDB();
   Future<LMResponse<void>> deleteUserDB();

@@ -1,16 +1,47 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/persistence/web/cache/handler/handler.dart';
+import 'package:likeminds_feed/src/persistence/web/community/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/web/user/handler/handler.dart';
 
 LMFeedPersistence getPersistenceService() => LMFeedPersistenceWeb();
 
 class LMFeedPersistenceWeb implements LMFeedPersistence {
   late LMUserDBHandlerHive userDBHandlerHive;
+  late LMCommunityConfigurationDBHandlerHive
+      communityConfigurationDBHandlerHive;
+  late LMCacheDBHandlerHive cacheDBHandlerHive;
 
   LMFeedPersistenceWeb() {
     userDBHandlerHive = LMUserDBHandlerHive(
       userBoxName: 'userBox',
       memberStateBoxName: 'memberStateBox',
     );
+    communityConfigurationDBHandlerHive = LMCommunityConfigurationDBHandlerHive(
+      communityConfigBoxName: 'communityConfigurationBox',
+    );
+    cacheDBHandlerHive = LMCacheDBHandlerHive(
+      cacheBoxName: 'cacheBox',
+    );
+  }
+
+  @override
+  Future<LMResponse<void>> init() async {
+    LMResponse userDBInit = await userDBHandlerHive.init();
+    LMResponse communityCongDB =
+        await communityConfigurationDBHandlerHive.init();
+    LMResponse cacheDBHandler = await cacheDBHandlerHive.init();
+
+    if (!userDBInit.success) {
+      return LMResponse(success: false, errorMessage: userDBInit.errorMessage);
+    } else if (!communityCongDB.success) {
+      return LMResponse(
+          success: false, errorMessage: communityCongDB.errorMessage);
+    } else if (!cacheDBHandler.success) {
+      return LMResponse(
+          success: false, errorMessage: cacheDBHandler.errorMessage);
+    } else {
+      return LMResponse(success: true);
+    }
   }
 
   @override
@@ -30,60 +61,62 @@ class LMFeedPersistenceWeb implements LMFeedPersistence {
 
   @override
   Future<LMResponse<void>> insertOrUpdateValueInCache(LMCache cache) {
-    throw UnimplementedError();
+    return cacheDBHandlerHive.insertOrUpdateValueInCache(cache);
   }
 
   @override
   Future<LMResponse<void>> deleteCache(String key) {
-    throw UnimplementedError();
+    return cacheDBHandlerHive.deleteValueFromCache(key);
   }
 
   @override
   LMResponse<LMCache> getCache(String key) {
-    throw UnimplementedError();
+    return cacheDBHandlerHive.getValueFromCache(key);
   }
 
   @override
   Future<LMResponse<void>> clearCache() {
-    throw UnimplementedError();
+    return cacheDBHandlerHive.clearCache();
   }
 
   @override
   Future<LMResponse<void>> insertOrUpdateCommunityConfiguration(
       List<CommunityConfigurations> communityConfigurations) {
-    throw UnimplementedError();
+    return communityConfigurationDBHandlerHive
+        .insertOrUpdateCommunityConfiguration(communityConfigurations);
   }
 
   @override
   LMResponse<CommunityConfigurations> getCommunityConfigurationsDB(
       String type) {
-    throw UnimplementedError();
+    return communityConfigurationDBHandlerHive.getCommunityConfiguration(type);
   }
 
   @override
   Future<LMResponse<void>> deleteCommunityConfigurationsDB(String type) {
-    throw UnimplementedError();
+    return communityConfigurationDBHandlerHive
+        .deleteCommunityConfiguration(type);
   }
 
   @override
   Future<LMResponse<void>> clearCommunityConfigurationsDB() {
-    throw UnimplementedError();
+    return communityConfigurationDBHandlerHive.clearCommunityConfigurations();
   }
 
   @override
   Future<LMResponse<void>> insertOrUpdateMemberState(
       MemberStateResponse memberStateResponse) {
-    throw UnimplementedError();
+    return userDBHandlerHive.insertOrUpdateMemberState(memberStateResponse);
   }
 
   @override
   LMResponse<MemberStateResponse> getMemberState() {
-    throw UnimplementedError();
+    return userDBHandlerHive.getMemberState();
   }
 
   @override
   Future<LMResponse<void>> deleteMemberState() {
-    throw UnimplementedError();
+    return userDBHandlerHive.deleteMemberState();
   }
 
   @override

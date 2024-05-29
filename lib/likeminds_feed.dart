@@ -5,6 +5,7 @@ export 'src/methods/methods.dart';
 export 'src/models/models.dart';
 export 'src/persistence/persistence.dart';
 
+import 'package:hive/hive.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
@@ -25,8 +26,11 @@ class LMFeedClient {
     LMSDKCallback? sdkCallback,
     InitiateLoggerRequest? initiateLoggerRequest,
   }) {
+    Hive.init(null);
     DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
+
+    LMFeedPersistence.instance.init();
     // ignore: prefer_initializing_formals
     if (initiateLoggerRequest != null) {
       LMFeedPersistence.instance

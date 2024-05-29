@@ -1,8 +1,6 @@
 import 'package:hive/hive.dart';
 
-part 'user_hive.g.dart'; // This line is required for Hive code generation
-
-@HiveType(typeId: 1)
+@HiveType(typeId: 31)
 class LMSDKClientInfoHive extends HiveObject {
   @HiveField(0)
   int community;
@@ -20,7 +18,7 @@ class LMSDKClientInfoHive extends HiveObject {
   });
 }
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 30)
 class LMUserHive extends HiveObject {
   @HiveField(0)
   int id;
@@ -90,7 +88,7 @@ class LMUserHive extends HiveObject {
   });
 }
 
-@HiveType(typeId: 3)
+@HiveType(typeId: 32)
 class LMMemberRightHive extends HiveObject {
   @HiveField(0)
   int id;
@@ -112,7 +110,7 @@ class LMMemberRightHive extends HiveObject {
   });
 }
 
-@HiveType(typeId: 4)
+@HiveType(typeId: 33)
 class LMMemberStateHive extends HiveObject {
   @HiveField(0)
   bool editRequired;
