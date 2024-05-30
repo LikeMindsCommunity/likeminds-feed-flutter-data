@@ -133,13 +133,21 @@ Added API Security, Fixed Post Detail page size issue
 Added callbacks for accessToken and refreshToken updation
 
 # 1.9.0
+
 Added support for polls
 
 # 1.10.0
+
 Added api key security
 
 # 1.10.1
+
 Fixed invalid LTM in case of app killed after token get expired.
 
 # 1.10.2
+
 Added pagination support in poll vote
+
+# 1.11.0
+
+Added support for pending post

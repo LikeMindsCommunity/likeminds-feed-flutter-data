@@ -29,7 +29,7 @@ The starting point is the LikeMinds website. Create your account and get and API
 Then add the package as dependency in pubspec.yaml
 
 ```
-likeminds_feed: 1.10.2
+likeminds_feed: 1.11.0
 ```
 
 or you can run this command in the terminal
