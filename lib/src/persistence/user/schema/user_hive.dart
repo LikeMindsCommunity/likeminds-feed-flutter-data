@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'user_hive.g.dart';
 
 @HiveType(typeId: 31)
-class LMSDKClientInfoHive extends HiveObject {
+class LMSDKClientInfoDB extends HiveObject {
   @HiveField(0)
   int community;
 
@@ -13,7 +13,7 @@ class LMSDKClientInfoHive extends HiveObject {
   @HiveField(2)
   String uuid;
 
-  LMSDKClientInfoHive({
+  LMSDKClientInfoDB({
     required this.community,
     required this.user,
     required this.uuid,
@@ -21,7 +21,7 @@ class LMSDKClientInfoHive extends HiveObject {
 }
 
 @HiveType(typeId: 30)
-class LMUserHive extends HiveObject {
+class LMUserDB extends HiveObject {
   @HiveField(0)
   int id;
 
@@ -44,7 +44,7 @@ class LMUserHive extends HiveObject {
   String? organisationName;
 
   @HiveField(7)
-  LMSDKClientInfoHive? sdkClientInfo;
+  LMSDKClientInfoDB? sdkClientInfo;
 
   @HiveField(8)
   int? updatedAt;
@@ -70,7 +70,7 @@ class LMUserHive extends HiveObject {
   @HiveField(15)
   int? createdAt;
 
-  LMUserHive({
+  LMUserDB({
     required this.id,
     required this.name,
     this.imageUrl,
@@ -91,7 +91,7 @@ class LMUserHive extends HiveObject {
 }
 
 @HiveType(typeId: 32)
-class LMMemberRightHive extends HiveObject {
+class LMMemberRightDB extends HiveObject {
   @HiveField(0)
   int id;
 
@@ -104,7 +104,7 @@ class LMMemberRightHive extends HiveObject {
   @HiveField(3)
   String title;
 
-  LMMemberRightHive({
+  LMMemberRightDB({
     required this.id,
     required this.isSelected,
     required this.state,
@@ -113,7 +113,7 @@ class LMMemberRightHive extends HiveObject {
 }
 
 @HiveType(typeId: 33)
-class LMMemberStateHive extends HiveObject {
+class LMMemberStateDB extends HiveObject {
   @HiveField(0)
   bool editRequired;
 
@@ -121,15 +121,15 @@ class LMMemberStateHive extends HiveObject {
   String uuid;
 
   @HiveField(2)
-  LMUserHive? member;
+  LMUserDB? member;
 
   @HiveField(3)
-  List<LMMemberRightHive> memberRights;
+  List<LMMemberRightDB> memberRights;
 
   @HiveField(4)
   int state;
 
-  LMMemberStateHive({
+  LMMemberStateDB({
     required this.editRequired,
     required this.uuid,
     this.member,

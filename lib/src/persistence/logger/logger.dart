@@ -4,9 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/logger/handler/handler.dart';
-import 'package:likeminds_feed/src/persistence/logger/schema/log_db.dart';
 import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils.dart';
-import 'package:realm/realm.dart' as realm;
 import 'package:stack_trace/stack_trace.dart';
 
 // This class handles all the operations
@@ -45,12 +43,7 @@ class LMFeedLogger {
   void initialise({required InitiateLoggerRequest initiateLoggerRequest}) {
     this.initiateLoggerRequest = initiateLoggerRequest;
     // Initialising LogDBHandler with all the neccessary schemas
-    logDBHandler = LogDBHandler(
-        config: realm.Configuration.local([
-      LMStackTraceDBModel.schema,
-      LMSDKMetaDBModel.schema,
-      LMLogDBModel.schema
-    ]));
+    logDBHandler = LogDBHandler(loggerBoxName: 'lm_logger');
   }
 
   // Creates a InsertLogRequest object and calls insertLog method
@@ -84,20 +77,26 @@ class LMFeedLogger {
   // Creates a PushLogRequest object and calls pushLogs method
   // If the response is success, then deletes the logs from the database
   // upto the current timestamp
-  Future<PushLogResponse> _pushLogs() async {
+  Future<LMResponse<void>> _pushLogs() async {
     if (!checkIfLoggerInitialised()) {
-      return PushLogResponse(
+      return LMResponse(
           success: false, errorMessage: 'LMFeedLogger not initialised');
     }
     int currentTimeStamp = DateTime.now().millisecondsSinceEpoch;
-    PushLogResponse response;
 
-    GetLogResponse getLogResponse = logDBHandler!.getLogs(currentTimeStamp);
+    LMResponse<GetLogResponse> response =
+        logDBHandler!.getLogs(currentTimeStamp);
+
+    if (!response.success) {
+      return response;
+    }
+
+    GetLogResponse getLogResponse = response.data!;
 
     List<LMLogBuilder> lmLogsBuilderList = getLogResponse.lmLogsBuilder;
 
     if (lmLogsBuilderList.isEmpty) {
-      return PushLogResponse(success: true);
+      return LMResponse(success: true);
     }
 
     // Builder for DeviceDetails
@@ -157,19 +156,19 @@ class LMFeedLogger {
     PushLogRequest pushLogRequest =
         (PushLogRequestBuilder()..logs(lmLogList)).build();
 
-    response = await SDKApplication.instance
+    LMResponse pushResponse = await SDKApplication.instance
         .getLoggerApi()
         .pushLogs(request: pushLogRequest);
 
     // If response is success
     // Clear logs from DB
     // And return the response
-    if (response.success) {
+    if (pushResponse.success) {
       ClearLogRequest clearLogRequest =
           (ClearLogRequestBuilder()..timestamp(currentTimeStamp)).build();
       _clearLogs(clearLogRequest);
     }
-    return response;
+    return pushResponse;
   }
 
   // Handles the exception

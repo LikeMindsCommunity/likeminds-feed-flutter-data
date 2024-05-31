@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:likeminds_feed/src/models/cache/cache.dart';
-import 'package:likeminds_feed/src/persistence/web/cache/schema/cache_hive.dart';
+import 'package:likeminds_feed/src/persistence/cache/schema/cache_hive.dart';
 
-class CacheInterfaceWeb {
-  static LMCache toCache(CacheHive cache) {
+class LMCacheDBInterface {
+  static LMCache toCache(LMCacheDB cache) {
     dynamic value = jsonDecode(cache.value);
 
     return (LMCacheBuilder()
@@ -13,8 +13,8 @@ class CacheInterfaceWeb {
         .build();
   }
 
-  static CacheHive fromCache(LMCache cache) {
-    return CacheHive(
+  static LMCacheDB fromCache(LMCache cache) {
+    return LMCacheDB(
       key: cache.key,
       value: jsonEncode(cache.value),
     );

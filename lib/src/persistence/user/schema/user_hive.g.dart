@@ -6,17 +6,17 @@ part of 'user_hive.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class LMSDKClientInfoHiveAdapter extends TypeAdapter<LMSDKClientInfoHive> {
+class LMSDKClientInfoDBAdapter extends TypeAdapter<LMSDKClientInfoDB> {
   @override
   final int typeId = 31;
 
   @override
-  LMSDKClientInfoHive read(BinaryReader reader) {
+  LMSDKClientInfoDB read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return LMSDKClientInfoHive(
+    return LMSDKClientInfoDB(
       community: fields[0] as int,
       user: fields[1] as int,
       uuid: fields[2] as String,
@@ -24,7 +24,7 @@ class LMSDKClientInfoHiveAdapter extends TypeAdapter<LMSDKClientInfoHive> {
   }
 
   @override
-  void write(BinaryWriter writer, LMSDKClientInfoHive obj) {
+  void write(BinaryWriter writer, LMSDKClientInfoDB obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -41,22 +41,22 @@ class LMSDKClientInfoHiveAdapter extends TypeAdapter<LMSDKClientInfoHive> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LMSDKClientInfoHiveAdapter &&
+      other is LMSDKClientInfoDBAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class LMUserHiveAdapter extends TypeAdapter<LMUserHive> {
+class LMUserDBAdapter extends TypeAdapter<LMUserDB> {
   @override
   final int typeId = 30;
 
   @override
-  LMUserHive read(BinaryReader reader) {
+  LMUserDB read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return LMUserHive(
+    return LMUserDB(
       id: fields[0] as int,
       name: fields[1] as String,
       imageUrl: fields[2] as String?,
@@ -64,7 +64,7 @@ class LMUserHiveAdapter extends TypeAdapter<LMUserHive> {
       isDeleted: fields[4] as bool?,
       uuid: fields[5] as String,
       organisationName: fields[6] as String?,
-      sdkClientInfo: fields[7] as LMSDKClientInfoHive?,
+      sdkClientInfo: fields[7] as LMSDKClientInfoDB?,
       updatedAt: fields[8] as int?,
       isOwner: fields[9] as bool?,
       customTitle: fields[10] as String?,
@@ -77,7 +77,7 @@ class LMUserHiveAdapter extends TypeAdapter<LMUserHive> {
   }
 
   @override
-  void write(BinaryWriter writer, LMUserHive obj) {
+  void write(BinaryWriter writer, LMUserDB obj) {
     writer
       ..writeByte(16)
       ..writeByte(0)
@@ -120,22 +120,22 @@ class LMUserHiveAdapter extends TypeAdapter<LMUserHive> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LMUserHiveAdapter &&
+      other is LMUserDBAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class LMMemberRightHiveAdapter extends TypeAdapter<LMMemberRightHive> {
+class LMMemberRightDBAdapter extends TypeAdapter<LMMemberRightDB> {
   @override
   final int typeId = 32;
 
   @override
-  LMMemberRightHive read(BinaryReader reader) {
+  LMMemberRightDB read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return LMMemberRightHive(
+    return LMMemberRightDB(
       id: fields[0] as int,
       isSelected: fields[1] as bool,
       state: fields[2] as int,
@@ -144,7 +144,7 @@ class LMMemberRightHiveAdapter extends TypeAdapter<LMMemberRightHive> {
   }
 
   @override
-  void write(BinaryWriter writer, LMMemberRightHive obj) {
+  void write(BinaryWriter writer, LMMemberRightDB obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)
@@ -163,32 +163,32 @@ class LMMemberRightHiveAdapter extends TypeAdapter<LMMemberRightHive> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LMMemberRightHiveAdapter &&
+      other is LMMemberRightDBAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class LMMemberStateHiveAdapter extends TypeAdapter<LMMemberStateHive> {
+class LMMemberStateDBAdapter extends TypeAdapter<LMMemberStateDB> {
   @override
   final int typeId = 33;
 
   @override
-  LMMemberStateHive read(BinaryReader reader) {
+  LMMemberStateDB read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return LMMemberStateHive(
+    return LMMemberStateDB(
       editRequired: fields[0] as bool,
       uuid: fields[1] as String,
-      member: fields[2] as LMUserHive?,
-      memberRights: (fields[3] as List).cast<LMMemberRightHive>(),
+      member: fields[2] as LMUserDB?,
+      memberRights: (fields[3] as List).cast<LMMemberRightDB>(),
       state: fields[4] as int,
     );
   }
 
   @override
-  void write(BinaryWriter writer, LMMemberStateHive obj) {
+  void write(BinaryWriter writer, LMMemberStateDB obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
@@ -209,7 +209,7 @@ class LMMemberStateHiveAdapter extends TypeAdapter<LMMemberStateHive> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LMMemberStateHiveAdapter &&
+      other is LMMemberStateDBAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

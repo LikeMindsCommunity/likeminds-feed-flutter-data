@@ -5,7 +5,6 @@ export 'src/methods/methods.dart';
 export 'src/models/models.dart';
 export 'src/persistence/persistence.dart';
 
-import 'package:hive/hive.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
 import 'package:likeminds_feed/src/methods/sdk.dart';
@@ -26,7 +25,6 @@ class LMFeedClient {
     LMSDKCallback? sdkCallback,
     InitiateLoggerRequest? initiateLoggerRequest,
   }) {
-    Hive.init(null);
     DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
@@ -590,8 +588,8 @@ class LMFeedClient {
   /// pushLogs is used to push logs
   /// [PushLogRequest] is used to pass the required parameters
   /// [PushLogResponse] is returned as a Future
-  Future<PushLogResponse> pushLogs(PushLogRequest request) async {
-    final PushLogResponse response =
+  Future<LMResponse> pushLogs(PushLogRequest request) async {
+    final LMResponse response =
         await _sdkApplication.getLoggerApi().pushLogs(request: request);
     return response;
   }

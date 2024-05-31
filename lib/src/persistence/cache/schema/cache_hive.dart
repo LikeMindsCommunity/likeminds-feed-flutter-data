@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'cache_hive.g.dart';
 
 @HiveType(typeId: 10) // Replace 1 with a unique ID for your model
-class CacheHive extends HiveObject {
+class LMCacheDB extends HiveObject {
   @override
   @HiveField(0)
   String key;
@@ -11,7 +11,7 @@ class CacheHive extends HiveObject {
   @HiveField(1)
   String value;
 
-  CacheHive({
+  LMCacheDB({
     required this.key,
     required this.value,
   });

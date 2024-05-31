@@ -1,5 +1,4 @@
-import 'package:likeminds_feed/src/models/logger/push_log_request.dart';
-import 'package:likeminds_feed/src/models/logger/push_log_response.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/logger_service.dart';
 
 class LoggerRepository {
@@ -7,10 +6,10 @@ class LoggerRepository {
 
   LoggerRepository({required this.loggerService});
 
-  Future<PushLogResponse> pushLogs({required PushLogRequest request}) async {
-    PushLogResponseEntity pushLogResponseEntity =
+  Future<LMResponse<void>> pushLogs({required PushLogRequest request}) async {
+    LMResponse pushLogResponseEntity =
         await loggerService.pushLogs(request: request);
 
-    return PushLogResponse.fromEntity(pushLogResponseEntity);
+    return pushLogResponseEntity;
   }
 }
