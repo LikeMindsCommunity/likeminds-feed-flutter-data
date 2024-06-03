@@ -5,7 +5,6 @@ import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils
 
 // This class handles all the DB operations
 // related to Error Logging
-// Accepts a [realm] instance as parameter
 class LogDBHandler {
   final String loggerBoxName;
   late Box<LMLogDB> loggerBox;

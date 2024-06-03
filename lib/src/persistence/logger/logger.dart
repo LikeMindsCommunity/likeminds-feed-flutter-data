@@ -35,8 +35,6 @@ class LMFeedLogger {
     return true;
   }
 
-  // Creates a new realm instance with all the neccessary schemas
-  // and initialises the logDBHandler
   // shareLogsWithLM is a boolean value which determines whether the logs
   // should be shared with LM or not
   // Must be called only once per app lifecycle
