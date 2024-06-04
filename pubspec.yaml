@@ -21,6 +21,7 @@ dependencies:
   stack_trace: ^1.11.0
   curl_logger_dio_interceptor: ^1.0.0
   hive: ^2.2.3
+  hive_flutter: ^1.1.0
   path_provider: ^2.1.2
 
 dev_dependencies:

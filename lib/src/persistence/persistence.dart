@@ -1,16 +1,8 @@
-import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/cache/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/community/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/user/handler/handler.dart';
-import 'package:path_provider/path_provider.dart';
-
-void initHive() async {
-  if (!kIsWeb) {
-    Hive.init((await getApplicationDocumentsDirectory()).path);
-  }
-}
 
 class LMFeedPersistence {
   late LMUserDBHandlerHive userDBHandlerHive;
@@ -22,7 +14,6 @@ class LMFeedPersistence {
   static LMFeedPersistence get instance => _instance ??= LMFeedPersistence._();
 
   LMFeedPersistence._() {
-    initHive();
     userDBHandlerHive = LMUserDBHandlerHive(
       userBoxName: 'userBox',
       memberStateBoxName: 'memberStateBox',
@@ -36,7 +27,7 @@ class LMFeedPersistence {
   }
 
   Future<LMResponse<void>> init() async {
-    initHive();
+    await Hive.initFlutter();
 
     LMResponse userDBInit = await userDBHandlerHive.init();
     LMResponse communityCongDB =
