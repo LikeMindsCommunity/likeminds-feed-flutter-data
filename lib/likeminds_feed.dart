@@ -28,13 +28,10 @@ class LMFeedClient {
     DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
-    if (initiateLoggerRequest != null) {
-      LMFeedPersistence.instance
-          .initialiseLogger(initiateLoggerRequest: initiateLoggerRequest);
-    }
   }
 
-  Future<LMResponse<void>> init() async {
+  Future<LMResponse<void>> init(
+      {InitiateLoggerRequest? initiateLoggerRequest}) async {
     return await LMFeedPersistence.instance.init();
   }
 

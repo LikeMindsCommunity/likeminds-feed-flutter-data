@@ -2,12 +2,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/cache/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/community/handler/handler.dart';
+import 'package:likeminds_feed/src/persistence/logger/logger.dart';
 import 'package:likeminds_feed/src/persistence/user/handler/handler.dart';
 
 class LMFeedPersistence {
   late LMUserDBHandlerHive userDBHandlerHive;
   late LMCommunityConfigurationDBHandler communityConfigurationDBHandlerHive;
   late LMCacheDBHandler cacheDBHandlerHive;
+  late LMFeedLogger logger;
 
   static LMFeedPersistence? _instance;
 
@@ -24,15 +26,22 @@ class LMFeedPersistence {
     cacheDBHandlerHive = LMCacheDBHandler(
       cacheBoxName: 'cacheBox',
     );
+    logger = LMFeedLogger.instance;
   }
 
-  Future<LMResponse<void>> init() async {
+  Future<LMResponse<void>> init({InitiateLoggerRequest? request}) async {
     await Hive.initFlutter();
 
     LMResponse userDBInit = await userDBHandlerHive.init();
     LMResponse communityCongDB =
         await communityConfigurationDBHandlerHive.init();
     LMResponse cacheDBHandler = await cacheDBHandlerHive.init();
+
+    LMResponse? loggerInitResponse;
+    if (request != null) {
+      loggerInitResponse =
+          await initialiseLogger(initiateLoggerRequest: request);
+    }
 
     if (!userDBInit.success) {
       return LMResponse(success: false, errorMessage: userDBInit.errorMessage);
@@ -42,6 +51,9 @@ class LMFeedPersistence {
     } else if (!cacheDBHandler.success) {
       return LMResponse(
           success: false, errorMessage: cacheDBHandler.errorMessage);
+    } else if (loggerInitResponse != null && !loggerInitResponse.success) {
+      return LMResponse(
+          success: false, errorMessage: loggerInitResponse.errorMessage);
     } else {
       return LMResponse(success: true);
     }
@@ -109,20 +121,20 @@ class LMFeedPersistence {
   }
 
   bool checkIfLoggerInitialised() {
-    throw UnimplementedError();
+    return logger.checkIfLoggerInitialised();
   }
 
-  void initialiseLogger(
-      {required InitiateLoggerRequest initiateLoggerRequest}) {
-    throw UnimplementedError();
+  Future<LMResponse<void>> initialiseLogger(
+      {required InitiateLoggerRequest initiateLoggerRequest}) async {
+    return logger.initialise(initiateLoggerRequest: initiateLoggerRequest);
   }
 
   void handleException(Exception exception, StackTrace stackTrace,
       {Severity errorSeverity = Severity.ERROR}) {
-    throw UnimplementedError();
+    logger.handleException(exception, stackTrace);
   }
 
   Future<void> flushLogs() {
-    throw UnimplementedError();
+    return logger.flushLogs();
   }
 }

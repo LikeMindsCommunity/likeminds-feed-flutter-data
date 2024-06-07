@@ -14,6 +14,7 @@ import 'package:stack_trace/stack_trace.dart';
 // and shared with LM later or not
 // Calls the errorHandler method for client if it is not null
 class LMFeedLogger {
+  bool isInitialised = false;
   // LogDBHandler instance to handle DB operations
   LogDBHandler? logDBHandler;
   // shareLogsWithLM is a boolean value which determines whether the logs
@@ -38,10 +39,19 @@ class LMFeedLogger {
   // shareLogsWithLM is a boolean value which determines whether the logs
   // should be shared with LM or not
   // Must be called only once per app lifecycle
-  void initialise({required InitiateLoggerRequest initiateLoggerRequest}) {
+  Future<LMResponse<void>> initialise(
+      {required InitiateLoggerRequest initiateLoggerRequest}) async {
     this.initiateLoggerRequest = initiateLoggerRequest;
     // Initialising LogDBHandler with all the neccessary schemas
     logDBHandler = LogDBHandler(loggerBoxName: 'lm_logger');
+
+    LMResponse response = await logDBHandler!.init();
+
+    if (response.success) {
+      isInitialised = true;
+    }
+
+    return response;
   }
 
   // Creates a InsertLogRequest object and calls insertLog method
