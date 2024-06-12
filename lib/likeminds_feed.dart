@@ -28,10 +28,11 @@ class LMFeedClient {
     DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
-    if (initiateLoggerRequest != null) {
-      LMFeedPersistence.instance
-          .initialiseLogger(initiateLoggerRequest: initiateLoggerRequest);
-    }
+  }
+
+  Future<LMResponse<void>> init(
+      {InitiateLoggerRequest? initiateLoggerRequest}) async {
+    return await LMFeedPersistence.instance.init();
   }
 
   // ------------------------------------------
@@ -584,8 +585,8 @@ class LMFeedClient {
   /// pushLogs is used to push logs
   /// [PushLogRequest] is used to pass the required parameters
   /// [PushLogResponse] is returned as a Future
-  Future<PushLogResponse> pushLogs(PushLogRequest request) async {
-    final PushLogResponse response =
+  Future<LMResponse> pushLogs(PushLogRequest request) async {
+    final LMResponse response =
         await _sdkApplication.getLoggerApi().pushLogs(request: request);
     return response;
   }

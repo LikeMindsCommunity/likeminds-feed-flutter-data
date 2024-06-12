@@ -8,17 +8,16 @@ class LoggerService {
 
   LoggerService({required this.apiClient});
 
-  Future<PushLogResponseEntity> pushLogs(
-      {required PushLogRequest request}) async {
+  Future<LMResponse<void>> pushLogs({required PushLogRequest request}) async {
     try {
       final response = await apiClient.client().post(
             apiClient.getEndpoints.loggerEndpoint,
             data: request.toJson(),
           );
       if (response.data['success'] == true) {
-        return PushLogResponseEntity.fromJson(response.data);
+        return LMResponse(success: true);
       } else {
-        return PushLogResponseEntity(
+        return LMResponse(
           success: false,
           errorMessage: response.data['error_message'],
         );
@@ -30,7 +29,7 @@ class LoggerService {
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
       }
-      return PushLogResponseEntity(
+      return LMResponse(
         success: false,
         errorMessage: errorMessage ?? "An error occurred",
       );

@@ -7,6 +7,7 @@ part 'community_model.g.dart';
 /// Contains all details related to a community within the application.
 /// The [id] and [name] parameters are required.
 /// All other parameters are optional.
+/// {@endtemplate}
 class Community {
   /// The unique identifier of the community.
   final int id;

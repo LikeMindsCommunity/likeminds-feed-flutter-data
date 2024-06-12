@@ -93,7 +93,6 @@ class AuthService {
     try {
       final response = await apiClient.client().get(
             apiClient.getEndpoints.authEndpoint,
-            data: request.toJson(),
             options: Options(
               headers: {
                 'Authorization': request.accessToken,

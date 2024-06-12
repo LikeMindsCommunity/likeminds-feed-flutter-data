@@ -1,34 +1,34 @@
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/models/auth/member_right_model.dart';
-import 'package:likeminds_feed/src/persistence/user/schema/user_db.dart';
+import 'package:likeminds_feed/src/persistence/user/schema/user_hive.dart';
 
-class LMUserInterface {
-  static User toUser(LMUserRO userDBModel) {
+class LMUserInterfaceWeb {
+  static User toUser(LMUserDB userHiveModel) {
     return User(
-      id: userDBModel.id,
-      name: userDBModel.name,
-      imageUrl: userDBModel.imageUrl,
-      isGuest: userDBModel.isGuest,
-      uuid: userDBModel.uuid,
-      sdkClientInfo: toSDKClientInfo(userDBModel.sdkClientInfo!),
-      communityId: userDBModel.communityId,
-      createdAt: userDBModel.createdAt,
-      isDeleted: userDBModel.isDeleted,
-      isOwner: userDBModel.isOwner,
-      customTitle: userDBModel.customTitle,
-      memberSince: userDBModel.memberSince,
-      route: userDBModel.route,
-      state: userDBModel.state,
-      updatedAt: userDBModel.updatedAt,
-      organisationName: userDBModel.organisationName,
+      id: userHiveModel.id,
+      name: userHiveModel.name,
+      imageUrl: userHiveModel.imageUrl,
+      isGuest: userHiveModel.isGuest,
+      uuid: userHiveModel.uuid,
+      sdkClientInfo: toSDKClientInfo(userHiveModel.sdkClientInfo!),
+      communityId: userHiveModel.communityId,
+      createdAt: userHiveModel.createdAt,
+      isDeleted: userHiveModel.isDeleted,
+      isOwner: userHiveModel.isOwner,
+      customTitle: userHiveModel.customTitle,
+      memberSince: userHiveModel.memberSince,
+      route: userHiveModel.route,
+      state: userHiveModel.state,
+      updatedAt: userHiveModel.updatedAt,
+      organisationName: userHiveModel.organisationName,
     );
   }
 
-  static LMUserRO fromUser(User user) {
-    return LMUserRO(
-      user.id,
-      user.name,
-      user.uuid,
+  static LMUserDB fromUser(User user) {
+    return LMUserDB(
+      id: user.id,
+      name: user.name,
+      uuid: user.uuid,
       communityId: user.communityId,
       createdAt: user.createdAt,
       imageUrl: user.imageUrl,
@@ -45,27 +45,31 @@ class LMUserInterface {
     );
   }
 
-  static SDKClientInfo toSDKClientInfo(LMSDKClientInfoRO sdkClientInfoDBModel) {
+  static SDKClientInfo toSDKClientInfo(
+      LMSDKClientInfoDB sdkClientInfoHiveModel) {
     return SDKClientInfo(
-      community: sdkClientInfoDBModel.community,
-      user: sdkClientInfoDBModel.user,
-      uuid: sdkClientInfoDBModel.uuid,
+      community: sdkClientInfoHiveModel.community,
+      user: sdkClientInfoHiveModel.user,
+      uuid: sdkClientInfoHiveModel.uuid,
     );
   }
 
-  static LMSDKClientInfoRO fromSDKClientInfo(SDKClientInfo sdkClientInfo) {
-    return LMSDKClientInfoRO(
-        sdkClientInfo.community, sdkClientInfo.user, sdkClientInfo.uuid);
+  static LMSDKClientInfoDB fromSDKClientInfo(SDKClientInfo sdkClientInfo) {
+    return LMSDKClientInfoDB(
+      community: sdkClientInfo.community,
+      user: sdkClientInfo.user,
+      uuid: sdkClientInfo.uuid,
+    );
   }
 
-  static LMMemberStateRO fromMemberState(MemberStateResponse memberState) {
+  static LMMemberStateDB fromMemberState(MemberStateResponse memberState) {
     if (!memberState.success) {
       throw Exception("MemberStateResponse is not successful");
     }
-    return LMMemberStateRO(
-      memberState.editRequired!,
-      memberState.member!.uuid,
-      memberState.state!,
+    return LMMemberStateDB(
+      editRequired: memberState.editRequired!,
+      uuid: memberState.member!.uuid,
+      state: memberState.state!,
       member: memberState.member != null ? fromUser(memberState.member!) : null,
       memberRights:
           memberState.memberRights?.map((e) => fromMemberRight(e)).toList() ??
@@ -73,35 +77,34 @@ class LMUserInterface {
     );
   }
 
-  static LMMemberRightRO fromMemberRight(MemberRight memberRight) {
-    return LMMemberRightRO(
-      memberRight.id,
-      memberRight.isSelected,
-      memberRight.state,
-      memberRight.title,
+  static LMMemberRightDB fromMemberRight(MemberRight memberRight) {
+    return LMMemberRightDB(
+      id: memberRight.id,
+      isSelected: memberRight.isSelected,
+      state: memberRight.state,
+      title: memberRight.title,
     );
   }
 
-  static MemberStateResponse toMemberState(LMMemberStateRO memberStateDBModel) {
+  static MemberStateResponse toMemberState(LMMemberStateDB memberStateHive) {
     return MemberStateResponse(
-      success: true,
-      editRequired: memberStateDBModel.editRequired,
-      member: memberStateDBModel.member != null
-          ? LMUserInterface.toUser(memberStateDBModel.member!)
+      editRequired: memberStateHive.editRequired,
+      member: memberStateHive.member != null
+          ? toUser(memberStateHive.member!)
           : null,
-      memberRights: memberStateDBModel.memberRights
-          .map((e) => LMUserInterface.toMemberRight(e))
-          .toList(),
-      state: memberStateDBModel.state,
+      memberRights:
+          memberStateHive.memberRights.map((e) => toMemberRight(e)).toList(),
+      state: memberStateHive.state,
+      success: true,
     );
   }
 
-  static MemberRight toMemberRight(LMMemberRightRO memberRightDBModel) {
+  static MemberRight toMemberRight(LMMemberRightDB memberRightHive) {
     return MemberRight(
-      id: memberRightDBModel.id,
-      isSelected: memberRightDBModel.isSelected,
-      state: memberRightDBModel.state,
-      title: memberRightDBModel.title,
+      id: memberRightHive.id,
+      isSelected: memberRightHive.isSelected,
+      state: memberRightHive.state,
+      title: memberRightHive.title,
     );
   }
 }

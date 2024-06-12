@@ -1,17 +1,25 @@
-import 'package:realm/realm.dart';
+import 'package:hive/hive.dart';
 
 part 'log_db.g.dart';
 
-@RealmModel()
-class _LMLogDBModel {
-  @PrimaryKey()
-  late final int timestamp;
-  @MapTo('stack_trace')
-  late final _LMStackTraceDBModel? stackTrace;
-  @MapTo('sdk_meta')
-  late final _LMSDKMetaDBModel? sdkMeta;
+@HiveType(typeId: 40)
+class LMLogDB extends HiveObject {
+  @HiveField(0)
+  int timestamp;
 
-  late final String severity;
+  @HiveField(1)
+  LMStackTraceDB? stackTrace;
+  @HiveField(2)
+  LMSDKMetaDB? sdkMeta;
+  @HiveField(3)
+  String severity;
+
+  LMLogDB({
+    required this.timestamp,
+    required this.stackTrace,
+    required this.sdkMeta,
+    required this.severity,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -23,14 +31,16 @@ class _LMLogDBModel {
   }
 }
 
-@RealmModel()
-class _LMSDKMetaDBModel {
-  @MapTo('sample_app_version')
-  late final String? sampleAppVersion;
-  @MapTo('ui_version')
-  late final String? uiVersion;
-  @MapTo('middleware_version')
-  late final String? middlewareVersion;
+@HiveType(typeId: 41)
+class LMSDKMetaDB extends HiveObject {
+  @HiveField(0)
+  String? sampleAppVersion;
+  @HiveField(1)
+  String? uiVersion;
+  @HiveField(2)
+  String? middlewareVersion;
+
+  LMSDKMetaDB({this.sampleAppVersion, this.uiVersion, this.middlewareVersion});
 
   Map<String, dynamic> toJson() {
     return {
@@ -41,10 +51,14 @@ class _LMSDKMetaDBModel {
   }
 }
 
-@RealmModel()
-class _LMStackTraceDBModel {
-  late final String exception;
-  late final String trace;
+@HiveType(typeId: 42)
+class LMStackTraceDB extends HiveObject {
+  @HiveField(0)
+  String exception;
+  @HiveField(1)
+  String trace;
+
+  LMStackTraceDB({required this.exception, required this.trace});
 
   Map<String, dynamic> toJson() {
     return {'exception': exception, 'trace': trace};
