@@ -31,7 +31,7 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
       width: json['width'] as double?,
       height: json['height'] as double?,
       aspectRatio: json['aspect_ratio'] as double?,
-      meta: attachtmentType == 5 ? json : null,
+      meta: attachtmentType == 5 ? json : json['meta'],
       ogTags: json['og_tags'] == null
           ? null
           : OgTagsEntity.fromJson(json['og_tags'] as Map<String, dynamic>),
@@ -48,23 +48,23 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
 
 Map<String, dynamic> _$AttachmentMetaEntityToJson(
     AttachmentMetaEntity instance) {
-  Map<String, dynamic> attachmentMeta = instance.meta ??
-      {
-        'url': instance.url,
-        'format': instance.format,
-        'size': instance.size,
-        'duration': instance.duration,
-        'page_count': instance.pageCount,
-        'og_tags': instance.ogTags,
-        'entity_id': instance.entityId,
-        'title': instance.pollQuestion,
-        'expiry_time': instance.expiryTime,
-        'options': instance.pollOptions,
-        'multiple_select_state': instance.multiSelectState,
-        'poll_type': instance.pollType,
-        'multiple_select_number': instance.multiSelectNo,
-        'is_anonymous': instance.isAnonymous,
-        'allow_add_option': instance.allowAddOption,
-      };
+  Map<String, dynamic> attachmentMeta = {
+    'url': instance.url,
+    'format': instance.format,
+    'size': instance.size,
+    'duration': instance.duration,
+    'page_count': instance.pageCount,
+    'og_tags': instance.ogTags,
+    'entity_id': instance.entityId,
+    'title': instance.pollQuestion,
+    'expiry_time': instance.expiryTime,
+    'options': instance.pollOptions,
+    'multiple_select_state': instance.multiSelectState,
+    'poll_type': instance.pollType,
+    'multiple_select_number': instance.multiSelectNo,
+    'is_anonymous': instance.isAnonymous,
+    'allow_add_option': instance.allowAddOption,
+    'meta': instance.meta,
+  };
   return attachmentMeta;
 }
