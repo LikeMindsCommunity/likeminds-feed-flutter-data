@@ -6,7 +6,7 @@ class LoggerApi {
 
   LoggerApi({required this.loggerRepository});
 
-  Future<PushLogResponse> pushLogs({
+  Future<LMResponse<void>> pushLogs({
     required PushLogRequest request,
   }) async {
     return await loggerRepository.pushLogs(request: request);

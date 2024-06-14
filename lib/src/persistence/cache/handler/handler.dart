@@ -1,87 +1,68 @@
-import 'package:likeminds_feed/src/models/cache/cache.dart';
-import 'package:likeminds_feed/src/models/response.dart';
-import 'package:likeminds_feed/src/persistence/cache/schema/cache_db.dart';
-import 'package:likeminds_feed/src/persistence/cache/utils/cache_interface.dart';
-import 'package:realm/realm.dart';
+import 'package:hive/hive.dart';
+import 'package:likeminds_feed/likeminds_feed.dart';
+import 'package:likeminds_feed/src/persistence/cache/schema/cache_hive.dart';
+import 'package:likeminds_feed/src/persistence/cache/utils/utils.dart';
 
 class LMCacheDBHandler {
-  Configuration config;
+  final String cacheBoxName;
+  late Box<LMCacheDB> cacheBox;
 
-  LMCacheDBHandler({required this.config});
+  LMCacheDBHandler({required this.cacheBoxName});
+
+  Future<LMResponse<void>> init() async {
+    try {
+      Hive.registerAdapter(LMCacheDBAdapter());
+      cacheBox = await Hive.openBox<LMCacheDB>(cacheBoxName);
+
+      if (cacheBox.isOpen) {
+        return LMResponse(success: true);
+      } else {
+        return LMResponse(success: false, errorMessage: 'Failed to open box');
+      }
+    } on Exception catch (e) {
+      return LMResponse(success: false, errorMessage: e.toString());
+    }
+  }
 
   Future<LMResponse<void>> insertOrUpdateValueInCache(LMCache cache) async {
-    Realm realm = Realm(config);
     try {
-      CacheRO cacheDBModel = CacheInterface.fromCache(cache);
-
-      await realm.writeAsync(() {
-        realm.add(cacheDBModel, update: true);
-      });
-
-      realm.close();
-
+      final cacheHiveModel = LMCacheDBInterface.fromCache(cache);
+      await cacheBox.put(cacheHiveModel.key, cacheHiveModel);
       return LMResponse(success: true);
     } on Exception catch (e) {
-      realm.close();
       return LMResponse(success: false, errorMessage: e.toString());
     }
   }
 
   Future<LMResponse<void>> deleteValueFromCache(String key) async {
-    Realm realm = Realm(config);
     try {
-      CacheRO? result = realm.find<CacheRO>(key);
-
-      if (result == null) {
-        return LMResponse(success: false, errorMessage: 'Cache not found');
-      }
-
-      await realm.writeAsync(() {
-        realm.delete(result);
-      });
-
-      realm.close();
-
+      await cacheBox.delete(key);
       return LMResponse(success: true);
     } on Exception catch (e) {
-      realm.close();
-
       return LMResponse(success: false, errorMessage: e.toString());
     }
   }
 
   LMResponse<LMCache> getValueFromCache(String key) {
-    Realm realm = Realm(config);
     try {
-      CacheRO? cacheRO = realm.find<CacheRO>(key);
+      final cacheHiveModel = cacheBox.get(key);
 
-      if (cacheRO == null) {
+      if (cacheHiveModel == null) {
         return LMResponse(success: false, errorMessage: 'Cache not found');
       }
 
-      LMCache cache = CacheInterface.toCache(cacheRO);
-
-      realm.close();
-
+      final cache = LMCacheDBInterface.toCache(cacheHiveModel);
       return LMResponse(success: true, data: cache);
-    } on Exception {
-      realm.close();
-      return LMResponse(success: false, errorMessage: 'Error fetching cache');
+    } on Exception catch (e) {
+      return LMResponse(success: false, errorMessage: e.toString());
     }
   }
 
   Future<LMResponse<void>> clearCache() async {
-    Realm realm = Realm(config);
     try {
-      await realm.writeAsync(() {
-        realm.deleteAll<CacheRO>();
-      });
-
-      realm.close();
-
+      await cacheBox.clear();
       return LMResponse(success: true);
     } on Exception catch (e) {
-      realm.close();
       return LMResponse(success: false, errorMessage: e.toString());
     }
   }

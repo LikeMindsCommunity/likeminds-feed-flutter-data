@@ -151,3 +151,7 @@ Added pagination support in poll vote
 # 1.11.0
 
 Added support for pending post
+
+# 1.12.0
+
+Added support for web platform

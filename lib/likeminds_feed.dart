@@ -14,7 +14,7 @@ import 'src/models/models.dart';
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
 
-const String feedSDKVersion = "1.11.0";
+const String feedSDKVersion = "1.12.0";
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
@@ -28,10 +28,11 @@ class LMFeedClient {
     DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
-    if (initiateLoggerRequest != null) {
-      LMFeedPersistence.instance
-          .initialiseLogger(initiateLoggerRequest: initiateLoggerRequest);
-    }
+  }
+
+  Future<LMResponse<void>> init(
+      {InitiateLoggerRequest? initiateLoggerRequest}) async {
+    return await LMFeedPersistence.instance.init();
   }
 
   // ------------------------------------------
@@ -584,8 +585,8 @@ class LMFeedClient {
   /// pushLogs is used to push logs
   /// [PushLogRequest] is used to pass the required parameters
   /// [PushLogResponse] is returned as a Future
-  Future<PushLogResponse> pushLogs(PushLogRequest request) async {
-    final PushLogResponse response =
+  Future<LMResponse> pushLogs(PushLogRequest request) async {
+    final LMResponse response =
         await _sdkApplication.getLoggerApi().pushLogs(request: request);
     return response;
   }

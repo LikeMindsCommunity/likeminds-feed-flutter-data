@@ -4,9 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/logger/handler/handler.dart';
-import 'package:likeminds_feed/src/persistence/logger/schema/log_db.dart';
 import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils.dart';
-import 'package:realm/realm.dart' as realm;
 import 'package:stack_trace/stack_trace.dart';
 
 // This class handles all the operations
@@ -16,6 +14,7 @@ import 'package:stack_trace/stack_trace.dart';
 // and shared with LM later or not
 // Calls the errorHandler method for client if it is not null
 class LMFeedLogger {
+  bool isInitialised = false;
   // LogDBHandler instance to handle DB operations
   LogDBHandler? logDBHandler;
   // shareLogsWithLM is a boolean value which determines whether the logs
@@ -37,20 +36,22 @@ class LMFeedLogger {
     return true;
   }
 
-  // Creates a new realm instance with all the neccessary schemas
-  // and initialises the logDBHandler
   // shareLogsWithLM is a boolean value which determines whether the logs
   // should be shared with LM or not
   // Must be called only once per app lifecycle
-  void initialise({required InitiateLoggerRequest initiateLoggerRequest}) {
+  Future<LMResponse<void>> initialise(
+      {required InitiateLoggerRequest initiateLoggerRequest}) async {
     this.initiateLoggerRequest = initiateLoggerRequest;
     // Initialising LogDBHandler with all the neccessary schemas
-    logDBHandler = LogDBHandler(
-        config: realm.Configuration.local([
-      LMStackTraceDBModel.schema,
-      LMSDKMetaDBModel.schema,
-      LMLogDBModel.schema
-    ]));
+    logDBHandler = LogDBHandler(loggerBoxName: 'lm_logger');
+
+    LMResponse response = await logDBHandler!.init();
+
+    if (response.success) {
+      isInitialised = true;
+    }
+
+    return response;
   }
 
   // Creates a InsertLogRequest object and calls insertLog method
@@ -84,20 +85,26 @@ class LMFeedLogger {
   // Creates a PushLogRequest object and calls pushLogs method
   // If the response is success, then deletes the logs from the database
   // upto the current timestamp
-  Future<PushLogResponse> _pushLogs() async {
+  Future<LMResponse<void>> _pushLogs() async {
     if (!checkIfLoggerInitialised()) {
-      return PushLogResponse(
+      return LMResponse(
           success: false, errorMessage: 'LMFeedLogger not initialised');
     }
     int currentTimeStamp = DateTime.now().millisecondsSinceEpoch;
-    PushLogResponse response;
 
-    GetLogResponse getLogResponse = logDBHandler!.getLogs(currentTimeStamp);
+    LMResponse<GetLogResponse> response =
+        logDBHandler!.getLogs(currentTimeStamp);
+
+    if (!response.success) {
+      return response;
+    }
+
+    GetLogResponse getLogResponse = response.data!;
 
     List<LMLogBuilder> lmLogsBuilderList = getLogResponse.lmLogsBuilder;
 
     if (lmLogsBuilderList.isEmpty) {
-      return PushLogResponse(success: true);
+      return LMResponse(success: true);
     }
 
     // Builder for DeviceDetails
@@ -157,19 +164,19 @@ class LMFeedLogger {
     PushLogRequest pushLogRequest =
         (PushLogRequestBuilder()..logs(lmLogList)).build();
 
-    response = await SDKApplication.instance
+    LMResponse pushResponse = await SDKApplication.instance
         .getLoggerApi()
         .pushLogs(request: pushLogRequest);
 
     // If response is success
     // Clear logs from DB
     // And return the response
-    if (response.success) {
+    if (pushResponse.success) {
       ClearLogRequest clearLogRequest =
           (ClearLogRequestBuilder()..timestamp(currentTimeStamp)).build();
       _clearLogs(clearLogRequest);
     }
-    return response;
+    return pushResponse;
   }
 
   // Handles the exception

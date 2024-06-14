@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/persistence/community/schema/community_conf_db.dart';
+import 'package:likeminds_feed/src/persistence/community/schema/community_conf_hive.dart';
 
-class LMCommunityConfigurationInterface {
-  static toCommunityConfiguration(
-      LMCommunityConfigurationRO communityConfigurationDBModel) {
+class LMCommunityConfigurationDBInterface {
+  static CommunityConfigurations toCommunityConfiguration(
+      LMCommunityConfigurationDB communityConfigurationDBModel) {
     Map<String, dynamic> value =
         jsonDecode(communityConfigurationDBModel.value!)
             as Map<String, dynamic>;
@@ -17,11 +17,11 @@ class LMCommunityConfigurationInterface {
     );
   }
 
-  static LMCommunityConfigurationRO fromCommunityConfiguration(
+  static LMCommunityConfigurationDB fromCommunityConfiguration(
       CommunityConfigurations communityConfiguration) {
-    return LMCommunityConfigurationRO(
-      communityConfiguration.type,
+    return LMCommunityConfigurationDB(
       description: communityConfiguration.description,
+      type: communityConfiguration.type,
       value: jsonEncode(communityConfiguration.value),
     );
   }

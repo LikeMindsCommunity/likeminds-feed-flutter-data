@@ -1,33 +1,50 @@
+import 'package:hive/hive.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/persistence/user/schema/user_db.dart';
+import 'package:likeminds_feed/src/persistence/user/schema/user_hive.dart';
 import 'package:likeminds_feed/src/persistence/user/utils/utils.dart';
-import 'package:realm/realm.dart' hide User;
 
 // This class handles all the DB operations
 // related to User Data
-// Accepts a [Configuration] instance as parameter
-class LMUserDBHandler {
-  Configuration config;
+// Accepts box names as strings
+class LMUserDBHandlerHive {
+  final String userBoxName;
+  final String memberStateBoxName;
+  late Box<LMUserDB> userBox;
+  late Box<LMMemberStateDB> memberStateBox;
 
-  LMUserDBHandler({required this.config});
+  LMUserDBHandlerHive({
+    required this.userBoxName,
+    required this.memberStateBoxName,
+  });
+
+  Future<LMResponse> init() async {
+    try {
+      Hive.registerAdapter(LMMemberRightDBAdapter());
+      Hive.registerAdapter(LMMemberStateDBAdapter());
+      Hive.registerAdapter(LMSDKClientInfoDBAdapter());
+      Hive.registerAdapter(LMUserDBAdapter());
+
+      userBox = await Hive.openBox<LMUserDB>(userBoxName);
+      memberStateBox = await Hive.openBox<LMMemberStateDB>(memberStateBoxName);
+
+      if (userBox.isOpen && memberStateBox.isOpen) {
+        return LMResponse(success: true);
+      } else {
+        return LMResponse(success: false, errorMessage: "Failed to open box");
+      }
+    } on Exception catch (e) {
+      return LMResponse(success: false, errorMessage: e.toString());
+    }
+  }
 
   // CRUD operation for User Model
   // Insert [User] data into local DB
   Future<LMResponse<void>> insertOrUpdateUser(User user) async {
-   
     try {
-       Realm realm =await Realm.open(config);
-      LMUserRO userDBModel = LMUserInterface.fromUser(user);
-
-      await realm.writeAsync(() {
-        realm.add(userDBModel, update: true);
-      });
-
-      realm.close();
-
+      final userHiveModel = LMUserInterfaceWeb.fromUser(user);
+      await userBox.put(userHiveModel.uuid, userHiveModel);
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
-      // realm.close();
       return LMResponse<void>(
         errorMessage: e.toString(),
         success: false,
@@ -37,24 +54,10 @@ class LMUserDBHandler {
 
   // Delete [User] data from local DB
   Future<LMResponse<void>> deleteUser() async {
-    Realm realm = Realm(config);
     try {
-      RealmResults<LMUserRO>? results = realm.all<LMUserRO>();
-
-      if (results.isNotEmpty) {
-        await realm.writeAsync(() {
-          realm.deleteMany(results);
-        });
-      } else {
-        return LMResponse(success: false, errorMessage: "User not found");
-      }
-
-      realm.close();
-
+      await userBox.clear();
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
-      realm.close();
-
       return LMResponse<void>(
         errorMessage: e.toString(),
         success: false,
@@ -64,22 +67,15 @@ class LMUserDBHandler {
 
   // Get [User] data from local DB
   LMResponse<User> getUser() {
-    Realm realm = Realm(config);
     try {
-      RealmResults<LMUserRO> userRO = realm.all<LMUserRO>();
+      final userHiveModels = userBox.values.toList();
 
-      if (userRO.isEmpty) {
+      if (userHiveModels.isEmpty) {
         return LMResponse(success: false, errorMessage: "User not found");
       }
-
-      User user = LMUserInterface.toUser(userRO.first);
-
-      realm.close();
-
+      final user = LMUserInterfaceWeb.toUser(userHiveModels.first);
       return LMResponse(success: true, data: user);
     } on Exception catch (e) {
-      realm.close();
-
       return LMResponse(success: false, errorMessage: e.toString());
     }
   }
@@ -87,25 +83,17 @@ class LMUserDBHandler {
   // CRUD operation for MemberStateResponse Model
   // Get [MemberStateResponse] data from local DB
   LMResponse<MemberStateResponse> getMemberState() {
-    Realm realm = Realm(config);
     try {
-      RealmResults<LMMemberStateRO> memberStateRO =
-          realm.all<LMMemberStateRO>();
+      final memberStateHiveModels = memberStateBox.values.toList();
 
-      if (memberStateRO.isEmpty) {
+      if (memberStateHiveModels.isEmpty) {
         return LMResponse(
             success: false, errorMessage: "MemberState not found");
       }
-
-      MemberStateResponse? memberStateResponse =
-          LMUserInterface.toMemberState(memberStateRO.first);
-
-      realm.close();
-
+      final memberStateResponse =
+          LMUserInterfaceWeb.toMemberState(memberStateHiveModels.first);
       return LMResponse(success: true, data: memberStateResponse);
     } on Exception catch (e) {
-      realm.close();
-
       return LMResponse(success: false, errorMessage: e.toString());
     }
   }
@@ -113,20 +101,12 @@ class LMUserDBHandler {
   // Update [MemberStateResponse] data in local DB
   Future<LMResponse<void>> insertOrUpdateMemberState(
       MemberStateResponse memberStateResponse) async {
-    Realm realm = Realm(config);
     try {
-      LMMemberStateRO memberStateDBModel =
-          LMUserInterface.fromMemberState(memberStateResponse);
-
-      await realm.writeAsync(() {
-        return realm.add(memberStateDBModel, update: true);
-      });
-
-      realm.close();
-
+      final memberStateHiveModel =
+          LMUserInterfaceWeb.fromMemberState(memberStateResponse);
+      await memberStateBox.put(memberStateHiveModel.uuid, memberStateHiveModel);
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
-      realm.close();
       return LMResponse<void>(
         errorMessage: e.toString(),
         success: false,
@@ -136,28 +116,10 @@ class LMUserDBHandler {
 
   // Delete [MemberStateResponse] data from local DB
   Future<LMResponse<void>> deleteMemberState() async {
-    Realm realm = Realm(config);
     try {
-      RealmResults<LMMemberStateRO> memberStateRO =
-          realm.all<LMMemberStateRO>();
-
-      if (memberStateRO.isEmpty) {
-        return LMResponse<void>(
-          errorMessage: "MemberState not found",
-          success: false,
-        );
-      }
-
-      await realm.writeAsync(() {
-        realm.deleteMany(memberStateRO);
-      });
-
-      realm.close();
-
+      await memberStateBox.clear();
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
-      realm.close();
-
       return LMResponse<void>(
         errorMessage: e.toString(),
         success: false,

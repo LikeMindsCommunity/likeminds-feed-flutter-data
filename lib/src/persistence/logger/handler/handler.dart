@@ -1,83 +1,109 @@
+import 'package:hive/hive.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/logger/schema/log_db.dart';
 import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils.dart';
-import 'package:realm/realm.dart';
 
 // This class handles all the DB operations
 // related to Error Logging
-// Accepts a [realm] instance as parameter
 class LogDBHandler {
-  Configuration config;
+  final String loggerBoxName;
+  late Box<LMLogDB> loggerBox;
 
-  LogDBHandler({required this.config});
+  LogDBHandler({required this.loggerBoxName});
+
+  // Initializes the DB
+  Future<LMResponse<void>> init() async {
+    try {
+      Hive.registerAdapter(LMLogDBAdapter());
+      loggerBox = await Hive.openBox<LMLogDB>(loggerBoxName);
+
+      if (loggerBox.isOpen) {
+        return LMResponse(success: true);
+      } else {
+        return LMResponse(success: false, errorMessage: 'Failed to open box');
+      }
+    } on Exception catch (e) {
+      return LMResponse(success: false, errorMessage: e.toString());
+    }
+  }
 
   // Accepts [InsertLogRequest] object as parameter
   // Creates a LMLogDBModel object and inserts it in the DB
-  void insertLog(InsertLogRequest request) {
-    Realm realm = Realm(config);
-    LMStackTraceDBModel stackTraceRO = LMStackTraceDBModel(
-        request.stackTrace.exception, request.stackTrace.stack);
-    LMSDKMetaDBModel sdkMetaRO = LMSDKMetaDBModel(
-        sampleAppVersion: request.sdkMeta?.sampleAppVersion ?? '',
-        uiVersion: request.sdkMeta?.uiVersion ?? '',
-        middlewareVersion: request.sdkMeta?.middlewareVersion ?? '');
-    realm.write(() {
-      realm.add(LMLogDBModel(
-        request.timestamp,
-        request.severity,
-        stackTrace: stackTraceRO,
-        sdkMeta: sdkMetaRO,
-      ));
-    });
-    realm.close();
+  Future<LMResponse<void>> insertLog(InsertLogRequest request) async {
+    try {
+      LMStackTraceDB stackTraceRO = LMStackTraceDB(
+          exception: request.stackTrace.exception,
+          trace: request.stackTrace.stack);
+
+      LMSDKMetaDB sdkMetaRO = LMSDKMetaDB(
+          sampleAppVersion: request.sdkMeta?.sampleAppVersion ?? '',
+          uiVersion: request.sdkMeta?.uiVersion ?? '',
+          middlewareVersion: request.sdkMeta?.middlewareVersion ?? '');
+
+      await loggerBox.put(
+          request.timestamp,
+          LMLogDB(
+              timestamp: request.timestamp,
+              stackTrace: stackTraceRO,
+              sdkMeta: sdkMetaRO,
+              severity: request.severity));
+
+      return LMResponse(success: true);
+    } on Exception catch (e) {
+      return LMResponse(success: false, errorMessage: e.toString());
+    }
   }
 
   // Returns a list of LMLogDBModel objects
   // which are older than the timestamp passed as parameter
-  GetLogResponse getLogs(int timestamp) {
-    Realm realm = Realm(config);
-    //RealmResults<LMLogDBModel> realmResults = realm!.all<LMLogDBModel>();
-    RealmResults<LMLogDBModel> queryResults =
-        realm.query<LMLogDBModel>('timestamp <= $timestamp');
+  LMResponse<GetLogResponse> getLogs(int timestamp) {
+    try {
+      Iterable<LMLogDB> result = loggerBox.valuesBetween(endKey: timestamp);
 
-    // Converting LMLogDBModel to LMLog while
-    // Mapping LMLog list with Device Details
-    List<LMLogBuilder> lmLogBuilderList = queryResults.map((e) {
-      LMStackTrace stackTrace = (LMStackTraceBuilder()
-            ..exception(e.stackTrace?.exception ?? "")
-            ..stack(e.stackTrace?.trace ?? ""))
-          .build();
+      // Converting LMLogDBModel to LMLog while
+      // Mapping LMLog list with Device Details
+      List<LMLogBuilder> lmLogBuilderList = result.map((e) {
+        LMStackTrace stackTrace = (LMStackTraceBuilder()
+              ..exception(e.stackTrace?.exception ?? "")
+              ..stack(e.stackTrace?.trace ?? ""))
+            .build();
 
-      // Create instance of LMSDKMeta
-      LMSDKMeta sdkMeta = (LMSDKMetaBuilder()
-            ..middlewareVersion(e.sdkMeta?.middlewareVersion ?? "")
-            ..sampleAppVersion(e.sdkMeta?.sampleAppVersion ?? "")
-            ..uiVersion(e.sdkMeta?.uiVersion ?? ""))
-          .build();
-      LMLogBuilder lmLogBuilder = LMLogBuilder();
-      lmLogBuilder
-        ..timestamp(e.timestamp)
-        ..severity(getSeverityFromString(e.severity))
-        ..sdkMeta(sdkMeta)
-        ..stackTrace(stackTrace);
+        // Create instance of LMSDKMeta
+        LMSDKMeta sdkMeta = (LMSDKMetaBuilder()
+              ..middlewareVersion(e.sdkMeta?.middlewareVersion ?? "")
+              ..sampleAppVersion(e.sdkMeta?.sampleAppVersion ?? "")
+              ..uiVersion(e.sdkMeta?.uiVersion ?? ""))
+            .build();
+        LMLogBuilder lmLogBuilder = LMLogBuilder();
+        lmLogBuilder
+          ..timestamp(e.timestamp)
+          ..severity(getSeverityFromString(e.severity))
+          ..sdkMeta(sdkMeta)
+          ..stackTrace(stackTrace);
 
-      return lmLogBuilder;
-    }).toList();
-    realm.close();
+        return lmLogBuilder;
+      }).toList();
 
-    return (GetLogResponseBuilder()..lmLogsBuilder(lmLogBuilderList)).build();
+      return LMResponse(
+          success: true,
+          data: (GetLogResponseBuilder()..lmLogsBuilder(lmLogBuilderList))
+              .build());
+    } on Exception catch (e) {
+      return LMResponse(success: false, errorMessage: e.toString());
+    }
   }
 
   // Deletes the logs passed as parameter
-  void clearLogs(ClearLogRequest request) async {
-    Realm realm = Realm(config);
-    RealmResults<LMLogDBModel> queryResults =
-        realm.query<LMLogDBModel>('timestamp <= ${request.timestamp}');
+  Future<LMResponse<void>> clearLogs(ClearLogRequest request) async {
+    try {
+      Iterable<LMLogDB> result =
+          loggerBox.valuesBetween(endKey: request.timestamp);
 
-    realm.write(() {
-      realm.deleteMany(queryResults);
-    });
+      await loggerBox.deleteAll(result.map((e) => e.timestamp));
 
-    realm.close();
+      return LMResponse(success: true);
+    } on Exception catch (e) {
+      return LMResponse(success: false, errorMessage: e.toString());
+    }
   }
 }
