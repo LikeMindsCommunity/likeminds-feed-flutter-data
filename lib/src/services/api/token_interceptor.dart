@@ -19,7 +19,6 @@ class TokenInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
-    debugPrint("Authenticated request completed pew pew");
     return super.onResponse(response, handler);
   }
 
