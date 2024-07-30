@@ -155,3 +155,7 @@ Added support for pending post
 # 1.12.0
 
 Added support for web platform
+
+# 1.13.0
+
+Updated dependencies to migrate to Android Target SDK version to 34
