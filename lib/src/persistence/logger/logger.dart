@@ -134,8 +134,6 @@ class LMFeedLogger {
         ..os('android')
         ..versionOS(androidDeviceInfo.version.release)
         ..deviceName(androidDeviceInfo.model)
-        ..screenHeight(androidDeviceInfo.displayMetrics.heightPx.toInt())
-        ..screenWidth(androidDeviceInfo.displayMetrics.widthPx.toInt())
         ..wifi(isOnWifi);
     } else if (Platform.isIOS) {
       IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
