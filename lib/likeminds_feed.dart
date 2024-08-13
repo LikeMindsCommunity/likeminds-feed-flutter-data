@@ -87,10 +87,10 @@ class LMFeedClient {
   }
 
   /// getFeedRoom is used to fetch the feed room list
-  /// [GetFeedroomRequest] is used to pass the required parameters
+  /// [GetFeedRoomRequest] is used to pass the required parameters
   /// [GetFeedRoomResponse] is returned as a Future
   Future<GetFeedRoomResponse> getFeedRoom(
-      GetFeedroomRequest getFeedRoomRequest) async {
+      GetFeedRoomRequest getFeedRoomRequest) async {
     final GetFeedRoomResponse response =
         await _sdkApplication.getFeedApi().getFeedRoom(getFeedRoomRequest);
     return response;
@@ -107,14 +107,14 @@ class LMFeedClient {
     return response;
   }
 
-  /// getExploreFeedrooms is used to fetch the explore feed rooms
+  /// getExploreFeedRooms is used to fetch the explore feed rooms
   /// [GetExploreFeedRoomRequest] is used to pass the required parameters
-  /// [GetExploreFeedroomResponse] is returned as a Future
+  /// [GetExploreFeedRoomResponse] is returned as a Future
   /// [LMResponse<GetExploreFeedRoomResponse>] is returned as a Future
-  Future<LMResponse<GetExploreFeedroomResponse>> getExploreFeedrooms(
+  Future<LMResponse<GetExploreFeedRoomResponse>> getExploreFeedRooms(
       GetExploreFeedRoomRequest request) async {
-    final LMResponse<GetExploreFeedroomResponse> response =
-        await _sdkApplication.getFeedApi().getExploreFeedrooms(request);
+    final LMResponse<GetExploreFeedRoomResponse> response =
+        await _sdkApplication.getFeedApi().getExploreFeedRooms(request);
     return response;
   }
 

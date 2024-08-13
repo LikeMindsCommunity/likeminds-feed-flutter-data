@@ -6,9 +6,9 @@ part of 'get_explore_feedroom_response_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetExploreFeedroomResponseEntity _$GetExploreFeedResponseEntityFromJson(
+GetExploreFeedRoomResponseEntity _$GetExploreFeedResponseEntityFromJson(
         Map<String, dynamic> json) =>
-    GetExploreFeedroomResponseEntity(
+    GetExploreFeedRoomResponseEntity(
       chatrooms: (json['chatrooms'] as List<dynamic>)
           .map((e) => ChatroomEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -18,7 +18,7 @@ GetExploreFeedroomResponseEntity _$GetExploreFeedResponseEntityFromJson(
     );
 
 Map<String, dynamic> _$GetExploreFeedResponseEntityToJson(
-        GetExploreFeedroomResponseEntity instance) =>
+        GetExploreFeedRoomResponseEntity instance) =>
     <String, dynamic>{
       'chatrooms': instance.chatrooms,
       'pinned_chatrooms_count': instance.pinnedChatroomsCount,

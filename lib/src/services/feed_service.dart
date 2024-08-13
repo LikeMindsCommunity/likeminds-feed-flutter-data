@@ -65,7 +65,7 @@ class FeedService {
   }
 
   Future<GetFeedRoomResponseEntity> getFeedRoom(
-      GetFeedroomRequest getFeedRoomRequest) async {
+      GetFeedRoomRequest getFeedRoomRequest) async {
     final Map<String, dynamic> queryParameters = {
       'page': getFeedRoomRequest.page,
     };
@@ -270,7 +270,7 @@ class FeedService {
     }
   }
 
-  Future<LMResponse<GetExploreFeedroomResponseEntity>> getExploreFeedrooms(
+  Future<LMResponse<GetExploreFeedRoomResponseEntity>> getExploreFeedRooms(
       GetExploreFeedRoomRequest request) async {
     try {
       final Response response = await apiClient.client().get(
@@ -285,19 +285,19 @@ class FeedService {
       Map<String, dynamic> data = response.data;
 
       if (data['success'] == false) {
-        return LMResponse<GetExploreFeedroomResponseEntity>(
+        return LMResponse<GetExploreFeedRoomResponseEntity>(
           success: false,
           errorMessage: data['error_message'],
         );
       }
 
-      return LMResponse<GetExploreFeedroomResponseEntity>(
+      return LMResponse<GetExploreFeedRoomResponseEntity>(
         success: true,
-        data: GetExploreFeedroomResponseEntity.fromJson(data['data']),
+        data: GetExploreFeedRoomResponseEntity.fromJson(data['data']),
       );
     } on DioException catch (e, stacktrace) {
       LMFeedPersistence.instance.handleException(e, stacktrace);
-      return LMResponse<GetExploreFeedroomResponseEntity>(
+      return LMResponse<GetExploreFeedRoomResponseEntity>(
         success: false,
         errorMessage: e.message,
       );

@@ -1,9 +1,9 @@
-class GetFeedroomRequest {
+class GetFeedRoomRequest {
   final int page;
   final int? pageSize;
   final int? feedroomId;
 
-  GetFeedroomRequest._({
+  GetFeedRoomRequest._({
     required this.page,
     this.feedroomId,
     this.pageSize,
@@ -16,12 +16,12 @@ class GetFeedroomRequest {
       };
 }
 
-class GetFeedroomRequestBuilder {
+class GetFeedRoomRequestBuilder {
   int? _page;
   int? _feedroomId;
   int? _pageSize;
 
-  GetFeedroomRequestBuilder();
+  GetFeedRoomRequestBuilder();
 
   void page(int page) {
     _page = page;
@@ -35,8 +35,8 @@ class GetFeedroomRequestBuilder {
     _pageSize = pageSize;
   }
 
-  GetFeedroomRequest build() {
-    return GetFeedroomRequest._(
+  GetFeedRoomRequest build() {
+    return GetFeedRoomRequest._(
       page: _page!,
       feedroomId: _feedroomId,
       pageSize: _pageSize,
