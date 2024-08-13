@@ -17,6 +17,9 @@ AddCommentResponseEntity _$AddCommentResponseEntityFromJson(
       topics: (json['data']['topics'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, TopicEntity.fromJson(e as Map<String, dynamic>)),
       ),
+      users: (json['data']['users'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, UserEntity.fromJson(e as Map<String, dynamic>)),
+      ),
       widgets: (json['data']['widgets'] as Map<String, dynamic>?)?.map(
         (k, e) =>
             MapEntry(k, WidgetModelEntity.fromJson(e as Map<String, dynamic>)),
