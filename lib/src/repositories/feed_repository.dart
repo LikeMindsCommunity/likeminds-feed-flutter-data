@@ -21,7 +21,7 @@ class FeedRepository {
   }
 
   Future<GetFeedRoomResponse> getFeedRoom(
-      GetFeedRoomRequest getFeedRoomRequest) async {
+      GetFeedroomRequest getFeedRoomRequest) async {
     final GetFeedRoomResponseEntity responseEntity =
         await feedService.getFeedRoom(getFeedRoomRequest);
     final GetFeedRoomResponse response =
@@ -68,5 +68,22 @@ class FeedRepository {
     final GetUserTopicsResponseEntity responseEntity =
         await feedService.getUserTopics(request);
     return GetUserTopicsResponse.fromEntity(responseEntity);
+  }
+
+  Future<LMResponse<GetExploreFeedroomResponse>> getExploreFeedrooms(
+      GetExploreFeedRoomRequest request) async {
+    final LMResponse<GetExploreFeedroomResponseEntity> responseEntity =
+        await feedService.getExploreFeedrooms(request);
+    if (responseEntity.data == null) {
+      return LMResponse<GetExploreFeedroomResponse>(
+        errorMessage: responseEntity.errorMessage,
+        success: responseEntity.success,
+      );
+    }
+    return LMResponse<GetExploreFeedroomResponse>(
+      data: GetExploreFeedroomResponse.fromEntity(responseEntity.data!),
+      errorMessage: responseEntity.errorMessage,
+      success: responseEntity.success,
+    );
   }
 }

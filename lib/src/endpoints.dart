@@ -28,6 +28,7 @@ class EndPoints {
   String get universalFeed => "$feedUrl/universal";
   String get feedroomEndpoint => "$KETTLE_HOST/feedroom";
   String get feedOfFeedroomEndpoint => "$KETTLE_HOST/feed/group";
+  String get exploreFeedroom => "$KETTLE_HOST/community/feed";
 
   String get addPostEndpoint => "$KETTLE_HOST/feed/post";
 

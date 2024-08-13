@@ -21,7 +21,7 @@ class FeedApi {
   }
 
   Future<GetFeedRoomResponse> getFeedRoom(
-      GetFeedRoomRequest getFeedRoomRequest) async {
+      GetFeedroomRequest getFeedRoomRequest) async {
     final GetFeedRoomResponse response =
         await feedRepository.getFeedRoom(getFeedRoomRequest);
     return response;
@@ -63,6 +63,13 @@ class FeedApi {
       GetUserTopicsRequest request) async {
     final GetUserTopicsResponse response =
         await feedRepository.getUserTopics(request);
+    return response;
+  }
+
+  Future<LMResponse<GetExploreFeedroomResponse>> getExploreFeedrooms(
+      GetExploreFeedRoomRequest request) async {
+    final LMResponse<GetExploreFeedroomResponse> response =
+        await feedRepository.getExploreFeedrooms(request);
     return response;
   }
 }
