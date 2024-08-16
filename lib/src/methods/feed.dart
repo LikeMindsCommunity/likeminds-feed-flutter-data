@@ -72,4 +72,10 @@ class FeedApi {
         await feedRepository.getExploreFeedRooms(request);
     return response;
   }
+
+  Future<LMResponse<void>> followFeedRoom(FollowFeedRoomRequest request) async {
+    final LMResponse<void> response =
+        await feedRepository.followFeedRoom(request);
+    return response;
+  }
 }
