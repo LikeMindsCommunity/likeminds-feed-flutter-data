@@ -305,11 +305,10 @@ class FeedService {
     }
   }
 
-  Future<LMResponse<void>> followFeedRoom(
-      FollowFeedRoomRequest request) async {
+  Future<LMResponse<void>> joinFeedRoom(JoinFeedRoomRequest request) async {
     try {
       final Response response = await apiClient.client().put(
-            apiClient.getEndpoints.followUnfollowFeedroom,
+            apiClient.getEndpoints.joinLeaveFeedroom,
             queryParameters: request.toJson(),
             options: Options(
               headers: {

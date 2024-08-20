@@ -73,9 +73,9 @@ class FeedApi {
     return response;
   }
 
-  Future<LMResponse<void>> followFeedRoom(FollowFeedRoomRequest request) async {
+  Future<LMResponse<void>> joinFeedRoom(JoinFeedRoomRequest request) async {
     final LMResponse<void> response =
-        await feedRepository.followFeedRoom(request);
+        await feedRepository.joinFeedRoom(request);
     return response;
   }
 }

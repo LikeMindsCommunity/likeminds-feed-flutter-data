@@ -73,7 +73,7 @@ export 'package:likeminds_feed/src/models/feedroom/get_feed_feedroom_request_mod
 export 'package:likeminds_feed/src/models/feedroom/get_feed_feedroom_response_model.dart';
 export 'package:likeminds_feed/src/models/feedroom/get_explore_feedroom_request_model.dart';
 export 'package:likeminds_feed/src/models/feedroom/get_explore_feedroom_response_model.dart';
-export 'package:likeminds_feed/src/models/feedroom/folllow_feedroom_request_model.dart';
+export 'package:likeminds_feed/src/models/feedroom/join_feedroom_request_model.dart';
 // -----
 
 export 'package:likeminds_feed/src/models/post/post_model.dart';

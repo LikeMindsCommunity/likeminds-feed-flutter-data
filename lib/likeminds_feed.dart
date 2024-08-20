@@ -117,12 +117,12 @@ class LMFeedClient {
     return response;
   }
 
-  /// followFeedRoom is used to follow or unfollow a feed room
-  /// [FollowFeedRoomRequest] is used to pass the required parameters
+  /// joinFeedRoom is used to follow or unfollow a feed room
+  /// [JoinFeedRoomRequest] is used to pass the required parameters
   /// [LMResponse<void>] is returned as a Future
-  Future<LMResponse<void>> followFeedRoom(FollowFeedRoomRequest request) async {
+  Future<LMResponse<void>> joinFeedRoom(JoinFeedRoomRequest request) async {
     final LMResponse<void> response =
-        await _sdkApplication.getFeedApi().followFeedRoom(request);
+        await _sdkApplication.getFeedApi().joinFeedRoom(request);
     return response;
   }
 

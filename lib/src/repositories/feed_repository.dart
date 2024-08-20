@@ -87,10 +87,10 @@ class FeedRepository {
     );
   }
 
-  Future<LMResponse<void>> followFeedRoom(
-      FollowFeedRoomRequest followUnFollowRequest) async {
+  Future<LMResponse<void>> joinFeedRoom(
+      JoinFeedRoomRequest followUnFollowRequest) async {
     final LMResponse<void> responseEntity =
-        await feedService.followFeedRoom(followUnFollowRequest);
+        await feedService.joinFeedRoom(followUnFollowRequest);
     return responseEntity;
   }
 }
