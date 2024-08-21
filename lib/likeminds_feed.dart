@@ -14,7 +14,7 @@ import 'src/models/models.dart';
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
 
-const String feedSDKVersion = "1.13.0";
+const String feedSDKVersion = "1.14.0";
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
@@ -104,6 +104,25 @@ class LMFeedClient {
     final GetFeedOfFeedRoomResponse response = await _sdkApplication
         .getFeedApi()
         .getFeedOfFeedRoom(getFeedFeedRoomRequest);
+    return response;
+  }
+
+  /// getExploreFeedRooms is used to fetch the explore feed rooms
+  /// [GetExploreFeedRoomRequest] is used to pass the required parameters
+  /// [LMResponse<GetExploreFeedRoomResponse>] is returned as a Future
+  Future<LMResponse<GetExploreFeedRoomResponse>> getExploreFeedRooms(
+      GetExploreFeedRoomRequest request) async {
+    final LMResponse<GetExploreFeedRoomResponse> response =
+        await _sdkApplication.getFeedApi().getExploreFeedRooms(request);
+    return response;
+  }
+
+  /// joinFeedRoom is used to follow or unfollow a feed room
+  /// [JoinFeedRoomRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+  Future<LMResponse<void>> joinFeedRoom(JoinFeedRoomRequest request) async {
+    final LMResponse<void> response =
+        await _sdkApplication.getFeedApi().joinFeedRoom(request);
     return response;
   }
 

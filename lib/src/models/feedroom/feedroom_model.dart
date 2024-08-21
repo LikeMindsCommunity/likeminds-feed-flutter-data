@@ -45,6 +45,18 @@ class FeedRoom {
   final User member;
   final List<dynamic>? cohorts;
   final List<dynamic>? coHosts;
+  final String? createdAt;
+  final DateTime? updatedAt;
+  final String? customTag;
+  final String? eventKind;
+  final int? imageCount;
+  final int? videoCount;
+  final int? pdfCount;
+  final int? pollsCount;
+  final int? totalResponseCount;
+  final List<dynamic>? reactions;
+  final int? type;
+  final int? memberId;
 
   FeedRoom({
     required this.id,
@@ -88,6 +100,18 @@ class FeedRoom {
     required this.member,
     this.cohorts,
     this.coHosts,
+    this.createdAt,
+    this.updatedAt,
+    this.customTag,
+    this.eventKind,
+    this.imageCount,
+    this.videoCount,
+    this.totalResponseCount,
+    this.pdfCount,
+    this.pollsCount,
+    this.reactions,
+    this.type,
+    this.memberId,
   });
 
   factory FeedRoom.fromEntity(FeedRoomEntity entity) {
@@ -133,6 +157,18 @@ class FeedRoom {
       member: User.fromEntity(entity.member),
       cohorts: entity.cohorts,
       coHosts: entity.coHosts,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+      customTag: entity.customTag,
+      eventKind: entity.eventKind,
+      imageCount: entity.imageCount,
+      videoCount: entity.videoCount,
+      pdfCount: entity.pdfCount,
+      pollsCount: entity.pollsCount,
+      totalResponseCount: entity.totalResponseCount,
+      reactions: entity.reactions,
+      type: entity.type,
+      memberId: entity.memberId,
     );
   }
 
@@ -179,6 +215,18 @@ class FeedRoom {
       member: member.toEntity(),
       cohorts: cohorts,
       coHosts: coHosts,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      customTag: customTag,
+      eventKind: eventKind,
+      imageCount: imageCount,
+      videoCount: videoCount,
+      pdfCount: pdfCount,
+      pollsCount: pollsCount,
+      totalResponseCount: totalResponseCount,
+      reactions: reactions,
+      type: type,
+      memberId: memberId,
     );
   }
 }
@@ -258,6 +306,28 @@ class FeedRoomEntity {
   final List<dynamic>? cohorts;
   @JsonKey(name: 'co_hosts')
   final List<dynamic>? coHosts;
+  @JsonKey(name: 'created_at')
+  final String? createdAt;
+  @JsonKey(name: 'updated_at')
+  final DateTime? updatedAt;
+  @JsonKey(name: 'custom_tag')
+  final String? customTag;
+  @JsonKey(name: 'event_kind')
+  final String? eventKind;
+  @JsonKey(name: 'image_count')
+  final int? imageCount;
+  @JsonKey(name: 'video_count')
+  final int? videoCount;
+  @JsonKey(name: 'pdf_count')
+  final int? pdfCount;
+  @JsonKey(name: 'polls_count')
+  final int? pollsCount;
+  @JsonKey(name: 'total_response_count')
+  final int? totalResponseCount;
+  final List<dynamic>? reactions;
+  final int? type;
+  @JsonKey(name: 'member_id')
+  final int? memberId;
 
   FeedRoomEntity({
     required this.id,
@@ -301,6 +371,18 @@ class FeedRoomEntity {
     required this.member,
     this.cohorts,
     this.coHosts,
+    this.createdAt,
+    this.updatedAt,
+    this.customTag,
+    this.eventKind,
+    this.imageCount,
+    this.videoCount,
+    this.pdfCount,
+    this.pollsCount,
+    this.totalResponseCount,
+    this.reactions,
+    this.type,
+    this.memberId,
   });
 
   factory FeedRoomEntity.fromJson(Map<String, dynamic> json) =>

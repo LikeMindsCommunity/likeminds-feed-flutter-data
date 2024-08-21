@@ -69,4 +69,28 @@ class FeedRepository {
         await feedService.getUserTopics(request);
     return GetUserTopicsResponse.fromEntity(responseEntity);
   }
+
+  Future<LMResponse<GetExploreFeedRoomResponse>> getExploreFeedRooms(
+      GetExploreFeedRoomRequest request) async {
+    final LMResponse<GetExploreFeedRoomResponseEntity> responseEntity =
+        await feedService.getExploreFeedRooms(request);
+    if (responseEntity.data == null) {
+      return LMResponse<GetExploreFeedRoomResponse>(
+        errorMessage: responseEntity.errorMessage,
+        success: responseEntity.success,
+      );
+    }
+    return LMResponse<GetExploreFeedRoomResponse>(
+      data: GetExploreFeedRoomResponse.fromEntity(responseEntity.data!),
+      errorMessage: responseEntity.errorMessage,
+      success: responseEntity.success,
+    );
+  }
+
+  Future<LMResponse<void>> joinFeedRoom(
+      JoinFeedRoomRequest followUnFollowRequest) async {
+    final LMResponse<void> responseEntity =
+        await feedService.joinFeedRoom(followUnFollowRequest);
+    return responseEntity;
+  }
 }

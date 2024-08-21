@@ -269,4 +269,70 @@ class FeedService {
       return response;
     }
   }
+
+  Future<LMResponse<GetExploreFeedRoomResponseEntity>> getExploreFeedRooms(
+      GetExploreFeedRoomRequest request) async {
+    try {
+      final Response response = await apiClient.client().get(
+            apiClient.getEndpoints.exploreFeedroom,
+            queryParameters: request.toJson(),
+            options: Options(
+              headers: {
+                'x-accept-version': 'v3',
+              },
+            ),
+          );
+
+      Map<String, dynamic> data = response.data;
+
+      if (data['success'] == false) {
+        return LMResponse<GetExploreFeedRoomResponseEntity>(
+          success: false,
+          errorMessage: data['error_message'],
+        );
+      }
+
+      return LMResponse<GetExploreFeedRoomResponseEntity>(
+        success: true,
+        data: GetExploreFeedRoomResponseEntity.fromJson(data['data']),
+      );
+    } on DioException catch (e, stacktrace) {
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      return LMResponse<GetExploreFeedRoomResponseEntity>(
+        success: false,
+        errorMessage: e.message,
+      );
+    }
+  }
+
+  Future<LMResponse<void>> joinFeedRoom(JoinFeedRoomRequest request) async {
+    try {
+      final Response response = await apiClient.client().put(
+            apiClient.getEndpoints.joinLeaveFeedroom,
+            queryParameters: request.toJson(),
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+
+      Map<String, dynamic> data = response.data;
+
+      if (data['success'] == false) {
+        return LMResponse<void>(
+          success: false,
+          errorMessage: data['error_message'],
+        );
+      }
+
+      return LMResponse<void>(success: true);
+    } on DioException catch (e, stacktrace) {
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      return LMResponse<void>(
+        success: false,
+        errorMessage: e.message,
+      );
+    }
+  }
 }

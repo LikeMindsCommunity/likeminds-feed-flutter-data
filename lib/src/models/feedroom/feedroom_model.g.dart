@@ -49,6 +49,20 @@ FeedRoomEntity _$FeedRoomEntityFromJson(Map<String, dynamic> json) =>
       member: UserEntity.fromJson(json['member'] as Map<String, dynamic>),
       cohorts: json['cohorts'] as List<dynamic>?,
       coHosts: json['co_hosts'] as List<dynamic>?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(json['updated_at'] as int),
+      customTag: json['custom_tag'] as String?,
+      eventKind: json['event_kind'] as String?,
+      imageCount: json['image_count'] as int?,
+      videoCount: json['video_count'] as int?,
+      pdfCount: json['pdf_count'] as int?,
+      pollsCount: json['polls_count'] as int?,
+      totalResponseCount: json['total_response_count'] as int?,
+      reactions: json['reactions'] as List<dynamic>?,
+      type: json['type'] as int?,
+      memberId: json['member_id'] as int?,
     );
 
 Map<String, dynamic> _$FeedRoomEntityToJson(FeedRoomEntity instance) =>
@@ -94,4 +108,16 @@ Map<String, dynamic> _$FeedRoomEntityToJson(FeedRoomEntity instance) =>
       'member': instance.member,
       'cohorts': instance.cohorts,
       'co_hosts': instance.coHosts,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt?.millisecondsSinceEpoch,
+      'custom_tag': instance.customTag,
+      'event_kind': instance.eventKind,
+      'image_count': instance.imageCount,
+      'video_count': instance.videoCount,
+      'pdf_count': instance.pdfCount,
+      'polls_count': instance.pollsCount,
+      'total_response_count': instance.totalResponseCount,
+      'reactions': instance.reactions,
+      'type': instance.type,
+      'member_id': instance.memberId,
     };
