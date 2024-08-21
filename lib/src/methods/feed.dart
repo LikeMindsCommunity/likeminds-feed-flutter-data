@@ -65,4 +65,17 @@ class FeedApi {
         await feedRepository.getUserTopics(request);
     return response;
   }
+
+  Future<LMResponse<GetExploreFeedRoomResponse>> getExploreFeedRooms(
+      GetExploreFeedRoomRequest request) async {
+    final LMResponse<GetExploreFeedRoomResponse> response =
+        await feedRepository.getExploreFeedRooms(request);
+    return response;
+  }
+
+  Future<LMResponse<void>> joinFeedRoom(JoinFeedRoomRequest request) async {
+    final LMResponse<void> response =
+        await feedRepository.joinFeedRoom(request);
+    return response;
+  }
 }

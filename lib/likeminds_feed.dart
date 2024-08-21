@@ -107,6 +107,25 @@ class LMFeedClient {
     return response;
   }
 
+  /// getExploreFeedRooms is used to fetch the explore feed rooms
+  /// [GetExploreFeedRoomRequest] is used to pass the required parameters
+  /// [LMResponse<GetExploreFeedRoomResponse>] is returned as a Future
+  Future<LMResponse<GetExploreFeedRoomResponse>> getExploreFeedRooms(
+      GetExploreFeedRoomRequest request) async {
+    final LMResponse<GetExploreFeedRoomResponse> response =
+        await _sdkApplication.getFeedApi().getExploreFeedRooms(request);
+    return response;
+  }
+
+  /// joinFeedRoom is used to follow or unfollow a feed room
+  /// [JoinFeedRoomRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+  Future<LMResponse<void>> joinFeedRoom(JoinFeedRoomRequest request) async {
+    final LMResponse<void> response =
+        await _sdkApplication.getFeedApi().joinFeedRoom(request);
+    return response;
+  }
+
   /// getTopics is used to fetch the topics
   /// [GetTopicsRequest] is used to pass the required parameters
   /// [GetTopicsResponse] is returned as a Future

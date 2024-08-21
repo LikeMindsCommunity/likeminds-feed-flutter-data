@@ -28,8 +28,8 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
       size: json['size'] as int?,
       duration: json['duration'] as int?,
       pageCount: json['page_count'] as int?,
-      width: json['width'] as double?,
-      height: json['height'] as double?,
+      width: json['width'] as int?,
+      height: json['height'] as int?,
       aspectRatio: json['aspect_ratio'] as double?,
       meta: attachtmentType == 5 ? json : json['meta'],
       ogTags: json['og_tags'] == null

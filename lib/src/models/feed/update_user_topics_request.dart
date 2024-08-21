@@ -1,4 +1,4 @@
-class UpdateUserTopicsRequest{
+class UpdateUserTopicsRequest {
   Map<String, bool> topicsId;
 
   String uuid;
@@ -14,7 +14,7 @@ class UpdateUserTopicsRequest{
       };
 }
 
-class UpdateUserTopicsRequestBuilder{
+class UpdateUserTopicsRequestBuilder {
   Map<String, bool> _topicsId = {};
   String? _uuid;
 

@@ -55,8 +55,8 @@ class AttachmentMeta {
   final int? duration;
   final int? pageCount;
   final OgTags? ogTags;
-  final double? height;
-  final double? width;
+  final int? height;
+  final int? width;
   final double? aspectRatio;
   final Map<String, dynamic>? meta;
   final String? entityId;
@@ -150,8 +150,8 @@ class AttachmentMetaEntity {
   final int? pageCount;
   @JsonKey(name: 'og_tags')
   final OgTagsEntity? ogTags;
-  final double? height;
-  final double? width;
+  final int? height;
+  final int? width;
   @JsonKey(name: 'aspect_ratio')
   final double? aspectRatio;
   final Map<String, dynamic>? meta;
