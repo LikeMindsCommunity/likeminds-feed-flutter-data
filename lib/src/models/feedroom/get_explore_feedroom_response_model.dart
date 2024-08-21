@@ -4,14 +4,14 @@ import 'package:likeminds_feed/src/models/models.dart';
 part 'get_explore_feedroom_response_model.g.dart';
 
 class GetExploreFeedRoomResponse {
-  final List<FeedRoom>? chatrooms;
-  final int? pinnedChatroomsCount;
+  final List<FeedRoom>? feedrooms;
+  final int? pinnedFeedroomsCount;
   final Map<String, WidgetModel>? widgets;
   final Map<String, int>? postCounts;
 
   GetExploreFeedRoomResponse({
-    this.chatrooms,
-    this.pinnedChatroomsCount,
+    this.feedrooms,
+    this.pinnedFeedroomsCount,
     this.widgets,
     this.postCounts,
   });
@@ -19,8 +19,8 @@ class GetExploreFeedRoomResponse {
   factory GetExploreFeedRoomResponse.fromEntity(
       GetExploreFeedRoomResponseEntity entity) {
     return GetExploreFeedRoomResponse(
-      chatrooms: entity.chatrooms?.map((e) => FeedRoom.fromEntity(e)).toList(),
-      pinnedChatroomsCount: entity.pinnedChatroomsCount,
+      feedrooms: entity.feedrooms?.map((e) => FeedRoom.fromEntity(e)).toList(),
+      pinnedFeedroomsCount: entity.pinnedFeedroomsCount,
       widgets: entity.widgets
           ?.map((key, value) => MapEntry(key, WidgetModel.fromEntity(value))),
       postCounts: entity.postCounts,
@@ -29,8 +29,8 @@ class GetExploreFeedRoomResponse {
 
   GetExploreFeedRoomResponseEntity toEntity() {
     return GetExploreFeedRoomResponseEntity(
-      chatrooms: chatrooms?.map((e) => e.toEntity()).toList(),
-      pinnedChatroomsCount: pinnedChatroomsCount,
+      feedrooms: feedrooms?.map((e) => e.toEntity()).toList(),
+      pinnedFeedroomsCount: pinnedFeedroomsCount,
       widgets: widgets?.map((key, value) => MapEntry(key, value.toEntity())),
       postCounts: postCounts,
     );
@@ -40,16 +40,16 @@ class GetExploreFeedRoomResponse {
 @JsonSerializable()
 class GetExploreFeedRoomResponseEntity {
   @JsonKey(name: 'chatrooms')
-  final List<FeedRoomEntity>? chatrooms;
+  final List<FeedRoomEntity>? feedrooms;
   @JsonKey(name: 'pinned_chatrooms_count')
-  final int? pinnedChatroomsCount;
+  final int? pinnedFeedroomsCount;
   final Map<String, WidgetModelEntity>? widgets;
   @JsonKey(name: 'post_counts')
   final Map<String, int>? postCounts;
 
   GetExploreFeedRoomResponseEntity({
-    this.chatrooms,
-    this.pinnedChatroomsCount,
+    this.feedrooms,
+    this.pinnedFeedroomsCount,
     this.widgets,
     this.postCounts,
   });

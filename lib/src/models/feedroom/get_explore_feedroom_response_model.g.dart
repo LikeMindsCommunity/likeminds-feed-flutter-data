@@ -9,10 +9,10 @@ part of 'get_explore_feedroom_response_model.dart';
 GetExploreFeedRoomResponseEntity _$GetExploreFeedRoomResponseEntityFromJson(
         Map<String, dynamic> json) =>
     GetExploreFeedRoomResponseEntity(
-      chatrooms: (json['chatrooms'] as List<dynamic>?)
+      feedrooms: (json['chatrooms'] as List<dynamic>?)
           ?.map((e) => FeedRoomEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      pinnedChatroomsCount: json['pinned_chatrooms_count'] as int?,
+      pinnedFeedroomsCount: json['pinned_chatrooms_count'] as int?,
       widgets: (json['widgets'] as Map<String, dynamic>?)?.map(
         (k, e) =>
             MapEntry(k, WidgetModelEntity.fromJson(e as Map<String, dynamic>)),
@@ -25,8 +25,8 @@ GetExploreFeedRoomResponseEntity _$GetExploreFeedRoomResponseEntityFromJson(
 Map<String, dynamic> _$GetExploreFeedRoomResponseEntityToJson(
         GetExploreFeedRoomResponseEntity instance) =>
     <String, dynamic>{
-      'chatrooms': instance.chatrooms,
-      'pinned_chatrooms_count': instance.pinnedChatroomsCount,
+      'chatrooms': instance.feedrooms,
+      'pinned_chatrooms_count': instance.pinnedFeedroomsCount,
       'widgets': instance.widgets,
       'post_counts': instance.postCounts,
     };
