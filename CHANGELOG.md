@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.14.0]
+- Added support for explore feedroom API
+- Added support for join/leave feedroom API
+
 ## [1.13.0]
 - Updated dependencies to migrate to Android Target SDK version 34
 
