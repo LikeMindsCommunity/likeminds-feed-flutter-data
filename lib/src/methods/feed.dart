@@ -78,4 +78,11 @@ class FeedApi {
         await feedRepository.joinFeedRoom(request);
     return response;
   }
+
+  Future<LMResponse<GetPersonalisedFeedResponse>> getPersonalisedFeed(
+      GetPersonalisedFeedRequest request) async {
+    final LMResponse<GetPersonalisedFeedResponse> response =
+        await feedRepository.getPersonalisedFeed(request);
+    return response;
+  }
 }

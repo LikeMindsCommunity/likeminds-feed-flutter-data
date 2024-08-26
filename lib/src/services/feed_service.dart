@@ -335,4 +335,32 @@ class FeedService {
       );
     }
   }
+
+  Future<LMResponse<GetPersonalisedFeedResponseEntity>> getPersonalisedFeed(
+      GetPersonalisedFeedRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.personalisedFeed,
+            queryParameters: request.toJson(),
+          );
+      if (!response.data['success'] || response.data['data'] == null) {
+        return LMResponse.error(
+          errorMessage: response.data['error_message'] ?? 'An error occurred',
+        );
+      }
+      return LMResponse.success(
+        data: GetPersonalisedFeedResponseEntity.fromJson(response.data['data']),
+      );
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LMResponse.error(
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
 }
