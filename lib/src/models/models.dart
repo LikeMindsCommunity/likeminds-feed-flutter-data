@@ -68,6 +68,7 @@ export 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
 // Personalised Feed Models
 export 'package:likeminds_feed/src/models/feed/get_personalised_feed_request.dart';
 export 'package:likeminds_feed/src/models/feed/get_personalised_feed_response.dart';
+export 'package:likeminds_feed/src/models/feed/post_seen_request.dart';
 // -----
 
 // -----

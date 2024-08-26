@@ -85,4 +85,9 @@ class FeedApi {
         await feedRepository.getPersonalisedFeed(request);
     return response;
   }
+
+  Future<LMResponse<void>> postSeen(PostSeenRequest request) async {
+    final LMResponse<void> response = await feedRepository.postSeen(request);
+    return response;
+  }
 }

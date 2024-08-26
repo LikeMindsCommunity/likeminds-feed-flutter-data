@@ -108,4 +108,9 @@ class FeedRepository {
       ),
     );
   }
+
+  Future<LMResponse<void>> postSeen(PostSeenRequest request) async {
+    final LMResponse<void> responseEntity = await feedService.postSeen(request);
+    return responseEntity;
+  }
 }
