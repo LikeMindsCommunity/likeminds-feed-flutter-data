@@ -35,4 +35,65 @@ class CommunityService {
       );
     }
   }
+
+  Future<LMResponse<ConnectionMetaResponseEntity>> connectionMeta(
+      ConnectionMetaRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getConnectionMetaEndpoint(request.userUUID),
+          );
+      if (!response.data['success'] || response.data['data'] == null) {
+        return LMResponse.error(errorMessage: response.data['error_message']);
+      }
+      final connectionMetaResponse =
+          ConnectionMetaResponseEntity.fromJson(response.data['data']);
+
+      return LMResponse.success(data: connectionMetaResponse);
+    } on DioException catch (e, stacktrace) {
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LMResponse.error(
+          errorMessage: errorMessage ?? "An error occurred");
+    }
+  }
+
+  Future<LMResponse<void>> sendConnection(SendConnectionRequest request) async {
+    try {
+      final response = await apiClient.client().post(
+            apiClient.getEndpoints.getConnectionEndpoint(request.receiverUUID),
+            data: request.toJson(),
+          );
+      if (!response.data['success']) {
+        return LMResponse.error(errorMessage: response.data['error_message']);
+      }
+      return LMResponse.success(data: null);
+    } on DioException catch (e, stacktrace) {
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      return LMResponse.error(
+          errorMessage: e.response?.data['error_message'] ??
+              "An error occurred while sending connection request");
+    }
+  }
+
+  Future<LMResponse<void>> updateConnection(
+      UpdateConnectionRequest request) async {
+    try {
+      final response = await apiClient.client().put(
+            apiClient.getEndpoints.getConnectionEndpoint(request.receiverUUID),
+            data: request.toJson(),
+          );
+      if (!response.data['success']) {
+        return LMResponse.error(errorMessage: response.data['error_message']);
+      }
+      return LMResponse.success(data: null);
+    } on DioException catch (e, stacktrace) {
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      return LMResponse.error(
+          errorMessage: e.response?.data['error_message'] ??
+              "An error occurred while updating connection request");
+    }
+  }
 }
