@@ -86,6 +86,27 @@ class LMFeedClient {
     return universalFeedResponse;
   }
 
+  /// getPersonalisedFeed is used to fetch the personalised feed
+  /// [GetPersonalisedFeedRequest] is used to pass the required parameters
+  /// [GetPersonalisedFeedResponse] is returned as a Future
+  Future<LMResponse<GetPersonalisedFeedResponse>> getPersonalisedFeed(
+      GetPersonalisedFeedRequest personalisedFeedRequest) async {
+    final LMResponse<GetPersonalisedFeedResponse> response =
+        await _sdkApplication
+            .getFeedApi()
+            .getPersonalisedFeed(personalisedFeedRequest);
+    return response;
+  }
+
+  /// postSeen is used to mark a post as seen
+  /// [PostSeenRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+  Future<LMResponse<void>> postSeen(PostSeenRequest request) async {
+    final LMResponse<void> response =
+        await _sdkApplication.getFeedApi().postSeen(request);
+    return response;
+  }
+
   /// getFeedRoom is used to fetch the feed room list
   /// [GetFeedRoomRequest] is used to pass the required parameters
   /// [GetFeedRoomResponse] is returned as a Future
