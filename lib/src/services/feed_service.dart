@@ -370,7 +370,7 @@ class FeedService {
             apiClient.getEndpoints.postSeenEndpoint,
             data: request.toJson(),
           );
-      if (!response.data['success'] || response.data['data'] == null) {
+      if (!response.data['success']) {
         return LMResponse.error(
           errorMessage: response.data['error_message'] ?? 'An error occurred',
         );
