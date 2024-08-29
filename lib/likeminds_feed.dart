@@ -239,6 +239,38 @@ class LMFeedClient {
         await _sdkApplication.getCommunityApi().getCommunityConfigurations();
     return response;
   }
+
+  /// connectionMeta is used to fetch the connection meta
+  /// [ConnectionMetaRequest] is used to pass the required parameters
+  /// [ConnectionMetaResponse] is returned as a Future
+
+  Future<LMResponse<ConnectionMetaResponse>> connectionMeta(
+      ConnectionMetaRequest request) async {
+    final LMResponse<ConnectionMetaResponse> response =
+        await _sdkApplication.getCommunityApi().connectionMeta(request);
+    return response;
+  }
+
+  /// sendConnection is used to send a connection request
+  /// [SendConnectionRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+
+  Future<LMResponse<void>> sendConnection(SendConnectionRequest request) async {
+    final LMResponse<void> response =
+        await _sdkApplication.getCommunityApi().sendConnection(request);
+    return response;
+  }
+
+  /// updateConnection is used to update a connection request
+  /// [UpdateConnectionRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+
+  Future<LMResponse<void>> updateConnection(
+      UpdateConnectionRequest request) async {
+    final LMResponse<void> response =
+        await _sdkApplication.getCommunityApi().updateConnection(request);
+    return response;
+  }
   // ------------------------------------------
 
   // ------------------------------------------
