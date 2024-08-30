@@ -56,7 +56,8 @@ class CommunityService {
         errorMessage = e.response!.data['error_message'];
       }
       return LMResponse.error(
-          errorMessage: errorMessage ?? "An error occurred");
+          errorMessage: errorMessage ??
+              "An error occurred while fetching connection meta");
     }
   }
 
@@ -72,8 +73,12 @@ class CommunityService {
       return LMResponse.success(data: null);
     } on DioException catch (e, stacktrace) {
       LMFeedPersistence.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return LMResponse.error(
-          errorMessage: e.response?.data['error_message'] ??
+          errorMessage: errorMessage ??
               "An error occurred while sending connection request");
     }
   }
@@ -81,7 +86,7 @@ class CommunityService {
   Future<LMResponse<void>> updateConnection(
       UpdateConnectionRequest request) async {
     try {
-      final response = await apiClient.client().put(
+      final response = await apiClient.client().patch(
             apiClient.getEndpoints.getConnectionEndpoint(request.receiverUUID),
             data: request.toJson(),
           );
@@ -91,8 +96,12 @@ class CommunityService {
       return LMResponse.success(data: null);
     } on DioException catch (e, stacktrace) {
       LMFeedPersistence.instance.handleException(e, stacktrace);
+      String? errorMessage;
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
       return LMResponse.error(
-          errorMessage: e.response?.data['error_message'] ??
+          errorMessage: errorMessage ??
               "An error occurred while updating connection request");
     }
   }

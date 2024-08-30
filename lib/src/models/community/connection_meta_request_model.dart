@@ -11,11 +11,11 @@ class ConnectionMetaRequestBuilder {
     _userUUID = userUUID;
   }
 
-  void build() {
+  ConnectionMetaRequest build() {
     if (_userUUID == null) {
       throw ArgumentError.notNull('userUUID');
     }
 
-    ConnectionMetaRequest._(userUUID: _userUUID!);
+    return ConnectionMetaRequest._(userUUID: _userUUID!);
   }
 }

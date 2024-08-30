@@ -100,9 +100,11 @@ class FeedRepository {
         await feedService.getPersonalisedFeed(request);
     return LMResponse.fromData(
       response: responseEntity,
-      data: GetPersonalisedFeedResponse.fromEntity(
-        entity: responseEntity.data!,
-      ),
+      data: responseEntity.data != null
+          ? GetPersonalisedFeedResponse.fromEntity(
+              entity: responseEntity.data!,
+            )
+          : null,
     );
   }
 

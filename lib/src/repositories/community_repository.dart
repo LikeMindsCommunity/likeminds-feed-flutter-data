@@ -17,7 +17,9 @@ class CommunityRepository {
     final response = await communityService.connectionMeta(request);
     return LMResponse.fromData(
       response: response,
-      data: ConnectionMetaResponse.fromEntity(response.data!),
+      data: response.data != null
+          ? ConnectionMetaResponse.fromEntity(response.data!)
+          : null,
     );
   }
 
