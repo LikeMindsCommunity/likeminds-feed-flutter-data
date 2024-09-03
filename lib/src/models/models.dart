@@ -199,3 +199,13 @@ export 'package:likeminds_feed/src/models/sdk/sdk_client_info_model.dart';
 export 'package:likeminds_feed/src/models/cache/cache.dart';
 
 export 'package:likeminds_feed/src/models/response.dart';
+
+// -----
+// Community Models
+export 'package:likeminds_feed/src/models/community/action.dart';
+export 'package:likeminds_feed/src/models/community/connection_type.dart';
+export 'package:likeminds_feed/src/models/community/connection_meta_request_model.dart';
+export 'package:likeminds_feed/src/models/community/connection_meta_response_model.dart';
+export 'package:likeminds_feed/src/models/community/send_connection_request_model.dart';
+export 'package:likeminds_feed/src/models/community/update_connection_request_model.dart';
+// -----

@@ -136,4 +136,12 @@ class EndPoints {
   String getPendingPostEndpoint(String postId) {
     return "$feedUrl/post/pending/$postId";
   }
+
+  String getConnectionMetaEndpoint(String uuid) {
+    return "$KETTLE_HOST/community/member/$uuid/connection_meta";
+  }
+
+  String getConnectionEndpoint(String uuid) {
+    return "$KETTLE_HOST/community/member/$uuid/connection";
+  }
 }
