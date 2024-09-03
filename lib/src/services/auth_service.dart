@@ -91,6 +91,14 @@ class AuthService {
   Future<ValidateUserResponseEntity> validateUser(
       ValidateUserRequest request) async {
     try {
+      // setting tokens in api client
+      // before making the request
+      // to handle the case where the tokens
+      // are not set in the api client
+      await apiClient.updateTokens(
+        request.accessToken,
+        request.refreshToken,
+      );
       final response = await apiClient.client().get(
             apiClient.getEndpoints.authEndpoint,
             options: Options(
@@ -108,10 +116,6 @@ class AuthService {
         // Checking if API returned app access
         if (validateUserResponse.appAccess!) {
           // If API returned app access, then set tokens and return response
-          await apiClient.updateTokens(
-            request.accessToken,
-            request.refreshToken,
-          );
           final localPref = LMFeedPersistence.instance;
           await localPref.deleteUserDB();
           await localPref
