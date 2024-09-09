@@ -3,6 +3,7 @@ import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/cache/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/community/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/logger/logger.dart';
+import 'package:likeminds_feed/src/persistence/seen_post/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/user/handler/handler.dart';
 
 class LMFeedPersistence {
@@ -10,6 +11,7 @@ class LMFeedPersistence {
   late LMCommunityConfigurationDBHandler communityConfigurationDBHandlerHive;
   late LMCacheDBHandler cacheDBHandlerHive;
   late LMFeedLogger logger;
+  late LMFeedSeenPostDBHandler seenPostDBHandler;
 
   static LMFeedPersistence? _instance;
 
@@ -27,6 +29,10 @@ class LMFeedPersistence {
       cacheBoxName: 'cacheBox',
     );
     logger = LMFeedLogger.instance;
+
+    seenPostDBHandler = LMFeedSeenPostDBHandler(
+      seenPostBoxName: 'seenPostBox',
+    );
   }
 
   Future<LMResponse<void>> init({InitiateLoggerRequest? request}) async {
@@ -36,7 +42,7 @@ class LMFeedPersistence {
     LMResponse communityCongDB =
         await communityConfigurationDBHandlerHive.init();
     LMResponse cacheDBHandler = await cacheDBHandlerHive.init();
-
+    LMResponse seenPostDBInit = await seenPostDBHandler.init();
     LMResponse? loggerInitResponse;
     if (request != null) {
       loggerInitResponse =
@@ -54,6 +60,8 @@ class LMFeedPersistence {
     } else if (loggerInitResponse != null && !loggerInitResponse.success) {
       return LMResponse(
           success: false, errorMessage: loggerInitResponse.errorMessage);
+    } else if (!seenPostDBInit.success) {
+      return seenPostDBInit;
     } else {
       return LMResponse(success: true);
     }
@@ -136,5 +144,17 @@ class LMFeedPersistence {
 
   Future<void> flushLogs() {
     return logger.flushLogs();
+  }
+
+  Future<LMResponse<void>> insertSeenPostID(List<String> seenPostIds) {
+    return seenPostDBHandler.insertSeenPostID(seenPostIds);
+  }
+
+  LMResponse<List<String>> getSeenPostIDs() {
+    return seenPostDBHandler.getSeenPostIDs();
+  }
+
+  Future<LMResponse<void>> clearSeenPostIDs() {
+    return seenPostDBHandler.clearSeenPostIDs();
   }
 }

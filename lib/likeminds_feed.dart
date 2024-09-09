@@ -14,7 +14,7 @@ import 'src/models/models.dart';
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
 
-const String feedSDKVersion = "1.14.0";
+const String feedSDKVersion = "1.15.0";
 
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
@@ -84,6 +84,27 @@ class LMFeedClient {
         .getFeedApi()
         .getUniversalFeed(universalFeedRequest);
     return universalFeedResponse;
+  }
+
+  /// getPersonalisedFeed is used to fetch the personalised feed
+  /// [GetPersonalisedFeedRequest] is used to pass the required parameters
+  /// [GetPersonalisedFeedResponse] is returned as a Future
+  Future<LMResponse<GetPersonalisedFeedResponse>> getPersonalisedFeed(
+      GetPersonalisedFeedRequest personalisedFeedRequest) async {
+    final LMResponse<GetPersonalisedFeedResponse> response =
+        await _sdkApplication
+            .getFeedApi()
+            .getPersonalisedFeed(personalisedFeedRequest);
+    return response;
+  }
+
+  /// postSeen is used to mark a post as seen
+  /// [PostSeenRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+  Future<LMResponse<void>> postSeen(PostSeenRequest request) async {
+    final LMResponse<void> response =
+        await _sdkApplication.getFeedApi().postSeen(request);
+    return response;
   }
 
   /// getFeedRoom is used to fetch the feed room list
@@ -216,6 +237,38 @@ class LMFeedClient {
       getCommunityConfigurations() async {
     final GetCommunityConfigurationsResponse response =
         await _sdkApplication.getCommunityApi().getCommunityConfigurations();
+    return response;
+  }
+
+  /// connectionMeta is used to fetch the connection meta
+  /// [ConnectionMetaRequest] is used to pass the required parameters
+  /// [ConnectionMetaResponse] is returned as a Future
+
+  Future<LMResponse<ConnectionMetaResponse>> connectionMeta(
+      ConnectionMetaRequest request) async {
+    final LMResponse<ConnectionMetaResponse> response =
+        await _sdkApplication.getCommunityApi().connectionMeta(request);
+    return response;
+  }
+
+  /// sendConnection is used to send a connection request
+  /// [SendConnectionRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+
+  Future<LMResponse<void>> sendConnection(SendConnectionRequest request) async {
+    final LMResponse<void> response =
+        await _sdkApplication.getCommunityApi().sendConnection(request);
+    return response;
+  }
+
+  /// updateConnection is used to update a connection request
+  /// [UpdateConnectionRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+
+  Future<LMResponse<void>> updateConnection(
+      UpdateConnectionRequest request) async {
+    final LMResponse<void> response =
+        await _sdkApplication.getCommunityApi().updateConnection(request);
     return response;
   }
   // ------------------------------------------

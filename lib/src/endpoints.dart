@@ -26,6 +26,8 @@ class EndPoints {
 
   String get feedUrl => "$KETTLE_HOST/feed";
   String get universalFeed => "$feedUrl/universal";
+  String get personalisedFeed => "$feedUrl/personalised";
+  String get postSeenEndpoint => "$feedUrl/post/seen";
   String get feedroomEndpoint => "$KETTLE_HOST/feedroom";
   String get feedOfFeedroomEndpoint => "$KETTLE_HOST/feed/group";
   String get exploreFeedroom => "$KETTLE_HOST/community/feed";
@@ -133,5 +135,13 @@ class EndPoints {
 
   String getPendingPostEndpoint(String postId) {
     return "$feedUrl/post/pending/$postId";
+  }
+
+  String getConnectionMetaEndpoint(String uuid) {
+    return "$KETTLE_HOST/community/member/$uuid/connection_meta";
+  }
+
+  String getConnectionEndpoint(String uuid) {
+    return "$KETTLE_HOST/community/member/$uuid/connection";
   }
 }

@@ -65,6 +65,13 @@ export 'package:likeminds_feed/src/models/feed/universal_feed_response.dart';
 // -----
 
 // -----
+// Personalised Feed Models
+export 'package:likeminds_feed/src/models/feed/get_personalised_feed_request.dart';
+export 'package:likeminds_feed/src/models/feed/get_personalised_feed_response.dart';
+export 'package:likeminds_feed/src/models/feed/post_seen_request.dart';
+// -----
+
+// -----
 // FeedRoom Models
 export 'package:likeminds_feed/src/models/feedroom/feedroom_model.dart';
 export 'package:likeminds_feed/src/models/feedroom/get_feedroom_request_model.dart';
@@ -192,3 +199,13 @@ export 'package:likeminds_feed/src/models/sdk/sdk_client_info_model.dart';
 export 'package:likeminds_feed/src/models/cache/cache.dart';
 
 export 'package:likeminds_feed/src/models/response.dart';
+
+// -----
+// Community Models
+export 'package:likeminds_feed/src/models/community/action.dart';
+export 'package:likeminds_feed/src/models/community/connection_type.dart';
+export 'package:likeminds_feed/src/models/community/connection_meta_request_model.dart';
+export 'package:likeminds_feed/src/models/community/connection_meta_response_model.dart';
+export 'package:likeminds_feed/src/models/community/send_connection_request_model.dart';
+export 'package:likeminds_feed/src/models/community/update_connection_request_model.dart';
+// -----

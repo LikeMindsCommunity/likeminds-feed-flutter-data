@@ -10,4 +10,18 @@ class CommunityApi {
       getCommunityConfigurations() async {
     return await communityRepository.getCommunityConfigurations();
   }
+
+  Future<LMResponse<ConnectionMetaResponse>> connectionMeta(
+      ConnectionMetaRequest request) async {
+    return await communityRepository.connectionMeta(request);
+  }
+
+  Future<LMResponse<void>> sendConnection(SendConnectionRequest request) async {
+    return await communityRepository.sendConnection(request);
+  }
+
+  Future<LMResponse<void>> updateConnection(
+      UpdateConnectionRequest request) async {
+    return await communityRepository.updateConnection(request);
+  }
 }

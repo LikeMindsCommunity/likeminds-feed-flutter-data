@@ -93,4 +93,23 @@ class FeedRepository {
         await feedService.joinFeedRoom(followUnFollowRequest);
     return responseEntity;
   }
+
+  Future<LMResponse<GetPersonalisedFeedResponse>> getPersonalisedFeed(
+      GetPersonalisedFeedRequest request) async {
+    final LMResponse<GetPersonalisedFeedResponseEntity> responseEntity =
+        await feedService.getPersonalisedFeed(request);
+    return LMResponse.fromData(
+      response: responseEntity,
+      data: responseEntity.data != null
+          ? GetPersonalisedFeedResponse.fromEntity(
+              entity: responseEntity.data!,
+            )
+          : null,
+    );
+  }
+
+  Future<LMResponse<void>> postSeen(PostSeenRequest request) async {
+    final LMResponse<void> responseEntity = await feedService.postSeen(request);
+    return responseEntity;
+  }
 }

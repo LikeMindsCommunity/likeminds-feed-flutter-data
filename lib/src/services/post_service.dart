@@ -151,12 +151,16 @@ class PostService extends IPostService {
             queryParameters: getAllPendingPostsRequest.toJson(),
           );
 
-      LMResponse<GetAllPendingPostsResponseEntity>
-          getAllPendingPostsResponseEntity =
-          LMResponse<GetAllPendingPostsResponseEntity>.fromJson(response.data,
-              GetAllPendingPostsResponseEntity.fromJson(response.data['data']));
+      if (!response.data['success'] || response.data['data'] == null) {
+        return LMResponse.error(
+          errorMessage: response.data['error_message'] ?? 'An error occurred',
+        );
+      }
 
-      return getAllPendingPostsResponseEntity;
+      GetAllPendingPostsResponseEntity getAllPendingPostsResponseEntity =
+          GetAllPendingPostsResponseEntity.fromJson(response.data['data']);
+
+      return LMResponse.success(data: getAllPendingPostsResponseEntity);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
       LMFeedPersistence.instance.handleException(e, stacktrace);
