@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.15.0]
+- Added support for personalised feed API
+- Added support for user connection API
+
 ## [1.14.0]
 - Added support for explore feedroom API
 - Added support for join/leave feedroom API
