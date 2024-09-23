@@ -4,18 +4,18 @@ on:
   pull_request:
     branches-ignore: #exclude the branches from the test
       - master
-      
+
 jobs:
   run-flutter-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - run: flutter pub get #installing the plugins for the flutter project
-      
+
       - name: Lint
         run: flutter analyze > lint-results.txt
 
@@ -25,14 +25,14 @@ jobs:
         with:
           name: lint-results
           path: lint-results.txt
-          
+
       - name: Install realm
         if: always()
         run: dart run realm install
 
       - name: Tests
         if: always()
-        run: flutter test --dart-define=DEBUG=true
+        run: flutter test --dart-define=DEBUG=true --dart-define=LM_TEST_ENVIRONMENT=true
 
       - name: Dry run for pub.dev
         if: always()

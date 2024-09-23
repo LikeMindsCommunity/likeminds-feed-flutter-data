@@ -66,8 +66,10 @@ class GetBlockedUsersResponseEntity {
   Map<String, dynamic> toJson() {
     return {
       'success': success,
-      'blocked_users':
-          blockedUsers?.map((userEntity) => userEntity.toJson()).toList(),
+      'data': {
+        'blocked_users':
+            blockedUsers?.map((userEntity) => userEntity.toJson()).toList(),
+      },
       'error_message': errorMessage,
     };
   }
@@ -76,7 +78,7 @@ class GetBlockedUsersResponseEntity {
   factory GetBlockedUsersResponseEntity.fromJson(Map<String, dynamic> json) {
     return GetBlockedUsersResponseEntity(
       success: json['success'],
-      blockedUsers: (json['blocked_users'] as List<dynamic>?)
+      blockedUsers: (json['data']['blocked_users'] as List<dynamic>?)
           ?.map((userJson) =>
               UserEntity.fromJson(userJson as Map<String, dynamic>))
           .toList(),

@@ -52,14 +52,16 @@ class AuthService {
             initiateUserResponse.accessToken!,
             initiateUserResponse.refreshToken!,
           );
-          final localPref = LMFeedPersistence.instance;
-          await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
-                ..key(kApiKey)
-                ..value(initiateUserRequest.apiKey))
-              .build());
-          await localPref.deleteUserDB();
-          await localPref
-              .insertOrUpdateUser(User.fromEntity(initiateUserResponse.user!));
+          if (!testEnvironment) {
+            final localPref = LMFeedPersistence.instance;
+            await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
+                  ..key(kApiKey)
+                  ..value(initiateUserRequest.apiKey))
+                .build());
+            await localPref.deleteUserDB();
+            await localPref.insertOrUpdateUser(
+                User.fromEntity(initiateUserResponse.user!));
+          }
           return initiateUserResponse;
           // Else, if API returned no app access
         } else {
@@ -116,10 +118,12 @@ class AuthService {
         // Checking if API returned app access
         if (validateUserResponse.appAccess!) {
           // If API returned app access, then set tokens and return response
-          final localPref = LMFeedPersistence.instance;
-          await localPref.deleteUserDB();
-          await localPref
-              .insertOrUpdateUser(User.fromEntity(validateUserResponse.user!));
+          if (!testEnvironment) {
+            final localPref = LMFeedPersistence.instance;
+            await localPref.deleteUserDB();
+            await localPref.insertOrUpdateUser(
+                User.fromEntity(validateUserResponse.user!));
+          }
           return validateUserResponse;
           // Else, if API returned no app access
         } else {
@@ -198,14 +202,15 @@ class AuthService {
           LogoutResponseEntity.fromJson(response.data);
       request.callback?.logoutCallback();
       apiClient.clearTokens();
+      if (!testEnvironment) {
+        PersistenceApi persistenceApi =
+            SDKApplication.instance.getPersistenceApi();
 
-      PersistenceApi persistenceApi =
-          SDKApplication.instance.getPersistenceApi();
-
-      persistenceApi.clearCache();
-      persistenceApi.clearCommunityConfigurationDB();
-      persistenceApi.deleteUserDB();
-      persistenceApi.deleteMemberState();
+        persistenceApi.clearCache();
+        persistenceApi.clearCommunityConfigurationDB();
+        persistenceApi.deleteUserDB();
+        persistenceApi.deleteMemberState();
+      }
 
       return logoutResponse;
     } on DioException catch (e, stacktrace) {

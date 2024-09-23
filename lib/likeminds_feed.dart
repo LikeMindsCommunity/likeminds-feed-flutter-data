@@ -13,7 +13,7 @@ import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
-
+const testEnvironment = bool.fromEnvironment('LM_TEST_ENVIRONMENT');
 const String feedSDKVersion = "1.15.0";
 
 class LMFeedClient {
@@ -28,6 +28,10 @@ class LMFeedClient {
     DIService.instance.init(_prod, sdkCallback);
     _sdkApplication = SDKApplication.instance;
     // ignore: prefer_initializing_formals
+  }
+
+  static LMFeedClientBuilder builder() {
+    return LMFeedClientBuilder();
   }
 
   Future<LMResponse<void>> init(
@@ -169,10 +173,19 @@ class LMFeedClient {
   /// getBlockedUsers is used to fetch the blocked users
   /// [GetBlockedUsersRequest] is used to pass the required parameters
   /// [GetBlockedUsersResponse] is returned as a Future
-  Future<GetBlockedUsersResponse> getBlockedUsers(
+  Future<LMResponse<GetBlockedUsersResponse>> getBlockedUsers(
       GetBlockedUsersRequest request) async {
-    final GetBlockedUsersResponse response =
+    final LMResponse<GetBlockedUsersResponse> response =
         await _sdkApplication.getUserApi().getBlockedUsers(request);
+    return response;
+  }
+
+  /// blockUser is used to block a user
+  /// [BlockUserRequest] is used to pass the required parameters
+  /// [LMResponse<void>] is returned as a Future
+  Future<LMResponse<void>> blockUser(BlockUserRequest request) async {
+    final LMResponse<void> response =
+        await _sdkApplication.getUserApi().blockUser(request);
     return response;
   }
 

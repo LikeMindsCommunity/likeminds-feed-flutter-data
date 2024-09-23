@@ -3,6 +3,7 @@
 ///
 /// This class is used to create a request to fetch blocked users based
 /// on a unique user identifier (UUID).
+/// {@endtemplate}
 class GetBlockedUsersRequest {
   /// The unique user identifier (UUID).
   final String userUUID;

@@ -1,4 +1,7 @@
 // -----
+// Response Models
+export 'package:likeminds_feed/src/models/response.dart';
+
 // Auth Models
 export 'package:likeminds_feed/src/models/auth/refresh_request_model.dart';
 export 'package:likeminds_feed/src/models/auth/refresh_response_model.dart';
@@ -26,6 +29,7 @@ export 'package:likeminds_feed/src/models/feed/update_user_topics_request.dart';
 export 'package:likeminds_feed/src/models/feed/update_user_topics_response.dart';
 export 'package:likeminds_feed/src/models/user/get_blocked_users_request.dart';
 export 'package:likeminds_feed/src/models/user/get_blocked_users_response.dart';
+export 'package:likeminds_feed/src/models/user/block_user_request.dart';
 // -----
 
 // -----
@@ -199,8 +203,6 @@ export 'package:likeminds_feed/src/models/logger/get_logs_response.dart';
 export 'package:likeminds_feed/src/models/sdk/sdk_client_info_model.dart';
 
 export 'package:likeminds_feed/src/models/cache/cache.dart';
-
-export 'package:likeminds_feed/src/models/response.dart';
 
 // -----
 // Community Models

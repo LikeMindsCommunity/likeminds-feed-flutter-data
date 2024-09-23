@@ -118,7 +118,7 @@ class LMFeedLogger {
 
     final connectivityResult = await (Connectivity().checkConnectivity());
 
-    if (connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult.contains(ConnectivityResult.wifi)) {
       isOnWifi = true;
     } else {
       isOnWifi = false;

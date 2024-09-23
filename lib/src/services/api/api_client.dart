@@ -39,15 +39,17 @@ class ApiClient {
   Future<void> updateTokens(String accessToken, String refreshToken) async {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
-    final localPref = LMFeedPersistence.instance;
-    await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
-          ..key(kAccessToken)
-          ..value(accessToken))
-        .build());
-    await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
-          ..key(kRefreshToken)
-          ..value(refreshToken))
-        .build());
+    if (!testEnvironment) {
+      final localPref = LMFeedPersistence.instance;
+      await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
+            ..key(kAccessToken)
+            ..value(accessToken))
+          .build());
+      await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
+            ..key(kRefreshToken)
+            ..value(refreshToken))
+          .build());
+    }
   }
 
   void clearTokens() {

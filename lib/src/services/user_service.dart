@@ -6,6 +6,9 @@ import 'package:likeminds_feed/src/services/api/api_client.dart';
 abstract class IUserService {
   Future<GetUserFeedMetaResponseEntity> getUserFeedMeta(
       GetUserFeedMetaRequest request);
+  Future<LMResponse<GetBlockedUsersResponseEntity>> getBlockedUsers(
+      GetBlockedUsersRequest request);
+  Future<LMResponse<void>> blockUser(BlockUserRequest request);
 }
 
 class UserService implements IUserService {
@@ -41,19 +44,24 @@ class UserService implements IUserService {
     }
   }
 
-  Future<GetBlockedUsersResponseEntity> getBlockedUsers(
+  @override
+  Future<LMResponse<GetBlockedUsersResponseEntity>> getBlockedUsers(
       GetBlockedUsersRequest request) async {
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints.getUserActivityEndpoint(request.userUUID),
+            apiClient.getEndpoints.blockUserEndpoint(request.userUUID),
             options: Options(
               headers: {
                 'Authorization': '${apiClient.accessToken}',
               },
             ),
           );
-
-      return GetBlockedUsersResponseEntity.fromJson(response.data);
+      if (response.data != null && response.data['success'] == true) {
+        return LMResponse.success(
+            data: GetBlockedUsersResponseEntity.fromJson(response.data));
+      } else {
+        return LMResponse.error(errorMessage: response.data['error_message']);
+      }
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
       String? errorMessage;
@@ -61,8 +69,37 @@ class UserService implements IUserService {
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
       }
-      return GetBlockedUsersResponseEntity(
-        success: false,
+      return LMResponse.error(
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
+
+  @override
+  Future<LMResponse<void>> blockUser(BlockUserRequest request) async {
+    try {
+      final response = await apiClient.client().put(
+            apiClient.getEndpoints.blockUserEndpoint(request.blockUserUUID),
+            data: request.toJson(),
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+      if (response.data != null && response.data['success'] == true) {
+        return LMResponse.success(data: null);
+      } else {
+        return LMResponse.error(errorMessage: response.data['error_message']);
+      }
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      String? errorMessage;
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return LMResponse.error(
         errorMessage: errorMessage ?? "An error occurred",
       );
     }

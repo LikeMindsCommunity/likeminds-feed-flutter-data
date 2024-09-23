@@ -20,6 +20,10 @@ class InitiateUserRequest {
         'image_url': imageUrl,
         'api_key': apiKey,
       };
+
+  static InitiateUserRequestBuilder builder() {
+    return InitiateUserRequestBuilder();
+  }
 }
 
 class InitiateUserRequestBuilder {
