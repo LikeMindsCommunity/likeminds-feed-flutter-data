@@ -18,11 +18,6 @@ class TokenInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) async {
-    return super.onResponse(response, handler);
-  }
-
-  @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {

@@ -90,12 +90,14 @@
 //             ..pageSize(10)
 //             ..uuid(prod ? testingProdBotID : testingBetaBotID))
 //           .build();
-//       GetUserPostResponse? response = await client.getUserCreatedPosts(request);
+//       GetUserPostResponse? response =
+//                              await client.getUserCreatedPosts(request);
 //       expect(response.success, true);
 //     });
 
 //     test('Testing Get Notification Feed', () async {
-//       GetNotificationFeedRequest request = (GetNotificationFeedRequestBuilder()
+//       GetNotificationFeedRequest request =
+//              (GetNotificationFeedRequestBuilder()
 //             ..page(1)
 //             ..pageSize(10))
 //           .build();
@@ -117,7 +119,8 @@
 //             ..pageSize(10)
 //             ..uuid(prod ? testingProdBotID : testingBetaBotID))
 //           .build();
-//       GetUserActivityResponse? response = await client.getUserActivity(request);
+//       GetUserActivityResponse? response = 
+//                  await client.getUserActivity(request);
 
 //       expect(response.success, true);
 //     });
@@ -285,7 +288,8 @@
 //             ..pageSize(10)
 //             ..postId(postId ?? ""))
 //           .build();
-//       GetCommentLikesResponse response = await client.getCommentLikes(request);
+//       GetCommentLikesResponse response = 
+//              await client.getCommentLikes(request);
 //       expect(response, isNotNull);
 //     });
 
@@ -297,7 +301,8 @@
 //             ..text("Comment Reply Request")
 //             ..postId(postId ?? ""))
 //           .build();
-//       AddCommentReplyResponse response = await client.addCommentReply(request);
+//       AddCommentReplyResponse response =
+//              await client.addCommentReply(request);
 //       if (response.success) {
 //         replyId = response.reply!.id;
 //       }
@@ -359,7 +364,8 @@
 //       LMResponse<AddPollOptionResponse> response =
 //           await client.addPollOption(request);
 //       debugPrint(
-//           "Add Poll Option Response: ${response.data?.widget?.lmMeta?["options"]}");
+//           "Add Poll Option Response: 
+//                  ${response.data?.widget?.lmMeta?["options"]}");
 //       expect(response.success, true);
 //     });
 
@@ -468,7 +474,8 @@
 //             ..pageSize(10)
 //             ..postId(postId ?? ""))
 //           .build();
-//       GetCommentLikesResponse response = await client.getCommentLikes(request);
+//       GetCommentLikesResponse response = 
+//                await client.getCommentLikes(request);
 
 //       expect(response.success, true);
 //     });
@@ -484,7 +491,8 @@
 //             ..tempId(tempId)
 //             ..postId(postId ?? ""))
 //           .build();
-//       AddCommentReplyResponse response = await client.addCommentReply(request);
+//       AddCommentReplyResponse response = 
+//              await client.addCommentReply(request);
 
 //       if (response.success) {
 //         replyId = response.reply!.id;

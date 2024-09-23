@@ -40,4 +40,31 @@ class UserService implements IUserService {
       );
     }
   }
+
+  Future<GetBlockedUsersResponseEntity> getBlockedUsers(
+      GetBlockedUsersRequest request) async {
+    try {
+      final response = await apiClient.client().get(
+            apiClient.getEndpoints.getUserActivityEndpoint(request.uuid),
+            options: Options(
+              headers: {
+                'Authorization': '${apiClient.accessToken}',
+              },
+            ),
+          );
+
+      return GetBlockedUsersResponseEntity.fromJson(response.data);
+    } on DioException catch (e, stacktrace) {
+      debugPrint("Dio error: $e");
+      String? errorMessage;
+      LMFeedPersistence.instance.handleException(e, stacktrace);
+      if (e.response != null && e.response!.data != null) {
+        errorMessage = e.response!.data['error_message'];
+      }
+      return GetBlockedUsersResponseEntity(
+        success: false,
+        errorMessage: errorMessage ?? "An error occurred",
+      );
+    }
+  }
 }

@@ -24,6 +24,8 @@ export 'package:likeminds_feed/src/models/feed/get_user_topics_request.dart';
 export 'package:likeminds_feed/src/models/feed/get_user_topics_response.dart';
 export 'package:likeminds_feed/src/models/feed/update_user_topics_request.dart';
 export 'package:likeminds_feed/src/models/feed/update_user_topics_response.dart';
+export 'package:likeminds_feed/src/models/user/get_blocked_users_request.dart';
+export 'package:likeminds_feed/src/models/user/get_blocked_users_response.dart';
 // -----
 
 // -----

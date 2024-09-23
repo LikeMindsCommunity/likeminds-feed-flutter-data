@@ -144,4 +144,8 @@ class EndPoints {
   String getConnectionEndpoint(String uuid) {
     return "$KETTLE_HOST/community/member/$uuid/connection";
   }
+
+  String blockUserEndpoint(String userId) {
+    return "$KETTLE_HOST/user/$userId/block";
+  }
 }

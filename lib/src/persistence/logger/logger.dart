@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -142,11 +144,11 @@ class LMFeedLogger {
         ..wifi(isOnWifi);
 
       if (iosDeviceInfo.systemVersion != null) {
-        deviceDetailsBuilder.versionOS(iosDeviceInfo.systemVersion!);
+        deviceDetailsBuilder.versionOS(iosDeviceInfo.systemVersion);
       }
 
       if (iosDeviceInfo.name != null) {
-        deviceDetailsBuilder.deviceName(iosDeviceInfo.name!);
+        deviceDetailsBuilder.deviceName(iosDeviceInfo.name);
       }
     }
 

@@ -166,6 +166,16 @@ class LMFeedClient {
     return response;
   }
 
+  /// getBlockedUsers is used to fetch the blocked users
+  /// [GetBlockedUsersRequest] is used to pass the required parameters
+  /// [GetBlockedUsersResponse] is returned as a Future
+  Future<GetBlockedUsersResponse> getBlockedUsers(
+      GetBlockedUsersRequest request) async {
+    final GetBlockedUsersResponse response =
+        await _sdkApplication.getUserApi().getBlockedUsers(request);
+    return response;
+  }
+
   /// getUserCreatedPosts is used to fetch the user created posts
   /// [GetUserPostRequest] is used to pass the required parameters
   /// [GetUserPostResponse] is returned as a Future

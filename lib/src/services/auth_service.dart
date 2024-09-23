@@ -124,7 +124,7 @@ class AuthService {
           // Else, if API returned no app access
         } else {
           // If API returned no app access, then logout and return response
-          final response = await logout(null);
+          await logout(null);
 
           return validateUserResponse;
         }
