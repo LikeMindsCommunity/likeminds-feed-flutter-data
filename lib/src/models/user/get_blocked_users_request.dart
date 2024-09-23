@@ -5,19 +5,19 @@
 /// on a unique user identifier (UUID).
 class GetBlockedUsersRequest {
   /// The unique user identifier (UUID).
-  final String uuid;
+  final String userUUID;
 
   /// Creates a new instance of [GetBlockedUsersRequest].
   ///
   /// The [uuid] parameter is required and must not be null.
-  GetBlockedUsersRequest._({required this.uuid});
+  GetBlockedUsersRequest._({required this.userUUID});
 
   /// Converts the request model into a JSON map for the API call.
   ///
   /// Returns a map containing the UUID.
   Map<String, dynamic> toJson() {
     return {
-      'uuid': uuid,
+      'uuid': userUUID,
     };
   }
 
@@ -29,19 +29,19 @@ class GetBlockedUsersRequest {
 
 /// A builder class for [GetBlockedUsersRequest].
 class GetBlockedUsersRequestBuilder {
-  String? _uuid;
+  String? _userUUID;
 
   /// Sets the UUID for the request.
-  GetBlockedUsersRequestBuilder uuid(String uuid) {
-    _uuid = uuid;
+  GetBlockedUsersRequestBuilder userUUID(String uuid) {
+    _userUUID = uuid;
     return this;
   }
 
   /// Builds and returns an instance of [GetBlockedUsersRequest].
   GetBlockedUsersRequest build() {
-    if (_uuid == null) {
+    if (_userUUID == null) {
       throw ArgumentError('UUID must not be null');
     }
-    return GetBlockedUsersRequest._(uuid: _uuid!);
+    return GetBlockedUsersRequest._(userUUID: _userUUID!);
   }
 }

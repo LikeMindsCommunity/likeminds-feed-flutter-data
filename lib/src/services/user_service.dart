@@ -45,7 +45,7 @@ class UserService implements IUserService {
       GetBlockedUsersRequest request) async {
     try {
       final response = await apiClient.client().get(
-            apiClient.getEndpoints.getUserActivityEndpoint(request.uuid),
+            apiClient.getEndpoints.getUserActivityEndpoint(request.userUUID),
             options: Options(
               headers: {
                 'Authorization': '${apiClient.accessToken}',

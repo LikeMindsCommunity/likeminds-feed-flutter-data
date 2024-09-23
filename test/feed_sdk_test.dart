@@ -119,7 +119,7 @@
 //             ..pageSize(10)
 //             ..uuid(prod ? testingProdBotID : testingBetaBotID))
 //           .build();
-//       GetUserActivityResponse? response = 
+//       GetUserActivityResponse? response =
 //                  await client.getUserActivity(request);
 
 //       expect(response.success, true);
@@ -288,7 +288,7 @@
 //             ..pageSize(10)
 //             ..postId(postId ?? ""))
 //           .build();
-//       GetCommentLikesResponse response = 
+//       GetCommentLikesResponse response =
 //              await client.getCommentLikes(request);
 //       expect(response, isNotNull);
 //     });
@@ -364,7 +364,7 @@
 //       LMResponse<AddPollOptionResponse> response =
 //           await client.addPollOption(request);
 //       debugPrint(
-//           "Add Poll Option Response: 
+//           "Add Poll Option Response:
 //                  ${response.data?.widget?.lmMeta?["options"]}");
 //       expect(response.success, true);
 //     });
@@ -474,7 +474,7 @@
 //             ..pageSize(10)
 //             ..postId(postId ?? ""))
 //           .build();
-//       GetCommentLikesResponse response = 
+//       GetCommentLikesResponse response =
 //                await client.getCommentLikes(request);
 
 //       expect(response.success, true);
@@ -491,7 +491,7 @@
 //             ..tempId(tempId)
 //             ..postId(postId ?? ""))
 //           .build();
-//       AddCommentReplyResponse response = 
+//       AddCommentReplyResponse response =
 //              await client.addCommentReply(request);
 
 //       if (response.success) {
