@@ -561,7 +561,7 @@ Add Poll Option Response: ${response.data?.widget?.lmMeta?["options"]}''');
             ..blockUserUUID(newUserId)
             ..shouldBlock(true))
           .build();
-      LMResponse<void> response = await client.blockUser(request);
+      LMResponse<void> response = await client.toggleUser(request);
       expect(response.success, true);
     });
 
@@ -585,7 +585,7 @@ Add Poll Option Response: ${response.data?.widget?.lmMeta?["options"]}''');
             ..blockUserUUID(newUserId)
             ..shouldBlock(false))
           .build();
-      LMResponse<void> response = await client.blockUser(request);
+      LMResponse<void> response = await client.toggleUser(request);
       expect(response.success, true);
     });
 

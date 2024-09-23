@@ -180,12 +180,12 @@ class LMFeedClient {
     return response;
   }
 
-  /// blockUser is used to block a user
+  /// toggleUser is used to block or unblock a user
   /// [BlockUserRequest] is used to pass the required parameters
   /// [LMResponse<void>] is returned as a Future
-  Future<LMResponse<void>> blockUser(BlockUserRequest request) async {
+  Future<LMResponse<void>> toggleUser(BlockUserRequest request) async {
     final LMResponse<void> response =
-        await _sdkApplication.getUserApi().blockUser(request);
+        await _sdkApplication.getUserApi().toggleUser(request);
     return response;
   }
 

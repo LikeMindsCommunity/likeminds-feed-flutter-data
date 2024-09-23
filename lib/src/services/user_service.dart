@@ -8,7 +8,7 @@ abstract class IUserService {
       GetUserFeedMetaRequest request);
   Future<LMResponse<GetBlockedUsersResponseEntity>> getBlockedUsers(
       GetBlockedUsersRequest request);
-  Future<LMResponse<void>> blockUser(BlockUserRequest request);
+  Future<LMResponse<void>> toggleUser(BlockUserRequest request);
 }
 
 class UserService implements IUserService {
@@ -76,7 +76,7 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<LMResponse<void>> blockUser(BlockUserRequest request) async {
+  Future<LMResponse<void>> toggleUser(BlockUserRequest request) async {
     try {
       final response = await apiClient.client().put(
             apiClient.getEndpoints.blockUserEndpoint(request.blockUserUUID),
