@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/services/api/api_client.dart';
 
@@ -57,7 +56,6 @@ class UserService implements IUserService {
 
       return GetUserFeedMetaResponseEntity.fromJson(response.data);
     } on DioException catch (e, stacktrace) {
-      debugPrint("Dio error: $e");
       String? errorMessage;
       LMFeedPersistence.instance.handleException(e, stacktrace);
       if (e.response != null && e.response!.data != null) {
@@ -79,12 +77,12 @@ class UserService implements IUserService {
           );
       if (response.data != null && response.data['success'] == true) {
         return LMResponse.success(
-            data: GetBlockedUsersResponseEntity.fromJson(response.data));
+            data:
+                GetBlockedUsersResponseEntity.fromJson(response.data['data']));
       } else {
         return LMResponse.error(errorMessage: response.data['error_message']);
       }
     } on DioException catch (e, stacktrace) {
-      debugPrint("Dio error: $e");
       String? errorMessage;
       LMFeedPersistence.instance.handleException(e, stacktrace);
       if (e.response != null && e.response!.data != null) {
@@ -108,7 +106,6 @@ class UserService implements IUserService {
         return LMResponse.error(errorMessage: response.data['error_message']);
       }
     } on DioException catch (e, stacktrace) {
-      debugPrint("Dio error: $e");
       String? errorMessage;
       LMFeedPersistence.instance.handleException(e, stacktrace);
       if (e.response != null && e.response!.data != null) {

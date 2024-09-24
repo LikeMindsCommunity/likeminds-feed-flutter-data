@@ -753,7 +753,8 @@ class LMFeedClient {
 
   /// Deletes the logged-in user from the database.
   ///
-  /// Returns an [LMResponse] indicating the success or failure of the operation.
+  /// Returns an [LMResponse] indicating the success
+  /// or failure of the operation.
   Future<LMResponse<void>> deleteLoggedInUser() async {
     return _sdkApplication.getPersistenceApi().deleteUserDB();
   }

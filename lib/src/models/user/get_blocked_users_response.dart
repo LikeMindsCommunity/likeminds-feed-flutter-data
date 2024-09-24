@@ -53,7 +53,7 @@ class GetBlockedUsersResponseEntity {
   /// Creates a [GetBlockedUsersResponseEntity] from JSON.
   factory GetBlockedUsersResponseEntity.fromJson(Map<String, dynamic> json) {
     return GetBlockedUsersResponseEntity(
-      blockedUsers: (json['data']['blocked_users'] as List<dynamic>? ?? [])
+      blockedUsers: (json['blocked_users'] as List<dynamic>? ?? [])
           .map((userJson) =>
               UserEntity.fromJson(userJson as Map<String, dynamic>))
           .toList(),
