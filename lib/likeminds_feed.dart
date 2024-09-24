@@ -16,6 +16,42 @@ const _prod = !bool.fromEnvironment('DEBUG');
 const testEnvironment = bool.fromEnvironment('LM_TEST_ENVIRONMENT');
 const String feedSDKVersion = "1.15.0";
 
+/// {@template feed_client_builder}
+/// The `LMFeedClient` class is responsible for managing and interacting with
+/// the feed data. It provides methods to fetch, update, and manipulate feed
+/// items from a data source.
+///
+/// Example:
+/// ```dart
+/// final feedClient = LMFeedClient.builder()
+///   ..sdkCallback(mySdkCallback)
+///   ..initiateLoggerRequest(myLoggerRequest)
+///   .build();
+///
+/// // Initialize the local database
+/// await feedClient.init();
+///
+/// // Use feedClient to interact with the feed data
+/// ```
+///
+/// After creating an instance of `LMFeedClient`,
+/// you must call the `init` method to initialize the local database.
+/// This step is crucial as it sets up the necessary local storage for caching
+/// and other persistence operations.
+///
+/// Example:
+/// ```dart
+/// final feedClient = LMFeedClient.builder()
+///   ..sdkCallback(mySdkCallback)
+///   ..initiateLoggerRequest(myLoggerRequest)
+///   .build();
+///
+/// // Initialize the local database
+/// await feedClient.init();
+///
+/// // Now you can use feedClient to interact with the feed data
+/// ```
+/// {@endtemplate}
 class LMFeedClient {
   late final SDKApplication _sdkApplication;
 
@@ -30,6 +66,13 @@ class LMFeedClient {
     // ignore: prefer_initializing_formals
   }
 
+  /// Returns a new instance of [LMFeedClientBuilder] to configure and build
+  /// an [LMFeedClient].
+  ///
+  /// This method provides a convenient way to start the process of creating
+  /// an [LMFeedClient] by obtaining a builder instance. Use the returned
+  /// [LMFeedClientBuilder] to set configuration options and then call the
+  /// `build` method to create the [LMFeedClient] instance.
   static LMFeedClientBuilder builder() {
     return LMFeedClientBuilder();
   }
@@ -692,36 +735,67 @@ class LMFeedClient {
   // These are used to talk to our persistence layer
   // for implementing caching and local DB
 
+  /// Inserts or updates the logged-in user in the database.
+  ///
+  /// Takes a [User] object as input and returns an [LMResponse] indicating
+  /// the success or failure of the operation.
   Future<LMResponse<void>> insertOrUpdateLoggedInUser(User user) async {
     return _sdkApplication.getPersistenceApi().insertOrUpdateUser(user);
   }
 
+  /// Retrieves the logged-in user from the database.
+  ///
+  /// Returns an [LMResponse] containing the [User] object if successful,
+  /// or an error message if not.
   LMResponse<User> getLoggedInUser() {
     return _sdkApplication.getPersistenceApi().getUserDB();
   }
 
+  /// Deletes the logged-in user from the database.
+  ///
+  /// Returns an [LMResponse] indicating the success or failure of the operation.
   Future<LMResponse<void>> deleteLoggedInUser() async {
     return _sdkApplication.getPersistenceApi().deleteUserDB();
   }
 
+  /// Inserts or updates a cache entry in the database.
+  ///
+  /// Takes an [LMCache] object as input and returns an [LMResponse] indicating
+  /// the success or failure of the operation.
   Future<LMResponse<void>> insertOrUpdateCache(LMCache cache) async {
     return _sdkApplication
         .getPersistenceApi()
         .insertOrUpdateValueInCache(cache);
   }
 
+  /// Deletes a cache entry from the database.
+  ///
+  /// Takes a [String] key as input and returns an [LMResponse] indicating
+  /// the success or failure of the operation.
   Future<LMResponse<void>> deleteCache(String key) async {
     return _sdkApplication.getPersistenceApi().deleteCache(key);
   }
 
+  /// Retrieves a cache entry from the database.
+  ///
+  /// Takes a [String] key as input and returns an [LMResponse] containing
+  /// the [LMCache] object if successful, or an error message if not.
   LMResponse<LMCache> getCache(String key) {
     return _sdkApplication.getPersistenceApi().getCache(key);
   }
 
+  /// Clears all cache entries from the database.
+  ///
+  /// Returns an [LMResponse] indicating the success
+  /// or failure of the operation.
   Future<LMResponse<void>> clearCache() async {
     return _sdkApplication.getPersistenceApi().clearCache();
   }
 
+  /// Inserts or updates community configurations in the database.
+  ///
+  /// Takes a list of [CommunityConfigurations] objects as input and returns
+  /// an [LMResponse] indicating the success or failure of the operation.
   Future<LMResponse<void>> insertOrUpdateCommunityConfigurationsDB(
       List<CommunityConfigurations> communityConfigurations) async {
     return await _sdkApplication
@@ -729,6 +803,11 @@ class LMFeedClient {
         .insertOrUpdateCommunityConfigurationDB(communityConfigurations);
   }
 
+  /// Retrieves community configurations from the database.
+  ///
+  /// Takes a [String] type as input and returns an [LMResponse] containing
+  /// the [CommunityConfigurations] object if successful,
+  /// or an error message if not.
   LMResponse<CommunityConfigurations> getCommunityConfigurationsDB(
       String type) {
     return _sdkApplication
@@ -736,16 +815,28 @@ class LMFeedClient {
         .getCommunityConfigurationDB(type);
   }
 
+  /// Deletes community configurations from the database.
+  ///
+  /// Takes a [String] type as input and returns an [LMResponse] indicating
+  /// the success or failure of the operation.
   Future<LMResponse<void>> deleteCommunityConfigurationsDB(String type) async {
     return _sdkApplication
         .getPersistenceApi()
         .deleteCommunityConfigurationDB(type);
   }
 
+  /// Clears all community configurations from the database.
+  ///
+  /// Returns an [LMResponse] indicating the success
+  /// or failure of the operation.
   Future<LMResponse<void>> clearCommunityConfigurationsDB() async {
     return _sdkApplication.getPersistenceApi().clearCommunityConfigurationDB();
   }
 
+  /// Inserts or updates the logged-in member state in the database.
+  ///
+  /// Takes a [MemberStateResponse] object as input and returns an [LMResponse]
+  /// indicating the success or failure of the operation.
   Future<LMResponse<void>> insertOrUpdateLoggedInMemberState(
       MemberStateResponse memberStateResponse) async {
     return await _sdkApplication
@@ -753,28 +844,57 @@ class LMFeedClient {
         .insertOrUpdateMemberState(memberStateResponse);
   }
 
+  /// Retrieves the logged-in member state from the database.
+  ///
+  /// Returns an [LMResponse] containing the [MemberStateResponse]
+  /// object if successful, or an error message if not.
   LMResponse<MemberStateResponse> getLoggedInMemberState() {
     return _sdkApplication.getPersistenceApi().getMemberState();
   }
 
+  /// Deletes the logged-in member state from the database.
+  ///
+  /// Returns an [LMResponse] indicating the success
+  /// or failure of the operation.
   Future<LMResponse<void>> deleteLoggedInMemberState() async {
     return await _sdkApplication.getPersistenceApi().deleteMemberState();
   }
   // ---------------------------------------
 }
 
+/// {@template feed_client_builder}
+/// A builder class for constructing instances of [LMFeedClient].
+///
+/// This class provides a fluent interface for configuring and creating
+/// instances of [LMFeedClient]. Use the [builder] method to obtain an
+/// instance of this builder, and then chain configuration methods to
+/// set various options before calling the `build` method to create the
+/// [LMFeedClient] instance.
+/// {@endtemplate}
 class LMFeedClientBuilder {
+  /// Callback for SDK events.
   LMSDKCallback? _sdkCallback;
+
+  /// Request to initiate the logger.
   InitiateLoggerRequest? _initiateLoggerRequest;
 
+  /// Sets the SDK callback.
+  ///
+  /// [sdkCallback] - The callback to be set for SDK events.
   void sdkCallback(LMSDKCallback? sdkCallback) {
     _sdkCallback = sdkCallback;
   }
 
+  /// Sets the request to initiate the logger.
+  ///
+  /// [initiateLoggerRequest] - The request to initiate the logger.
   void initiateLoggerRequest(InitiateLoggerRequest initiateLoggerRequest) {
     _initiateLoggerRequest = initiateLoggerRequest;
   }
 
+  /// Builds and returns an instance of [LMFeedClient].
+  ///
+  /// Returns an instance of [LMFeedClient] with the provided configurations.
   LMFeedClient build() {
     return LMFeedClient._(
       sdkCallback: _sdkCallback,

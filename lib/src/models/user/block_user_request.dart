@@ -13,7 +13,7 @@ class BlockUserRequest {
 
   /// Creates a new instance of [BlockUserRequest].
   ///
-  /// The [userUUID] and [shouldBlock] parameters are required
+  /// The [blockUserUUID] and [shouldBlock] parameters are required
   /// and must not be null.
   BlockUserRequest._({required this.blockUserUUID, required this.shouldBlock});
 
