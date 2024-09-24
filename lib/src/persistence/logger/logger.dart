@@ -9,18 +9,22 @@ import 'package:likeminds_feed/src/persistence/logger/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils.dart';
 import 'package:stack_trace/stack_trace.dart';
 
-// This class handles all the operations
-// related to Error Logging
-// Accepts a [shareLogsWithLM] boolean as parameter
-// which determines whether the logs should be stored in LocalDB
-// and shared with LM later or not
-// Calls the errorHandler method for client if it is not null
+/// This class handles all the operations
+/// related to Error Logging.
+///
+/// Accepts a [shareLogsWithLM] boolean as a parameter
+/// which determines whether the logs should be stored in LocalDB
+/// and shared with LM later or not.
+///
+/// Calls the errorHandler method for the client if it is not null.
 class LMFeedLogger {
   bool isInitialised = false;
-  // LogDBHandler instance to handle DB operations
+
+  /// LogDBHandler instance to handle DB operations
   LogDBHandler? logDBHandler;
-  // shareLogsWithLM is a boolean value which determines whether the logs
-  // should be stored in LocalDB and shared with LM or not
+
+  /// shareLogsWithLM is a boolean value which determines whether the logs
+  /// should be stored in LocalDB and shared with LM or not
   InitiateLoggerRequest? initiateLoggerRequest;
 
   LMFeedLogger._internal();

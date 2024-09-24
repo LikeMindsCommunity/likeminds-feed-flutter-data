@@ -13,7 +13,9 @@ import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
 const _prod = !bool.fromEnvironment('DEBUG');
+// ignore: public_member_api_docs
 const testEnvironment = bool.fromEnvironment('LM_TEST_ENVIRONMENT');
+// ignore: public_member_api_docs
 const String feedSDKVersion = "1.15.0";
 
 /// {@template feed_client_builder}

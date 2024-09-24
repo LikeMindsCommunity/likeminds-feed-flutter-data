@@ -29,3 +29,5 @@ linter:
      - curly_braces_in_flow_control_structures
     # doc comments
      - slash_for_doc_comments
+    # Public api
+     - public_member_api_docs
