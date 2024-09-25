@@ -79,6 +79,27 @@ class LMFeedClient {
     return LMFeedClientBuilder();
   }
 
+  /// Initializes the local database and sets up necessary local storage
+  /// for caching and other persistence operations.
+  ///
+  /// This method must be called after creating an instance of `LMFeedClient`
+  /// to ensure that the local database is properly initialized.
+  ///
+  /// Returns a [Future] that completes with an [LMResponse<void>] indicating
+  /// the success or failure of the initialization process.
+  ///
+  /// Example:
+  /// ```dart
+  /// final feedClient = LMFeedClient.builder()
+  ///   ..sdkCallback(mySdkCallback)
+  ///   ..initiateLoggerRequest(myLoggerRequest)
+  ///   .build();
+  ///
+  /// // Initialize the local database
+  /// await feedClient.init();
+  ///
+  /// // Now you can use feedClient to interact with the feed data
+  /// ```
   Future<LMResponse<void>> init(
       {InitiateLoggerRequest? initiateLoggerRequest}) async {
     return await LMFeedPersistence.instance.init();
@@ -361,9 +382,9 @@ class LMFeedClient {
     return await _sdkApplication.getPostApi().getPendingPost(request);
   }
 
-  // getAllPendingPost is used to fetch all pending posts
-  // [GetAllPendingPostRequest] is used to pass the required parameters
-  // [GetAllPendingPostResponse] is returned as a Future
+  /// getAllPendingPost is used to fetch all pending posts
+  /// [GetAllPendingPostRequest] is used to pass the required parameters
+  /// [GetAllPendingPostResponse] is returned as a Future
   Future<LMResponse<GetAllPendingPostsResponse>> getAllPendingPosts(
       GetAllPendingPostsRequest request) async {
     return await _sdkApplication.getPostApi().getAllPendingPosts(request);
