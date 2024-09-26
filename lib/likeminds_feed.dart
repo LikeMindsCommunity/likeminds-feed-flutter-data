@@ -12,9 +12,9 @@ import 'package:likeminds_feed/src/persistence/persistence.dart';
 import 'src/models/models.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const _prod = !bool.fromEnvironment('DEBUG');
+const _prod = !bool.fromEnvironment('LM_DEBUG');
 // ignore: public_member_api_docs
-const testEnvironment = bool.fromEnvironment('LM_TEST_ENVIRONMENT');
+const testEnvironment = bool.fromEnvironment('LM_TEST_ENV');
 // ignore: public_member_api_docs
 const String feedSDKVersion = "1.15.0";
 

@@ -32,7 +32,7 @@ jobs:
 
       - name: Tests
         if: always()
-        run: flutter test --dart-define=DEBUG=true --dart-define=LM_TEST_ENVIRONMENT=true
+        run: flutter test --dart-define=LM_DEBUG=true --dart-define=LM_TEST_ENV=true
 
       - name: Dry run for pub.dev
         if: always()

@@ -13,7 +13,7 @@ import 'environment/test_env.dart';
 import 'helper.dart';
 
 /// Flutter flavour/environment manager v0.0.1
-const prod = !bool.fromEnvironment('DEBUG');
+const prod = !bool.fromEnvironment('LM_DEBUG');
 
 //Testing credentials, and callback
 //final TestCallback testingCallback = TestCallback();
@@ -32,6 +32,8 @@ void main() {
   debugPrint("Initiating unit tests now...");
   group('Testing LMFeedClient SDK layer\n', () {
     late LMFeedClient client;
+    String? accessToken;
+    String? refreshToken;
     String? pollId;
     String? optionId;
     test('Testing Initiate User', () async {
@@ -45,8 +47,20 @@ void main() {
       InitiateUserResponse response = await client.initiateUser(request);
       expect(response.success, true);
 
+      accessToken = response.accessToken;
+      refreshToken = response.refreshToken;
+
       expect(response.user!.sdkClientInfo.uuid,
           prod ? testingProdBotID : testingBetaBotID);
+    });
+
+    test('Testing Validate User', () async {
+      ValidateUserRequest request = (ValidateUserRequestBuilder()
+            ..accessToken(accessToken ?? "")
+            ..refreshToken(refreshToken ?? ""))
+          .build();
+      ValidateUserResponse response = await client.validateUser(request);
+      expect(response.success, true);
     });
 
     test('Testing Get Profile', () async {

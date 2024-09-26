@@ -78,7 +78,9 @@ class AuthService {
       }
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedPersistence.instance.handleException(e, stacktrace);
+      if (!testEnvironment) {
+        LMFeedPersistence.instance.handleException(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -138,7 +140,9 @@ class AuthService {
       }
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedPersistence.instance.handleException(e, stacktrace);
+      if (!testEnvironment) {
+        LMFeedPersistence.instance.handleException(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
