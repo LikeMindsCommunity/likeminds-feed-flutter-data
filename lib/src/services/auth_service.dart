@@ -52,14 +52,16 @@ class AuthService {
             initiateUserResponse.accessToken!,
             initiateUserResponse.refreshToken!,
           );
-          final localPref = LMFeedPersistence.instance;
-          await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
-                ..key(kApiKey)
-                ..value(initiateUserRequest.apiKey))
-              .build());
-          await localPref.deleteUserDB();
-          await localPref
-              .insertOrUpdateUser(User.fromEntity(initiateUserResponse.user!));
+          if (!testEnvironment) {
+            final localPref = LMFeedPersistence.instance;
+            await localPref.insertOrUpdateValueInCache((LMCacheBuilder()
+                  ..key(kApiKey)
+                  ..value(initiateUserRequest.apiKey))
+                .build());
+            await localPref.deleteUserDB();
+            await localPref.insertOrUpdateUser(
+                User.fromEntity(initiateUserResponse.user!));
+          }
           return initiateUserResponse;
           // Else, if API returned no app access
         } else {
@@ -76,7 +78,9 @@ class AuthService {
       }
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedPersistence.instance.handleException(e, stacktrace);
+      if (!testEnvironment) {
+        LMFeedPersistence.instance.handleException(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -116,15 +120,17 @@ class AuthService {
         // Checking if API returned app access
         if (validateUserResponse.appAccess!) {
           // If API returned app access, then set tokens and return response
-          final localPref = LMFeedPersistence.instance;
-          await localPref.deleteUserDB();
-          await localPref
-              .insertOrUpdateUser(User.fromEntity(validateUserResponse.user!));
+          if (!testEnvironment) {
+            final localPref = LMFeedPersistence.instance;
+            await localPref.deleteUserDB();
+            await localPref.insertOrUpdateUser(
+                User.fromEntity(validateUserResponse.user!));
+          }
           return validateUserResponse;
           // Else, if API returned no app access
         } else {
           // If API returned no app access, then logout and return response
-          final response = await logout(null);
+          await logout(null);
 
           return validateUserResponse;
         }
@@ -134,7 +140,9 @@ class AuthService {
       }
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
-      LMFeedPersistence.instance.handleException(e, stacktrace);
+      if (!testEnvironment) {
+        LMFeedPersistence.instance.handleException(e, stacktrace);
+      }
       String? errorMessage;
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
@@ -198,14 +206,15 @@ class AuthService {
           LogoutResponseEntity.fromJson(response.data);
       request.callback?.logoutCallback();
       apiClient.clearTokens();
+      if (!testEnvironment) {
+        PersistenceApi persistenceApi =
+            SDKApplication.instance.getPersistenceApi();
 
-      PersistenceApi persistenceApi =
-          SDKApplication.instance.getPersistenceApi();
-
-      persistenceApi.clearCache();
-      persistenceApi.clearCommunityConfigurationDB();
-      persistenceApi.deleteUserDB();
-      persistenceApi.deleteMemberState();
+        persistenceApi.clearCache();
+        persistenceApi.clearCommunityConfigurationDB();
+        persistenceApi.deleteUserDB();
+        persistenceApi.deleteMemberState();
+      }
 
       return logoutResponse;
     } on DioException catch (e, stacktrace) {

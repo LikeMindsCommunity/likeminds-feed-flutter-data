@@ -44,7 +44,11 @@ class GetExploreFeedRoomRequestBuilder {
   }
 }
 
-// Type of order i.e. newest=0, recently active=1, most messages=2, most participants=3
+// Type of order
+// i.e. newest=0,
+// recently active=1,
+// most messages=2,
+// most participants=3
 // create an advanced enum for this with the int values
 enum LMFeedRoomOrderType {
   newest(0),

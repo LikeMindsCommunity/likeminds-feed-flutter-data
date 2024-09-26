@@ -36,6 +36,13 @@ import 'package:likeminds_feed/src/services/widgets_service.dart';
 class DIService {
   static DIService? _instance;
 
+  /// Provides a singleton instance of the `DIService` class.
+  ///
+  /// If the instance is not already created, it initializes a new instance
+  /// using the private constructor `DIService._()`.
+  ///
+  /// Returns:
+  ///   A singleton instance of the `DIService` class.
   static DIService get instance => _instance ??= DIService._();
 
   DIService._();
@@ -165,24 +172,60 @@ class DIService {
     );
   }
 
-  // Get the static instance of GetIt to get the dependencies
+  /// This class provides a static instance of GetIt for dependency injection.
+  ///
+  /// It also defines constant instances of various dependencies used throughout
+  /// the application. These constants are used as keys to register and retrieve
+  /// dependencies from the GetIt instance.
   static GetIt getIt = GetIt.instance;
 
-  // Constant instances of the dependencies
+  /// - `kInstanceAPIClient`: Key for the API client instance.
   static const String kInstanceAPIClient = 'api_client';
+
+  /// - `kInstanceAccessRepository`: Key for the access repository instance.
   static const String kInstanceAccessRepository = 'access_repository';
+
+  /// - `kInstanceFeedRepository`: Key for the feed repository instance.
   static const String kInstanceFeedRepository = 'feed_repository';
+
+  /// - `kInstanceCommentRepository`: Key for the comment repository instance.
   static const String kInstanceCommentRepository = 'comment_repository';
+
+  /// - `kInstanceCommunityRepository`: Key f
+  /// or the community repository instance.
   static const String kInstanceCommunityRepository = 'community_repository';
+
+  /// - `kInstanceAuthRepository`: Key for the auth repository instance.
   static const String kInstanceAuthRepository = 'auth_repository';
+
+  /// - `kInstancePostRepository`: Key for the post repository instance.
   static const String kInstancePostRepository = 'post_repository';
+
+  /// - `kInstanceMediaRepository`: Key for the media repository instance.
   static const String kInstanceMediaRepository = 'media_repository';
+
+  /// - `kInstanceHelperRepository`: Key for the helper repository instance.
   static const String kInstanceHelperRepository = 'helper_repository';
+
+  /// - `kInstancePersistenceRepository`: Key for the
+  /// persistence repository instance.
   static const String kInstancePersistenceRepository = 'persistence_repository';
+
+  /// - `kInstanceModerationRepository`: Key for the
+  /// moderation repository instance.
   static const String kInstanceModerationRepository = 'moderation_repository';
+
+  /// - `kInstanceNotificationFeedRepository`: Key for the
+  /// notification feed repository instance.
   static const String kInstanceNotificationFeedRepository =
       'notification_feed_repository';
+
+  /// - `kInstanceWidgetRepository`: Key for the widget repository instance.
   static const String kInstanceWidgetRepository = 'widget_repository';
+
+  /// - `kInstanceLoggerRepository`: Key for the logger repository instance.
   static const String kInstanceLoggerRepository = 'logger_repository';
+
+  /// - `kInstanceUserRepository`: Key for the user repository instance.
   static const String kInstanceUserRepository = 'user_repository';
 }
