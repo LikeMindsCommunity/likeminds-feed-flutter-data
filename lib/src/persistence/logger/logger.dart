@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -7,18 +9,22 @@ import 'package:likeminds_feed/src/persistence/logger/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils.dart';
 import 'package:stack_trace/stack_trace.dart';
 
-// This class handles all the operations
-// related to Error Logging
-// Accepts a [shareLogsWithLM] boolean as parameter
-// which determines whether the logs should be stored in LocalDB
-// and shared with LM later or not
-// Calls the errorHandler method for client if it is not null
+/// This class handles all the operations
+/// related to Error Logging.
+///
+/// Accepts a [shareLogsWithLM] boolean as a parameter
+/// which determines whether the logs should be stored in LocalDB
+/// and shared with LM later or not.
+///
+/// Calls the errorHandler method for the client if it is not null.
 class LMFeedLogger {
   bool isInitialised = false;
-  // LogDBHandler instance to handle DB operations
+
+  /// LogDBHandler instance to handle DB operations
   LogDBHandler? logDBHandler;
-  // shareLogsWithLM is a boolean value which determines whether the logs
-  // should be stored in LocalDB and shared with LM or not
+
+  /// shareLogsWithLM is a boolean value which determines whether the logs
+  /// should be stored in LocalDB and shared with LM or not
   InitiateLoggerRequest? initiateLoggerRequest;
 
   LMFeedLogger._internal();
@@ -116,7 +122,7 @@ class LMFeedLogger {
 
     final connectivityResult = await (Connectivity().checkConnectivity());
 
-    if (connectivityResult == ConnectivityResult.wifi) {
+    if (connectivityResult.contains(ConnectivityResult.wifi)) {
       isOnWifi = true;
     } else {
       isOnWifi = false;
@@ -142,11 +148,11 @@ class LMFeedLogger {
         ..wifi(isOnWifi);
 
       if (iosDeviceInfo.systemVersion != null) {
-        deviceDetailsBuilder.versionOS(iosDeviceInfo.systemVersion!);
+        deviceDetailsBuilder.versionOS(iosDeviceInfo.systemVersion);
       }
 
       if (iosDeviceInfo.name != null) {
-        deviceDetailsBuilder.deviceName(iosDeviceInfo.name!);
+        deviceDetailsBuilder.deviceName(iosDeviceInfo.name);
       }
     }
 

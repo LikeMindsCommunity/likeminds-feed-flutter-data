@@ -1,5 +1,4 @@
-import 'package:likeminds_feed/src/models/user/get_user_feed_meta_request.dart';
-import 'package:likeminds_feed/src/models/user/get_user_feed_meta_response.dart';
+import 'package:likeminds_feed/src/models/models.dart';
 import 'package:likeminds_feed/src/services/user_service.dart';
 
 class UserRepository {
@@ -10,5 +9,21 @@ class UserRepository {
     final GetUserFeedMetaResponseEntity responseEntity =
         await userService.getUserFeedMeta(request);
     return GetUserFeedMetaResponse.fromEntity(responseEntity);
+  }
+
+  Future<LMResponse<GetBlockedUsersResponse>> getBlockedUsers(
+      GetBlockedUsersRequest request) async {
+    final LMResponse<GetBlockedUsersResponseEntity> responseEntity =
+        await userService.getBlockedUsers(request);
+    return LMResponse.fromData(
+        response: responseEntity,
+        data: responseEntity.data != null
+            ? GetBlockedUsersResponse.fromEntity(responseEntity.data!)
+            : null);
+  }
+
+  Future<LMResponse<void>> toggleBlock(BlockUserRequest request) async {
+    final LMResponse<void> response = await userService.toggleBlock(request);
+    return response;
   }
 }

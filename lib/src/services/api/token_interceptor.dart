@@ -18,11 +18,6 @@ class TokenInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) async {
-    return super.onResponse(response, handler);
-  }
-
-  @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
@@ -55,6 +50,9 @@ class TokenInterceptor extends Interceptor {
 
   Future<void> refreshToken() async {
     debugPrint("Refreshing token");
+    if (testEnvironment) {
+      return;
+    }
     LMResponse refreshTokenResponse =
         LMFeedPersistence.instance.getCache(kRefreshToken);
     if (!refreshTokenResponse.success ||
