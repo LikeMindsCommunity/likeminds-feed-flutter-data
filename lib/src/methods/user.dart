@@ -20,8 +20,8 @@ class UserApi {
     return response;
   }
 
-  Future<LMResponse<void>> toggleUser(BlockUserRequest request) async {
-    final LMResponse<void> response = await userRepository.toggleUser(request);
+  Future<LMResponse<void>> toggleBlock(BlockUserRequest request) async {
+    final LMResponse<void> response = await userRepository.toggleBlock(request);
     return response;
   }
 }

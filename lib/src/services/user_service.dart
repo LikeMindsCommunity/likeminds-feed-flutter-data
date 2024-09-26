@@ -27,7 +27,7 @@ abstract class IUserService {
   Future<LMResponse<GetBlockedUsersResponseEntity>> getBlockedUsers(
       GetBlockedUsersRequest request);
 
-  /// {@template userService_toggleUser}
+  /// {@template userService_toggleBlock}
   /// Toggles the block status of a user.
   ///
   /// Takes a [BlockUserRequest] object as input and
@@ -35,7 +35,7 @@ abstract class IUserService {
   /// or an error message if not.
   /// Throws a [DioException] if there is an error during the API call.
   /// {@endtemplate}
-  Future<LMResponse<void>> toggleUser(BlockUserRequest request);
+  Future<LMResponse<void>> toggleBlock(BlockUserRequest request);
 }
 
 /// The `UserService` class implements the `IUserService` interface and provides
@@ -95,7 +95,7 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<LMResponse<void>> toggleUser(BlockUserRequest request) async {
+  Future<LMResponse<void>> toggleBlock(BlockUserRequest request) async {
     try {
       final response = await apiClient.client().put(
           apiClient.getEndpoints.blockUserEndpoint(request.blockUserUUID),

@@ -22,8 +22,8 @@ class UserRepository {
             : null);
   }
 
-  Future<LMResponse<void>> toggleUser(BlockUserRequest request) async {
-    final LMResponse<void> response = await userService.toggleUser(request);
+  Future<LMResponse<void>> toggleBlock(BlockUserRequest request) async {
+    final LMResponse<void> response = await userService.toggleBlock(request);
     return response;
   }
 }
