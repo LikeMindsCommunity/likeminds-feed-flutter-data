@@ -558,7 +558,7 @@ Add Poll Option Response: ${response.data?.widget?.lmMeta?["options"]}''');
                 ..uuid(newUserId))
               .build());
       BlockUserRequest request = (BlockUserRequestBuilder()
-            ..blockUserUUID(newUserId)
+            ..uuid(newUserId)
             ..shouldBlock(true))
           .build();
       LMResponse<void> response = await client.toggleBlock(request);
@@ -582,7 +582,7 @@ Add Poll Option Response: ${response.data?.widget?.lmMeta?["options"]}''');
 
     test('Testing Unblock User', () async {
       BlockUserRequest request = (BlockUserRequestBuilder()
-            ..blockUserUUID(newUserId)
+            ..uuid(newUserId)
             ..shouldBlock(false))
           .build();
       LMResponse<void> response = await client.toggleBlock(request);

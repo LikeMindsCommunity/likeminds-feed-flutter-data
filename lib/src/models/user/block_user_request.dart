@@ -6,16 +6,16 @@
 /// {@endtemplate}
 class BlockUserRequest {
   /// The unique user identifier (UUID).
-  final String blockUserUUID;
+  final String uuid;
 
   /// Indicates whether the user should be blocked.
   final bool shouldBlock;
 
   /// Creates a new instance of [BlockUserRequest].
   ///
-  /// The [blockUserUUID] and [shouldBlock] parameters are required
+  /// The [uuid] and [shouldBlock] parameters are required
   /// and must not be null.
-  BlockUserRequest._({required this.blockUserUUID, required this.shouldBlock});
+  BlockUserRequest._({required this.uuid, required this.shouldBlock});
 
   /// Converts the request model into a JSON map for the API call.
   ///
@@ -34,12 +34,12 @@ class BlockUserRequest {
 
 /// A builder class for [BlockUserRequest].
 class BlockUserRequestBuilder {
-  String? _blockUserUUID;
+  String? _uuid;
   bool? _shouldBlock;
 
   /// Sets the UUID for the request.
-  BlockUserRequestBuilder blockUserUUID(String uuid) {
-    _blockUserUUID = uuid;
+  BlockUserRequestBuilder uuid(String uuid) {
+    _uuid = uuid;
     return this;
   }
 
@@ -51,13 +51,12 @@ class BlockUserRequestBuilder {
 
   /// Builds and returns an instance of [BlockUserRequest].
   BlockUserRequest build() {
-    if (_blockUserUUID == null) {
+    if (_uuid == null) {
       throw ArgumentError('UUID must not be null');
     }
     if (_shouldBlock == null) {
       throw ArgumentError('Block status must not be null');
     }
-    return BlockUserRequest._(
-        blockUserUUID: _blockUserUUID!, shouldBlock: _shouldBlock!);
+    return BlockUserRequest._(uuid: _uuid!, shouldBlock: _shouldBlock!);
   }
 }

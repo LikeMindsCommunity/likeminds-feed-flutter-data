@@ -98,7 +98,7 @@ class UserService implements IUserService {
   Future<LMResponse<void>> toggleBlock(BlockUserRequest request) async {
     try {
       final response = await apiClient.client().put(
-          apiClient.getEndpoints.blockUserEndpoint(request.blockUserUUID),
+          apiClient.getEndpoints.blockUserEndpoint(request.uuid),
           data: request.toJson());
       if (response.data != null && response.data['success'] == true) {
         return LMResponse.success(data: null);
