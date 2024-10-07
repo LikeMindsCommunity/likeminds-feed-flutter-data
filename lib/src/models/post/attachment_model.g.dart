@@ -44,6 +44,7 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
       multiSelectNo: json['multiple_select_number'] as int?,
       isAnonymous: json['is_anonymous'] as bool?,
       allowAddOption: json['allow_add_option'] as bool?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
     );
 
 Map<String, dynamic> _$AttachmentMetaEntityToJson(
@@ -65,6 +66,7 @@ Map<String, dynamic> _$AttachmentMetaEntityToJson(
     'is_anonymous': instance.isAnonymous,
     'allow_add_option': instance.allowAddOption,
     'meta': instance.meta,
+    'thumbnail_url': instance.thumbnailUrl,
   };
   return attachmentMeta;
 }

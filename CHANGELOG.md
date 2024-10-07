@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.16.1]
+
+- Added support for thumbnail url in Attachment model
+
 ## [1.16.0]
 
 - Added support for toggle block api
