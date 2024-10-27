@@ -12,12 +12,21 @@ class LMTempPostDBAdapter extends TypeAdapter<LMTempPostDB> {
 
   @override
   LMTempPostDB read(BinaryReader reader) {
-    return LMTempPostDB();
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return LMTempPostDB(
+      post: fields[0] as LMPostDB,
+    );
   }
 
   @override
   void write(BinaryWriter writer, LMTempPostDB obj) {
-    writer.writeByte(0);
+    writer
+      ..writeByte(1)
+      ..writeByte(0)
+      ..write(obj.post);
   }
 
   @override
@@ -72,7 +81,7 @@ class LMPostDBAdapter extends TypeAdapter<LMPostDB> {
   @override
   void write(BinaryWriter writer, LMPostDB obj) {
     writer
-      ..writeByte(23)
+      ..writeByte(24)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
