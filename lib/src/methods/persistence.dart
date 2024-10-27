@@ -65,4 +65,19 @@ class PersistenceApi {
   Future<LMResponse<void>> deleteMemberState() async {
     return await persistenceRepository.deleteMemberState();
   }
+
+  /// save temp post to db
+  Future<LMResponse<void>> saveTemporaryPost(Post post) {
+    return persistenceRepository.saveTemporaryPost(post);
+  }
+
+  /// delete temp post from db
+  Future<LMResponse<void>> deleteTemporaryPost(String tempId) {
+    return persistenceRepository.deleteTemporaryPost(tempId);
+  }
+
+  /// get temp post from db
+  LMResponse<Post> getTemporaryPost() {
+    return persistenceRepository.getTemporaryPost();
+  }
 }

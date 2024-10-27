@@ -13,6 +13,7 @@ PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => PostEntity(
           ?.map((e) => AttachmentEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
       communityId: json['community_id'] as int,
+      feedroomId: json['feedroom_id'] as int,
       isPinned: json['is_pinned'] as bool,
       uuid: json['uuid'] as String,
       likeCount: json['likes_count'] as int,
@@ -50,6 +51,7 @@ Map<String, dynamic> _$PostEntityToJson(PostEntity instance) =>
       'text': instance.text,
       'attachments': instance.attachments?.map((e) => e.toJson()).toList(),
       'community_id': instance.communityId,
+      'feedroom_id': instance.feedroomId,
       'is_pinned': instance.isPinned,
       'is_liked': instance.isLiked,
       'is_edited': instance.isEdited,

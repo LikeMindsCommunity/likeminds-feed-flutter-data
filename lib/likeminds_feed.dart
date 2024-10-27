@@ -884,6 +884,27 @@ class LMFeedClient {
     return await _sdkApplication.getPersistenceApi().deleteMemberState();
   }
   // ---------------------------------------
+
+  /// Insert a temp post to the database
+  Future<LMResponse<void>> saveTemporaryPost(Post request) async {
+    return await _sdkApplication.getPersistenceApi().saveTemporaryPost(request);
+  }
+
+  /// Get a temp post from the database
+  /// Returns an [LMResponse] containing the [Post] object if successful,
+  /// or an error message if not.
+  LMResponse<Post> getTemporaryPost() {
+    return _sdkApplication.getPersistenceApi().getTemporaryPost();
+  }
+
+  /// Delete a temp post from the database
+  /// Returns an [LMResponse] indicating the success
+  /// or failure of the operation.
+  Future<LMResponse<void>> deleteTemporaryPost(String tempPostId) async {
+    return await _sdkApplication
+        .getPersistenceApi()
+        .deleteTemporaryPost(tempPostId);
+  }
 }
 
 /// {@template feed_client_builder}

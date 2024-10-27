@@ -4,6 +4,7 @@ import 'package:likeminds_feed/src/persistence/cache/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/community/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/logger/logger.dart';
 import 'package:likeminds_feed/src/persistence/seen_post/handler/handler.dart';
+import 'package:likeminds_feed/src/persistence/temp_post/handler/handler.dart';
 import 'package:likeminds_feed/src/persistence/user/handler/handler.dart';
 
 class LMFeedPersistence {
@@ -12,6 +13,7 @@ class LMFeedPersistence {
   late LMCacheDBHandler cacheDBHandlerHive;
   late LMFeedLogger logger;
   late LMFeedSeenPostDBHandler seenPostDBHandler;
+  late LMFeedTempPostDBHandler tempPostDBHandler;
 
   static LMFeedPersistence? _instance;
 
@@ -33,6 +35,9 @@ class LMFeedPersistence {
     seenPostDBHandler = LMFeedSeenPostDBHandler(
       seenPostBoxName: 'seenPostBox',
     );
+    tempPostDBHandler = LMFeedTempPostDBHandler(
+      postBoxName: 'tempPostBox',
+    );
   }
 
   Future<LMResponse<void>> init({InitiateLoggerRequest? request}) async {
@@ -43,6 +48,7 @@ class LMFeedPersistence {
         await communityConfigurationDBHandlerHive.init();
     LMResponse cacheDBHandler = await cacheDBHandlerHive.init();
     LMResponse seenPostDBInit = await seenPostDBHandler.init();
+    LMResponse tempPostDBInit = await tempPostDBHandler.init();
     LMResponse? loggerInitResponse;
     if (request != null) {
       loggerInitResponse =
@@ -62,6 +68,8 @@ class LMFeedPersistence {
           success: false, errorMessage: loggerInitResponse.errorMessage);
     } else if (!seenPostDBInit.success) {
       return seenPostDBInit;
+    } else if (!tempPostDBInit.success) {
+      return tempPostDBInit;
     } else {
       return LMResponse(success: true);
     }
@@ -156,5 +164,20 @@ class LMFeedPersistence {
 
   Future<LMResponse<void>> clearSeenPostIDs() {
     return seenPostDBHandler.clearSeenPostIDs();
+  }
+
+  /// save temp post to db
+  Future<LMResponse<void>> saveTemporaryPost(Post post) {
+    return tempPostDBHandler.insertTempPost(post);
+  }
+
+  /// delete temp post from db
+  Future<LMResponse<void>> deleteTemporaryPost(String tempId) {
+    return tempPostDBHandler.deleteTempPost(tempId);
+  }
+
+  /// get temp post from db
+  LMResponse<Post> getTemporaryPost() {
+    return tempPostDBHandler.getTempPost();
   }
 }

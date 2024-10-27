@@ -65,4 +65,19 @@ class PersistenceRepository {
   Future<LMResponse<void>> deleteMemberState() async {
     return await persistenceService.deleteMemberState();
   }
+
+  /// save temp post to db
+  Future<LMResponse<void>> saveTemporaryPost(Post post) {
+    return persistenceService.saveTemporaryPost(post);
+  }
+
+  /// delete temp post from db
+  Future<LMResponse<void>> deleteTemporaryPost(String tempId) {
+    return persistenceService.deleteTemporaryPost(tempId);
+  }
+
+  /// get temp post from db
+  LMResponse<Post> getTemporaryPost() {
+    return persistenceService.getTemporaryPost();
+  }
 }
