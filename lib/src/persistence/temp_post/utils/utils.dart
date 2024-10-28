@@ -28,6 +28,7 @@ class LMPostDBInterface {
       isRepostedByUser: post.isRepostedByUser,
       isPendingPost: post.isPendingPost,
       postStatus: post.postStatus,
+      feedroomId: post.feedroomId,
     );
   }
 
@@ -58,6 +59,7 @@ class LMPostDBInterface {
       isPendingPost: postDB.isPendingPost,
       postStatus: postDB.postStatus,
       menuItems: [],
+      feedroomId: postDB.feedroomId,
     );
   }
 
@@ -99,6 +101,8 @@ class LMPostDBInterface {
       isAnonymous: attachmentMeta.isAnonymous,
       allowAddOption: attachmentMeta.allowAddOption,
       thumbnailUrl: attachmentMeta.thumbnailUrl,
+      path: attachmentMeta.path,
+      bytes: attachmentMeta.bytes,
     );
   }
 
@@ -124,6 +128,8 @@ class LMPostDBInterface {
       isAnonymous: metaDB.isAnonymous,
       allowAddOption: metaDB.allowAddOption,
       thumbnailUrl: metaDB.thumbnailUrl,
+      path: metaDB.path,
+      bytes: metaDB.bytes,
     );
   }
 }

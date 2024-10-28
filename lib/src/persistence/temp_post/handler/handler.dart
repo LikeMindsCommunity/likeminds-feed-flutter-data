@@ -29,9 +29,11 @@ class LMFeedTempPostDBHandler {
   }
 
   /// Insert a temp post in the box
-  Future<LMResponse<void>> insertTempPost(Post posts) async {
+  Future<LMResponse<void>> saveTemporaryPost(
+      SaveTemporaryPostRequest saveTemporaryPostRequest) async {
     try {
-      final LMPostDB postDB = LMPostDBInterface.fromPost(posts);
+      final Post post = saveTemporaryPostRequest.tempPost;
+      final LMPostDB postDB = LMPostDBInterface.fromPost(post);
       await postBox.put(tempPostKey, postDB);
       return LMResponse<void>(success: true);
     } on Exception catch (e) {
@@ -43,11 +45,13 @@ class LMFeedTempPostDBHandler {
   }
 
   /// Delete a post by temporary ID
-  Future<LMResponse<void>> deleteTempPost(String tempId) async {
+  Future<LMResponse<void>> deleteTemporaryPost(
+      DeleteTemporaryPostRequest deleteTemporaryPostRequest) async {
     try {
+      String tempPostId = deleteTemporaryPostRequest.temporaryPostId;
       final result = postBox.get(tempPostKey);
 
-      if (result == null) {
+      if (result == null || result.tempId != tempPostId) {
         return LMResponse<void>(
           success: false,
           errorMessage: "Post not found",
@@ -64,7 +68,7 @@ class LMFeedTempPostDBHandler {
   }
 
   /// Fetch a post by ID
-  LMResponse<Post> getTempPost() {
+  LMResponse<Post> getTemporaryPost() {
     try {
       final queryResult = postBox.values;
 

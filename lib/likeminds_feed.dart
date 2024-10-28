@@ -886,7 +886,7 @@ class LMFeedClient {
   // ---------------------------------------
 
   /// Insert a temp post to the database
-  Future<LMResponse<void>> saveTemporaryPost(Post request) async {
+  Future<LMResponse<void>> saveTemporaryPost(SaveTemporaryPostRequest request) async {
     return await _sdkApplication.getPersistenceApi().saveTemporaryPost(request);
   }
 
@@ -900,10 +900,11 @@ class LMFeedClient {
   /// Delete a temp post from the database
   /// Returns an [LMResponse] indicating the success
   /// or failure of the operation.
-  Future<LMResponse<void>> deleteTemporaryPost(String tempPostId) async {
+  Future<LMResponse<void>> deleteTemporaryPost(
+      DeleteTemporaryPostRequest deleteTemporaryPostRequest) async {
     return await _sdkApplication
         .getPersistenceApi()
-        .deleteTemporaryPost(tempPostId);
+        .deleteTemporaryPost(deleteTemporaryPostRequest);
   }
 }
 

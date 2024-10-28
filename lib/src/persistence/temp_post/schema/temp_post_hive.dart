@@ -23,7 +23,7 @@ class LMPostDB extends HiveObject {
   String uuid;
 
   @HiveField(2)
-  int communityId;
+  int? communityId;
 
   @HiveField(3)
   String? tempId;
@@ -92,7 +92,7 @@ class LMPostDB extends HiveObject {
   LMPostDB({
     required this.id,
     required this.uuid,
-    required this.communityId,
+    this.communityId,
     this.tempId,
     required this.text,
     this.heading,

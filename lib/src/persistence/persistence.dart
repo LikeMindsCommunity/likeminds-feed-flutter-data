@@ -167,17 +167,18 @@ class LMFeedPersistence {
   }
 
   /// save temp post to db
-  Future<LMResponse<void>> saveTemporaryPost(Post post) {
-    return tempPostDBHandler.insertTempPost(post);
+  Future<LMResponse<void>> saveTemporaryPost(SaveTemporaryPostRequest request) {
+    return tempPostDBHandler.saveTemporaryPost(request);
   }
 
   /// delete temp post from db
-  Future<LMResponse<void>> deleteTemporaryPost(String tempId) {
-    return tempPostDBHandler.deleteTempPost(tempId);
+  Future<LMResponse<void>> deleteTemporaryPost(
+      DeleteTemporaryPostRequest deleteTemporaryPostRequest) {
+    return tempPostDBHandler.deleteTemporaryPost(deleteTemporaryPostRequest);
   }
 
   /// get temp post from db
   LMResponse<Post> getTemporaryPost() {
-    return tempPostDBHandler.getTempPost();
+    return tempPostDBHandler.getTemporaryPost();
   }
 }

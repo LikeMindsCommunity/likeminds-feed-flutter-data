@@ -67,13 +67,14 @@ class PersistenceRepository {
   }
 
   /// save temp post to db
-  Future<LMResponse<void>> saveTemporaryPost(Post post) {
-    return persistenceService.saveTemporaryPost(post);
+  Future<LMResponse<void>> saveTemporaryPost(SaveTemporaryPostRequest request) {
+    return persistenceService.saveTemporaryPost(request);
   }
 
   /// delete temp post from db
-  Future<LMResponse<void>> deleteTemporaryPost(String tempId) {
-    return persistenceService.deleteTemporaryPost(tempId);
+  Future<LMResponse<void>> deleteTemporaryPost(
+      DeleteTemporaryPostRequest deleteTemporaryPostRequest) {
+    return persistenceService.deleteTemporaryPost(deleteTemporaryPostRequest);
   }
 
   /// get temp post from db

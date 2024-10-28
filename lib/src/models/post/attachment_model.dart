@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:likeminds_feed/likeminds_feed.dart';
 
@@ -66,6 +67,10 @@ class AttachmentMeta {
   /// The URL of the attachment.
   final String? url;
 
+  final String? path;
+
+  final Uint8List? bytes;
+
   /// The format of the attachment.
   final String? format;
 
@@ -126,6 +131,8 @@ class AttachmentMeta {
   /// Creates an [AttachmentMeta] instance.
   AttachmentMeta({
     this.url,
+    this.path,
+    this.bytes,
     this.format,
     this.size,
     this.duration,
