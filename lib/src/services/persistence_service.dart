@@ -83,4 +83,9 @@ class PersistenceService {
   LMResponse<Post> getTemporaryPost() {
     return feedPersistence!.getTemporaryPost();
   }
+
+  /// clear temp post from db
+  Future<LMResponse<void>> clearTemporaryPost() {
+    return feedPersistence!.clearTemporaryPost();
+  }
 }

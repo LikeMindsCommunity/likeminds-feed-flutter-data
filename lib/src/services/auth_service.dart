@@ -214,6 +214,7 @@ class AuthService {
         persistenceApi.clearCommunityConfigurationDB();
         persistenceApi.deleteUserDB();
         persistenceApi.deleteMemberState();
+        persistenceApi.clearTemporaryPost();
       }
 
       return logoutResponse;

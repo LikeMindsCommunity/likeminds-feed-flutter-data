@@ -181,4 +181,9 @@ class LMFeedPersistence {
   LMResponse<Post> getTemporaryPost() {
     return tempPostDBHandler.getTemporaryPost();
   }
+
+  /// clear temp post from db
+  Future<LMResponse<void>> clearTemporaryPost() {
+    return tempPostDBHandler.clearTemporaryPost();
+  }
 }

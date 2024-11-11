@@ -81,4 +81,9 @@ class PersistenceRepository {
   LMResponse<Post> getTemporaryPost() {
     return persistenceService.getTemporaryPost();
   }
+
+  /// clear temp post from db
+  Future<LMResponse<void>> clearTemporaryPost() {
+    return persistenceService.clearTemporaryPost();
+  }
 }

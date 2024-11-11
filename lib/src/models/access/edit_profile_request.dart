@@ -5,7 +5,7 @@ class EditProfileRequest {
   String? imageUrl;
   String uuid;
   List<QuestionCommunityJoin>? questionCommunityJoin;
-  Map<String, dynamic>? metadata;
+  Map<String, dynamic>? metadata; 
 
   EditProfileRequest._({
     this.name,

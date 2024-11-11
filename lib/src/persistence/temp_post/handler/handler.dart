@@ -90,7 +90,7 @@ class LMFeedTempPostDBHandler {
   }
 
   /// Clear all posts from the box
-  Future<LMResponse<void>> clearPosts() async {
+  Future<LMResponse<void>> clearTemporaryPost() async {
     try {
       await postBox.clear();
       return LMResponse<void>(success: true);

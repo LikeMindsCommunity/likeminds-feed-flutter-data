@@ -73,13 +73,18 @@ class PersistenceApi {
 
   /// delete temp post from db
   Future<LMResponse<void>> deleteTemporaryPost(
-      DeleteTemporaryPostRequest deleteTemporaryPostRequestd) {
+      DeleteTemporaryPostRequest deleteTemporaryPostRequest) {
     return persistenceRepository
-        .deleteTemporaryPost(deleteTemporaryPostRequestd);
+        .deleteTemporaryPost(deleteTemporaryPostRequest);
   }
 
   /// get temp post from db
   LMResponse<Post> getTemporaryPost() {
     return persistenceRepository.getTemporaryPost();
+  }
+
+  /// clear temp post from db
+  Future<LMResponse<void>> clearTemporaryPost() {
+    return persistenceRepository.clearTemporaryPost();
   }
 }
