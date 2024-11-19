@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.17.0]
+
+- Added support for retry mechanism for all the api failure
+
 ## [1.16.1]
 
 - Added support for thumbnail url in Attachment model
