@@ -195,16 +195,38 @@ class AuthService {
   /// Throws [DioException] if error
   Future<LogoutResponseEntity> logout(LogoutRequest? request) async {
     try {
+      final String? refreshToken =
+          request?.refreshToken ?? apiClient.getRefreshToken;
+      final String? deviceId = request?.deviceId;
+
+      // if refresh token is null, then clear tokens and return success
+      if (refreshToken == null) {
+        request?.callback?.logoutCallback();
+        apiClient.clearTokens();
+        if (!testEnvironment) {
+          PersistenceApi persistenceApi =
+              SDKApplication.instance.getPersistenceApi();
+
+          persistenceApi.clearCache();
+          persistenceApi.clearCommunityConfigurationDB();
+          persistenceApi.deleteUserDB();
+          persistenceApi.deleteMemberState();
+          persistenceApi.clearTemporaryPost();
+        }
+        return LogoutResponseEntity(success: true);
+      }
+
       final response = await apiClient.client().post(
         apiClient.getEndpoints.authLogoutEndpoint,
         data: {
-          "refresh_token": request!.refreshToken ?? apiClient.getRefreshToken
+          "refresh_token": refreshToken,
+          "device_id": deviceId,
         },
       );
 
       LogoutResponseEntity logoutResponse =
           LogoutResponseEntity.fromJson(response.data);
-      request.callback?.logoutCallback();
+      request?.callback?.logoutCallback();
       apiClient.clearTokens();
       if (!testEnvironment) {
         PersistenceApi persistenceApi =
@@ -214,6 +236,7 @@ class AuthService {
         persistenceApi.clearCommunityConfigurationDB();
         persistenceApi.deleteUserDB();
         persistenceApi.deleteMemberState();
+        persistenceApi.clearTemporaryPost();
       }
 
       return logoutResponse;

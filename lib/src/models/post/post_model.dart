@@ -15,8 +15,10 @@ class Post {
 // Post Details
   final String id; // Unique identifier for the post
   final String uuid; // Unique identifier for the creator of post
-  final int communityId; // ID of the community to which the post belongs
+  final int? communityId; // ID of the community to which the post belongs
   final String? tempId; // Temporary identifier for the post (nullable)
+  final int?
+      feedroomId; // ID of the feedroom to which the post belongs (nullable)
 
   // Post Data
   final String text; // Text content of the post
@@ -58,7 +60,8 @@ class Post {
     required this.id,
     required this.text,
     required this.attachments,
-    required this.communityId,
+    this.communityId,
+    this.feedroomId,
     required this.isPinned,
     required this.uuid,
     required this.likeCount,
@@ -93,6 +96,7 @@ class Post {
       attachments:
           postEntity.attachments?.map((e) => Attachment.fromEntity(e)).toList(),
       communityId: postEntity.communityId,
+      feedroomId: postEntity.feedroomId,
       isPinned: postEntity.isPinned,
       uuid: postEntity.uuid,
       likeCount: postEntity.likeCount,
@@ -130,6 +134,7 @@ class Post {
       isEdited: isEdited,
       attachments: attachments?.map((e) => e.toEntity()).toList(),
       communityId: communityId,
+      feedroomId: feedroomId,
       isPinned: isPinned,
       uuid: uuid,
       likeCount: likeCount,
@@ -164,7 +169,9 @@ class PostEntity {
   final String text;
   final List<AttachmentEntity>? attachments;
   @JsonKey(name: 'community_id')
-  final int communityId;
+  final int? communityId;
+  @JsonKey(name: 'feedroom_id')
+  final int? feedroomId;
   @JsonKey(name: 'is_pinned')
   final bool isPinned;
   @JsonKey(name: 'is_liked')
@@ -211,7 +218,8 @@ class PostEntity {
       {required this.id,
       required this.text,
       required this.attachments,
-      required this.communityId,
+      this.communityId,
+      this.feedroomId,
       required this.isPinned,
       required this.uuid,
       required this.likeCount,

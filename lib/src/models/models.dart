@@ -204,6 +204,9 @@ export 'package:likeminds_feed/src/models/sdk/sdk_client_info_model.dart';
 
 export 'package:likeminds_feed/src/models/cache/cache.dart';
 
+export 'package:likeminds_feed/src/models/post/save_temporary_post_request.dart';
+export 'package:likeminds_feed/src/models/post/delete_temporary_post_request.dart';
+
 // -----
 // Community Models
 export 'package:likeminds_feed/src/models/community/action.dart';

@@ -67,4 +67,25 @@ class PersistenceService {
   Future<LMResponse<void>> deleteMemberState() async {
     return await feedPersistence!.deleteMemberState();
   }
+
+  /// save temp post to db
+  Future<LMResponse<void>> saveTemporaryPost(SaveTemporaryPostRequest request) {
+    return feedPersistence!.saveTemporaryPost(request);
+  }
+
+  /// delete temp post from db
+  Future<LMResponse<void>> deleteTemporaryPost(
+      DeleteTemporaryPostRequest deleteTemporaryPostRequest) {
+    return feedPersistence!.deleteTemporaryPost(deleteTemporaryPostRequest);
+  }
+
+  /// get temp post from db
+  LMResponse<Post> getTemporaryPost() {
+    return feedPersistence!.getTemporaryPost();
+  }
+
+  /// clear temp post from db
+  Future<LMResponse<void>> clearTemporaryPost() {
+    return feedPersistence!.clearTemporaryPost();
+  }
 }
