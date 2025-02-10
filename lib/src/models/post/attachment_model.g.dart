@@ -67,6 +67,9 @@ Map<String, dynamic> _$AttachmentMetaEntityToJson(
     'allow_add_option': instance.allowAddOption,
     'meta': instance.meta,
     'thumbnail_url': instance.thumbnailUrl,
+    'width': instance.width,
+    'height': instance.height,
+    'name': instance.name,
   };
   return attachmentMeta;
 }
