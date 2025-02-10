@@ -45,6 +45,7 @@ AttachmentMetaEntity _$AttachmentMetaEntityFromJson(
       isAnonymous: json['is_anonymous'] as bool?,
       allowAddOption: json['allow_add_option'] as bool?,
       thumbnailUrl: json['thumbnail_url'] as String?,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$AttachmentMetaEntityToJson(
