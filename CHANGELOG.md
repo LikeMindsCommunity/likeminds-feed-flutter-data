@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.18.0]
+
+- Added height, width and name in Attachment meta
+
 ## [1.17.0]
 
 - Added support for retry mechanism for all the api failure
