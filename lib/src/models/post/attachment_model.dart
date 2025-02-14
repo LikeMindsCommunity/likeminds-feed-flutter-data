@@ -128,6 +128,9 @@ class AttachmentMeta {
   /// The thumbnail URL of the attachment.
   final String? thumbnailUrl;
 
+  /// Name of the attachment file.
+  final String? name;
+
   /// Creates an [AttachmentMeta] instance.
   AttachmentMeta({
     this.url,
@@ -152,6 +155,7 @@ class AttachmentMeta {
     this.isAnonymous,
     this.allowAddOption,
     this.thumbnailUrl,
+    this.name,
   });
 
   /// Creates an [AttachmentMeta] from an [AttachmentMetaEntity].
@@ -177,6 +181,7 @@ class AttachmentMeta {
       isAnonymous: entity.isAnonymous,
       allowAddOption: entity.allowAddOption,
       thumbnailUrl: entity.thumbnailUrl,
+      name: entity.name,
     );
   }
 
@@ -203,6 +208,7 @@ class AttachmentMeta {
       isAnonymous: isAnonymous,
       allowAddOption: allowAddOption,
       thumbnailUrl: thumbnailUrl,
+      name: name,
     );
   }
 }
@@ -283,6 +289,10 @@ class AttachmentMetaEntity {
   @JsonKey(name: 'thumbnail_url')
   final String? thumbnailUrl;
 
+  /// Name of the attachment file.
+  @JsonKey(name: 'name')
+  final String? name;
+
   /// Creates an [AttachmentMetaEntity] instance.
   AttachmentMetaEntity({
     this.url,
@@ -305,6 +315,7 @@ class AttachmentMetaEntity {
     this.isAnonymous,
     this.allowAddOption,
     this.thumbnailUrl,
+    this.name,
   });
 
   /// Creates an [AttachmentMetaEntity] from a JSON map.
