@@ -1,14 +1,18 @@
+import 'dart:convert';
+
 class GetPersonalisedFeedRequest {
   final int page;
   final int? pageSize;
   final bool? shouldRecompute;
   final bool? shouldReorder;
+  final List<String>? startFeedWithPostIds;
 
   GetPersonalisedFeedRequest._({
     required this.page,
     this.pageSize,
     this.shouldRecompute,
     this.shouldReorder,
+    this.startFeedWithPostIds,
   });
 
   Map<String, dynamic> toJson() {
@@ -17,6 +21,7 @@ class GetPersonalisedFeedRequest {
       'page_size': pageSize,
       'should_recompute': shouldRecompute,
       'should_reorder': shouldReorder,
+      'post_ids': jsonEncode(startFeedWithPostIds),
     };
   }
 }
@@ -26,6 +31,7 @@ class GetPersonalisedFeedRequestBuilder {
   int? _pageSize;
   bool? _shouldRecompute;
   bool? _shouldReorder;
+  List<String>? _startFeedWithPostIds;
 
   GetPersonalisedFeedRequestBuilder();
 
@@ -45,6 +51,10 @@ class GetPersonalisedFeedRequestBuilder {
     _shouldReorder = shouldReorder;
   }
 
+  void startFeedWithPostIds(List<String> startFeedWithPostIds) {
+    _startFeedWithPostIds = startFeedWithPostIds;
+  }
+
   GetPersonalisedFeedRequest build() {
     if (_page == null) {
       throw ArgumentError('page is required');
@@ -54,6 +64,7 @@ class GetPersonalisedFeedRequestBuilder {
       pageSize: _pageSize,
       shouldRecompute: _shouldRecompute,
       shouldReorder: _shouldReorder,
+      startFeedWithPostIds: _startFeedWithPostIds,
     );
   }
 }
