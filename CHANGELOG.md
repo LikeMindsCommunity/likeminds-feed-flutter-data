@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.19.0]
+
+- Added support for start feed id in universal and personalised feed
+
 ## [1.18.0]
 
 - Added height, width and name in Attachment meta
