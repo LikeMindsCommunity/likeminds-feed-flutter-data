@@ -2,7 +2,7 @@
 
 ## [1.19.0]
 
-- Added support for start feed id in universal and personalised feed
+- Added support for initializing the feed with a specific post using postId in both Universal Feed and Personalized Feed.
 
 ## [1.18.0]
 
