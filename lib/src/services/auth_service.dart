@@ -197,11 +197,11 @@ class AuthService {
     try {
       final String? refreshToken =
           request?.refreshToken ?? apiClient.getRefreshToken;
+      final String? accessToken = apiClient.accessToken;
       final String? deviceId = request?.deviceId;
-
+      request?.callback?.logoutCallback();
       // if refresh token is null, then clear tokens and return success
-      if (refreshToken == null) {
-        request?.callback?.logoutCallback();
+      if (refreshToken == null && accessToken == null) {
         apiClient.clearTokens();
         if (!testEnvironment) {
           PersistenceApi persistenceApi =
@@ -214,20 +214,23 @@ class AuthService {
           persistenceApi.clearTemporaryPost();
         }
         return LogoutResponseEntity(success: true);
+      } else if (deviceId != null) {
+        final response = await apiClient.client().post(
+          apiClient.getEndpoints.authLogoutEndpoint,
+          data: {
+            "refresh_token": refreshToken,
+            "device_id": deviceId,
+          },
+        );
+
+        LogoutResponseEntity logoutResponse =
+            LogoutResponseEntity.fromJson(response.data);
+
+        apiClient.clearTokens();
+
+        return logoutResponse;
       }
 
-      final response = await apiClient.client().post(
-        apiClient.getEndpoints.authLogoutEndpoint,
-        data: {
-          "refresh_token": refreshToken,
-          "device_id": deviceId,
-        },
-      );
-
-      LogoutResponseEntity logoutResponse =
-          LogoutResponseEntity.fromJson(response.data);
-      request?.callback?.logoutCallback();
-      apiClient.clearTokens();
       if (!testEnvironment) {
         PersistenceApi persistenceApi =
             SDKApplication.instance.getPersistenceApi();
@@ -238,8 +241,7 @@ class AuthService {
         persistenceApi.deleteMemberState();
         persistenceApi.clearTemporaryPost();
       }
-
-      return logoutResponse;
+      return LogoutResponseEntity(success: true);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
       LMFeedPersistence.instance.handleException(e, stacktrace);
