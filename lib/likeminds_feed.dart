@@ -943,6 +943,9 @@ class LMFeedClientBuilder {
   ///
   /// Returns an instance of [LMFeedClient] with the provided configurations.
   LMFeedClient build() {
+    if (_initiateLoggerRequest != null) {
+      LMFeedPersistence.instance.init(request: _initiateLoggerRequest);
+    }
     return LMFeedClient._(
       sdkCallback: _sdkCallback,
       initiateLoggerRequest: _initiateLoggerRequest,
