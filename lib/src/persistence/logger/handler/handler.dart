@@ -3,8 +3,8 @@ import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/logger/schema/log_db.dart';
 import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils.dart';
 
-// This class handles all the DB operations
-// related to Error Logging
+/// This class handles all the DB operations
+/// related to Error Logging
 class LogDBHandler {
   final String loggerBoxName;
   late Box<LMLogDB> loggerBox;
@@ -14,21 +14,37 @@ class LogDBHandler {
   // Initializes the DB
   Future<LMResponse<void>> init() async {
     try {
-      Hive.registerAdapter(LMLogDBAdapter());
+      if (!Hive.isAdapterRegistered(LMLogDBAdapter().typeId)) {
+        Hive.registerAdapter(LMLogDBAdapter());
+      }
+      if (!Hive.isAdapterRegistered(LMStackTraceDBAdapter().typeId)) {
+        Hive.registerAdapter(LMStackTraceDBAdapter());
+      }
+      if (!Hive.isAdapterRegistered(LMSDKMetaDBAdapter().typeId)) {
+        Hive.registerAdapter(LMSDKMetaDBAdapter());
+      }
+
       loggerBox = await Hive.openBox<LMLogDB>(loggerBoxName);
 
       if (loggerBox.isOpen) {
         return LMResponse(success: true);
       } else {
-        return LMResponse(success: false, errorMessage: 'Failed to open box');
+        // This path is less likely as openBox usually throws on failure.
+        return LMResponse(
+            success: false, errorMessage: 'Failed to open box $loggerBoxName');
       }
     } on Exception catch (e) {
-      return LMResponse(success: false, errorMessage: e.toString());
+      // It's good practice to also log this critical failure to the console.
+      // print('Failed to initialize logger database $loggerBoxName: $e');
+      return LMResponse(
+          success: false,
+          errorMessage:
+              'Failed to initialize logger database: ${e.toString()}');
     }
   }
 
   // Accepts [InsertLogRequest] object as parameter
-  // Creates a LMLogDBModel object and inserts it in the DB
+  // Creates a LMLogDB object and inserts it in the DB
   Future<LMResponse<void>> insertLog(InsertLogRequest request) async {
     try {
       LMStackTraceDB stackTraceRO = LMStackTraceDB(
@@ -36,44 +52,52 @@ class LogDBHandler {
           trace: request.stackTrace.stack);
 
       LMSDKMetaDB sdkMetaRO = LMSDKMetaDB(
-          sampleAppVersion: request.sdkMeta?.sampleAppVersion ?? '',
-          uiVersion: request.sdkMeta?.uiVersion ?? '',
-          middlewareVersion: request.sdkMeta?.middlewareVersion ?? '');
+        dataLayerVersion: request.sdkMeta?.dataLayerVersion ?? "",
+        coreVersion: request.sdkMeta?.coreVersion ?? "",
+      );
 
-      await loggerBox.put(
-          request.timestamp,
-          LMLogDB(
-              timestamp: request.timestamp,
-              stackTrace: stackTraceRO,
-              sdkMeta: sdkMetaRO,
-              severity: request.severity));
+      // Create the log entry, storing the original timestamp within the object.
+      LMLogDB logEntry = LMLogDB(
+          timestamp: request.timestamp, // The actual millisecond timestamp
+          stackTrace: stackTraceRO,
+          sdkMeta: sdkMetaRO,
+          severity: request.severity);
+
+      // Use add() to let Hive assign an auto-incrementing integer key.
+      // This key is guaranteed to be unique and within the valid 0 - 0xFFFFFFFF range.
+      await loggerBox.add(logEntry);
 
       return LMResponse(success: true);
     } on Exception catch (e) {
-      return LMResponse(success: false, errorMessage: e.toString());
+      // print('Failed to insert log into Hive box $loggerBoxName: $e');
+      return LMResponse(
+          success: false,
+          errorMessage: 'Failed to insert log: ${e.toString()}');
     }
   }
 
-  // Returns a list of LMLogDBModel objects
-  // which are older than the timestamp passed as parameter
+  // Returns a list of LMLogDB objects
+  // which are older than or equal to the timestamp passed as parameter
   LMResponse<GetLogResponse> getLogs(int timestamp) {
     try {
-      Iterable<LMLogDB> result = loggerBox.valuesBetween(endKey: timestamp);
+      // Filter values based on the `timestamp` property of the LMLogDB objects.
+      // The original code used `valuesBetween(endKey: timestamp)`, meaning logs
+      // with key <= timestamp. This replicates that logic for the object's property.
+      Iterable<LMLogDB> result =
+          loggerBox.values.where((log) => log.timestamp <= timestamp);
 
-      // Converting LMLogDBModel to LMLog while
-      // Mapping LMLog list with Device Details
+      // Converting LMLogDB to LMLog (using builder pattern)
       List<LMLogBuilder> lmLogBuilderList = result.map((e) {
         LMStackTrace stackTrace = (LMStackTraceBuilder()
               ..exception(e.stackTrace?.exception ?? "")
               ..stack(e.stackTrace?.trace ?? ""))
             .build();
 
-        // Create instance of LMSDKMeta
         LMSDKMeta sdkMeta = (LMSDKMetaBuilder()
-              ..middlewareVersion(e.sdkMeta?.middlewareVersion ?? "")
-              ..sampleAppVersion(e.sdkMeta?.sampleAppVersion ?? "")
-              ..uiVersion(e.sdkMeta?.uiVersion ?? ""))
+              ..dataLayerVersion(e.sdkMeta?.dataLayerVersion ?? "")
+              ..coreVersion(e.sdkMeta?.coreVersion ?? ""))
             .build();
+
         LMLogBuilder lmLogBuilder = LMLogBuilder();
         lmLogBuilder
           ..timestamp(e.timestamp)
@@ -89,7 +113,9 @@ class LogDBHandler {
           data: (GetLogResponseBuilder()..lmLogsBuilder(lmLogBuilderList))
               .build());
     } on Exception catch (e) {
-      return LMResponse(success: false, errorMessage: e.toString());
+      return LMResponse(
+          success: false,
+          errorMessage: 'Failed to retrieve logs: ${e.toString()}');
     }
   }
 
@@ -97,14 +123,27 @@ class LogDBHandler {
   // Deletes the logs passed as parameter
   Future<LMResponse<void>> clearLogs(ClearLogRequest request) async {
     try {
-      Iterable<LMLogDB> result =
-          loggerBox.valuesBetween(endKey: request.timestamp);
+      List<dynamic> keysToDelete = [];
 
-      await loggerBox.deleteAll(result.map((e) => e.timestamp));
+      // Iterate over the box's key-value pairs to find logs matching the criterion.
+      // loggerBox.toMap() loads all entries into memory. This is generally fine
+      // for client-side logging scenarios but could be optimized for extremely large boxes
+      // by iterating keys and fetching values one by one if memory becomes an issue.
+      loggerBox.toMap().forEach((key, logValue) {
+        if (logValue.timestamp <= request.timestamp) {
+          keysToDelete.add(key); // `key` is the auto-generated Hive key
+        }
+      });
+
+      if (keysToDelete.isNotEmpty) {
+        await loggerBox.deleteAll(keysToDelete);
+      }
 
       return LMResponse(success: true);
     } on Exception catch (e) {
-      return LMResponse(success: false, errorMessage: e.toString());
+      return LMResponse(
+          success: false,
+          errorMessage: 'Failed to clear logs: ${e.toString()}');
     }
   }
 }

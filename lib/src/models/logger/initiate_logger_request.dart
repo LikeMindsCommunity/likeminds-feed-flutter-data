@@ -4,15 +4,13 @@ class InitiateLoggerRequest {
   final Function(Exception, StackTrace) onErrorHandler;
   final bool shareLogsWithLM;
   final Severity logLevel;
-  final String? sampleAppVersion;
-  final String? uiVersion;
+  final String coreVersion;
 
   InitiateLoggerRequest._({
     required this.onErrorHandler,
     required this.shareLogsWithLM,
     required this.logLevel,
-    this.sampleAppVersion,
-    this.uiVersion,
+    required this.coreVersion,
   });
 }
 
@@ -20,8 +18,7 @@ class InitiateLoggerRequestBuilder {
   Function(Exception, StackTrace)? _onErrorHandler;
   bool? _shareLogsWithLM;
   Severity? _logLevel;
-  String? _sampleAppVersion;
-  String? _uiVersion;
+  String? _coreVersion;
 
   void errorHandler(Function(Exception, StackTrace) onErrorHandler) {
     _onErrorHandler = onErrorHandler;
@@ -35,12 +32,8 @@ class InitiateLoggerRequestBuilder {
     _logLevel = logLevel;
   }
 
-  void sampleAppVersion(String sampleAppVersion) {
-    _sampleAppVersion = sampleAppVersion;
-  }
-
-  void uiVersion(String uiVersion) {
-    _uiVersion = uiVersion;
+  void coreVersion(String coreVersion) {
+    _coreVersion = coreVersion;
   }
 
   InitiateLoggerRequest build() {
@@ -48,8 +41,7 @@ class InitiateLoggerRequestBuilder {
       onErrorHandler: _onErrorHandler!,
       shareLogsWithLM: _shareLogsWithLM!,
       logLevel: _logLevel!,
-      sampleAppVersion: _sampleAppVersion,
-      uiVersion: _uiVersion,
+      coreVersion: _coreVersion!,
     );
   }
 }

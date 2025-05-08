@@ -69,9 +69,8 @@ class LMFeedLogger {
     int currentTimestamp = DateTime.now().millisecondsSinceEpoch;
 
     LMSDKMeta lmSdkMeta = (LMSDKMetaBuilder()
-          ..middlewareVersion(feedSDKVersion)
-          ..sampleAppVersion(initiateLoggerRequest!.sampleAppVersion)
-          ..uiVersion(initiateLoggerRequest!.uiVersion))
+          ..dataLayerVersion(feedSDKVersion)
+          ..coreVersion(initiateLoggerRequest!.coreVersion))
         .build();
 
     String severityString = severityMap[severity]!;
