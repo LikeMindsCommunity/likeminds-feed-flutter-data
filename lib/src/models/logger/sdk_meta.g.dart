@@ -7,13 +7,11 @@ part of 'sdk_meta.dart';
 // **************************************************************************
 
 LMSDKMeta _$LMSDKMetaFromJson(Map<String, dynamic> json) => LMSDKMeta(
-      sampleAppVersion: json['sample_app_version'] as String?,
-      uiVersion: json['ui_version'] as String?,
-      middlewareVersion: json['middleware_version'] as String?,
+      dataLayerVersion: json['data_layer_version'] as String?,
+      coreVersion: json['core_version'] as String?,
     );
 
 Map<String, dynamic> _$LMSDKMetaToJson(LMSDKMeta instance) => <String, dynamic>{
-      'sample_app_version': instance.sampleAppVersion,
-      'ui_version': instance.uiVersion,
-      'middleware_version': instance.middlewareVersion,
+      'data_layer_version': instance.dataLayerVersion,
+      'core_version': instance.coreVersion,
     };

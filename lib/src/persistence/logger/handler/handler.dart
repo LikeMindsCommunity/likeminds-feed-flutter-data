@@ -36,9 +36,9 @@ class LogDBHandler {
           trace: request.stackTrace.stack);
 
       LMSDKMetaDB sdkMetaRO = LMSDKMetaDB(
-          sampleAppVersion: request.sdkMeta?.sampleAppVersion ?? '',
-          uiVersion: request.sdkMeta?.uiVersion ?? '',
-          middlewareVersion: request.sdkMeta?.middlewareVersion ?? '');
+        dataLayerVersion: request.sdkMeta?.dataLayerVersion ?? "",
+        coreVersion: request.sdkMeta?.coreVersion ?? "",
+      );
 
       await loggerBox.put(
           request.timestamp,
@@ -70,9 +70,8 @@ class LogDBHandler {
 
         // Create instance of LMSDKMeta
         LMSDKMeta sdkMeta = (LMSDKMetaBuilder()
-              ..middlewareVersion(e.sdkMeta?.middlewareVersion ?? "")
-              ..sampleAppVersion(e.sdkMeta?.sampleAppVersion ?? "")
-              ..uiVersion(e.sdkMeta?.uiVersion ?? ""))
+              ..dataLayerVersion(e.sdkMeta?.dataLayerVersion ?? "")
+              ..coreVersion(e.sdkMeta?.coreVersion ?? ""))
             .build();
         LMLogBuilder lmLogBuilder = LMLogBuilder();
         lmLogBuilder
