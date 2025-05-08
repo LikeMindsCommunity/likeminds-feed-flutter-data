@@ -1,10 +1,10 @@
 import 'package:hive/hive.dart';
-import 'package:likeminds_feed/likeminds_feed.dart'; // Assuming this exports necessary types
+import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/persistence/logger/schema/log_db.dart';
 import 'package:likeminds_feed/src/persistence/logger/utils/severity_level_utils.dart';
 
-// This class handles all the DB operations
-// related to Error Logging
+/// This class handles all the DB operations
+/// related to Error Logging
 class LogDBHandler {
   final String loggerBoxName;
   late Box<LMLogDB> loggerBox;
@@ -113,7 +113,6 @@ class LogDBHandler {
           data: (GetLogResponseBuilder()..lmLogsBuilder(lmLogBuilderList))
               .build());
     } on Exception catch (e) {
-      // print('Failed to get logs from Hive box $loggerBoxName: $e');
       return LMResponse(
           success: false,
           errorMessage: 'Failed to retrieve logs: ${e.toString()}');
@@ -141,7 +140,6 @@ class LogDBHandler {
 
       return LMResponse(success: true);
     } on Exception catch (e) {
-      // print('Failed to clear logs from Hive box $loggerBoxName: $e');
       return LMResponse(
           success: false,
           errorMessage: 'Failed to clear logs: ${e.toString()}');
