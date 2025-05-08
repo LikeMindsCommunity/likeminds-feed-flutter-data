@@ -31,7 +31,6 @@ class LMLogDB extends HiveObject {
   }
 }
 
-// TODO: change this noor
 @HiveType(typeId: 41)
 class LMSDKMetaDB extends HiveObject {
   @HiveField(0)

@@ -11,7 +11,10 @@ class LMCacheDBHandler {
 
   Future<LMResponse<void>> init() async {
     try {
-      Hive.registerAdapter(LMCacheDBAdapter());
+      if (!Hive.isAdapterRegistered(LMCacheDBAdapter().typeId)) {
+        Hive.registerAdapter(LMCacheDBAdapter());
+      }
+
       cacheBox = await Hive.openBox<LMCacheDB>(cacheBoxName);
 
       if (cacheBox.isOpen) {

@@ -13,7 +13,10 @@ class LMFeedSeenPostDBHandler {
 
   Future<LMResponse> init() async {
     try {
-      Hive.registerAdapter(LMSeenPostDBAdapter());
+      if (!Hive.isAdapterRegistered(LMSeenPostDBAdapter().typeId)) {
+        Hive.registerAdapter(LMSeenPostDBAdapter());
+      }
+
       _seenPostBox = await Hive.openBox<LMSeenPostDB>(seenPostBoxName);
 
       if (_seenPostBox.isOpen) {
