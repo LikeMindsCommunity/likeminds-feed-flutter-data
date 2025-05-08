@@ -2,30 +2,17 @@ import 'package:likeminds_feed/likeminds_feed.dart';
 import 'package:likeminds_feed/src/di/di_service.dart';
 
 class LogoutRequest {
-  final String? refreshToken;
   final String? deviceId;
-  final LMSDKCallback? callback =
-      DIService.getIt.isRegistered<LMSDKCallback>(instanceName: "LMCallback")
-          ? DIService.getIt.get<LMSDKCallback>(
-              instanceName: "LMCallback",
-            )
-          : null;
 
   LogoutRequest._({
-    this.refreshToken,
     this.deviceId,
   });
 }
 
 class LogoutRequestBuilder {
-  String? _refreshToken;
   String? _deviceId;
 
   LogoutRequestBuilder();
-
-  void refreshToken(String refreshToken) {
-    _refreshToken = refreshToken;
-  }
 
   void deviceId(String deviceId) {
     _deviceId = deviceId;
@@ -34,7 +21,6 @@ class LogoutRequestBuilder {
   LogoutRequest build() {
     return LogoutRequest._(
       deviceId: _deviceId,
-      refreshToken: _refreshToken,
     );
   }
 }

@@ -190,18 +190,20 @@ class AuthService {
 
   /// Logout user
   /// Logs out a SDK user, and clears tokens
-  /// Returns [LogoutResponseEntity] if success
+  /// Returns [LMResponse] if success
   /// Takes [LogoutRequest] as input
   /// Throws [DioException] if error
-  Future<LogoutResponseEntity> logout(LogoutRequest? request) async {
+  Future<LMResponse<void>> logout(LogoutRequest? request) async {
     try {
-      final String? refreshToken =
-          request?.refreshToken ?? apiClient.getRefreshToken;
+      final String? refreshToken = apiClient.getRefreshToken;
       final String? accessToken = apiClient.accessToken;
       final String? deviceId = request?.deviceId;
 
       // if refresh token is null, then clear tokens and return success
-      if (refreshToken == null && accessToken == null) {
+      if (refreshToken == null || accessToken == null) {
+        if (accessToken != null) {
+          await LMFeedPersistence.instance.flushLogs();
+        }
         apiClient.clearTokens();
         if (!testEnvironment) {
           PersistenceApi persistenceApi =
@@ -213,9 +215,10 @@ class AuthService {
           persistenceApi.deleteMemberState();
           persistenceApi.clearTemporaryPost();
         }
-        request?.callback?.logoutCallback();
-        return LogoutResponseEntity(success: true);
+
+        return LMResponse(success: true);
       } else if (deviceId != null) {
+        await LMFeedPersistence.instance.flushLogs();
         final response = await apiClient.client().post(
           apiClient.getEndpoints.authLogoutEndpoint,
           data: {
@@ -223,15 +226,11 @@ class AuthService {
             "device_id": deviceId,
           },
         );
-
-        LogoutResponseEntity logoutResponse =
-            LogoutResponseEntity.fromJson(response.data);
+        bool success = response.data['success'];
 
         apiClient.clearTokens();
-        if (logoutResponse.success) {
-          request?.callback?.logoutCallback();
-        }
-        return logoutResponse;
+
+        return LMResponse.success(data: response.data);
       }
 
       if (!testEnvironment) {
@@ -244,8 +243,8 @@ class AuthService {
         persistenceApi.deleteMemberState();
         persistenceApi.clearTemporaryPost();
       }
-      request?.callback?.logoutCallback();
-      return LogoutResponseEntity(success: true);
+
+      return LMResponse(success: true);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
       LMFeedPersistence.instance.handleException(e, stacktrace);
@@ -253,10 +252,8 @@ class AuthService {
       if (e.response != null && e.response!.data != null) {
         errorMessage = e.response!.data['error_message'];
       }
-      return LogoutResponseEntity(
-        success: false,
-        errorMessage: errorMessage ?? "An error occurred",
-      );
+      return LMResponse.error(
+          errorMessage: errorMessage ?? "An error occurred");
     }
   }
 }

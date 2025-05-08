@@ -93,6 +93,7 @@ class LogDBHandler {
     }
   }
 
+// this is wrong
   // Deletes the logs passed as parameter
   Future<LMResponse<void>> clearLogs(ClearLogRequest request) async {
     try {

@@ -16,10 +16,6 @@ InitiateUserResponseEntity _$InitiateUserResponseEntityFromJson(
           ? null
           : CommunityEntity.fromJson(
               json['data']['community'] as Map<String, dynamic>),
-      logoutResponse: json['data']['logout_response'] == null
-          ? null
-          : LogoutResponseEntity.fromJson(
-              json['data']['logout_response'] as Map<String, dynamic>),
       accessToken: json['data']['access_token'] as String?,
       refreshToken: json['data']['refresh_token'] as String?,
       errorMessage: json['error_message'] as String?,
@@ -33,7 +29,6 @@ Map<String, dynamic> _$InitiateUserResponseEntityToJson(
         'app_access': instance.appAccess,
         'user': instance.user?.toJson(),
         'community': instance.community?.toJson(),
-        'logout_response': instance.logoutResponse?.toJson(),
         'access_token': instance.accessToken,
         'refresh_token': instance.refreshToken,
       },

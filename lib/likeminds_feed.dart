@@ -135,8 +135,8 @@ class LMFeedClient {
 
   /// logout is used to logout a user session
   /// [LogoutRequest] is used to pass the required parameters
-  /// [LogoutResponse] is returned as a Future
-  Future<LogoutResponse> logout(LogoutRequest request) async {
+  /// [LMResponse] is returned as a Future
+  Future<LMResponse<void>> logout(LogoutRequest request) async {
     return await _sdkApplication.getAuthApi().logoutUser(request);
   }
   // ------------------------------------------
@@ -886,7 +886,8 @@ class LMFeedClient {
   // ---------------------------------------
 
   /// Insert a temp post to the database
-  Future<LMResponse<void>> saveTemporaryPost(SaveTemporaryPostRequest request) async {
+  Future<LMResponse<void>> saveTemporaryPost(
+      SaveTemporaryPostRequest request) async {
     return await _sdkApplication.getPersistenceApi().saveTemporaryPost(request);
   }
 

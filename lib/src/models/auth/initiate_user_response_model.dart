@@ -8,7 +8,7 @@ class InitiateUserResponse {
   final bool? appAccess;
   final User? user;
   final Community? community;
-  final LogoutResponse? logoutResponse;
+  final LMResponse? logoutResponse;
   final String? accessToken;
   final String? refreshToken;
   final String? errorMessage;
@@ -32,9 +32,7 @@ class InitiateUserResponse {
       community: entity.community != null
           ? Community.fromEntity(entity.community!)
           : null,
-      logoutResponse: entity.logoutResponse != null
-          ? LogoutResponse.fromEntity(entity.logoutResponse!)
-          : null,
+      logoutResponse: entity.logoutResponse,
       accessToken: entity.accessToken,
       refreshToken: entity.refreshToken,
       errorMessage: entity.errorMessage,
@@ -47,7 +45,7 @@ class InitiateUserResponse {
       appAccess: appAccess,
       user: user?.toEntity(),
       community: community?.toEntity(),
-      logoutResponse: logoutResponse?.toEntity(),
+      logoutResponse: logoutResponse,
       accessToken: accessToken,
       refreshToken: refreshToken,
       errorMessage: errorMessage,
@@ -69,7 +67,7 @@ class InitiateUserResponseEntity {
   final CommunityEntity? community;
 
   @JsonKey(name: 'logout_response')
-  final LogoutResponseEntity? logoutResponse;
+  final LMResponse? logoutResponse;
 
   @JsonKey(name: 'access_token')
   final String? accessToken;
