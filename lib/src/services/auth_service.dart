@@ -218,7 +218,6 @@ class AuthService {
 
         return LMResponse(success: true);
       } else if (deviceId != null) {
-        await LMFeedPersistence.instance.flushLogs();
         final response = await apiClient.client().post(
           apiClient.getEndpoints.authLogoutEndpoint,
           data: {
@@ -226,11 +225,13 @@ class AuthService {
             "device_id": deviceId,
           },
         );
-        bool success = response.data['success'];
-
+        bool success = bool.parse(response.data['success']);
+        await LMFeedPersistence.instance.flushLogs();
         apiClient.clearTokens();
 
-        return LMResponse.success(data: response.data);
+        return success
+            ? LMResponse.success(data: response.data)
+            : LMResponse.error(errorMessage: response.data['errorMessage']);
       }
 
       if (!testEnvironment) {
@@ -243,7 +244,8 @@ class AuthService {
         persistenceApi.deleteMemberState();
         persistenceApi.clearTemporaryPost();
       }
-
+      await LMFeedPersistence.instance.logger
+          .clearLogs(DateTime.now().millisecondsSinceEpoch);
       return LMResponse(success: true);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");

@@ -1,6 +1,3 @@
-import 'package:likeminds_feed/likeminds_feed.dart';
-import 'package:likeminds_feed/src/di/di_service.dart';
-
 class LogoutRequest {
   final String? deviceId;
 
