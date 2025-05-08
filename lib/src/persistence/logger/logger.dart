@@ -219,11 +219,11 @@ class LMFeedLogger {
 
   // Deletes all the logs upto the timestamp passed as parameter
   // Wrapper function for LogDBHandler
-  void _clearLogs(ClearLogRequest clearLogRequest) {
+  Future<LMResponse<void>> _clearLogs(ClearLogRequest clearLogRequest) async {
     if (!checkIfLoggerInitialised()) {
-      return;
+      return LMResponse(success: false, errorMessage: "Logger not initilized");
     }
-    logDBHandler!.clearLogs(clearLogRequest);
+    return await logDBHandler!.clearLogs(clearLogRequest);
   }
 
   // This function should be called on
@@ -234,5 +234,12 @@ class LMFeedLogger {
   // Deletes the logs from DB
   Future<void> flushLogs() async {
     await _pushLogs();
+  }
+
+  /// used to clear logs
+  Future<LMResponse<void>> clearLogs(int timestamp) async {
+    ClearLogRequest clearLogRequest =
+        (ClearLogRequestBuilder()..timestamp(timestamp)).build();
+    return await _clearLogs(clearLogRequest);
   }
 }
