@@ -12,14 +12,18 @@ class LMFeedTempPostDBHandler {
   /// Initialize the PostDBHandler by registering the adapter and opening the box
   Future<LMResponse<void>> init() async {
     try {
-      if (!Hive.isAdapterRegistered(LMPostDBAdapter().typeId)) {
-        Hive.registerAdapter(LMPostDBAdapter());
+      final lmPostDBAdapter = LMPostDBAdapter();
+      final lmAttachmentDBAdapter = LMAttachmentDBAdapter();
+      final lmAttachmentMetaDBAdapter = LMAttachmentMetaDBAdapter();
+
+      if (!Hive.isAdapterRegistered(lmPostDBAdapter.typeId)) {
+        Hive.registerAdapter(lmPostDBAdapter);
       }
-      if (!Hive.isAdapterRegistered(LMAttachmentDBAdapter().typeId)) {
-        Hive.registerAdapter(LMAttachmentDBAdapter());
+      if (!Hive.isAdapterRegistered(lmAttachmentDBAdapter.typeId)) {
+        Hive.registerAdapter(lmAttachmentDBAdapter);
       }
-      if (!Hive.isAdapterRegistered(LMAttachmentMetaDBAdapter().typeId)) {
-        Hive.registerAdapter(LMAttachmentMetaDBAdapter());
+      if (!Hive.isAdapterRegistered(lmAttachmentMetaDBAdapter.typeId)) {
+        Hive.registerAdapter(lmAttachmentMetaDBAdapter);
       }
 
       postBox = await Hive.openBox<LMPostDB>(postBoxName);

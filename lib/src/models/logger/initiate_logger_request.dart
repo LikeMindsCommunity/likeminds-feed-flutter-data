@@ -4,13 +4,13 @@ class InitiateLoggerRequest {
   final Function(Exception, StackTrace) onErrorHandler;
   final bool shareLogsWithLM;
   final Severity logLevel;
-  final String coreVersion;
+  final String? coreVersion;
 
   InitiateLoggerRequest._({
     required this.onErrorHandler,
     required this.shareLogsWithLM,
     required this.logLevel,
-    required this.coreVersion,
+    this.coreVersion,
   });
 }
 
@@ -37,6 +37,16 @@ class InitiateLoggerRequestBuilder {
   }
 
   InitiateLoggerRequest build() {
+    if (_onErrorHandler == null) {
+      throw ArgumentError('onErrorHandler must not be null');
+    }
+    if (_shareLogsWithLM == null) {
+      throw ArgumentError('shareLogsWithLM must not be null');
+    }
+    if (_logLevel == null) {
+      throw ArgumentError('logLevel must not be null');
+    }
+
     return InitiateLoggerRequest._(
       onErrorHandler: _onErrorHandler!,
       shareLogsWithLM: _shareLogsWithLM!,

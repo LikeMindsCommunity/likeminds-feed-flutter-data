@@ -14,14 +14,18 @@ class LogDBHandler {
   // Initializes the DB
   Future<LMResponse<void>> init() async {
     try {
-      if (!Hive.isAdapterRegistered(LMLogDBAdapter().typeId)) {
-        Hive.registerAdapter(LMLogDBAdapter());
+      final lmLogDBAdapter = LMLogDBAdapter();
+      final lmStackTraceDBAdapter = LMStackTraceDBAdapter();
+      final lmSDKMetaDBAdapter = LMSDKMetaDBAdapter();
+
+      if (!Hive.isAdapterRegistered(lmLogDBAdapter.typeId)) {
+        Hive.registerAdapter(lmLogDBAdapter);
       }
-      if (!Hive.isAdapterRegistered(LMStackTraceDBAdapter().typeId)) {
-        Hive.registerAdapter(LMStackTraceDBAdapter());
+      if (!Hive.isAdapterRegistered(lmStackTraceDBAdapter.typeId)) {
+        Hive.registerAdapter(lmStackTraceDBAdapter);
       }
-      if (!Hive.isAdapterRegistered(LMSDKMetaDBAdapter().typeId)) {
-        Hive.registerAdapter(LMSDKMetaDBAdapter());
+      if (!Hive.isAdapterRegistered(lmSDKMetaDBAdapter.typeId)) {
+        Hive.registerAdapter(lmSDKMetaDBAdapter);
       }
 
       loggerBox = await Hive.openBox<LMLogDB>(loggerBoxName);
