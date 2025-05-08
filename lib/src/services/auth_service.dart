@@ -199,7 +199,7 @@ class AuthService {
           request?.refreshToken ?? apiClient.getRefreshToken;
       final String? accessToken = apiClient.accessToken;
       final String? deviceId = request?.deviceId;
-      request?.callback?.logoutCallback();
+
       // if refresh token is null, then clear tokens and return success
       if (refreshToken == null && accessToken == null) {
         apiClient.clearTokens();
@@ -213,6 +213,7 @@ class AuthService {
           persistenceApi.deleteMemberState();
           persistenceApi.clearTemporaryPost();
         }
+        request?.callback?.logoutCallback();
         return LogoutResponseEntity(success: true);
       } else if (deviceId != null) {
         final response = await apiClient.client().post(
@@ -227,7 +228,9 @@ class AuthService {
             LogoutResponseEntity.fromJson(response.data);
 
         apiClient.clearTokens();
-
+        if (logoutResponse.success) {
+          request?.callback?.logoutCallback();
+        }
         return logoutResponse;
       }
 
@@ -241,6 +244,7 @@ class AuthService {
         persistenceApi.deleteMemberState();
         persistenceApi.clearTemporaryPost();
       }
+      request?.callback?.logoutCallback();
       return LogoutResponseEntity(success: true);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
