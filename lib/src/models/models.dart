@@ -6,7 +6,6 @@ export 'package:likeminds_feed/src/models/response.dart';
 export 'package:likeminds_feed/src/models/auth/refresh_request_model.dart';
 export 'package:likeminds_feed/src/models/auth/refresh_response_model.dart';
 
-export 'package:likeminds_feed/src/models/auth/logout_response_model.dart';
 export 'package:likeminds_feed/src/models/auth/logout_request_model.dart';
 export 'package:likeminds_feed/src/models/auth/member_state_response_model.dart';
 export 'package:likeminds_feed/src/models/auth/validate_user_request.model.dart';

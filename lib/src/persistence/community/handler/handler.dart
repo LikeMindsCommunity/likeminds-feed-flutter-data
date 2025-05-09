@@ -11,7 +11,10 @@ class LMCommunityConfigurationDBHandler {
 
   Future<LMResponse<void>> init() async {
     try {
-      Hive.registerAdapter(LMCommunityConfigurationDBAdapter());
+      if (!Hive.isAdapterRegistered(
+          LMCommunityConfigurationDBAdapter().typeId)) {
+        Hive.registerAdapter(LMCommunityConfigurationDBAdapter());
+      }
 
       communityConfigBox = await Hive.openBox<LMCommunityConfigurationDB>(
           communityConfigBoxName);

@@ -4,17 +4,14 @@ part 'sdk_meta.g.dart';
 
 @JsonSerializable()
 class LMSDKMeta {
-  @JsonKey(name: 'sample_app_version')
-  final String? sampleAppVersion;
-  @JsonKey(name: 'ui_version')
-  final String? uiVersion;
-  @JsonKey(name: 'middleware_version')
-  final String? middlewareVersion;
+  @JsonKey(name: 'data_layer_version')
+  final String? dataLayerVersion;
+  @JsonKey(name: 'core_version')
+  final String? coreVersion;
 
   LMSDKMeta({
-    this.sampleAppVersion,
-    this.uiVersion,
-    this.middlewareVersion,
+    this.dataLayerVersion,
+    this.coreVersion,
   });
 
   factory LMSDKMeta.fromJson(Map<String, dynamic> json) =>
@@ -24,27 +21,21 @@ class LMSDKMeta {
 }
 
 class LMSDKMetaBuilder {
-  String? _sampleAppVersion;
-  String? _uiVersion;
-  String? _middlewareVersion;
+  String? _dataLayerVersion;
+  String? _coreVersion;
 
-  void sampleAppVersion(String? sampleAppVersion) {
-    _sampleAppVersion = sampleAppVersion;
+  void dataLayerVersion(String? dataLayerVersion) {
+    _dataLayerVersion = dataLayerVersion;
   }
 
-  void uiVersion(String? uiVersion) {
-    _uiVersion = uiVersion;
-  }
-
-  void middlewareVersion(String middlewareVersion) {
-    _middlewareVersion = middlewareVersion;
+  void coreVersion(String? coreVersion) {
+    _coreVersion = coreVersion;
   }
 
   LMSDKMeta build() {
     return LMSDKMeta(
-      sampleAppVersion: _sampleAppVersion,
-      uiVersion: _uiVersion,
-      middlewareVersion: _middlewareVersion,
+      dataLayerVersion: _dataLayerVersion,
+      coreVersion: _coreVersion,
     );
   }
 }

@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -69,9 +70,8 @@ class LMFeedLogger {
     int currentTimestamp = DateTime.now().millisecondsSinceEpoch;
 
     LMSDKMeta lmSdkMeta = (LMSDKMetaBuilder()
-          ..middlewareVersion(feedSDKVersion)
-          ..sampleAppVersion(initiateLoggerRequest!.sampleAppVersion)
-          ..uiVersion(initiateLoggerRequest!.uiVersion))
+          ..dataLayerVersion(feedSDKVersion)
+          ..coreVersion(initiateLoggerRequest!.coreVersion))
         .build();
 
     String severityString = severityMap[severity]!;
@@ -83,7 +83,7 @@ class LMFeedLogger {
           ..timestamp(currentTimestamp))
         .build();
     // insert the log in DB
-    logDBHandler!.insertLog(insertLogRequest);
+    await logDBHandler!.insertLog(insertLogRequest);
   }
 
   // Gets all the logs from the database
@@ -127,7 +127,12 @@ class LMFeedLogger {
     } else {
       isOnWifi = false;
     }
-
+    Size size = PlatformDispatcher.instance.views.first.display.size;
+    double width = size.width;
+    double height = size.height;
+    deviceDetailsBuilder
+      ..screenHeight(height.toInt())
+      ..screenWidth(width.toInt());
     // To store device details
     // OS [Android or iOS]
     // OS Version
@@ -220,11 +225,11 @@ class LMFeedLogger {
 
   // Deletes all the logs upto the timestamp passed as parameter
   // Wrapper function for LogDBHandler
-  void _clearLogs(ClearLogRequest clearLogRequest) {
+  Future<LMResponse<void>> _clearLogs(ClearLogRequest clearLogRequest) async {
     if (!checkIfLoggerInitialised()) {
-      return;
+      return LMResponse(success: false, errorMessage: "Logger not initilized");
     }
-    logDBHandler!.clearLogs(clearLogRequest);
+    return await logDBHandler!.clearLogs(clearLogRequest);
   }
 
   // This function should be called on
@@ -235,5 +240,13 @@ class LMFeedLogger {
   // Deletes the logs from DB
   Future<void> flushLogs() async {
     await _pushLogs();
+  }
+
+  /// used to clear logs
+  Future<LMResponse<void>> clearAllLogs() async {
+    if (!checkIfLoggerInitialised()) {
+      return LMResponse.error(errorMessage: "Logger not initilized");
+    }
+    return await logDBHandler!.clearAllLogs();
   }
 }

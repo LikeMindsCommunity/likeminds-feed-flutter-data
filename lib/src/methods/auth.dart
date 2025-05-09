@@ -40,9 +40,9 @@ class AuthApi {
 
   /// Logout a user
   /// Logs out a user
-  /// Returns [LogoutResponse]
+  /// Returns [LMResponse]
   /// Takes [LogoutRequest] as input
-  Future<LogoutResponse> logoutUser(LogoutRequest logoutRequest) async {
+  Future<LMResponse<void>> logoutUser(LogoutRequest logoutRequest) async {
     return await authRepository.logoutUser(logoutRequest);
   }
 }
