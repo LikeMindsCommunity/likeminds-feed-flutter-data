@@ -214,8 +214,8 @@ class AuthService {
           persistenceApi.deleteUserDB();
           persistenceApi.deleteMemberState();
           persistenceApi.clearTemporaryPost();
+          await LMFeedLogger.instance.clearAllLogs();
         }
-        await LMFeedPersistence.instance.logger.clearALLLogs();
 
         return LMResponse(success: true);
       } else if (deviceId != null) {
@@ -244,8 +244,9 @@ class AuthService {
         persistenceApi.deleteUserDB();
         persistenceApi.deleteMemberState();
         persistenceApi.clearTemporaryPost();
+        await LMFeedLogger.instance.clearAllLogs();
       }
-      await LMFeedPersistence.instance.logger.clearALLLogs();
+
       return LMResponse(success: true);
     } on DioException catch (e, stacktrace) {
       debugPrint("Dio error: $e");
