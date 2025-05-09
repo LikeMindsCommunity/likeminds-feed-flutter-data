@@ -82,7 +82,7 @@ class LMFeedLogger {
           ..timestamp(currentTimestamp))
         .build();
     // insert the log in DB
-    logDBHandler!.insertLog(insertLogRequest);
+    await logDBHandler!.insertLog(insertLogRequest);
   }
 
   // Gets all the logs from the database
@@ -237,7 +237,7 @@ class LMFeedLogger {
   }
 
   /// used to clear logs
-  Future<LMResponse<void>> clearALLLogs() async {
+  Future<LMResponse<void>> clearAllLogs() async {
     if (!checkIfLoggerInitialised()) {
       return LMResponse.error(errorMessage: "Logger not initilized");
     }
