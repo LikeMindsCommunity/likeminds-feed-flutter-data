@@ -38,8 +38,6 @@ class LogDBHandler {
             success: false, errorMessage: 'Failed to open box $loggerBoxName');
       }
     } on Exception catch (e) {
-      // It's good practice to also log this critical failure to the console.
-      // print('Failed to initialize logger database $loggerBoxName: $e');
       return LMResponse(
           success: false,
           errorMessage:
@@ -147,6 +145,18 @@ class LogDBHandler {
       return LMResponse(
           success: false,
           errorMessage: 'Failed to clear logs: ${e.toString()}');
+    }
+  }
+
+  // Clears all logs from the database
+  Future<LMResponse<void>> clearAllLogs() async {
+    try {
+      await loggerBox.clear();
+      return LMResponse(success: true);
+    } on Exception catch (e) {
+      return LMResponse(
+          success: false,
+          errorMessage: 'Failed to clear all logs: ${e.toString()}');
     }
   }
 }
