@@ -4,6 +4,7 @@ export 'src/methods/sdk.dart';
 export 'src/methods/methods.dart';
 export 'src/models/models.dart';
 export 'src/persistence/persistence.dart';
+export 'src/persistence/logger/logger.dart';
 
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
