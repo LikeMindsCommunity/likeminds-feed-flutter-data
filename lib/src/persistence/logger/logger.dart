@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -126,7 +127,12 @@ class LMFeedLogger {
     } else {
       isOnWifi = false;
     }
-
+    Size size = PlatformDispatcher.instance.views.first.display.size;
+    double width = size.width;
+    double height = size.height;
+    deviceDetailsBuilder
+      ..screenHeight(height.toInt())
+      ..screenWidth(width.toInt());
     // To store device details
     // OS [Android or iOS]
     // OS Version
