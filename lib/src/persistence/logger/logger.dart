@@ -237,9 +237,10 @@ class LMFeedLogger {
   }
 
   /// used to clear logs
-  Future<LMResponse<void>> clearLogs(int timestamp) async {
-    ClearLogRequest clearLogRequest =
-        (ClearLogRequestBuilder()..timestamp(timestamp)).build();
-    return await _clearLogs(clearLogRequest);
+  Future<LMResponse<void>> clearALLLogs() async {
+    if (!checkIfLoggerInitialised()) {
+      return LMResponse.error(errorMessage: "Logger not initilized");
+    }
+    return await logDBHandler!.clearAllLogs();
   }
 }
