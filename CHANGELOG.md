@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.20.0]
+
+- Added Error loggin and logout
+
 ## [1.19.0]
 
 - Added support for initializing the feed with a specific post using postId in both Universal Feed and Personalized Feed.
