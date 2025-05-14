@@ -622,17 +622,11 @@ Add Poll Option Response: ${response.data?.widget?.lmMeta?["options"]}''');
     test('Testing Logout without LMSDKCallback', () async {
       String deviceId = "deviceId";
 
-      String refreshToken = "refreshToken";
-
-      LogoutRequest request = (LogoutRequestBuilder()
-            ..deviceId(deviceId)
-            ..refreshToken(refreshToken))
-          .build();
+      LogoutRequest request =
+          (LogoutRequestBuilder()..deviceId(deviceId)).build();
       expect(request, isNotNull);
 
       expect(request.deviceId, deviceId);
-
-      expect(request.refreshToken, refreshToken);
     });
   });
 }

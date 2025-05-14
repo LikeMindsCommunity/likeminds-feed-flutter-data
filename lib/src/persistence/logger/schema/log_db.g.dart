@@ -60,22 +60,19 @@ class LMSDKMetaDBAdapter extends TypeAdapter<LMSDKMetaDB> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return LMSDKMetaDB(
-      sampleAppVersion: fields[0] as String?,
-      uiVersion: fields[1] as String?,
-      middlewareVersion: fields[2] as String?,
+      dataLayerVersion: fields[0] as String?,
+      coreVersion: fields[1] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, LMSDKMetaDB obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.sampleAppVersion)
-      ..writeByte(1)
-      ..write(obj.uiVersion)
       ..writeByte(2)
-      ..write(obj.middlewareVersion);
+      ..writeByte(0)
+      ..write(obj.dataLayerVersion)
+      ..writeByte(1)
+      ..write(obj.coreVersion);
   }
 
   @override

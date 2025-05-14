@@ -28,9 +28,7 @@ class AuthRepository {
     );
   }
 
-  Future<LogoutResponse> logoutUser(LogoutRequest logoutRequest) async {
-    return LogoutResponse.fromEntity(
-      await authService.logout(logoutRequest),
-    );
+  Future<LMResponse> logoutUser(LogoutRequest logoutRequest) async {
+    return await authService.logout(logoutRequest);
   }
 }

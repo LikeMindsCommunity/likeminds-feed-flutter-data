@@ -19,10 +19,23 @@ class LMUserDBHandlerHive {
 
   Future<LMResponse> init() async {
     try {
-      Hive.registerAdapter(LMMemberRightDBAdapter());
-      Hive.registerAdapter(LMMemberStateDBAdapter());
-      Hive.registerAdapter(LMSDKClientInfoDBAdapter());
-      Hive.registerAdapter(LMUserDBAdapter());
+      final lmMemberRightDBAdapter = LMMemberRightDBAdapter();
+      final lmMemberStateDBAdapter = LMMemberStateDBAdapter();
+      final lmSDKClientInfoDBAdapter = LMSDKClientInfoDBAdapter();
+      final lmUserDBAdapter = LMUserDBAdapter();
+
+      if (!Hive.isAdapterRegistered(lmMemberRightDBAdapter.typeId)) {
+        Hive.registerAdapter(lmMemberRightDBAdapter);
+      }
+      if (!Hive.isAdapterRegistered(lmMemberStateDBAdapter.typeId)) {
+        Hive.registerAdapter(lmMemberStateDBAdapter);
+      }
+      if (!Hive.isAdapterRegistered(lmSDKClientInfoDBAdapter.typeId)) {
+        Hive.registerAdapter(lmSDKClientInfoDBAdapter);
+      }
+      if (!Hive.isAdapterRegistered(lmUserDBAdapter.typeId)) {
+        Hive.registerAdapter(lmUserDBAdapter);
+      }
 
       userBox = await Hive.openBox<LMUserDB>(userBoxName);
       memberStateBox = await Hive.openBox<LMMemberStateDB>(memberStateBoxName);

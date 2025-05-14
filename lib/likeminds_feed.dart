@@ -4,6 +4,7 @@ export 'src/methods/sdk.dart';
 export 'src/methods/methods.dart';
 export 'src/models/models.dart';
 export 'src/persistence/persistence.dart';
+export 'src/persistence/logger/logger.dart';
 
 import 'package:likeminds_feed/src/di/di_service.dart';
 import 'package:likeminds_feed/src/methods/methods.dart';
@@ -16,7 +17,7 @@ const _prod = !bool.fromEnvironment('LM_DEBUG');
 // ignore: public_member_api_docs
 const testEnvironment = bool.fromEnvironment('LM_TEST_ENV');
 // ignore: public_member_api_docs
-const String feedSDKVersion = "1.19.0";
+const String feedSDKVersion = "1.20.0";
 
 /// {@template feed_client_builder}
 /// The `LMFeedClient` class is responsible for managing and interacting with
@@ -135,8 +136,8 @@ class LMFeedClient {
 
   /// logout is used to logout a user session
   /// [LogoutRequest] is used to pass the required parameters
-  /// [LogoutResponse] is returned as a Future
-  Future<LogoutResponse> logout(LogoutRequest request) async {
+  /// [LMResponse] is returned as a Future
+  Future<LMResponse<void>> logout(LogoutRequest request) async {
     return await _sdkApplication.getAuthApi().logoutUser(request);
   }
   // ------------------------------------------
@@ -886,7 +887,8 @@ class LMFeedClient {
   // ---------------------------------------
 
   /// Insert a temp post to the database
-  Future<LMResponse<void>> saveTemporaryPost(SaveTemporaryPostRequest request) async {
+  Future<LMResponse<void>> saveTemporaryPost(
+      SaveTemporaryPostRequest request) async {
     return await _sdkApplication.getPersistenceApi().saveTemporaryPost(request);
   }
 
@@ -942,6 +944,9 @@ class LMFeedClientBuilder {
   ///
   /// Returns an instance of [LMFeedClient] with the provided configurations.
   LMFeedClient build() {
+    if (_initiateLoggerRequest != null) {
+      LMFeedPersistence.instance.init(request: _initiateLoggerRequest);
+    }
     return LMFeedClient._(
       sdkCallback: _sdkCallback,
       initiateLoggerRequest: _initiateLoggerRequest,

@@ -34,19 +34,16 @@ class LMLogDB extends HiveObject {
 @HiveType(typeId: 41)
 class LMSDKMetaDB extends HiveObject {
   @HiveField(0)
-  String? sampleAppVersion;
+  String? dataLayerVersion;
   @HiveField(1)
-  String? uiVersion;
-  @HiveField(2)
-  String? middlewareVersion;
+  String? coreVersion;
 
-  LMSDKMetaDB({this.sampleAppVersion, this.uiVersion, this.middlewareVersion});
+  LMSDKMetaDB({this.dataLayerVersion, this.coreVersion});
 
   Map<String, dynamic> toJson() {
     return {
-      'sample_app_version': sampleAppVersion,
-      'ui_version': uiVersion,
-      'middleware_version': middlewareVersion
+      'data_layer_version': dataLayerVersion,
+      'core_version': coreVersion,
     };
   }
 }
