@@ -2,7 +2,7 @@
 
 ## [1.20.0]
 
-- Added Error loggin and logout
+- Added Error logging and logout
 
 ## [1.19.0]
 
