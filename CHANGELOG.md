@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.21.0]
+
+- Added Separation of Video Feed and Social Feed
+
 ## [1.20.0]
 
 - Added Error logging and logout

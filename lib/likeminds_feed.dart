@@ -17,7 +17,7 @@ const _prod = !bool.fromEnvironment('LM_DEBUG');
 // ignore: public_member_api_docs
 const testEnvironment = bool.fromEnvironment('LM_TEST_ENV');
 // ignore: public_member_api_docs
-const String feedSDKVersion = "1.20.0";
+const String feedSDKVersion = "1.21.0";
 
 /// {@template feed_client_builder}
 /// The `LMFeedClient` class is responsible for managing and interacting with
